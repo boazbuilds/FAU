@@ -1,7 +1,44 @@
 // Nerdy Big Four-accountantshumor + Duolingo-achtige feedback.
 // Alles is puur en deterministisch te seeden, zodat het testbaar blijft.
 
-export const MASCOT = { emoji: '🧮', name: 'Plus', role: 'de Rekenmachine' };
+export const MASCOT = { emoji: '🧮', name: 'Plus', role: 'je motivatie-maatje' };
+
+// --- Motivatie van Plus: overwegend positief, soms cynisch, af en toe een grap.
+//     De echte citaten zijn geverifieerd en eerlijk toegeschreven (incl. de
+//     bekende valkuilen: de "Aristoteles"-quote is van Will Durant, en de
+//     Prediker-regel is bewust gemarkeerd als bewerking). ---
+export const motivation = [
+  // Spiritueel / heilige teksten
+  '“Ik kan alles aan door Hem die mij kracht geeft.” — Filippenzen 4:13',
+  '“Wees sterk en moedig, laat je door niets ontmoedigen.” — Jozua 1:9',
+  '“Voorwaar, met de moeilijkheid komt verlichting.” — Koran 94:5-6',
+  '“Allah belast niemand boven zijn vermogen.” — Koran 2:286',
+  '“Voor alles is er een tijd” — ook voor jouw doorbraak. (naar Prediker 3:1)',
+  // Filosofie
+  '“Je hebt macht over je geest, niet over gebeurtenissen. Besef dat, en je vindt kracht.” — Marcus Aurelius',
+  '“Het is niet omdat het moeilijk is dat we niet durven; het is omdat we niet durven dat het moeilijk wordt.” — Seneca',
+  '“Wie een waarom heeft om te leven, verdraagt bijna elk hoe.” — Friedrich Nietzsche',
+  '“De reis van duizend mijl begint met één stap.” — Lao Tzu',
+  '“We zijn wat we herhaaldelijk doen. Uitmuntendheid is dus geen daad, maar een gewoonte.” — Will Durant (over Aristoteles)',
+  // Doorzetters
+  '“Optimisme is het geloof dat tot succes leidt.” — Helen Keller. En ik ben een optimistische rekenmachine, dus luister.',
+  '“Het lijkt altijd onmogelijk, totdat het gedaan is.” — Nelson Mandela',
+  '“Je zult tegenslagen tegenkomen, maar je mag je niet laten verslaan.” — Maya Angelou',
+  '“Ik heb niet gefaald — ik vond 10.000 manieren die niet werken.” — Thomas Edison',
+  '“De toekomst is van wie gelooft in de schoonheid van zijn dromen.” — Eleanor Roosevelt',
+  '“Het is niet de berg die we bedwingen, maar onszelf.” — Edmund Hillary',
+  '“Of je nu denkt dat het lukt of niet — je hebt gelijk.” — Henry Ford',
+  '“Geloof dat je het kunt, en je bent al halverwege.” — Theodore Roosevelt',
+  // Iets cynischer (maar liefdevol)
+  'Niemand wenste op zijn sterfbed méér uren op kantoor. Maar goed — die journaalpost moet nog wél kloppen.',
+  'Motivatie is als een streak: zomaar verloren. Dus kom gewoon morgen weer terug.',
+  'Perfectie bestaat niet — behalve in een sluitende balans. En zelfs die is afgerond.',
+  // Grapje ertussendoor
+  'Onthoud: jij bent een asset, geen liability — en jij schrijft níét af in waarde.',
+  'Debet links, credit rechts, jij bovenaan. Zo simpel is succes.',
+  'Going concern, officieel verklaard: jij gaat door. Geen voorbehoud. ✅',
+  'Tel je zegeningen. Ik help — dat is letterlijk mijn werk. 🧮'
+];
 
 // --- Grappen (Big Four / accountancy, mild en zelfspot) ---
 export const jokes = [
@@ -132,6 +169,10 @@ export function randomFrom(arr) {
 
 export function jokeOfTheDay(day) {
   return pick(jokes, day);
+}
+
+export function motivationOfDay(day) {
+  return pick(motivation, day);
 }
 
 export function praiseFor(result) {

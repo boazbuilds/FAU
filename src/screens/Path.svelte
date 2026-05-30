@@ -10,7 +10,7 @@
   import { isLessonUnlocked, isModuleUnlocked, moduleProgress } from '../lib/progress.js';
   import { predict } from '../lib/predict.js';
   import { todayNumber } from '../lib/day.js';
-  import { jokeOfTheDay, randomFrom, jokes } from '../lib/humor.js';
+  import { motivationOfDay, randomFrom, motivation } from '../lib/humor.js';
   import LessonNode from '../components/LessonNode.svelte';
   import Mascot from '../components/Mascot.svelte';
 
@@ -55,40 +55,40 @@
   const hour = new Date().getHours();
   const greeting = hour < 6 ? 'Goedenacht' : hour < 12 ? 'Goedemorgen' : hour < 18 ? 'Goedemiddag' : 'Goedenavond';
 
-  let joke = jokeOfTheDay(todayNumber());
-  function newJoke() {
-    let next = joke;
-    while (jokes.length > 1 && next === joke) next = randomFrom(jokes);
-    joke = next;
+  let quote = motivationOfDay(todayNumber());
+  function newQuote() {
+    let next = quote;
+    while (motivation.length > 1 && next === quote) next = randomFrom(motivation);
+    quote = next;
   }
 </script>
 
 <div class="space-y-4 px-4 pb-28 pt-2">
   <div class="flex items-center justify-between">
-    <div>
-      <h1 class="text-2xl font-bold text-white">{greeting} 👋</h1>
-      <p class="text-sm text-slate-400">Jouw pad naar het FAU-tentamen</p>
+    <div class="min-w-0">
+      <h1 class="truncate font-pixel text-sm uppercase neon-cyan">{greeting}</h1>
+      <p class="mt-1 text-xs text-slate-400">Jouw pad naar het FAU-tentamen 👾</p>
     </div>
-    <button class="rounded-xl border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:bg-slate-800" on:click={() => go('cheatsheet')}>📕 Spiek</button>
+    <button class="btn-arcade shrink-0 rounded-xl px-3 py-2 font-pixel text-[9px] uppercase" on:click={() => go('cheatsheet')}>📕 Spiek</button>
   </div>
 
-  <!-- Mascotte: grap van de dag (tik voor een nieuwe) -->
-  <button type="button" class="block w-full text-left" on:click={newJoke} aria-label="Nieuwe grap">
-    <Mascot mood="happy" hint="tik voor een nieuwe 🔁">{joke}</Mascot>
+  <!-- Plus: motivatie van de dag (tik voor een nieuwe) -->
+  <button type="button" class="block w-full text-left" on:click={newQuote} aria-label="Nieuwe quote">
+    <Mascot mood="happy" hint="tik voor nieuwe motivatie 🔁">{quote}</Mascot>
   </button>
 
   <!-- Dagdoel + herhaling -->
-  <div class="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
+  <div class="arcade-panel flex items-center gap-3 rounded-2xl p-4">
     <div class="flex-1">
-      <div class="mb-1 flex items-center justify-between text-xs text-slate-400">
-        <span>Dagdoel</span><span>{$profile.today.xp ?? 0} / {$profile.dailyGoalXp} XP</span>
+      <div class="mb-1 flex items-center justify-between font-pixel text-[8px] uppercase tracking-wide text-slate-400">
+        <span>Dagdoel</span><span class="text-cyan-300">{$profile.today.xp ?? 0}/{$profile.dailyGoalXp} XP</span>
       </div>
-      <div class="h-2 overflow-hidden rounded-full bg-slate-800">
-        <div class="h-full rounded-full bg-indigo-500 transition-all" style="width:{Math.round(goalPct * 100)}%"></div>
+      <div class="h-2.5 overflow-hidden rounded-full border border-cyan-500/20 bg-slate-900">
+        <div class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 transition-all" style="width:{Math.round(goalPct * 100)}%"></div>
       </div>
     </div>
     <button
-      class="shrink-0 rounded-xl bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-40"
+      class="btn-arcade btn-arcade-magenta shrink-0 rounded-xl px-3 py-2 font-pixel text-[9px] uppercase disabled:opacity-40"
       on:click={review}
       disabled={due === 0}
       title="Herhaal vragen die vandaag aan de beurt zijn"
@@ -140,11 +140,11 @@
   {/each}
 
   <!-- Slaagkans -->
-  <button class="flex w-full items-center justify-between rounded-2xl border border-slate-800 bg-slate-900/60 p-5 text-left hover:border-slate-700" on:click={() => go('predict')}>
+  <button class="arcade-panel flex w-full items-center justify-between rounded-2xl p-5 text-left transition hover:border-cyan-400/50" on:click={() => go('predict')}>
     <div>
-      <div class="text-sm text-slate-400">Geschatte slagingskans</div>
-      <div class="text-2xl font-bold text-white">{pred.enoughData ? `${Math.round(pred.pPass / 0.05) * 5}%` : '—'}</div>
-      <div class="text-xs text-slate-500">{pred.enoughData ? 'schatting, geen garantie' : 'oefen meer voor een schatting'}</div>
+      <div class="font-pixel text-[8px] uppercase tracking-wide text-slate-400">Geschatte slagingskans</div>
+      <div class="mt-1.5 font-pixel text-xl neon-magenta">{pred.enoughData ? `${Math.round(pred.pPass / 0.05) * 5}%` : '—'}</div>
+      <div class="mt-1 text-xs text-slate-500">{pred.enoughData ? 'schatting, geen garantie' : 'oefen meer voor een schatting'}</div>
     </div>
     <div class="text-3xl">🔮</div>
   </button>

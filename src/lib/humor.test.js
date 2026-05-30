@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   jokes, praise, consolation, jokeOfTheDay, pick, randomFrom,
-  praiseFor, comboMessage, resultQuip
+  praiseFor, comboMessage, resultQuip, motivation, motivationOfDay
 } from './humor.js';
 
 describe('humor', () => {
@@ -29,6 +29,15 @@ describe('humor', () => {
     expect(praise).toContain(praiseFor('correct'));
     expect(praiseFor('partial')).toMatch(/Deels/);
     expect(consolation).toContain(praiseFor('wrong'));
+  });
+
+  it('heeft 25 unieke, niet-lege motivatie-quotes', () => {
+    expect(motivation.length).toBe(25);
+    expect(new Set(motivation).size).toBe(25); // allemaal uniek
+    expect(motivation.every((q) => typeof q === 'string' && q.trim().length > 0)).toBe(true);
+    // determinisme + geldige selectie
+    expect(motivationOfDay(42)).toBe(motivationOfDay(42));
+    expect(motivation).toContain(motivationOfDay(3));
   });
 
   it('resultQuip geeft altijd een string', () => {
