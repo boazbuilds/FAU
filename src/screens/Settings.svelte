@@ -7,6 +7,31 @@
   import * as audio from '../lib/audio.js';
   import { trackList, nowPlaying } from '../lib/audio.js';
   import { ratings } from '../stores/ratings.js';
+  import { isConfigured } from '../lib/cloud/online.js';
+  import { auth } from '../stores/auth.js';
+  import { signIn, signUp, signOut } from '../lib/cloud/sync.js';
+
+  let email = '';
+  let password = '';
+  let username = '';
+  let authMode = 'login';
+  let authErr = '';
+  let authBusy = false;
+  async function doAuth() {
+    authErr = '';
+    authBusy = true;
+    try {
+      if (authMode === 'signup') await signUp(email.trim(), password, username.trim());
+      else await signIn(email.trim(), password);
+      email = password = username = '';
+    } catch (e) {
+      authErr = e?.message || 'Er ging iets mis.';
+    }
+    authBusy = false;
+  }
+  async function doLogout() {
+    await signOut();
+  }
 
   $: ratingCount = Object.keys($ratings).length;
   function clearRatings() {
@@ -99,6 +124,33 @@
 
 <div class="space-y-6 px-4 pb-28 pt-2">
   <h1 class="font-pixel text-sm uppercase neon-cyan">Instellingen</h1>
+
+  <section class="arcade-panel space-y-3 rounded-2xl p-5">
+    <h2 class="font-pixel text-[10px] uppercase tracking-wide text-cyan-300/80">Account</h2>
+    {#if !isConfigured()}
+      <p class="text-xs leading-relaxed text-slate-400">
+        Online staat nog uit. Met een gratis account bewaar je je voortgang in de cloud (op al je apparaten) en kun je vrienden toevoegen (tab Vrienden). Aanzetten? Zie <span class="font-mono text-slate-300">docs/ONLINE-SETUP.md</span>.
+      </p>
+    {:else if $auth.user}
+      <p class="text-sm text-slate-200">Ingelogd als <span class="font-semibold text-white">{$auth.user.email}</span> ✅</p>
+      <p class="-mt-1 text-xs text-slate-500">Je voortgang synchroniseert automatisch.</p>
+      <button class="w-full rounded-xl border border-slate-700 py-2.5 text-sm font-medium text-slate-200 hover:bg-slate-800" on:click={doLogout}>Uitloggen</button>
+    {:else}
+      <div class="grid grid-cols-2 gap-2">
+        <button class="rounded-lg border py-2 text-xs font-medium {authMode === 'login' ? 'border-indigo-500 bg-indigo-600/20 text-white' : 'border-slate-700 text-slate-300'}" on:click={() => (authMode = 'login')}>Inloggen</button>
+        <button class="rounded-lg border py-2 text-xs font-medium {authMode === 'signup' ? 'border-indigo-500 bg-indigo-600/20 text-white' : 'border-slate-700 text-slate-300'}" on:click={() => (authMode = 'signup')}>Account maken</button>
+      </div>
+      {#if authMode === 'signup'}
+        <input class="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white outline-none focus:border-indigo-400" placeholder="gebruikersnaam" bind:value={username} autocomplete="username" />
+      {/if}
+      <input class="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white outline-none focus:border-indigo-400" type="email" placeholder="e-mail" bind:value={email} autocomplete="email" />
+      <input class="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white outline-none focus:border-indigo-400" type="password" placeholder="wachtwoord" bind:value={password} autocomplete="current-password" />
+      {#if authErr}<p class="text-xs text-rose-400">{authErr}</p>{/if}
+      <button class="w-full rounded-xl bg-indigo-600 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-50" on:click={doAuth} disabled={authBusy || !email || !password}>
+        {authBusy ? '…' : authMode === 'signup' ? 'Account maken' : 'Inloggen'}
+      </button>
+    {/if}
+  </section>
 
   <section class="space-y-3 rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
     <h2 class="font-pixel text-[10px] uppercase tracking-wide text-cyan-300/80">Dagdoel</h2>

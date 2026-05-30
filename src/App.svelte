@@ -5,6 +5,10 @@
   import { profile } from './stores/profile.js';
   import { settings } from './stores/settings.js';
   import { progress } from './stores/progressStore.js';
+  import { srs } from './stores/srsStore.js';
+  import { ratings } from './stores/ratings.js';
+  import { auth, initAuth } from './stores/auth.js';
+  import { loginSync, schedulePush } from './lib/cloud/sync.js';
   import { regenHearts, reconcileDay, migrateProfile } from './lib/gamify.js';
   import { ensureInit } from './lib/progress.js';
   import { maybeRemind } from './lib/notify.js';
@@ -21,6 +25,7 @@
   import Settings from './screens/Settings.svelte';
   import Cheatsheet from './screens/Cheatsheet.svelte';
   import Mistakes from './screens/Mistakes.svelte';
+  import Account from './screens/Account.svelte';
 
   onMount(() => {
     profile.update((p) => {
@@ -44,7 +49,23 @@
     };
     window.addEventListener('pointerdown', unlock);
     window.addEventListener('keydown', unlock);
+
+    // Online (uit tenzij geconfigureerd): account + cloud-sync.
+    initAuth();
+    [profile, progress, srs, ratings].forEach((st) => st.subscribe(() => schedulePush()));
   });
+
+  // Bij inloggen één keer cloud↔lokaal samenvoegen (per gebruiker).
+  let syncedFor = null;
+  function handleAuth(u) {
+    if (u && u.id !== syncedFor) {
+      syncedFor = u.id;
+      loginSync();
+    } else if (!u) {
+      syncedFor = null;
+    }
+  }
+  $: handleAuth($auth.user);
 
   $: if (typeof document !== 'undefined') {
     document.documentElement.classList.toggle('reduce-motion', !!$settings.reducedMotion);
@@ -61,7 +82,7 @@
   const nav = [
     { id: 'home', label: 'Pad', icon: '🗺️' },
     { id: 'progress', label: 'Voortgang', icon: '📊' },
-    { id: 'predict', label: 'Slaagkans', icon: '🔮' },
+    { id: 'account', label: 'Vrienden', icon: '👥' },
     { id: 'settings', label: 'Meer', icon: '⚙️' }
   ];
 </script>
@@ -83,6 +104,8 @@
     <Predict />
   {:else if $screen === 'settings'}
     <Settings />
+  {:else if $screen === 'account'}
+    <Account />
   {:else if $screen === 'cheatsheet'}
     <Cheatsheet />
   {:else if $screen === 'mistakes'}
