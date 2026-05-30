@@ -7,15 +7,18 @@ import { writable } from 'svelte/store';
 export const nowPlaying = writable('');
 
 let ctx = null;
-let master = null; // master gain → destination
+let master = null; // master gain → destination (via compressor)
 let musicBus = null; // muziek loopt hierdoor (apart regelbaar)
+let musicSum = null; // alle muziek-stemmen → hier → sidechain-VCA → musicBus
 let sfxBus = null; // effecten lopen hierdoor
+let reverbSend = null; // galm-send (gedeeld door instrumenten)
+let delaySend = null; // tempo-delay-send (ruimte/echo)
 let noiseBuffer = null;
 
 let sfxOn = true;
 let musicOn = true;
 
-const MUSIC_VOL = 0.24;
+const MUSIC_VOL = 0.26;
 const SFX_VOL = 0.85;
 
 function supported() {
@@ -28,17 +31,58 @@ function ensure() {
   try {
     const AC = window.AudioContext || window.webkitAudioContext;
     ctx = new AC();
-    master = ctx.createGain();
-    master.gain.value = 0.9;
-    master.connect(ctx.destination);
 
+    // Master-keten: alles → compressor (lijmt de mix, maakt 'm luider/strakker) → out.
+    const comp = ctx.createDynamicsCompressor();
+    comp.threshold.value = -18;
+    comp.knee.value = 24;
+    comp.ratio.value = 3;
+    comp.attack.value = 0.006;
+    comp.release.value = 0.22;
+    comp.connect(ctx.destination);
+
+    master = ctx.createGain();
+    master.gain.value = 0.92;
+    master.connect(comp);
+
+    // Muziek: alle stemmen → musicSum → sidechain-VCA (musicBus) → master.
+    // De VCA "dipt" bij elke kick = de pompende dance-ademhaling.
     musicBus = ctx.createGain();
-    musicBus.gain.value = 0; // we faden omhoog bij start
+    musicBus.gain.value = 0; // volume-fade in/out
     musicBus.connect(master);
+    musicSum = ctx.createGain();
+    musicSum.gain.value = 1;
+    musicSum.connect(musicBus);
 
     sfxBus = ctx.createGain();
     sfxBus.gain.value = SFX_VOL;
     sfxBus.connect(master);
+
+    // Galm-send (gegenereerde impulse response) — geeft ruimte/diepte.
+    const conv = ctx.createConvolver();
+    conv.buffer = makeImpulse(2.2, 2.6);
+    reverbSend = ctx.createGain();
+    reverbSend.gain.value = 1;
+    reverbSend.connect(conv);
+    const revWet = ctx.createGain();
+    revWet.gain.value = 0.9;
+    conv.connect(revWet);
+    revWet.connect(musicSum);
+
+    // Tempo-delay-send — subtiele echo's op leads/stabs.
+    const delay = ctx.createDelay(1.0);
+    delay.delayTime.value = 0.32;
+    const fb = ctx.createGain();
+    fb.gain.value = 0.34;
+    const dWet = ctx.createGain();
+    dWet.gain.value = 0.5;
+    delaySend = ctx.createGain();
+    delaySend.gain.value = 1;
+    delaySend.connect(delay);
+    delay.connect(fb);
+    fb.connect(delay); // feedback-lus
+    delay.connect(dWet);
+    dWet.connect(musicSum);
 
     const len = Math.floor(ctx.sampleRate * 0.4);
     noiseBuffer = ctx.createBuffer(1, len, ctx.sampleRate);
@@ -55,6 +99,29 @@ export function midiToFreq(n) {
   return 440 * Math.pow(2, (n - 69) / 12);
 }
 const F = midiToFreq;
+
+// Genereer een impulse-respons (afnemende ruis) voor de galm — geen asset nodig.
+function makeImpulse(seconds, decay) {
+  const rate = ctx.sampleRate;
+  const len = Math.max(1, Math.floor(seconds * rate));
+  const buf = ctx.createBuffer(2, len, rate);
+  for (let ch = 0; ch < 2; ch++) {
+    const d = buf.getChannelData(ch);
+    for (let i = 0; i < len; i++) {
+      d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, decay);
+    }
+  }
+  return buf;
+}
+
+// Stuur een bron naar een effect-send met een bepaald niveau.
+function sendTo(node, target, amount) {
+  if (!target || !amount) return;
+  const g = ctx.createGain();
+  g.gain.value = amount;
+  node.connect(g);
+  g.connect(target);
+}
 
 // --- Lage-niveau bouwstenen ---
 function env(g, t, dur, peak, attack, release) {
@@ -167,24 +234,45 @@ export function tap() {
 //  Muziek — chiptune/trance-sequencer (Trackmania/arcade-vibe)
 // =========================================================================
 
-// --- Instrumenten (alles via de musicBus) ---
+// --- Instrumenten (alle muziek → musicSum, zodat ze de sidechain-pomp + fx krijgen) ---
+
+// Sidechain: dip de muziek kort bij elke kick (de pompende dance-"ademhaling").
+function duck(t, depth = 0.55) {
+  if (!musicBus) return;
+  const g = musicBus.gain;
+  const base = musicOn ? MUSIC_VOL : 0.0001;
+  g.cancelScheduledValues(t);
+  g.setValueAtTime(Math.max(0.0001, base * (1 - depth)), t);
+  g.linearRampToValueAtTime(base, t + 0.18);
+}
+
 function kick(t, gain = 0.9) {
   if (!ctx) return;
+  duck(t, 0.5);
   const o = ctx.createOscillator();
   const g = ctx.createGain();
   o.type = 'sine';
-  o.frequency.setValueAtTime(165, t);
-  o.frequency.exponentialRampToValueAtTime(46, t + 0.13);
+  o.frequency.setValueAtTime(170, t);
+  o.frequency.exponentialRampToValueAtTime(44, t + 0.13);
   g.gain.setValueAtTime(gain, t);
-  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.2);
+  // lichte tik bovenop voor "punch"
+  const click = ctx.createOscillator();
+  const cg = ctx.createGain();
+  click.type = 'triangle';
+  click.frequency.setValueAtTime(900, t);
+  cg.gain.setValueAtTime(gain * 0.25, t);
+  cg.gain.exponentialRampToValueAtTime(0.0001, t + 0.02);
   o.connect(g);
-  g.connect(musicBus);
-  o.start(t);
-  o.stop(t + 0.2);
+  click.connect(cg);
+  g.connect(musicSum);
+  cg.connect(musicSum);
+  o.start(t); o.stop(t + 0.22);
+  click.start(t); click.stop(t + 0.03);
 }
 
 function snare(t, gain = 0.45) {
-  noise(t, 0.13, { gain: gain * 0.5, hp: 1800, lp: 9000, bus: musicBus });
+  noise(t, 0.16, { gain: gain * 0.5, hp: 1700, lp: 9500, bus: musicSum });
   const o = ctx.createOscillator();
   const g = ctx.createGain();
   o.type = 'triangle';
@@ -192,44 +280,57 @@ function snare(t, gain = 0.45) {
   g.gain.setValueAtTime(gain * 0.5, t);
   g.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
   o.connect(g);
-  g.connect(musicBus);
+  g.connect(musicSum);
+  sendTo(g, reverbSend, gain * 0.18); // beetje galm op de snare
   o.start(t);
   o.stop(t + 0.14);
 }
 
 function hat(t, open = false, gain = 0.1) {
-  noise(t, open ? 0.12 : 0.03, { gain, hp: 8500, bus: musicBus });
+  noise(t, open ? 0.12 : 0.03, { gain, hp: 8800, bus: musicSum });
 }
 
 function clap(t, gain = 0.3) {
-  [0, 0.012, 0.024].forEach((d) => noise(t + d, 0.04, { gain, hp: 1200, lp: 6500, bus: musicBus }));
+  [0, 0.012, 0.024].forEach((d) => noise(t + d, 0.045, { gain, hp: 1200, lp: 6500, bus: musicSum }));
 }
 
+// Bassline met sub-octaaf eronder = vollere low-end.
 function sawBass(t, freq, dur, gain = 0.28, lp = 1100) {
   if (!ctx) return;
-  const o = ctx.createOscillator();
   const f = ctx.createBiquadFilter();
   const g = ctx.createGain();
+  f.type = 'lowpass';
+  f.frequency.value = lp;
+  f.Q.value = 6;
+  env(g, t, dur, gain, 0.004, 0.02);
+  // hoofd-saw
+  const o = ctx.createOscillator();
   o.type = 'sawtooth';
   o.frequency.value = freq;
-  f.type = 'lowpass';
-  f.frequency.value = lp;
-  env(g, t, dur, gain, 0.004, 0.02);
   o.connect(f);
+  // sub-sine een octaaf lager
+  const sub = ctx.createOscillator();
+  const sg = ctx.createGain();
+  sub.type = 'sine';
+  sub.frequency.value = freq / 2;
+  env(sg, t, dur, gain * 0.7, 0.004, 0.02);
+  sub.connect(sg);
+  sg.connect(musicSum);
   f.connect(g);
-  g.connect(musicBus);
-  o.start(t);
-  o.stop(t + dur + 0.05);
+  g.connect(musicSum);
+  o.start(t); o.stop(t + dur + 0.05);
+  sub.start(t); sub.stop(t + dur + 0.05);
 }
 
-// "Supersaw": meerdere licht ontstemde zaagtanden = die dikke trance/Trackmania-lead.
+// "Supersaw": dikker (meer stemmen + sub-octaaf-stem) en met galm/delay-send.
 function supersaw(t, freq, dur, opts = {}) {
   if (!ctx) return;
-  const { gain = 0.1, voices = 3, detune = 14, lp = 4000, release = 0.06 } = opts;
+  const { gain = 0.1, voices = 5, detune = 16, lp = 4000, release = 0.06, reverb = 0.14, delay = 0.1 } = opts;
   const f = ctx.createBiquadFilter();
   const g = ctx.createGain();
   f.type = 'lowpass';
   f.frequency.value = lp;
+  f.Q.value = 1.2;
   env(g, t, dur, gain, 0.006, release);
   for (let i = 0; i < voices; i++) {
     const o = ctx.createOscillator();
@@ -240,16 +341,25 @@ function supersaw(t, freq, dur, opts = {}) {
     o.start(t);
     o.stop(t + dur + release + 0.03);
   }
+  // sub-octaaf-stem voor body
+  const sub = ctx.createOscillator();
+  sub.type = 'sawtooth';
+  sub.frequency.value = freq / 2;
+  sub.connect(f);
+  sub.start(t);
+  sub.stop(t + dur + release + 0.03);
   f.connect(g);
-  g.connect(musicBus);
+  g.connect(musicSum);
+  sendTo(g, reverbSend, gain * reverb);
+  sendTo(g, delaySend, gain * delay);
 }
 
 function stab(t, freqs, dur, gain = 0.06) {
-  freqs.forEach((fq) => supersaw(t, fq, dur, { gain, voices: 3, detune: 16, lp: 3200, release: 0.05 }));
+  freqs.forEach((fq) => supersaw(t, fq, dur, { gain, voices: 5, detune: 18, lp: 3400, release: 0.05, reverb: 0.2, delay: 0.18 }));
 }
 
 function pad(t, freqs, dur, gain = 0.05) {
-  freqs.forEach((fq) => supersaw(t, fq, dur, { gain, voices: 5, detune: 17, lp: 2600, release: 0.45 }));
+  freqs.forEach((fq) => supersaw(t, fq, dur, { gain, voices: 7, detune: 18, lp: 2600, release: 0.5, reverb: 0.35, delay: 0.12 }));
 }
 
 // Akkoordprogressies (per maat: grondtoon + akkoordtonen als halve-toon-offsets).
@@ -298,6 +408,7 @@ const TRACKS = {
     play(step, t) {
       const b = barAt(EUPH, step);
       const s = step % 16;
+      if (s === 0) pad(t, b.chord.map((c) => F(b.root + 12 + c)), 1.9, 0.03); // warme onderlaag
       if (s % 4 === 0) kick(t, 0.95);
       if (s === 4 || s === 12) snare(t, 0.4);
       hat(t, s % 4 === 2, s % 2 === 0 ? 0.05 : 0.09);
@@ -305,7 +416,7 @@ const TRACKS = {
       if (s % 4 !== 0) sawBass(t, F(b.root - 12 + (s % 2 ? 12 : 0)), 0.1, 0.24, 1100);
       else sawBass(t, F(b.root - 12), 0.1, 0.26, 1000);
       const tn = b.chord[s % b.chord.length];
-      supersaw(t, F(b.root + 24 + tn), 0.1, { gain: 0.09, voices: 3, detune: 14, lp: 4400, release: 0.04 });
+      supersaw(t, F(b.root + 24 + tn), 0.1, { gain: 0.09, voices: 5, detune: 14, lp: 4400, release: 0.04 });
       if (s === 0) stab(t, b.chord.slice(0, 3).map((c) => F(b.root + 12 + c)), 0.45, 0.05);
     }
   },
@@ -338,10 +449,10 @@ const TRACKS = {
       if (s % 4 === 0) kick(t, 0.65);
       if (s === 4 || s === 12) snare(t, 0.35);
       if (s % 2 === 1) hat(t, false, 0.05);
-      if (s % 2 === 0) tone(F(b.root - 12), t, 0.12, { type: 'triangle', gain: 0.26, bus: musicBus, release: 0.02 });
+      if (s % 2 === 0) tone(F(b.root - 12), t, 0.12, { type: 'triangle', gain: 0.26, bus: musicSum, release: 0.02 });
       const arp = [0, b.chord[1], b.chord[2], b.chord[1]];
-      tone(F(b.root + 24 + arp[s % arp.length]), t, 0.09, { type: 'square', gain: 0.14, bus: musicBus, release: 0.03 });
-      if (s % 8 === 0) tone(F(b.root + 36), t, 0.06, { type: 'square', gain: 0.05, bus: musicBus });
+      tone(F(b.root + 24 + arp[s % arp.length]), t, 0.09, { type: 'square', gain: 0.14, bus: musicSum, release: 0.03 });
+      if (s % 8 === 0) tone(F(b.root + 36), t, 0.06, { type: 'square', gain: 0.05, bus: musicSum });
     }
   },
   synthwave: {
@@ -390,12 +501,14 @@ let stepCounter = 0;
 let currentTrack = 'menu';
 let energeticChoice = 'stadium';
 
+const SWING = 0.18; // shuffle: oneven 16e-noten iets later = groove
 function tick() {
   if (!ctx) return;
   const track = TRACKS[currentTrack] ?? TRACKS.menu;
   const stepDur = 60 / track.bpm / 4; // zestiende noot
   while (nextStepTime < ctx.currentTime + 0.12) {
-    track.play(stepCounter, nextStepTime);
+    const swing = stepCounter % 2 === 1 ? stepDur * SWING : 0;
+    track.play(stepCounter, nextStepTime + swing);
     nextStepTime += stepDur;
     stepCounter++;
   }
@@ -411,9 +524,12 @@ export function startMusic(trackId) {
   if (musicTimer) return; // loopt al
   nextStepTime = ctx.currentTime + 0.08;
   stepCounter = 0;
+  // musicBus = sidechain-VCA (door duck() bestuurd); de in/uit-fade zit op musicSum.
   musicBus.gain.cancelScheduledValues(ctx.currentTime);
-  musicBus.gain.setValueAtTime(Math.max(0.0001, musicBus.gain.value), ctx.currentTime);
-  musicBus.gain.linearRampToValueAtTime(MUSIC_VOL, ctx.currentTime + 0.6);
+  musicBus.gain.setValueAtTime(MUSIC_VOL, ctx.currentTime);
+  musicSum.gain.cancelScheduledValues(ctx.currentTime);
+  musicSum.gain.setValueAtTime(Math.max(0.0001, musicSum.gain.value), ctx.currentTime);
+  musicSum.gain.linearRampToValueAtTime(1, ctx.currentTime + 0.6);
   tick();
 }
 
@@ -423,9 +539,10 @@ export function stopMusic() {
     clearTimeout(musicTimer);
     musicTimer = null;
   }
-  musicBus.gain.cancelScheduledValues(ctx.currentTime);
-  musicBus.gain.setValueAtTime(musicBus.gain.value, ctx.currentTime);
-  musicBus.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.3);
+  // Fade op musicSum (musicBus blijft vrij voor de sidechain).
+  musicSum.gain.cancelScheduledValues(ctx.currentTime);
+  musicSum.gain.setValueAtTime(musicSum.gain.value, ctx.currentTime);
+  musicSum.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.3);
 }
 
 // Wissel van track zonder de loop te onderbreken (naadloos).

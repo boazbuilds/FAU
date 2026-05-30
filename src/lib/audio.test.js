@@ -28,8 +28,17 @@ class FakeAC {
     return { type: 'square', frequency: fakeParam(), detune: fakeParam(), connect() {}, start() { startCount++; }, stop() {} };
   }
   createBufferSource() { return { buffer: null, connect() {}, start() {}, stop() {} }; }
-  createBiquadFilter() { return { type: 'lowpass', frequency: fakeParam(), connect() {} }; }
-  createBuffer(_ch, len) { return { getChannelData: () => new Float32Array(len) }; }
+  createBiquadFilter() { return { type: 'lowpass', frequency: fakeParam(), Q: fakeParam(), connect() {} }; }
+  createBuffer(ch, len) { return { getChannelData: () => new Float32Array(len) }; }
+  // Nodes voor de productie-effectketen (galm, delay, sidechain-compressor).
+  createConvolver() { return { buffer: null, connect() {} }; }
+  createDelay() { return { delayTime: fakeParam(), connect() {} }; }
+  createDynamicsCompressor() {
+    return {
+      threshold: fakeParam(), knee: fakeParam(), ratio: fakeParam(),
+      attack: fakeParam(), release: fakeParam(), connect() {}
+    };
+  }
 }
 
 describe('audio-engine', () => {
