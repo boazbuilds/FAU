@@ -1,7 +1,16 @@
 // XP, levels, league, levens, streak en achievements. Grotendeels pure helpers.
 import { CONFIG } from '../config.js';
-import { todayNumber } from './day.js';
+import { todayNumber, weekNumber } from './day.js';
 import { achievements as achievementDefs } from './content.js';
+
+function uuid() {
+  try {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+  } catch (e) {
+    /* fallback */
+  }
+  return 'u-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10);
+}
 
 export function levelFromXp(xp) {
   return Math.floor((Math.sqrt(1 + (8 * xp) / 100) - 1) / 2) + 1;
@@ -48,17 +57,28 @@ export function xpForAnswer(result, difficulty) {
 export function defaultProfile() {
   const today = todayNumber();
   return {
-    v: 1,
+    v: 2,
+    userId: uuid(),
     xp: 0,
     hearts: CONFIG.maxHearts,
     heartsUpdatedAt: Date.now(),
     streak: { current: 0, longest: 0, lastActiveDay: null, freezesOwned: 1 },
     dailyGoalXp: CONFIG.defaultDailyGoalXp,
     today: { day: today, xp: 0, answered: 0, correct: 0, sessions: 0 },
+    week: { weekKey: weekNumber(), xp: 0, bestXp: 0 },
     totals: { answered: 0, correct: 0, sessions: 0 },
     achievements: {},
     createdAt: today
   };
+}
+
+// Idempotente migratie van een bestaand profiel naar v2. load() deep-merge't niet.
+export function migrateProfile(profile) {
+  if (!profile) return defaultProfile();
+  if (!profile.userId) profile.userId = uuid();
+  if (!profile.week) profile.week = { weekKey: weekNumber(), xp: 0, bestXp: 0 };
+  if ((profile.v ?? 1) < 2) profile.v = 2;
+  return profile;
 }
 
 // Vul levens lui aan op basis van verstreken tijd.
@@ -87,9 +107,15 @@ export function msUntilNextHeart(profile, now = Date.now()) {
 }
 
 // Nieuwe dag: reset 'today' en breek de streak bij een hele gemiste dag (met freeze-buffer).
-export function reconcileDay(profile, today = todayNumber()) {
+export function reconcileDay(profile, today = todayNumber(), thisWeek = weekNumber()) {
   if (profile.today?.day !== today) {
     profile.today = { day: today, xp: 0, answered: 0, correct: 0, sessions: 0 };
+  }
+  // Weekbucket rollen (voor het latere leaderboard).
+  if (!profile.week) profile.week = { weekKey: thisWeek, xp: 0, bestXp: 0 };
+  if (profile.week.weekKey !== thisWeek) {
+    profile.week.bestXp = Math.max(profile.week.bestXp ?? 0, profile.week.xp ?? 0);
+    profile.week = { weekKey: thisWeek, xp: 0, bestXp: profile.week.bestXp };
   }
   const last = profile.streak?.lastActiveDay;
   if (last != null) {
@@ -117,7 +143,12 @@ export function registerGoalProgress(profile, today = todayNumber()) {
 
 // Bepaal nieuw vrijgespeelde achievements. Muteert profile.achievements.
 export function evaluateAchievements(profile, opts = {}, today = todayNumber()) {
-  const { predictResult = null, topicStats = null, perfectSession = false } = opts;
+  const {
+    predictResult = null,
+    perfectSession = false,
+    bossPassed = false,
+    bossPerfect = false
+  } = opts;
   const unlocked = [];
   const has = (id) => !!profile.achievements[id];
   const give = (id) => {
@@ -132,9 +163,8 @@ export function evaluateAchievements(profile, opts = {}, today = todayNumber()) 
   if ((profile.streak.current ?? 0) >= 7) give('streak-7');
   if ((profile.totals.answered ?? 0) >= 100) give('centurion');
   if (perfectSession) give('perfect-session');
-  if (topicStats && Object.values(topicStats).some((s) => s.mastery >= CONFIG.masteryTarget)) {
-    give('topic-master');
-  }
+  if (bossPassed) give('module-complete');
+  if (bossPerfect) give('boss-flawless');
   if (predictResult && predictResult.enoughData && predictResult.pPass >= 0.8) give('exam-ready');
 
   return unlocked.map((id) => achievementDefs.find((a) => a.id === id)).filter(Boolean);

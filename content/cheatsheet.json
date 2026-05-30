@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "hraNav": [
+    { "group": "Opdrachtsoorten", "topic": "Beoordelingsopdracht", "standard": "2400", "paras": "2400.38", "note": "beperkte zekerheid; continuering: voorwaarden herzien", "tab": "blauw" },
+    { "group": "Opdrachtsoorten", "topic": "Samenstellen", "standard": "4410", "paras": "—", "note": "géén zekerheid; ordenen en presenteren", "tab": "blauw" },
+    { "group": "Opdrachtsoorten", "topic": "Overeengekomen werkzaamheden (AUP)", "standard": "4400N", "paras": "—", "note": "alleen feitelijke bevindingen, geen oordeel", "tab": "blauw" },
+    { "group": "Opdrachtsoorten", "topic": "Assurance overig", "standard": "3000A", "paras": "—", "note": "kapstok voor niet-historische assurance", "tab": "blauw" },
+    { "group": "Opdrachtsoorten", "topic": "Prognose / toekomstgericht", "standard": "3400", "paras": "—", "note": "totstandkoming + veronderstellingen; inherente onzekerheid", "tab": "blauw" },
+    { "group": "Opdrachtsoorten", "topic": "Duurzaamheid", "standard": "3810N", "paras": "3810N.8", "note": "zekerheidsniveau niet verlagen om uitkomst te ontwijken", "tab": "blauw" },
+    { "group": "Opdrachtsoorten", "topic": "Bijzonder doel (subsidie)", "standard": "800/805/810", "paras": "—", "note": "controleprotocol bepaalt vaak lage materialiteit", "tab": "blauw" },
+    { "group": "Opdrachtsoorten", "topic": "Transactie / due diligence", "standard": "5500N", "paras": "5500N.13", "note": "geen assurance; objectiviteit (VGBA 11) blijft", "tab": "blauw" },
+
+    { "group": "Risico & werk", "topic": "Professioneel-kritische instelling", "standard": "200", "paras": "200", "note": "onderzoekende geest; alert op tegenstrijdigheden", "tab": "groen" },
+    { "group": "Risico & werk", "topic": "Risico-inschatting", "standard": "315", "paras": "315.12", "note": "inherente risicofactoren: complexiteit, subjectiviteit, verandering, onzekerheid, tendentie", "tab": "groen" },
+    { "group": "Risico & werk", "topic": "Materialiteit", "standard": "320/450", "paras": "320, 450", "note": "materialiteit + uitvoeringsmaterialiteit; afwijking afzetten tegen drempel", "tab": "groen" },
+    { "group": "Risico & werk", "topic": "Inspelen op risico's", "standard": "330", "paras": "330", "note": "controlemix: aard, timing, omvang; significant risico → altijd gegevensgericht", "tab": "groen" },
+    { "group": "Risico & werk", "topic": "Controle-informatie", "standard": "500", "paras": "500", "note": "extern > intern, schriftelijk > mondeling, eigen waarneming sterkst", "tab": "groen" },
+    { "group": "Risico & werk", "topic": "Externe bevestigingen", "standard": "505", "paras": "505", "note": "bestaan debiteuren/bank; non-respons → alternatieve werkzaamheden", "tab": "groen" },
+    { "group": "Risico & werk", "topic": "Cijferanalyse / verbandscontrole", "standard": "520", "paras": "520", "note": "volledigheid omzet: inkoop-voorraad-verkoop, brutomarge", "tab": "groen" },
+    { "group": "Risico & werk", "topic": "Schattingen", "standard": "540", "paras": "540", "note": "challenge assumpties + retrospectieve toets", "tab": "groen" },
+
+    { "group": "Fraude / NOCLAR / Wwft", "topic": "Fraude", "standard": "240", "paras": "240.12, 240.31", "note": "fraudedriehoek; management override → verplichte journaalpostcontroles", "tab": "rood" },
+    { "group": "Fraude / NOCLAR / Wwft", "topic": "Niet-naleving wet- en regelgeving", "standard": "250 / NV NOCLAR", "paras": "—", "note": "stappenplan: feiten → bespreken → aandringen → evt. melden", "tab": "rood" },
+    { "group": "Fraude / NOCLAR / Wwft", "topic": "Witwassen / ongebruikelijke transactie", "standard": "Wwft", "paras": "—", "note": "cliëntenonderzoek + UBO; melden bij FIU-Nederland; tipping-off verboden", "tab": "rood" },
+
+    { "group": "Oordeel & slotwerk", "topic": "Oordeel (basis)", "standard": "700", "paras": "700", "note": "ongewijzigd oordeel + onderbouwing", "tab": "geel" },
+    { "group": "Oordeel & slotwerk", "topic": "Modificaties", "standard": "705", "paras": "705", "note": "2×2: bron (afwijking/beperking) × diepgaandheid (materieel/diepgaand)", "tab": "geel" },
+    { "group": "Oordeel & slotwerk", "topic": "Benadrukking / overige aangelegenheden", "standard": "706", "paras": "706", "note": "wijzigt het oordeel NIET", "tab": "geel" },
+    { "group": "Oordeel & slotwerk", "topic": "Kernpunten van de controle (KAM)", "standard": "701", "paras": "701", "note": "alleen bij OOB", "tab": "geel" },
+    { "group": "Oordeel & slotwerk", "topic": "Continuïteit", "standard": "570", "paras": "570", "note": "4 stappen: inschatting → materiële onzekerheid → toelichting → gevolg verklaring", "tab": "geel" },
+    { "group": "Oordeel & slotwerk", "topic": "Gebeurtenissen na balansdatum", "standard": "560", "paras": "560", "note": "mét info over balansdatum → verwerken; zónder → toelichten", "tab": "geel" },
+    { "group": "Oordeel & slotwerk", "topic": "Bevestiging management (LOR)", "standard": "580", "paras": "580", "note": "aanvullende info; vervangt nooit andere controle-informatie", "tab": "geel" },
+
+    { "group": "Ethiek & onafhankelijkheid", "topic": "VGBA beginselen", "standard": "VGBA", "paras": "art. 7, 15a", "note": "5 beginselen; art. 7 niet-integer handelen; art. 15a collegiaal overleg", "tab": "paars" },
+    { "group": "Ethiek & onafhankelijkheid", "topic": "Onafhankelijkheid", "standard": "ViO", "paras": "art. 5, 18/19, 28, 38, 44", "note": "derde-toets; samenloop; vertrouwdheid/duur; cooling-off; persoonlijke relaties", "tab": "paars" },
+    { "group": "Ethiek & onafhankelijkheid", "topic": "Kwaliteit & aanvaarding", "standard": "NVKS", "paras": "art. 5, 6, 13", "note": "integere cliënt; kwaliteitsstelsel; OKB bij verhoogd risico", "tab": "paars" }
+  ],
+  "decisionTrees": [
+    {
+      "title": "Verklaring: de 2×2-matrix (705)",
+      "steps": [
+        "Bron? Afwijking ín de jaarrekening óf beperking in de controle.",
+        "Diepgaandheid? Materieel (niet-diepgaand) óf materieel én van diepgaande invloed (pervasive).",
+        "Afwijking + materieel/niet-diepgaand → oordeel met beperking.",
+        "Afwijking + diepgaand → afkeurend oordeel.",
+        "Beperking + materieel/niet-diepgaand → oordeel met beperking.",
+        "Beperking + diepgaand → oordeelonthouding."
+      ]
+    },
+    {
+      "title": "Continuïteit in 4 stappen (570)",
+      "steps": [
+        "Beoordeel de inschatting van het management.",
+        "Is er een materiële onzekerheid?",
+        "Is die adequaat toegelicht in de jaarrekening?",
+        "Adequaat → goedkeurend + aparte sectie; niet adequaat → modificeren (705)."
+      ]
+    },
+    {
+      "title": "Toelichtende paragraaf kiezen",
+      "steps": [
+        "Correct verwerkt + je wilt aandacht vestigen → benadrukking (706).",
+        "Iets over de controle/verantwoordelijkheden → overige aangelegenheden (706).",
+        "Kernpunten van de controle → 701, maar alleen bij een OOB.",
+        "Geen van deze wijzigt het oordeel — een modificatie is 705."
+      ]
+    },
+    {
+      "title": "Fraudedriehoek (240)",
+      "steps": [
+        "Prikkel/druk — een motief (bv. bonus, KPI, financiering).",
+        "Gelegenheid — zwakke beheersing, management override.",
+        "Rationalisatie — houding die de fraude goedpraat.",
+        "Reflex: management override → journaalpostcontroles (240.31)."
+      ]
+    },
+    {
+      "title": "Functiescheiding",
+      "steps": [
+        "Beschikken — Bewaren — Registreren — Controleren (en Uitvoeren).",
+        "Eén persoon meerdere onverenigbare taken → doorbroken functiescheiding.",
+        "Bij elke IB-vraag: wijs de ontbrekende scheiding aan → bijna altijd een punt."
+      ]
+    }
+  ]
+}

@@ -29,6 +29,27 @@ export const CONFIG = {
   ],
   defaultDailyGoalXp: 50,
 
+  // --- Leerpad / Boss ---
+  path: {
+    bossPassRatio: 0.8, // correct/answered nodig om de boss te halen
+    bossBonusXp: 60, // bonus bij gehaalde boss
+    bossCostsHearts: false, // mild: boss tornt niet aan levens
+    star2Ratio: 0.8, // ≥80% in een les = 2 sterren
+    star3Ratio: 1.0 // 100% = 3 sterren (1 ster = afgerond)
+  },
+
+  // --- Content ---
+  content: {
+    earlyUnlockModules: ['m0', 'm7'], // techniek + fundamenten meteen open
+    moduleWeightOverrides: { m7: 0 } // techniek telt niet mee in slaagkans
+  },
+
+  // --- Online-klaar (nu nog lokaal) ---
+  online: {
+    enabled: false,
+    weeklyLeaderboard: true
+  },
+
   // --- "Ga ik slagen?"-voorspelling ---
   predict: {
     S0: 0.6, // vaardigheid die ~ "net slagen" benadert

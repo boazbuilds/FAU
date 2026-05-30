@@ -3,20 +3,53 @@
   import { activeSession, go } from '../stores/ui.js';
   import { srs } from '../stores/srsStore.js';
   import { settings } from '../stores/settings.js';
-  import { buildSession } from '../lib/session.js';
+  import { buildSession, buildLessonSession, buildBossSession } from '../lib/session.js';
+  import { starsFor } from '../lib/progress.js';
+  import { topicById } from '../lib/content.js';
+  import { CONFIG } from '../config.js';
   import Badge from '../components/Badge.svelte';
 
   const summary = get(activeSession)?.summary ?? {
-    answered: 0, correct: 0, xpGained: 0, perfect: false, outOfHearts: false, isPractice: false, newBadges: [], pred: null
+    answered: 0, correct: 0, score: 0, xpGained: 0, perfect: false, outOfHearts: false,
+    mode: 'normal', newBadges: [], pred: null, boss: null
   };
   const accuracy = summary.answered ? Math.round((summary.correct / summary.answered) * 100) : 0;
-  const showConfetti = summary.perfect && !get(settings).reducedMotion;
+  const isLesson = summary.mode === 'lesson';
+  const isBoss = summary.mode === 'boss';
+  const bossPassed = isBoss && summary.boss?.passed;
+  const stars = isLesson ? starsFor(summary.score) : 0;
+
+  const celebrate = (summary.perfect || bossPassed) && !get(settings).reducedMotion;
   const colors = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#22d3ee'];
 
-  function again() {
+  const heroEmoji = bossPassed ? '👑' : isBoss ? '😬' : summary.perfect ? '🏆' : summary.outOfHearts ? '💔' : '🎉';
+  const title = bossPassed
+    ? 'Boss verslagen!'
+    : isBoss
+      ? 'Boss niet gehaald'
+      : isLesson
+        ? 'Les afgerond!'
+        : summary.outOfHearts
+          ? 'Levens op'
+          : 'Sessie klaar!';
+
+  const unlockedTitle = summary.boss?.unlockedModuleId ? topicById[summary.boss.unlockedModuleId]?.title : null;
+
+  function againLesson() {
+    if (summary.lessonId) {
+      activeSession.set({ ids: buildLessonSession(summary.lessonId), mode: 'lesson', lessonId: summary.lessonId, moduleId: summary.moduleId });
+      go('session');
+    }
+  }
+  function retryBoss() {
+    if (summary.moduleId) {
+      activeSession.set({ ids: buildBossSession(summary.moduleId), mode: 'boss', moduleId: summary.moduleId });
+      go('session');
+    }
+  }
+  function againNormal() {
     const s = get(settings);
-    const ids = buildSession(get(srs), { length: s.sessionLength, newCount: s.newPerSession });
-    activeSession.set({ ids, mode: 'normal' });
+    activeSession.set({ ids: buildSession(get(srs), { length: s.sessionLength, newCount: s.newPerSession }), mode: 'normal' });
     go('session');
   }
   function home() {
@@ -26,10 +59,14 @@
 </script>
 
 <div class="mx-auto flex min-h-[100dvh] w-full max-w-md flex-col items-center justify-center gap-6 px-6 text-center">
-  <div class="animate-pop text-6xl">{summary.perfect ? '🏆' : summary.outOfHearts ? '💔' : '🎉'}</div>
-  <h1 class="text-2xl font-bold text-white">
-    {summary.perfect ? 'Vlekkeloze sessie!' : summary.outOfHearts ? 'Levens op' : summary.isPractice ? 'Lekker geoefend!' : 'Sessie klaar!'}
-  </h1>
+  <div class="animate-pop text-6xl">{heroEmoji}</div>
+  <h1 class="text-2xl font-bold text-white">{title}</h1>
+
+  {#if isLesson}
+    <div class="flex gap-2 text-4xl" aria-label="{stars} van 3 sterren">
+      {#each Array(3) as _, i}<span class={i < stars ? 'text-amber-400' : 'text-slate-700'}>★</span>{/each}
+    </div>
+  {/if}
 
   <div class="grid w-full grid-cols-2 gap-3">
     <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
@@ -37,10 +74,18 @@
       <div class="text-xs text-slate-400">XP verdiend</div>
     </div>
     <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
-      <div class="text-3xl font-bold text-emerald-300">{accuracy}%</div>
+      <div class="text-3xl font-bold {bossPassed || (!isBoss && accuracy >= 80) ? 'text-emerald-300' : 'text-amber-300'}">{accuracy}%</div>
       <div class="text-xs text-slate-400">{summary.correct}/{summary.answered} goed</div>
     </div>
   </div>
+
+  {#if isBoss}
+    {#if bossPassed}
+      <p class="text-sm text-emerald-300">Gehaald! {#if unlockedTitle}Module <span class="font-semibold">{unlockedTitle}</span> ontgrendeld. 🔓{/if}</p>
+    {:else}
+      <p class="text-sm text-rose-300">Je had {accuracy}% — je hebt {Math.round(CONFIG.path.bossPassRatio * 100)}% nodig. Oefen de lessen nog eens en probeer opnieuw.</p>
+    {/if}
+  {/if}
 
   {#if summary.outOfHearts}
     <p class="text-sm text-slate-400">Je levens groeien vanzelf weer aan. Vrij oefenen kan altijd zonder levens.</p>
@@ -55,17 +100,19 @@
     </div>
   {/if}
 
-  {#if summary.pred?.enoughData}
-    <div class="text-sm text-slate-400">Slagingskans nu: <span class="font-semibold text-white">{Math.round(summary.pred.pPass / 0.05) * 5}%</span></div>
-  {/if}
-
   <div class="w-full space-y-2">
-    <button class="w-full rounded-xl bg-indigo-600 py-3 font-bold text-white hover:bg-indigo-500" on:click={again}>Nog een ronde</button>
-    <button class="w-full rounded-xl border border-slate-700 py-3 font-semibold text-slate-200 hover:bg-slate-800" on:click={home}>Klaar voor nu</button>
+    {#if isBoss && !bossPassed}
+      <button class="w-full rounded-xl bg-indigo-600 py-3 font-bold text-white hover:bg-indigo-500" on:click={retryBoss}>Boss opnieuw</button>
+    {:else if isLesson}
+      <button class="w-full rounded-xl bg-indigo-600 py-3 font-bold text-white hover:bg-indigo-500" on:click={againLesson}>Les herhalen</button>
+    {:else if !isBoss}
+      <button class="w-full rounded-xl bg-indigo-600 py-3 font-bold text-white hover:bg-indigo-500" on:click={againNormal}>Nog een ronde</button>
+    {/if}
+    <button class="w-full rounded-xl border border-slate-700 py-3 font-semibold text-slate-200 hover:bg-slate-800" on:click={home}>Terug naar pad</button>
   </div>
 </div>
 
-{#if showConfetti}
+{#if celebrate}
   <div class="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
     {#each Array.from({ length: 40 }) as _, i}
       <span class="confetti" style="left:{Math.random() * 100}%; animation-delay:{Math.random() * 0.6}s; background:{colors[i % colors.length]}"></span>

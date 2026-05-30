@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store';
 
-// home | session | results | progress | predict | settings
+// path | session | results | progress | predict | settings | cheatsheet | mistakes
 export const screen = writable('home');
 
-// Tijdens een sessie: { ids:[], mode:'normal'|'practice' }. Na afloop: { summary:{...} }.
+// Tijdens een sessie: { ids:[], mode, lessonId?, moduleId? }. Na afloop: { summary:{...} }.
 export const activeSession = writable(null);
 
 export function go(name) {

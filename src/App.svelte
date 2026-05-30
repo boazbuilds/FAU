@@ -4,23 +4,32 @@
   import { screen, go } from './stores/ui.js';
   import { profile } from './stores/profile.js';
   import { settings } from './stores/settings.js';
-  import { regenHearts, reconcileDay } from './lib/gamify.js';
+  import { progress } from './stores/progressStore.js';
+  import { regenHearts, reconcileDay, migrateProfile } from './lib/gamify.js';
+  import { ensureInit } from './lib/progress.js';
   import { maybeRemind } from './lib/notify.js';
   import { todayNumber } from './lib/day.js';
+  import { modules } from './lib/content.js';
+  import { getIdentity } from './lib/sync.js';
   import TopBar from './components/TopBar.svelte';
-  import Home from './screens/Home.svelte';
+  import Path from './screens/Path.svelte';
   import Session from './screens/Session.svelte';
   import Results from './screens/Results.svelte';
   import Progress from './screens/Progress.svelte';
   import Predict from './screens/Predict.svelte';
   import Settings from './screens/Settings.svelte';
+  import Cheatsheet from './screens/Cheatsheet.svelte';
+  import Mistakes from './screens/Mistakes.svelte';
 
   onMount(() => {
     profile.update((p) => {
+      migrateProfile(p); // backfill nieuwe velden voor bestaande gebruikers
       regenHearts(p);
       reconcileDay(p);
       return p;
     });
+    progress.update((pr) => ensureInit(pr, modules));
+    getIdentity(get(profile)); // online-naad (no-op zolang uit)
     maybeRemind(get(profile), get(settings), todayNumber());
   });
 
@@ -31,7 +40,7 @@
   $: chromeless = $screen === 'session' || $screen === 'results';
 
   const nav = [
-    { id: 'home', label: 'Start', icon: '🏠' },
+    { id: 'home', label: 'Pad', icon: '🗺️' },
     { id: 'progress', label: 'Voortgang', icon: '📊' },
     { id: 'predict', label: 'Slaagkans', icon: '🔮' },
     { id: 'settings', label: 'Meer', icon: '⚙️' }
@@ -44,7 +53,7 @@
   {/if}
 
   {#if $screen === 'home'}
-    <Home />
+    <Path />
   {:else if $screen === 'session'}
     <Session />
   {:else if $screen === 'results'}
@@ -55,6 +64,10 @@
     <Predict />
   {:else if $screen === 'settings'}
     <Settings />
+  {:else if $screen === 'cheatsheet'}
+    <Cheatsheet />
+  {:else if $screen === 'mistakes'}
+    <Mistakes />
   {/if}
 
   {#if !chromeless}

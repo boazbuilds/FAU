@@ -3,17 +3,27 @@
   import { activeSession, go } from '../stores/ui.js';
   import { profile } from '../stores/profile.js';
   import { srs } from '../stores/srsStore.js';
+  import { progress } from '../stores/progressStore.js';
   import { settings } from '../stores/settings.js';
-  import { questionById, topicById } from '../lib/content.js';
+  import { questionById, topicById, lessonById, modules, tipById } from '../lib/content.js';
   import { applyResult } from '../lib/srs.js';
   import { xpForAnswer, registerGoalProgress, evaluateAchievements } from '../lib/gamify.js';
-  import { predict, topicStats } from '../lib/predict.js';
+  import { predict } from '../lib/predict.js';
+  import { completeLesson, recordBoss } from '../lib/progress.js';
   import { CONFIG } from '../config.js';
   import Question from '../components/Question.svelte';
 
   const sess = get(activeSession) ?? { ids: [], mode: 'normal' };
   const ids = sess.ids ?? [];
-  const isPractice = sess.mode === 'practice';
+  const mode = sess.mode ?? 'normal';
+  const lessonId = sess.lessonId ?? null;
+  const moduleId = sess.moduleId ?? null;
+  const isPractice = mode === 'practice';
+  const isBoss = mode === 'boss';
+  const isLesson = mode === 'lesson';
+
+  const lesson = lessonId ? lessonById[lessonId] : null;
+  let showIntro = !!lesson?.casusIntro;
 
   let index = 0;
   let phase = 'question'; // 'question' | 'feedback'
@@ -24,11 +34,13 @@
 
   $: q = questionById[ids[index]];
   $: topic = q ? topicById[q.topicId] : null;
-  $: progress = ids.length ? (index + (phase === 'feedback' ? 1 : 0)) / ids.length : 0;
+  $: tip = q?.tipRef ? tipById[q.tipRef] : null;
+  $: progressPct = ids.length ? (index + (phase === 'feedback' ? 1 : 0)) / ids.length : 0;
   $: isLast = index + 1 >= ids.length;
 
   function heartsActive() {
-    return !isPractice && get(settings).heartsEnabled;
+    // mild: oefenen én boss kosten geen levens
+    return mode !== 'practice' && mode !== 'boss' && get(settings).heartsEnabled;
   }
 
   function onAnswer(e) {
@@ -49,6 +61,7 @@
       p.totals.answered = (p.totals.answered ?? 0) + 1;
       p.today.answered = (p.today.answered ?? 0) + 1;
       p.today.xp = (p.today.xp ?? 0) + gained;
+      if (p.week) p.week.xp = (p.week.xp ?? 0) + gained;
       if (result === 'correct') {
         p.totals.correct = (p.totals.correct ?? 0) + 1;
         p.today.correct = (p.today.correct ?? 0) + 1;
@@ -76,9 +89,22 @@
   function finish() {
     const answered = results.length;
     const correct = results.filter((r) => r.result === 'correct').length;
+    const score = answered ? correct / answered : 0;
     const perfect = answered > 0 && !outOfHearts && results.every((r) => r.result === 'correct');
 
     let bonus = 0;
+    let bossResult = null;
+
+    // Voortgang wegschrijven voor les/boss
+    if (isLesson && lessonId) {
+      progress.update((pr) => completeLesson(pr, lessonId, score, undefined));
+    } else if (isBoss && moduleId) {
+      progress.update((pr) => {
+        bossResult = recordBoss(pr, modules, moduleId, score, undefined);
+        return pr;
+      });
+    }
+
     profile.update((p) => {
       const firstToday = (p.today.sessions ?? 0) === 0;
       p.today.sessions = (p.today.sessions ?? 0) + 1;
@@ -86,8 +112,10 @@
       if (!isPractice) {
         if (perfect) bonus += CONFIG.perfectSessionBonus;
         if (firstToday) bonus += CONFIG.firstSessionOfDayBonus;
+        if (isBoss && bossResult?.passed) bonus += CONFIG.path.bossBonusXp;
         p.xp += bonus;
         p.today.xp += bonus;
+        if (p.week) p.week.xp = (p.week.xp ?? 0) + bonus;
         registerGoalProgress(p);
       } else {
         p.hearts = CONFIG.maxHearts; // oefenen herstelt levens
@@ -97,20 +125,25 @@
     });
     sessionXp += bonus;
 
-    const stats = topicStats(get(srs));
     const pred = predict(get(srs));
     let newBadges = [];
     profile.update((p) => {
       newBadges = evaluateAchievements(p, {
         predictResult: pred,
-        topicStats: stats,
-        perfectSession: perfect
+        perfectSession: perfect,
+        bossPassed: isBoss && bossResult?.passed,
+        bossPerfect: isBoss && bossResult?.passed && perfect
       });
       return p;
     });
 
     activeSession.set({
-      summary: { answered, correct, xpGained: sessionXp, perfect, outOfHearts, isPractice, newBadges, pred }
+      summary: {
+        answered, correct, score, xpGained: sessionXp, perfect, outOfHearts,
+        mode, lessonId, moduleId,
+        boss: bossResult,
+        newBadges, pred
+      }
     });
     go('results');
   }
@@ -119,18 +152,29 @@
     activeSession.set(null);
     go('home');
   }
+
+  const headerLabel = isBoss ? '👑 Boss' : isPractice ? 'oefenen' : lesson ? lesson.title : '';
 </script>
 
+{#if showIntro}
+  <div class="mx-auto flex min-h-[100dvh] w-full max-w-md flex-col justify-center gap-4 px-6">
+    <div class="text-xs font-semibold uppercase tracking-wide text-indigo-300">📄 Casus</div>
+    <h1 class="text-xl font-bold text-white">{lesson.title}</h1>
+    <p class="text-sm leading-relaxed text-slate-200">{lesson.casusIntro}</p>
+    <button class="mt-2 w-full rounded-xl bg-indigo-600 py-3 font-bold text-white hover:bg-indigo-500" on:click={() => (showIntro = false)}>Begin</button>
+    <button class="text-sm text-slate-400 hover:text-white" on:click={quit}>Annuleren</button>
+  </div>
+{:else}
 <div class="mx-auto flex min-h-[100dvh] w-full max-w-md flex-col">
   <header class="flex items-center gap-3 px-4 py-3">
     <button class="text-xl text-slate-400 hover:text-white" on:click={quit} aria-label="Sluiten">✕</button>
     <div class="h-2.5 flex-1 overflow-hidden rounded-full bg-slate-800">
-      <div class="h-full rounded-full bg-indigo-500 transition-all duration-300" style="width:{Math.round(progress * 100)}%"></div>
+      <div class="h-full rounded-full {isBoss ? 'bg-amber-500' : 'bg-indigo-500'} transition-all duration-300" style="width:{Math.round(progressPct * 100)}%"></div>
     </div>
-    {#if !isPractice && $settings.heartsEnabled}
+    {#if heartsActive()}
       <div class="flex items-center gap-1 text-sm font-semibold text-rose-400"><span>❤️</span>{$profile.hearts}</div>
     {:else}
-      <div class="text-xs font-medium text-slate-400">oefenen</div>
+      <div class="text-xs font-medium text-slate-400">{isBoss ? 'boss' : 'oefenen'}</div>
     {/if}
   </header>
 
@@ -143,7 +187,7 @@
       </div>
     {:else}
       {#if topic}
-        <div class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400">{topic.icon} {topic.title}</div>
+        <div class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400">{topic.icon} {topic.title}{headerLabel && !isLesson ? ` · ${headerLabel}` : ''}</div>
       {/if}
       {#key q.id}
         <Question question={q} on:answer={onAnswer} />
@@ -164,22 +208,19 @@
         class="mb-1 font-bold
         {lastResult === 'correct' ? 'text-emerald-300' : lastResult === 'partial' ? 'text-amber-300' : 'text-rose-300'}"
       >
-        {lastResult === 'correct'
-          ? 'Goed! 🎉'
-          : lastResult === 'partial'
-            ? 'Deels goed 🟡'
-            : q.type === 'open'
-              ? 'Volgende keer beter 💪'
-              : 'Niet helemaal ❌'}
+        {lastResult === 'correct' ? 'Goed! 🎉' : lastResult === 'partial' ? 'Deels goed 🟡' : 'Niet helemaal ❌'}
       </div>
       {#if q.type === 'short'}
         <div class="mb-1 text-sm text-slate-200">Geaccepteerd antwoord: <span class="font-semibold">{q.answer.accept[0]}</span></div>
       {/if}
       <p class="text-sm leading-relaxed text-slate-200">{q.explanation}</p>
-      {#if q.reference}<p class="mt-1 text-xs text-slate-400">📖 {q.reference}</p>{/if}
+      {#if tip}
+        <p class="mt-2 rounded-lg bg-slate-900/60 p-2 text-xs leading-relaxed text-indigo-200"><span class="font-semibold">💡 Tip — {tip.title}:</span> {tip.body}</p>
+      {/if}
       <button class="mt-3 w-full rounded-xl bg-white py-3 font-bold text-slate-900 hover:bg-slate-100" on:click={next}>
         {outOfHearts || isLast ? 'Afronden' : 'Volgende'}
       </button>
     </div>
   {/if}
 </div>
+{/if}

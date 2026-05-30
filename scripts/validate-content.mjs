@@ -1,5 +1,6 @@
 // Valideert de content vóór een build. Geen dependencies nodig.
-import { readFileSync, readdirSync } from 'node:fs';
+// Merge't base + extensies en controleert het schema van Boaz' vragenbank.
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -7,80 +8,108 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = join(root, 'content');
 const errors = [];
 const warnings = [];
-
 const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'));
 
-// --- topics ---
-const topics = readJson(join(contentDir, 'topics.json'));
-const topicIds = new Set();
-let weightSum = 0;
-for (const t of topics.topics ?? []) {
-  if (!t.id) errors.push('Topic zonder id');
-  else if (topicIds.has(t.id)) errors.push(`Dubbele topic-id: ${t.id}`);
-  else topicIds.add(t.id);
-  if (typeof t.examWeight !== 'number') errors.push(`examWeight ontbreekt/ongeldig bij topic ${t.id}`);
-  else weightSum += t.examWeight;
-  for (const f of ['title', 'description', 'order']) {
-    if (t[f] === undefined) errors.push(`Topic ${t.id} mist veld '${f}'`);
+const base = readJson(join(contentDir, 'course/vragenbank.json'));
+const casus = readJson(join(contentDir, 'course/vragenbankcasussen.json'));
+const techniek = readJson(join(contentDir, 'course/vragenbanktechniek.json'));
+const tipsData = readJson(join(contentDir, 'examtips.json'));
+
+// --- merge ---
+const course = JSON.parse(JSON.stringify(base));
+for (const ext of [casus, techniek]) {
+  const addLessons = ext.addLessonsToModule || {};
+  for (const m of course.modules) {
+    if (addLessons[m.id]) m.lessons.push(...addLessons[m.id]);
   }
+  if (ext.addModules) course.modules.push(...ext.addModules);
 }
-if (Math.abs(weightSum - 1) > 0.01) {
-  errors.push(`Som van examWeight is ${weightSum.toFixed(3)} (moet ~1.00 zijn)`);
-}
+course.modules.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
-// --- questions ---
-const qDir = join(contentDir, 'questions');
-const qFiles = readdirSync(qDir).filter((f) => f.endsWith('.json'));
+// --- tips ---
+const tipIds = new Set((tipsData.tips ?? []).map((t) => t.id));
+if (tipIds.size === 0) errors.push('examtips.json bevat geen tips');
+
+// --- modules / lessen / vragen ---
+const moduleIds = new Set();
+const lessonIds = new Set();
 const qIds = new Set();
-const topicsWithQuestions = new Set();
 let qCount = 0;
+let lessonCount = 0;
+const OBJECTIVE = new Set(['multiple_choice', 'multi_select', 'matching', 'fill_blank']);
 
-for (const file of qFiles) {
-  const data = readJson(join(qDir, file));
-  if (!data.topicId) errors.push(`${file}: topicId ontbreekt`);
-  else if (!topicIds.has(data.topicId)) errors.push(`${file}: onbekende topicId '${data.topicId}'`);
-  else topicsWithQuestions.add(data.topicId);
+for (const m of course.modules) {
+  if (!m.id) errors.push('Module zonder id');
+  else if (moduleIds.has(m.id)) errors.push(`Dubbele module-id: ${m.id}`);
+  else moduleIds.add(m.id);
+  for (const f of ['title', 'order']) {
+    if (m[f] === undefined) errors.push(`Module ${m.id} mist veld '${f}'`);
+  }
 
-  for (const q of data.questions ?? []) {
-    qCount++;
-    if (!q.id) { errors.push(`${file}: vraag zonder id`); continue; }
-    if (qIds.has(q.id)) errors.push(`Dubbele vraag-id: ${q.id}`);
-    qIds.add(q.id);
-    if (q.topicId && q.topicId !== data.topicId) errors.push(`${q.id}: topicId wijkt af van bestand`);
-    if (!q.prompt) errors.push(`${q.id}: prompt ontbreekt`);
-    if (!q.explanation) errors.push(`${q.id}: explanation ontbreekt`);
-    if (![1, 2, 3].includes(q.difficulty)) warnings.push(`${q.id}: difficulty ontbreekt of niet 1-3`);
+  for (const l of m.lessons ?? []) {
+    lessonCount++;
+    if (!l.id) errors.push(`Module ${m.id}: les zonder id`);
+    else if (lessonIds.has(l.id)) errors.push(`Dubbele les-id: ${l.id}`);
+    else lessonIds.add(l.id);
+    if (!l.title) errors.push(`Les ${l.id}: title ontbreekt`);
+    if (!Array.isArray(l.questions) || l.questions.length === 0) {
+      warnings.push(`Les ${l.id}: geen vragen`);
+    }
 
-    switch (q.type) {
-      case 'mcq': {
-        if (!Array.isArray(q.options) || q.options.length < 2) errors.push(`${q.id}: mcq heeft < 2 opties`);
-        if (!Array.isArray(q.correct) || q.correct.length < 1) {
-          errors.push(`${q.id}: mcq mist correct[]`);
-        } else {
-          const ids = new Set((q.options ?? []).map((o) => o.id));
-          for (const c of q.correct) if (!ids.has(c)) errors.push(`${q.id}: correct '${c}' bestaat niet in opties`);
+    for (const q of l.questions ?? []) {
+      qCount++;
+      if (!q.id) { errors.push(`Les ${l.id}: vraag zonder id`); continue; }
+      if (qIds.has(q.id)) errors.push(`Dubbele vraag-id: ${q.id}`);
+      qIds.add(q.id);
+      if (!q.prompt) errors.push(`${q.id}: prompt ontbreekt`);
+      if (!q.explanation) errors.push(`${q.id}: explanation ontbreekt`);
+      if (![1, 2, 3].includes(q.difficulty)) warnings.push(`${q.id}: difficulty ontbreekt of niet 1-3`);
+      if (q.tipRef && !tipIds.has(q.tipRef)) errors.push(`${q.id}: onbekende tipRef '${q.tipRef}'`);
+
+      switch (q.type) {
+        case 'multiple_choice': {
+          if (!Array.isArray(q.options) || q.options.length < 2) errors.push(`${q.id}: mc heeft < 2 opties`);
+          if (!Number.isInteger(q.correct) || q.correct < 0 || q.correct >= (q.options?.length ?? 0)) {
+            errors.push(`${q.id}: correct-index buiten bereik`);
+          }
+          break;
         }
-        break;
+        case 'multi_select': {
+          if (!Array.isArray(q.options) || q.options.length < 2) errors.push(`${q.id}: multi_select heeft < 2 opties`);
+          if (!Array.isArray(q.correct) || q.correct.length < 1) errors.push(`${q.id}: multi_select mist correct[]`);
+          else for (const i of q.correct) {
+            if (!Number.isInteger(i) || i < 0 || i >= (q.options?.length ?? 0)) errors.push(`${q.id}: correct-index ${i} buiten bereik`);
+          }
+          break;
+        }
+        case 'matching': {
+          if (!Array.isArray(q.pairs) || q.pairs.length < 2) errors.push(`${q.id}: matching heeft < 2 pairs`);
+          else {
+            // De grader matcht op pair-positie, niet op tekst, dus dubbele 'right'
+            // is toegestaan (bv. 2x 'Oordeel met beperking' in de 2x2-matrix).
+            // Dubbele 'left' is wel ambigu en niet toegestaan.
+            const lefts = new Set();
+            for (const p of q.pairs) {
+              if (!p.left || !p.right) errors.push(`${q.id}: pair met lege left/right`);
+              if (lefts.has(p.left)) errors.push(`${q.id}: dubbele left '${p.left}'`);
+              lefts.add(p.left);
+            }
+          }
+          break;
+        }
+        case 'fill_blank':
+          if (!q.answer) errors.push(`${q.id}: fill_blank mist answer`);
+          break;
+        default:
+          errors.push(`${q.id}: onbekend type '${q.type}'`);
       }
-      case 'truefalse':
-        if (typeof q.correct !== 'boolean') errors.push(`${q.id}: truefalse mist boolean 'correct'`);
-        break;
-      case 'short':
-        if (!q.answer || !Array.isArray(q.answer.accept) || q.answer.accept.length < 1) {
-          errors.push(`${q.id}: short mist answer.accept[]`);
-        }
-        break;
-      case 'open':
-        if (!q.modelAnswer) errors.push(`${q.id}: open mist modelAnswer`);
-        break;
-      default:
-        errors.push(`${q.id}: onbekend type '${q.type}'`);
+
+      // bossvragen (lessen met boss:true) moeten objectief zijn
+      if (l.boss && !OBJECTIVE.has(q.type)) {
+        errors.push(`${q.id}: boss-les mag alleen objectieve typen bevatten`);
+      }
     }
   }
-}
-
-for (const t of topicIds) {
-  if (!topicsWithQuestions.has(t)) warnings.push(`Topic '${t}' heeft (nog) geen vragen`);
 }
 
 if (warnings.length) {
@@ -93,4 +122,4 @@ if (errors.length) {
   console.error(`\n${errors.length} fout(en) gevonden.\n`);
   process.exit(1);
 }
-console.log(`\n✅ Content OK — ${topicIds.size} topics, ${qCount} vragen, ${qFiles.length} bestand(en).\n`);
+console.log(`\n✅ Content OK — ${moduleIds.size} modules, ${lessonCount} lessen, ${qCount} vragen, ${tipIds.size} tips.\n`);

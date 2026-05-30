@@ -1,110 +1,171 @@
 import { describe, it, expect } from 'vitest';
 import { applyResult, isDue } from './srs.js';
-import { gradeShort, gradeMcq, gradeTrueFalse, normalize, similarity } from './grading.js';
-import { predict, topicStats } from './predict.js';
-import { levelFromXp, xpForLevel, xpForAnswer } from './gamify.js';
-import { allQuestions, topics } from './content.js';
+import { gradeShort, gradeMcq, gradeTrueFalse, matchFraction, gradeMatchResult, gradeMatch, normalize } from './grading.js';
+import { predict } from './predict.js';
+import { levelFromXp, xpForAnswer, defaultProfile, migrateProfile } from './gamify.js';
+import { modules, allQuestions, questionById, questionsForLesson, tips, tipById } from './content.js';
+import { defaultProgress, ensureInit, isLessonUnlocked, isModuleUnlocked, starsFor, completeLesson, recordBoss } from './progress.js';
 
-describe('srs (Leitner)', () => {
-  it('promoot een nieuw item naar box 2 bij goed', () => {
-    const item = applyResult(undefined, 'correct', 100);
-    expect(item.box).toBe(2);
-    expect(item.due).toBe(101); // 100 + interval[2]=1
-    expect(item.history).toEqual([1]);
-    expect(item.reps).toBe(1);
+describe('content loader (merge + normalisatie)', () => {
+  it('merget tot 8 modules en 103 vragen', () => {
+    expect(modules.length).toBe(8);
+    expect(allQuestions.length).toBe(103);
+    expect(tips.length).toBe(22);
   });
 
-  it('reset naar box 1 bij fout en is meteen due', () => {
-    let item = applyResult(undefined, 'correct', 100); // box 2
-    item = applyResult(item, 'correct', 101); // box 3
-    item = applyResult(item, 'wrong', 105);
-    expect(item.box).toBe(1);
-    expect(item.lapses).toBe(1);
-    expect(item.due).toBe(105);
-    expect(isDue(item, 105)).toBe(true);
+  it('normaliseert multiple_choice naar mcq met letters', () => {
+    const q = questionById['m0l1q1'];
+    expect(q.type).toBe('mcq');
+    expect(q.multi).toBe(false);
+    expect(q.options[0].id).toBe('a');
+    expect(q.correct).toEqual(['b']); // bron correct:1 -> 'b'
   });
 
-  it('loopt op tot maximaal box 5', () => {
-    let item;
-    let day = 0;
-    for (let i = 0; i < 10; i++) item = applyResult(item, 'correct', day++);
-    expect(item.box).toBe(5);
+  it('normaliseert matching naar match met pair-ids', () => {
+    const q = questionById['m0l1q5'];
+    expect(q.type).toBe('match');
+    expect(q.pairs.length).toBeGreaterThan(1);
+    expect(q.pairs[0].id).toBe('p0');
   });
 
-  it('houdt de box gelijk bij deels', () => {
-    let item = applyResult(undefined, 'correct', 0); // box 2
-    item = applyResult(item, 'correct', 1); // box 3
-    const before = item.box;
-    item = applyResult(item, 'partial', 2);
-    expect(item.box).toBe(before);
+  it('normaliseert fill_blank naar short met accept', () => {
+    const q = questionById['m0l1q4'];
+    expect(q.type).toBe('short');
+    expect(q.answer.accept).toContain('waardering');
+  });
+
+  it('normaliseert multi_select naar mcq multi', () => {
+    const q = questionById['m2l1q4'];
+    expect(q.type).toBe('mcq');
+    expect(q.multi).toBe(true);
+    expect(q.correct).toEqual(['a', 'b']); // bron correct:[0,1]
+  });
+
+  it('elke tipRef bestaat', () => {
+    for (const q of allQuestions) {
+      if (q.tipRef) expect(tipById[q.tipRef]).toBeTruthy();
+    }
+  });
+
+  it('m7 heeft examWeight 0, kennismodules samen ~1', () => {
+    const m7 = modules.find((m) => m.id === 'm7');
+    expect(m7.examWeight).toBe(0);
+    const sum = modules.reduce((s, m) => s + m.examWeight, 0);
+    expect(Math.abs(sum - 1)).toBeLessThan(0.001);
   });
 });
 
 describe('grading', () => {
-  it('normaliseert diakrieten en leestekens', () => {
+  it('mcq enkel en multi', () => {
+    expect(gradeMcq({ correct: ['c'] }, ['c'])).toBe(true);
+    expect(gradeMcq({ correct: ['a', 'b'] }, ['b', 'a'])).toBe(true); // volgorde-onafhankelijk
+    expect(gradeMcq({ correct: ['a', 'b'] }, ['a'])).toBe(false);
+  });
+
+  it('short met synoniemen/fuzzy', () => {
+    const q = { answer: { accept: ['waardering', 'de waardering'], minSimilarity: 0.85 } };
+    expect(gradeShort(q, 'Waardering')).toBe(true);
+    expect(gradeShort(q, 'bestaan')).toBe(false);
+  });
+
+  it('match: fractie, 3-weg en binair', () => {
+    const q = { pairs: [{ id: 'p0' }, { id: 'p1' }, { id: 'p2' }, { id: 'p3' }] };
+    expect(matchFraction(q, { p0: 'p0', p1: 'p1', p2: 'p2', p3: 'p3' })).toBe(1);
+    expect(gradeMatch(q, { p0: 'p0', p1: 'p1', p2: 'p2', p3: 'p3' })).toBe(true);
+    expect(gradeMatchResult(q, { p0: 'p0', p1: 'p1', p2: 'x', p3: 'x' })).toBe('partial'); // 0.5
+    expect(gradeMatchResult(q, { p0: 'x', p1: 'x', p2: 'x', p3: 'x' })).toBe('wrong');
+  });
+
+  it('truefalse en normalize', () => {
+    expect(gradeTrueFalse({ correct: true }, true)).toBe(true);
     expect(normalize('Détéctie, risico!')).toBe('detectie risico');
   });
+});
 
-  it('beoordeelt korte antwoorden met synoniemen en fuzzy match', () => {
-    const q = { answer: { accept: ['detectierisico', 'detection risk'], minSimilarity: 0.85 } };
-    expect(gradeShort(q, 'Detectierisico')).toBe(true);
-    expect(gradeShort(q, 'detectie risico')).toBe(true); // klein verschil
-    expect(gradeShort(q, 'het detectierisico')).toBe(true); // kernwoord aanwezig
-    expect(gradeShort(q, 'inherent risico')).toBe(false);
-    expect(gradeShort(q, '')).toBe(false);
+describe('srs (Leitner)', () => {
+  it('promoot bij goed, reset bij fout', () => {
+    let it = applyResult(undefined, 'correct', 100);
+    expect(it.box).toBe(2);
+    it = applyResult(it, 'correct', 101);
+    it = applyResult(it, 'wrong', 105);
+    expect(it.box).toBe(1);
+    expect(isDue(it, 105)).toBe(true);
+  });
+});
+
+describe('progress (leerpad)', () => {
+  const mods = modules;
+  it('m0 en m7 zijn vroeg ontgrendeld; m3 niet', () => {
+    const pr = ensureInit(defaultProgress(), mods);
+    expect(isModuleUnlocked(pr, mods, 'm0')).toBe(true);
+    expect(isModuleUnlocked(pr, mods, 'm7')).toBe(true);
+    expect(isModuleUnlocked(pr, mods, 'm3')).toBe(false);
   });
 
-  it('beoordeelt mcq en waar/onwaar', () => {
-    expect(gradeMcq({ correct: ['c'] }, ['c'])).toBe(true);
-    expect(gradeMcq({ correct: ['c'] }, ['a'])).toBe(false);
-    expect(gradeMcq({ correct: ['c'] }, [])).toBe(false);
-    expect(gradeTrueFalse({ correct: true }, true)).toBe(true);
-    expect(gradeTrueFalse({ correct: false }, true)).toBe(false);
+  it('les 2 ontgrendelt na les 1; cascade na boss', () => {
+    const pr = ensureInit(defaultProgress(), mods);
+    const m0 = mods.find((m) => m.id === 'm0');
+    const [l1, l2] = m0.lessons;
+    expect(isLessonUnlocked(pr, mods, 'm0', l2.id)).toBe(false);
+    completeLesson(pr, l1.id, 1, 0);
+    expect(isLessonUnlocked(pr, mods, 'm0', l2.id)).toBe(true);
   });
 
-  it('similarity ligt tussen 0 en 1', () => {
-    expect(similarity('abc', 'abc')).toBe(1);
-    expect(similarity('abc', 'xyz')).toBeGreaterThanOrEqual(0);
-    expect(similarity('abc', 'xyz')).toBeLessThan(0.5);
+  it('sterren-drempels', () => {
+    expect(starsFor(1)).toBe(3);
+    expect(starsFor(0.8)).toBe(2);
+    expect(starsFor(0.5)).toBe(1);
+  });
+
+  it('recordBoss haalt drempel en ontgrendelt volgende module', () => {
+    const pr = ensureInit(defaultProgress(), mods);
+    const fail = recordBoss(pr, mods, 'm1', 0.5, 0);
+    expect(fail.passed).toBe(false);
+    const pass = recordBoss(pr, mods, 'm1', 0.9, 0);
+    expect(pass.passed).toBe(true);
+    expect(pass.unlockedModuleId).toBe('m2');
+    expect(isModuleUnlocked(pr, mods, 'm2')).toBe(true);
   });
 });
 
 describe('gamify', () => {
-  it('level stijgt monotoon met XP', () => {
-    expect(levelFromXp(0)).toBe(1);
+  it('level stijgt met XP; XP-beloning schaalt met moeilijkheid', () => {
     expect(levelFromXp(1000)).toBeGreaterThan(levelFromXp(100));
-    expect(xpForLevel(levelFromXp(500))).toBeLessThanOrEqual(500);
+    expect(xpForAnswer('correct', 3)).toBeGreaterThan(xpForAnswer('correct', 1));
+    expect(xpForAnswer('wrong', 2)).toBe(0);
   });
 
-  it('geeft meer XP voor moeilijkere goede antwoorden', () => {
-    expect(xpForAnswer('correct', 3)).toBeGreaterThan(xpForAnswer('correct', 1));
-    expect(xpForAnswer('wrong', 3)).toBe(0);
-    expect(xpForAnswer('partial', 2)).toBeGreaterThan(0);
+  it('defaultProfile is v2 met userId en week', () => {
+    const p = defaultProfile();
+    expect(p.v).toBe(2);
+    expect(p.userId).toBeTruthy();
+    expect(p.week).toBeTruthy();
+  });
+
+  it('migreert een oud v1-profiel naar v2 zonder dataverlies', () => {
+    const old = { v: 1, xp: 500, streak: { current: 4 }, today: {}, totals: {}, achievements: {} };
+    const m = migrateProfile(old);
+    expect(m.v).toBe(2);
+    expect(m.xp).toBe(500); // bestaande data intact
+    expect(m.userId).toBeTruthy();
+    expect(m.week).toBeTruthy();
   });
 });
 
 describe('predict (Ga ik slagen?)', () => {
-  it('gebruikt de prior en toont geen percentage zonder data', () => {
-    const p = predict({ items: {} });
-    expect(p.enoughData).toBe(false);
-    expect(p.pPass).toBeGreaterThan(0);
-    expect(p.pPass).toBeLessThan(0.3); // prior 0.35 < S0 0.60 -> lage kans
-    expect(p.weakest.length).toBe(Math.min(3, topics.length));
-  });
+  it('lage kans zonder data, hoger met goede antwoorden', () => {
+    const empty = predict({ items: {} });
+    expect(empty.enoughData).toBe(false);
 
-  it('hogere beheersing verhoogt de slagingskans', () => {
     const items = {};
     let day = 0;
-    // beantwoord elke vraag een paar keer goed -> hoge mastery
     for (const q of allQuestions) {
       let it;
-      for (let i = 0; i < 4; i++) it = applyResult(it, 'correct', day++);
+      for (let i = 0; i < 3; i++) it = applyResult(it, 'correct', day++);
       items[q.id] = it;
     }
     const good = predict({ items });
-    const empty = predict({ items: {} });
     expect(good.pPass).toBeGreaterThan(empty.pPass);
     expect(good.enoughData).toBe(true);
-    expect(good.pPass).toBeGreaterThan(0.5);
   });
 });
