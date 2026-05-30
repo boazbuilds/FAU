@@ -68,7 +68,6 @@
     clearTimer();
     qStart = Date.now();
     bonusXp = 0;
-    timedOutNow = false;
     isSjefQ =
       index > 0 &&
       sjefCount < CONFIG.sjef.maxPerSession &&

@@ -1,0 +1,627 @@
+{
+  "meta": {
+    "extends": "vragenbank.json",
+    "title": "Bank m4 - extra oefenset",
+    "note": "merge",
+    "description": "Extra oefenset voor module 4 (Verklaringenstelsel en rapportage): de 2x2-matrix (alle vier de hoeken), diepgaandheid bepalen, 706 vs 705 vs 570 vs 701 vs 720, continuiteit-stappen, de strekking-denklijn (bron x diepgaandheid), subsidie-strekking, oob-accountantsverslag en de klassieke instinkers. Gebaseerd op de casussen Great Choice, International Publishing, Tankprof, Property XL, Flexscooter en Mondzorg.",
+    "language": "nl",
+    "version": "1.0"
+  },
+  "addLessonsToModule": {
+    "m4": [
+      {
+        "id": "m4lb1",
+        "title": "Verklaringenstelsel - extra oefenset (deel 1)",
+        "questions": [
+          {
+            "id": "m4lb1q01",
+            "type": "matching",
+            "prompt": "Koppel elke combinatie (bron x diepgaandheid) aan de juiste strekking van het oordeel.",
+            "pairs": [
+              {"left": "Afwijking in de jaarrekening - materieel, niet diepgaand", "right": "Oordeel met beperking"},
+              {"left": "Afwijking in de jaarrekening - materieel en diepgaand", "right": "Afkeurend oordeel"},
+              {"left": "Beperking in de controle - materieel, niet diepgaand", "right": "Oordeel met beperking"},
+              {"left": "Beperking in de controle - materieel en diepgaand", "right": "Oordeelonthouding"}
+            ],
+            "explanation": "De 2x2-matrix (Standaard 705): twee assen zijn bron (afwijking in de jaarrekening vs. beperking in de controle) en diepgaandheid (niet-pervasive vs. pervasive). Materieel is niet hetzelfde als diepgaand.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.705", "matrix"],
+            "scoreChance": 85,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q02",
+            "type": "multiple_choice",
+            "context": "E-en geisoleerde post staat materieel te hoog; het bestuur weigert te corrigeren. De jaarrekening blijft als geheel bruikbaar en betrouwbaar.",
+            "prompt": "Welke strekking past hier?",
+            "options": [
+              "Goedkeurend oordeel",
+              "Oordeel met beperking",
+              "Afkeurend oordeel",
+              "Oordeelonthouding"
+            ],
+            "correct": 1,
+            "explanation": "Een afwijking in de jaarrekening die materieel maar niet diepgaand is -> oordeel met beperking ('met uitzondering van'), Standaard 705. Een geisoleerde fout is zelden diepgaand.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.705", "matrix"],
+            "scoreChance": 80,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q03",
+            "type": "multiple_choice",
+            "context": "De waarderingsgrondslag is over de hele linie onjuist toegepast; de fout werkt door in nagenoeg alle posten en het beeld van de jaarrekening als geheel is misleidend. Het bestuur corrigeert niet.",
+            "prompt": "Welke strekking past?",
+            "options": [
+              "Oordeel met beperking",
+              "Afkeurend oordeel",
+              "Oordeelonthouding",
+              "Goedkeurend met benadrukking (706)"
+            ],
+            "correct": 1,
+            "explanation": "Een afwijking in de jaarrekening die materieel en diepgaand (pervasive) is -> afkeurend oordeel, Standaard 705. De fout is niet tot een deel te isoleren.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.705", "matrix"],
+            "scoreChance": 80,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q04",
+            "type": "multiple_choice",
+            "context": "Je kunt over een belangrijke post geen toereikende controle-informatie krijgen (bv. voorraadtelling gemist). Het betreft een afgebakende post; de rest van de jaarrekening kun je wel controleren.",
+            "prompt": "Welke strekking past?",
+            "options": [
+              "Goedkeurend oordeel",
+              "Oordeel met beperking",
+              "Afkeurend oordeel",
+              "Oordeelonthouding"
+            ],
+            "correct": 1,
+            "explanation": "Een beperking in de controle die materieel maar niet diepgaand is -> oordeel met beperking, Standaard 705. Een afgebakend informatietekort leidt nog niet tot onthouding.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.705", "matrix"],
+            "scoreChance": 75,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q05",
+            "type": "multiple_choice",
+            "context": "Door het ontbreken van een betrouwbare administratie over het hele jaar kun je over grote delen van de jaarrekening geen toereikende controle-informatie verkrijgen.",
+            "prompt": "Welke strekking past?",
+            "options": [
+              "Oordeel met beperking",
+              "Afkeurend oordeel",
+              "Oordeelonthouding",
+              "Goedkeurend oordeel met een sectie 'overige aangelegenheden'"
+            ],
+            "correct": 2,
+            "explanation": "Een beperking in de controle die materieel en diepgaand (pervasive) is -> oordeelonthouding, Standaard 705. Je kunt geen onderbouwd oordeel geven.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.705", "matrix"],
+            "scoreChance": 75,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q06",
+            "type": "fill_blank",
+            "prompt": "De vier mogelijke modificaties van het oordeel volgens Standaard 705 zijn: oordeel met beperking, afkeurend oordeel en ___.",
+            "answer": "oordeelonthouding",
+            "accept": ["oordeelonthouding", "onthouding", "onthouding van oordeel", "oordeelsonthouding"],
+            "explanation": "Standaard 705 kent drie modificaties: oordeel met beperking, afkeurend oordeel en oordeelonthouding. Standaard 700 is het goedkeurende (ongemodificeerde) oordeel.",
+            "difficulty": 1,
+            "tags": ["verklaring", "St.705"],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q07",
+            "type": "multiple_choice",
+            "prompt": "Wat betekent 'van diepgaande invloed' (pervasive) volgens Standaard 705?",
+            "options": [
+              "Dat de afwijking boven de uitvoeringsmaterialiteit uitkomt",
+              "Dat het bestuur weigert te corrigeren",
+              "Dat het om een oob gaat",
+              "Dat de gevolgen niet tot bepaalde elementen zijn te isoleren, of een substantieel deel raken, of fundamenteel zijn voor het begrip van de gebruikers"
+            ],
+            "correct": 3,
+            "explanation": "Standaard 705 definieert 'van diepgaande invloed' als gevolgen die niet tot specifieke elementen beperkt zijn, of een substantieel deel betreffen, of fundamenteel zijn voor het inzicht van de gebruiker. Diepgaandheid staat los van enkel de materialiteitsgrens.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.705", "diepgaand"],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q08",
+            "type": "multiple_choice",
+            "prompt": "Welke uitspraak is JUIST?",
+            "options": [
+              "Elke materiele afwijking leidt tot een afkeurend oordeel",
+              "Materieel betekent automatisch diepgaand",
+              "Een geisoleerde materiele afwijking leidt in beginsel tot een oordeel met beperking, niet tot een afkeurend oordeel",
+              "Bij een beperking in de controle geef je altijd een oordeelonthouding"
+            ],
+            "correct": 2,
+            "explanation": "Kernregel: materieel is niet hetzelfde als diepgaand. Een geisoleerde materiele fout -> beperking; alleen materieel en diepgaand -> afkeurend (afwijking) of onthouding (beperking controle). Standaard 705.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.705", "instinker"],
+            "scoreChance": 85,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q09",
+            "type": "multiple_choice",
+            "prompt": "Een goedkeurend (ongemodificeerd) oordeel bij de controle van een jaarrekening berust op welke Standaard?",
+            "options": [
+              "Standaard 700",
+              "Standaard 705",
+              "Standaard 706",
+              "Standaard 720"
+            ],
+            "correct": 0,
+            "explanation": "Standaard 700 regelt het vormen van een oordeel en de (goedkeurende) controleverklaring. 705 betreft de aanpassingen van dat oordeel.",
+            "difficulty": 1,
+            "tags": ["verklaring", "St.700"],
+            "scoreChance": 65,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb1q10",
+            "type": "multiple_choice",
+            "context": "Na de balansdatum is er een belangrijke onzekerheid (een groot rechtsgeding) die het bestuur correct en toereikend in de jaarrekening heeft toegelicht. Je oordeel is niet aangepast.",
+            "prompt": "Welk instrument gebruik je om de gebruiker hierop te wijzen?",
+            "options": [
+              "Een oordeel met beperking (705)",
+              "Een paragraaf ter benadrukking van een aangelegenheid (706)",
+              "Een sectie kernpunten van de controle (701)",
+              "Een sectie 'andere informatie' (720)"
+            ],
+            "correct": 1,
+            "explanation": "Standaard 706: een benadrukking van een aangelegenheid verwijst naar iets dat correct in de jaarrekening is toegelicht en fundamenteel is voor het begrip. Het oordeel blijft ongewijzigd (goedkeurend).",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.706"],
+            "scoreChance": 75,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q11",
+            "type": "multiple_choice",
+            "prompt": "Welke uitspraak over een paragraaf ter benadrukking (706) is JUIST?",
+            "options": [
+              "Een benadrukking laat het oordeel ongewijzigd en wijst op iets dat al correct is toegelicht",
+              "Een benadrukking wijzigt het oordeel naar 'met beperking'",
+              "Een benadrukking vervangt een vereiste toelichting van het bestuur",
+              "Een benadrukking mag alleen bij een oob"
+            ],
+            "correct": 0,
+            "explanation": "Standaard 706: de benadrukking laat het oordeel ongewijzigd en is geen vervanging voor een ontbrekende toelichting of voor een modificatie. Denken dat 706 het oordeel wijzigt is een klassieke instinker.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.706", "instinker"],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q12",
+            "type": "multiple_choice",
+            "prompt": "Wat is het verschil tussen een 'benadrukking van een aangelegenheid' en 'overige aangelegenheden' (beide Standaard 706)?",
+            "options": [
+              "Benadrukking gaat over iets dat IN de jaarrekening is opgenomen/toegelicht; overige aangelegenheden gaan over iets dat NIET in de jaarrekening staat maar relevant is voor het begrip van de controle",
+              "Benadrukking mag alleen bij oob; overige aangelegenheden alleen bij niet-oob",
+              "Er is geen verschil, het zijn synoniemen",
+              "Benadrukking wijzigt het oordeel; overige aangelegenheden niet"
+            ],
+            "correct": 0,
+            "explanation": "Standaard 706: de benadrukking verwijst naar een in de jaarrekening opgenomen aangelegenheid; de paragraaf inzake overige aangelegenheden betreft iets buiten de jaarrekening dat relevant is voor het begrip van de controle/verklaring. Het oordeel blijft in beide gevallen ongewijzigd.",
+            "difficulty": 3,
+            "tags": ["verklaring", "St.706"],
+            "scoreChance": 55,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb1q13",
+            "type": "multiple_choice",
+            "context": "De onderneming heeft een materiele onzekerheid over de continuiteit. Het bestuur heeft deze onzekerheid adequaat (toereikend) toegelicht in de jaarrekening en de continuiteitsveronderstelling is aanvaardbaar.",
+            "prompt": "Wat doet de accountant?",
+            "options": [
+              "Een oordeel met beperking geven omdat er onzekerheid is",
+              "Een goedkeurend oordeel met een aparte sectie 'materiele onzekerheid over continuiteit'",
+              "Een afkeurend oordeel geven",
+              "Een oordeelonthouding geven"
+            ],
+            "correct": 1,
+            "explanation": "Standaard 570: bij een adequaat toegelichte materiele continuiteitsonzekerheid blijft het oordeel goedkeurend, met een aparte sectie 'materiele onzekerheid over continuiteit'. Je modificeert het oordeel niet.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.570", "continuiteit"],
+            "scoreChance": 85,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q14",
+            "type": "multiple_choice",
+            "context": "Er is een materiele continuiteitsonzekerheid, maar het bestuur weigert deze adequaat toe te lichten in de jaarrekening.",
+            "prompt": "Wat is het gevolg?",
+            "options": [
+              "Goedkeurend oordeel met de sectie 'materiele onzekerheid over continuiteit'",
+              "Het oordeel modificeren (oordeel met beperking of afkeurend), want de jaarrekening schiet tekort in de toelichting",
+              "Een paragraaf ter benadrukking (706) zonder het oordeel te wijzigen",
+              "Niets, zolang de continuiteitsveronderstelling zelf nog aanvaardbaar is"
+            ],
+            "correct": 1,
+            "explanation": "Standaard 570: is de onzekerheid niet adequaat toegelicht, dan is de jaarrekening op dat punt afwijkend en modificeer je het oordeel (beperking of afkeurend, afhankelijk van diepgaandheid). De aparte sectie is dan niet de juiste route.",
+            "difficulty": 3,
+            "tags": ["verklaring", "St.570", "continuiteit"],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q15",
+            "type": "multiple_choice",
+            "context": "De continuiteitsveronderstelling is niet langer aanvaardbaar (de onderneming gaat aantoonbaar niet door), maar de jaarrekening is toch op continuiteitsbasis opgesteld.",
+            "prompt": "Welke strekking past?",
+            "options": [
+              "Goedkeurend met een aparte continuiteitssectie",
+              "Oordeel met beperking",
+              "Afkeurend oordeel",
+              "Een benadrukking van een aangelegenheid (706)"
+            ],
+            "correct": 2,
+            "explanation": "Standaard 570: als de continuiteitsbasis onterecht is gebruikt, is dat een diepgaande afwijking in de jaarrekening (verkeerde grondslag) -> afkeurend oordeel.",
+            "difficulty": 3,
+            "tags": ["verklaring", "St.570", "continuiteit"],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb1q16",
+            "type": "multiple_choice",
+            "prompt": "Wanneer neemt de accountant een sectie 'kernpunten van de controle' (KAM, Standaard 701) op?",
+            "options": [
+              "Bij elke controle van een jaarrekening",
+              "Alleen bij een gemodificeerd oordeel",
+              "Alleen bij een continuiteitsonzekerheid",
+              "Alleen bij de controle van een organisatie van openbaar belang (oob), of indien anderszins vereist/vrijwillig overeengekomen"
+            ],
+            "correct": 3,
+            "explanation": "Standaard 701: kernpunten van de controle zijn verplicht bij oob's (en kunnen vrijwillig/anders vereist worden opgenomen). Denken dat 701 bij elke controle hoort is een instinker.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.701", "oob"],
+            "scoreChance": 75,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb1q17",
+            "type": "multi_select",
+            "prompt": "Welke onderdelen laten het oordeel ONgewijzigd (geen modificatie)? (meerdere antwoorden mogelijk)",
+            "options": [
+              "Paragraaf ter benadrukking van een aangelegenheid (706)",
+              "Sectie kernpunten van de controle (701)",
+              "Aparte sectie 'materiele onzekerheid over continuiteit' bij adequate toelichting (570)",
+              "Oordeel met beperking wegens een niet-gecorrigeerde materiele fout (705)"
+            ],
+            "correct": [0, 1, 2],
+            "explanation": "706 (benadrukking/overige), 701 (KAM) en de 570-continuiteitssectie bij adequate toelichting laten het oordeel ongewijzigd. Alleen 705 wijzigt de strekking van het oordeel.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.706", "St.701", "St.570", "St.705"],
+            "scoreChance": 65,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb1q18",
+            "type": "matching",
+            "prompt": "Koppel elke Standaard aan de juiste functie in de controleverklaring.",
+            "pairs": [
+              {"left": "Standaard 700", "right": "Goedkeurend (ongemodificeerd) oordeel"},
+              {"left": "Standaard 705", "right": "Aanpassingen van het oordeel (beperking/afkeurend/onthouding)"},
+              {"left": "Standaard 706", "right": "Benadrukking + overige aangelegenheden (oordeel ongewijzigd)"},
+              {"left": "Standaard 701", "right": "Kernpunten van de controle (alleen oob)"},
+              {"left": "Standaard 570", "right": "Continuiteit (aparte sectie of modificatie)"}
+            ],
+            "explanation": "Kapstok van de rapportage-standaarden: 700 goedkeurend, 705 modificaties, 706 benadrukking/overig (oordeel ongewijzigd), 701 KAM (oob), 570 continuiteit.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.700", "St.705", "St.706", "St.701", "St.570"],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog"
+          }
+        ]
+      },
+      {
+        "id": "m4lb2",
+        "title": "Verklaringenstelsel - extra oefenset (deel 2)",
+        "questions": [
+          {
+            "id": "m4lb2q01",
+            "type": "multiple_choice",
+            "prompt": "Wat doet de accountant met het bestuursverslag/andere informatie volgens Standaard 720?",
+            "options": [
+              "De accountant controleert het en geeft er assurance over",
+              "De accountant 'leest' het en let op materiele inconsistenties met de jaarrekening en zijn kennis; hij geeft er geen assurance over",
+              "De accountant negeert het volledig",
+              "De accountant geeft er een beperkte mate van zekerheid over"
+            ],
+            "correct": 1,
+            "explanation": "Standaard 720: de accountant leest de andere informatie en let op inconsistenties van materieel belang; hij geeft er GEEN assurance over. Denken dat je het bestuursverslag controleert/zekerheid geeft is een instinker.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.720", "instinker"],
+            "scoreChance": 80,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb2q02",
+            "type": "multiple_choice",
+            "context": "Flexscooter: in het bestuursverslag staan duurzaamheidsclaims (mogelijke greenwashing) die materieel inconsistent zijn met wat je tijdens de controle hebt vastgesteld. Het bestuur past de andere informatie niet aan.",
+            "prompt": "Hoe verwerk je dit in de controleverklaring?",
+            "options": [
+              "Je modificeert het oordeel over de jaarrekening tot 'met beperking'",
+              "Je neemt het op in de sectie 'Andere informatie' en beschrijft de niet-gecorrigeerde materiele afwijking",
+              "Je geeft een benadrukking van een aangelegenheid (706)",
+              "Je geeft assurance over de duurzaamheidsclaims via Standaard 3810N"
+            ],
+            "correct": 1,
+            "explanation": "Standaard 720: een niet-gecorrigeerde materiele inconsistentie/afwijking in de andere informatie beschrijf je in de sectie 'Andere informatie'. Het oordeel OVER DE JAARREKENING wordt hierdoor niet gemodificeerd.",
+            "difficulty": 3,
+            "tags": ["verklaring", "St.720", "Flexscooter"],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb2q03",
+            "type": "matching",
+            "prompt": "Vier bevindingen, vier instrumenten. Koppel ze correct.",
+            "pairs": [
+              {"left": "Niet-gecorrigeerde materiele fout in de jaarrekening, niet diepgaand", "right": "Oordeel met beperking (705)"},
+              {"left": "Belangrijke, correct toegelichte onzekerheid (rechtsgeding) benadrukken", "right": "Benadrukking van een aangelegenheid (706)"},
+              {"left": "Adequaat toegelichte materiele continuiteitsonzekerheid", "right": "Aparte sectie continuiteit + goedkeurend (570)"},
+              {"left": "Materiele inconsistentie in het bestuursverslag, niet gecorrigeerd", "right": "Sectie 'Andere informatie' (720)"}
+            ],
+            "explanation": "Onderscheid de instrumenten: 705 wijzigt het oordeel; 706, de 570-continuiteitssectie en de 720-sectie laten het oordeel ongewijzigd.",
+            "difficulty": 3,
+            "tags": ["verklaring", "St.705", "St.706", "St.570", "St.720"],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb2q04",
+            "type": "multiple_choice",
+            "context": "International Publishing: een rubriceringsafwijking (verkeerde presentatie/rubricering) in de jaarrekening wordt door het bestuur niet gecorrigeerd. De afwijking is materieel maar raakt een afgebakend deel; de jaarrekening blijft als geheel bruikbaar.",
+            "prompt": "Welke strekking past?",
+            "options": [
+              "Goedkeurend oordeel",
+              "Oordeel met beperking",
+              "Afkeurend oordeel",
+              "Oordeelonthouding"
+            ],
+            "correct": 1,
+            "explanation": "Standaard 705: een niet-gecorrigeerde, materiele maar niet-diepgaande rubriceringsafwijking is een afwijking in de jaarrekening -> oordeel met beperking. Zo werd dit in de casus International Publishing afgewikkeld.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.705", "International Publishing"],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb2q05",
+            "type": "multiple_choice",
+            "prompt": "Waar is het oob-accountantsverslag (het uitgebreide verslag aan de met governance belaste personen / aandeelhouders bij een oob) op gebaseerd?",
+            "options": [
+              "Standaard 701",
+              "Standaard 706",
+              "Standaard 720",
+              "Artikel 11 van de EU-verordening (controleverordening voor oob's)"
+            ],
+            "correct": 3,
+            "explanation": "Het aanvullende accountantsverslag bij een oob volgt uit artikel 11 van de EU-verordening (537/2014). Dit is iets anders dan de kernpunten van de controle (701) in de publieke verklaring.",
+            "difficulty": 3,
+            "tags": ["verklaring", "oob", "art.11", "International Publishing"],
+            "scoreChance": 45,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb2q06",
+            "type": "multiple_choice",
+            "context": "Tankprof (subsidie, Standaard 800): tijdens de controle van de subsidie-eindafrekening wordt een fout ontdekt; de subsidieontvanger corrigeert deze volledig in de eindafrekening.",
+            "prompt": "Welke strekking past dan?",
+            "options": [
+              "Goedkeurend oordeel",
+              "Oordeel met beperking",
+              "Afkeurend oordeel",
+              "Oordeelonthouding"
+            ],
+            "correct": 0,
+            "explanation": "Standaard 800: een gecorrigeerde fout leidt niet tot een modificatie -> goedkeurend oordeel. De fout zit immers niet meer in de (gecorrigeerde) eindafrekening.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.800", "subsidie", "Tankprof"],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb2q07",
+            "type": "multiple_choice",
+            "context": "Tankprof: een fout in de subsidie-eindafrekening wordt NIET gecorrigeerd en overschrijdt de drempel uit de materialiteitstabel van het controleprotocol ruim (diepgaand effect op het afgerekende bedrag).",
+            "prompt": "Welke strekking past?",
+            "options": [
+              "Goedkeurend oordeel",
+              "Oordeel met beperking",
+              "Afkeurend oordeel",
+              "Een benadrukking van een aangelegenheid (706)"
+            ],
+            "correct": 2,
+            "explanation": "Standaard 800 / controleprotocol: een niet-gecorrigeerde fout die de hoogste drempel van de materialiteitstabel overschrijdt -> afkeurend oordeel. De tabel koppelt het foutpercentage aan de strekking.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.800", "subsidie", "Tankprof"],
+            "scoreChance": 55,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb2q08",
+            "type": "multiple_choice",
+            "context": "Property XL: volgens de materialiteitstabel van het controleprotocol bedraagt het foutpercentage 8,33% van de subsidie. De tabel zegt dat dit percentage onder de afkeur-drempel maar boven de goedkeur-drempel ligt.",
+            "prompt": "Welke strekking hoort daarbij?",
+            "options": [
+              "Goedkeurend oordeel",
+              "Oordeel met beperking",
+              "Afkeurend oordeel",
+              "Oordeelonthouding"
+            ],
+            "correct": 1,
+            "explanation": "Property XL: 8,33% valt in de tabel in de band die hoort bij een oordeel met beperking. De materialiteitstabel van het protocol koppelt het foutpercentage rechtstreeks aan de strekking (Standaard 800).",
+            "difficulty": 3,
+            "tags": ["verklaring", "St.800", "subsidie", "Property XL"],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb2q09",
+            "type": "multiple_choice",
+            "context": "Property XL: bij de subsidie-eindafrekening ontbreken meetgegevens, waardoor je over een belangrijk deel geen toereikende controle-informatie kunt verkrijgen.",
+            "prompt": "Welke strekking past, afhankelijk van de omvang?",
+            "options": [
+              "Altijd goedkeurend",
+              "Beperking in de controle: oordeel met beperking, of bij diepgaand effect een oordeelonthouding",
+              "Altijd afkeurend",
+              "Een benadrukking van een aangelegenheid (706)"
+            ],
+            "correct": 1,
+            "explanation": "Ontbrekende meetgegevens zijn een beperking in de controle (te weinig informatie): niet diepgaand -> oordeel met beperking; diepgaand -> oordeelonthouding. Dit is de informatie-as van de 2x2-matrix.",
+            "difficulty": 3,
+            "tags": ["verklaring", "St.705", "subsidie", "Property XL"],
+            "scoreChance": 55,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb2q10",
+            "type": "multiple_choice",
+            "context": "Great Choice: bij de assurance over een duurzaamheidsverslag (redelijke mate van zekerheid) constateer je een diepgaande afwijking op een kernonderwerp. De opdrachtgever stelt voor de opdracht 'om te zetten' naar beperkte zekerheid om de uitkomst te ontwijken.",
+            "prompt": "Wat is juist?",
+            "options": [
+              "Downgraden naar beperkte zekerheid mag, want dan is er minder zekerheid nodig",
+              "Een diepgaande afwijking leidt tot een afkeurende conclusie; downgraden zonder deugdelijke grond is niet toegestaan (3810N.8)",
+              "Je geeft een conclusie met beperking",
+              "Je onthoudt je van een conclusie"
+            ],
+            "correct": 1,
+            "explanation": "Great Choice: een diepgaande afwijking -> afkeurende conclusie. De opdracht 'downgraden' naar beperkte zekerheid om de uitkomst te ontlopen is verboden (Standaard 3810N.8).",
+            "difficulty": 3,
+            "tags": ["verklaring", "St.3810N", "Great Choice", "duurzaamheid"],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb2q11",
+            "type": "multiple_choice",
+            "prompt": "Hoe heten de modificaties bij een BEOORDELINGSopdracht (Standaard 2400, beperkte mate van zekerheid)?",
+            "options": [
+              "Oordeel met beperking, afkeurend oordeel, oordeelonthouding",
+              "Goedkeurend, met beperking, afkeurend",
+              "Benadrukking, overige aangelegenheden, kernpunten",
+              "Conclusie met beperking, afkeurende conclusie, onthouding van conclusie"
+            ],
+            "correct": 3,
+            "explanation": "Standaard 2400 spreekt van een CONCLUSIE (beperkte zekerheid): conclusie met beperking, afkeurende conclusie of onthouding van conclusie. Bij controle (705) gaat het om een OORDEEL.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.2400", "beoordeling"],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb2q12",
+            "type": "multiple_choice",
+            "prompt": "Welke uitspraak over continuiteit (Standaard 570) is JUIST?",
+            "options": [
+              "Bij een adequaat toegelichte materiele onzekerheid clausuleer je (oordeel met beperking)",
+              "Bij een adequaat toegelichte materiele onzekerheid geef je een goedkeurend oordeel met een aparte sectie",
+              "Een continuiteitsonzekerheid leidt altijd tot een afkeurend oordeel",
+              "Continuiteit hoort thuis in de sectie 'Andere informatie' (720)"
+            ],
+            "correct": 1,
+            "explanation": "Standaard 570: adequaat toegelicht -> goedkeurend oordeel + aparte sectie 'materiele onzekerheid over continuiteit'. Clausuleren terwijl het adequaat is toegelicht is een klassieke instinker.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.570", "instinker"],
+            "scoreChance": 75,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb2q13",
+            "type": "fill_blank",
+            "prompt": "Standaard ___ gaat over het evalueren van tijdens de controle geconstateerde afwijkingen: optellen, met het bestuur bespreken en zo mogelijk laten corrigeren.",
+            "answer": "450",
+            "accept": ["450", "Standaard 450", "COS 450"],
+            "explanation": "Standaard 450: geconstateerde afwijkingen accumuleren, communiceren en (laten) corrigeren; de niet-gecorrigeerde afwijkingen wegen mee in het oordeel (link naar 705).",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.450"],
+            "scoreChance": 55,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb2q14",
+            "type": "multiple_choice",
+            "context": "Mondzorg: na afgifte van de controleverklaring blijkt dat de jaarrekening een belangrijke fout bevat die je destijds niet kende; het bestuur weigert de jaarrekening en de al verspreide verklaring te herzien.",
+            "prompt": "Wat is een passende stap van de accountant?",
+            "options": [
+              "Niets doen; de verklaring is al afgegeven",
+              "De machtiging om de controleverklaring te gebruiken intrekken (en zo nodig betrokkenen informeren)",
+              "Alsnog een benadrukking van een aangelegenheid (706) sturen",
+              "Het oordeel met terugwerkende kracht omzetten naar een onthouding via 720"
+            ],
+            "correct": 1,
+            "explanation": "Mondzorg: bij een na afgifte gebleken materiele fout die niet wordt hersteld, kan de accountant de machtiging tot gebruik van de controleverklaring intrekken (Standaard 560 over gebeurtenissen na datum verklaring).",
+            "difficulty": 3,
+            "tags": ["verklaring", "St.560", "Mondzorg"],
+            "scoreChance": 45,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m4lb2q15",
+            "type": "multi_select",
+            "context": "Je bepaalt de strekking met de denklijn 'bron x diepgaandheid'.",
+            "prompt": "Welke uitkomsten zijn JUIST? (meerdere antwoorden mogelijk)",
+            "options": [
+              "Afwijking in de jaarrekening + diepgaand -> afkeurend oordeel",
+              "Beperking in de controle + diepgaand -> oordeelonthouding",
+              "Beperking in de controle + niet diepgaand -> afkeurend oordeel",
+              "Afwijking in de jaarrekening + niet diepgaand -> oordeel met beperking"
+            ],
+            "correct": [0, 1, 3],
+            "explanation": "Standaard 705-matrix: diepgaande afwijking -> afkeurend; diepgaande beperking -> onthouding; niet-diepgaande afwijking -> beperking. Een niet-diepgaande beperking in de controle geeft een beperking, geen afkeurend oordeel (optie 3 is fout).",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.705", "matrix"],
+            "scoreChance": 75,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb2q16",
+            "type": "multiple_choice",
+            "prompt": "Welke combinatie van uitspraken bevat UITSLUITEND instinkers (allemaal ONJUIST)?",
+            "options": [
+              "Materieel = automatisch afkeurend; 701 hoort bij elke controle; 706 wijzigt het oordeel",
+              "Materieel is niet hetzelfde als diepgaand; 701 alleen bij oob; 706 laat het oordeel ongewijzigd",
+              "Adequaat toegelichte continuiteit -> goedkeurend + sectie; 720 = lezen zonder assurance",
+              "705 kent drie modificaties; 700 is het goedkeurende oordeel"
+            ],
+            "correct": 0,
+            "explanation": "Optie 0 bevat drie klassieke instinkers: materieel is niet automatisch afkeurend, 701 is alleen voor oob's, en 706 laat het oordeel ongewijzigd. De andere opties zijn juist.",
+            "difficulty": 2,
+            "tags": ["verklaring", "instinker"],
+            "scoreChance": 75,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m4lb2q17",
+            "type": "multiple_choice",
+            "context": "Je twijfelt of een afwijking diepgaand is. De fout zit in een enkele, duidelijk af te bakenen post; de rest van de jaarrekening geeft een getrouw beeld en gebruikers kunnen er nog op steunen.",
+            "prompt": "Hoe kwalificeer je de diepgaandheid en wat is het gevolg?",
+            "options": [
+              "Diepgaand -> afkeurend oordeel",
+              "Niet diepgaand (te isoleren) -> oordeel met beperking",
+              "Diepgaand -> oordeelonthouding",
+              "Niet materieel -> goedkeurend oordeel"
+            ],
+            "correct": 1,
+            "explanation": "Standaard 705: is de fout te isoleren en blijft de jaarrekening als geheel bruikbaar, dan is hij niet diepgaand -> oordeel met beperking. Diepgaandheid betekent dat het beeld als geheel wordt aangetast.",
+            "difficulty": 2,
+            "tags": ["verklaring", "St.705", "diepgaand"],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog"
+          }
+        ]
+      }
+    ]
+  }
+}

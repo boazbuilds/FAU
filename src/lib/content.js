@@ -5,6 +5,11 @@ import baseData from '../../content/course/vragenbank.json';
 import casusData from '../../content/course/vragenbankcasussen.json';
 import techniekData from '../../content/course/vragenbanktechniek.json';
 import extraData from '../../content/course/vragenbankextra.json';
+import bank0 from '../../content/course/vragenbankbank0.json';
+import bank1 from '../../content/course/vragenbankbank1.json';
+import bank2 from '../../content/course/vragenbankbank2.json';
+import bank3 from '../../content/course/vragenbankbank3.json';
+import bank4 from '../../content/course/vragenbankbank4.json';
 import tipsData from '../../content/examtips.json';
 import { CONFIG } from '../config.js';
 
@@ -82,7 +87,7 @@ export function isObjective(question) {
 }
 
 // --- 3. Bouw de indexen ---
-const course = mergeCourse(baseData, [casusData, techniekData, extraData]);
+const course = mergeCourse(baseData, [casusData, techniekData, extraData, bank0, bank1, bank2, bank3, bank4]);
 
 // Genereer per module een boss-examen. Virtueel: de boss-les heeft zelf geen
 // vragen, maar buildBossSession() trekt een wisselende subset uit de modulepool
