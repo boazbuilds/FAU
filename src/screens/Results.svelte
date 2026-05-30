@@ -1,5 +1,6 @@
 <script>
   import { get } from 'svelte/store';
+  import { onMount } from 'svelte';
   import { activeSession, go } from '../stores/ui.js';
   import { srs } from '../stores/srsStore.js';
   import { settings } from '../stores/settings.js';
@@ -8,6 +9,7 @@
   import { topicById } from '../lib/content.js';
   import { CONFIG } from '../config.js';
   import { resultQuip, randomFrom, jokes } from '../lib/humor.js';
+  import * as audio from '../lib/audio.js';
   import Badge from '../components/Badge.svelte';
   import Mascot from '../components/Mascot.svelte';
 
@@ -63,6 +65,13 @@
     activeSession.set(null);
     go('home');
   }
+
+  onMount(() => {
+    if (bossPassed || summary.perfect) audio.fanfare();
+    else if (summary.outOfHearts) audio.wrong();
+    else audio.correct(0);
+    if (summary.newBadges?.length) setTimeout(() => audio.levelUp(), 650);
+  });
 </script>
 
 <div class="mx-auto flex min-h-[100dvh] w-full max-w-md flex-col items-center justify-center gap-6 px-6 text-center">

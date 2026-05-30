@@ -19,6 +19,16 @@
     settings.update((s) => { s.reducedMotion = on; return s; });
   }
 
+  function toggleSound(e) {
+    const on = e.target.checked;
+    settings.update((s) => { s.sound = on; return s; });
+  }
+
+  function toggleMusic(e) {
+    const on = e.target.checked;
+    settings.update((s) => { s.music = on; return s; });
+  }
+
   async function toggleReminder(e) {
     const on = e.target.checked;
     if (on) {
@@ -100,6 +110,19 @@
       <span class="text-slate-200">Minder beweging/animaties</span>
       <input type="checkbox" class="h-5 w-5 accent-indigo-500" checked={$settings.reducedMotion} on:change={toggleMotion} />
     </label>
+  </section>
+
+  <section class="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
+    <h2 class="text-sm font-semibold uppercase tracking-wide text-slate-400">Geluid</h2>
+    <label class="flex items-center justify-between">
+      <span class="text-slate-200">🔊 Geluidseffecten</span>
+      <input type="checkbox" class="h-5 w-5 accent-indigo-500" checked={$settings.sound !== false} on:change={toggleSound} />
+    </label>
+    <label class="flex items-center justify-between">
+      <span class="text-slate-200">🎵 Achtergrondmuziek</span>
+      <input type="checkbox" class="h-5 w-5 accent-indigo-500" checked={$settings.music !== false} on:change={toggleMusic} />
+    </label>
+    <p class="-mt-2 text-xs text-slate-500">Arcade-deuntjes en bevredigende effecten. Start zodra je de app aanraakt.</p>
   </section>
 
   <section class="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-5">

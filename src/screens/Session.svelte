@@ -12,6 +12,7 @@
   import { completeLesson, recordBoss } from '../lib/progress.js';
   import { CONFIG } from '../config.js';
   import { praiseFor, comboMessage } from '../lib/humor.js';
+  import * as audio from '../lib/audio.js';
   import Question from '../components/Question.svelte';
 
   const sess = get(activeSession) ?? { ids: [], mode: 'normal' };
@@ -62,6 +63,16 @@
     }
     comboMsg = result === 'correct' ? comboMessage(combo) : null;
     feedbackHead = praiseFor(result);
+
+    // Bevredigende arcade-feedback.
+    if (result === 'correct') {
+      audio.correct(combo);
+      if (comboMsg) audio.comboFlair(combo);
+    } else if (result === 'partial') {
+      audio.partial();
+    } else {
+      audio.wrong();
+    }
     const gained = xpForAnswer(result, q.difficulty);
     sessionXp += gained;
 
@@ -191,6 +202,12 @@
     {:else}
       <div class="text-xs font-medium text-slate-400">{isBoss ? 'boss' : 'oefenen'}</div>
     {/if}
+    <button
+      class="text-lg leading-none {$settings.music !== false ? 'text-indigo-400' : 'text-slate-600'}"
+      on:click={() => { audio.unlock(); settings.update((s) => { s.music = s.music === false ? true : false; return s; }); }}
+      title="Muziek aan/uit"
+      aria-label="Muziek aan of uit"
+    >{$settings.music !== false ? '🎵' : '🔇'}</button>
   </header>
 
   <main class="flex-1 px-4 pb-32 pt-2">
