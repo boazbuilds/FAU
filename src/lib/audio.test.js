@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect, vi } from 'vitest';
+import { get } from 'svelte/store';
 import * as audio from './audio.js';
 
 // --- Mini-mock van de Web Audio API om te bewijzen dat de graaf echt wordt aangestuurd ---
@@ -51,11 +52,21 @@ describe('audio-engine', () => {
       audio.comboFlair(5);
       audio.levelUp();
       audio.tap();
-      audio.startMusic('race');
+      audio.startMusic('stadium');
       audio.setTrack('menu');
+      audio.nextTrack();
+      audio.pickSession(false);
+      audio.pickSession(true);
+      audio.setContext('session');
+      audio.setContext('home');
       audio.stopMusic();
       audio.setMusicEnabled(false);
     }).not.toThrow();
+  });
+
+  it('biedt meerdere muzieknummers', () => {
+    expect(audio.trackList.length).toBeGreaterThanOrEqual(5);
+    expect(audio.trackList.every((t) => t.id && t.name)).toBe(true);
   });
 
   it('houdt de muziekstatus bij', () => {
@@ -83,6 +94,12 @@ describe('audio-engine', () => {
     const beforeMusic = oscCount;
     a.setMusicEnabled(true); // context bestaat → sequencer schedulet stappen
     expect(oscCount).toBeGreaterThan(beforeMusic);
+    expect(get(a.nowPlaying)).toBeTruthy(); // UI weet welk nummer speelt
+
+    const before = get(a.nowPlaying);
+    a.nextTrack(); // jukebox: volgend nummer
+    expect(get(a.nowPlaying)).not.toBe(before);
+
     a.stopMusic(); // ruimt de lookahead-timer op (geen lek)
 
     delete window.AudioContext;

@@ -76,7 +76,7 @@
 
 <div class="mx-auto flex min-h-[100dvh] w-full max-w-md flex-col items-center justify-center gap-6 px-6 text-center">
   <div class="animate-pop text-6xl">{heroEmoji}</div>
-  <h1 class="text-2xl font-bold text-white">{title}</h1>
+  <h1 class="font-pixel text-base uppercase leading-relaxed {summary.outOfHearts || (isBoss && !bossPassed) ? 'neon-magenta' : 'neon-cyan'}">{title}</h1>
 
   {#if isLesson}
     <div class="flex gap-2 text-4xl" aria-label="{stars} van 3 sterren">
@@ -85,18 +85,18 @@
   {/if}
 
   <div class="grid w-full grid-cols-2 gap-3">
-    <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
-      <div class="text-3xl font-bold text-indigo-300">+{summary.xpGained}</div>
-      <div class="text-xs text-slate-400">XP verdiend</div>
+    <div class="arcade-panel rounded-2xl p-4">
+      <div class="font-pixel text-lg neon-cyan">+{summary.xpGained}</div>
+      <div class="mt-1.5 font-pixel text-[7px] uppercase tracking-wide text-slate-400">XP verdiend</div>
     </div>
-    <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
-      <div class="text-3xl font-bold {bossPassed || (!isBoss && accuracy >= 80) ? 'text-emerald-300' : 'text-amber-300'}">{accuracy}%</div>
-      <div class="text-xs text-slate-400">{summary.correct}/{summary.answered} goed</div>
+    <div class="arcade-panel rounded-2xl p-4">
+      <div class="font-pixel text-lg {bossPassed || (!isBoss && accuracy >= 80) ? 'text-emerald-300' : 'text-amber-300'}">{accuracy}%</div>
+      <div class="mt-1.5 font-pixel text-[7px] uppercase tracking-wide text-slate-400">{summary.correct}/{summary.answered} goed</div>
     </div>
   </div>
 
   {#if summary.maxCombo >= 3}
-    <div class="inline-flex items-center gap-2 rounded-full bg-amber-500/15 px-4 py-1.5 text-sm font-bold text-amber-300">🔥 Hoogste reeks: {summary.maxCombo} op rij</div>
+    <div class="inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-4 py-1.5 font-pixel text-[9px] uppercase text-amber-300">🔥 Reeks: {summary.maxCombo} op rij</div>
   {/if}
 
   <div class="w-full text-left">
@@ -126,15 +126,15 @@
     </div>
   {/if}
 
-  <div class="w-full space-y-2">
+  <div class="w-full space-y-2.5">
     {#if isBoss && !bossPassed}
-      <button class="w-full rounded-xl bg-indigo-600 py-3 font-bold text-white hover:bg-indigo-500" on:click={retryBoss}>Boss opnieuw</button>
+      <button class="btn-arcade w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={retryBoss}>Boss opnieuw ↻</button>
     {:else if isLesson}
-      <button class="w-full rounded-xl bg-indigo-600 py-3 font-bold text-white hover:bg-indigo-500" on:click={againLesson}>Les herhalen</button>
+      <button class="btn-arcade w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={againLesson}>Les herhalen ↻</button>
     {:else if !isBoss}
-      <button class="w-full rounded-xl bg-indigo-600 py-3 font-bold text-white hover:bg-indigo-500" on:click={againNormal}>Nog een ronde</button>
+      <button class="btn-arcade w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={againNormal}>Nog een ronde ▶</button>
     {/if}
-    <button class="w-full rounded-xl border border-slate-700 py-3 font-semibold text-slate-200 hover:bg-slate-800" on:click={home}>Terug naar pad</button>
+    <button class="w-full rounded-xl border border-slate-700 py-3 font-pixel text-[10px] uppercase text-slate-300 hover:bg-slate-800" on:click={home}>Terug naar pad</button>
   </div>
 </div>
 

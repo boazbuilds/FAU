@@ -23,8 +23,8 @@
     <span class="{mood === 'cheer' ? 'animate-wiggle' : ''}">{MASCOT.emoji}</span>
   </div>
   <div class="relative min-w-0 flex-1">
-    <div class="rounded-2xl rounded-tl-sm border border-slate-700 bg-slate-800/80 px-4 py-3 text-sm leading-relaxed text-slate-100">
-      <span class="mb-0.5 block text-xs font-semibold text-indigo-300">{MASCOT.name} {MASCOT.role}</span>
+    <div class="arcade-panel rounded-2xl rounded-tl-sm px-4 py-3 text-sm leading-relaxed text-slate-100">
+      <span class="mb-1 block font-pixel text-[8px] uppercase tracking-wide neon-cyan">{MASCOT.name} · {MASCOT.role}</span>
       <slot>{message}</slot>
     </div>
     {#if hint}

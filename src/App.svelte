@@ -54,7 +54,7 @@
   $: audio.setSfxEnabled($settings.sound !== false);
   $: audio.setMusicEnabled($settings.music !== false);
   // Track wisselen: energiek in de sessie/resultaten, rustig in de menu's.
-  $: audio.setTrack($screen === 'session' || $screen === 'results' ? 'race' : 'menu');
+  $: audio.setContext($screen);
 
   $: chromeless = $screen === 'session' || $screen === 'results';
 
@@ -90,14 +90,15 @@
   {/if}
 
   {#if !chromeless}
-    <nav class="fixed inset-x-0 bottom-0 z-10 mx-auto w-full max-w-md border-t border-slate-800 bg-slate-950/90 backdrop-blur">
+    <nav class="fixed inset-x-0 bottom-0 z-10 mx-auto w-full max-w-md border-t border-cyan-500/25 bg-slate-950/90 backdrop-blur">
       <div class="grid grid-cols-4">
         {#each nav as item}
           <button
-            class="flex flex-col items-center gap-0.5 py-2 text-xs {$screen === item.id ? 'text-indigo-400' : 'text-slate-400'}"
+            class="flex flex-col items-center gap-1 py-2.5 {$screen === item.id ? 'neon-cyan' : 'text-slate-500'}"
             on:click={() => go(item.id)}
           >
-            <span class="text-lg">{item.icon}</span>{item.label}
+            <span class="text-lg">{item.icon}</span>
+            <span class="font-pixel text-[7px] uppercase tracking-wide">{item.label}</span>
           </button>
         {/each}
       </div>

@@ -1,5 +1,6 @@
 <script>
   import { get } from 'svelte/store';
+  import { onMount } from 'svelte';
   import { activeSession, go } from '../stores/ui.js';
   import { profile } from '../stores/profile.js';
   import { srs } from '../stores/srsStore.js';
@@ -14,6 +15,7 @@
   import { praiseFor, comboMessage } from '../lib/humor.js';
   import * as audio from '../lib/audio.js';
   import Question from '../components/Question.svelte';
+  import MusicControl from '../components/MusicControl.svelte';
 
   const sess = get(activeSession) ?? { ids: [], mode: 'normal' };
   const ids = sess.ids ?? [];
@@ -37,6 +39,9 @@
   let maxCombo = 0;
   let comboMsg = null;
   let feedbackHead = '';
+
+  // Kies een (willekeurig) energiek nummer voor deze sessie; boss = intens.
+  onMount(() => audio.pickSession(isBoss));
 
   $: q = questionById[ids[index]];
   $: topic = q ? topicById[q.topicId] : null;
@@ -184,11 +189,11 @@
 
 {#if showIntro}
   <div class="mx-auto flex min-h-[100dvh] w-full max-w-md flex-col justify-center gap-4 px-6">
-    <div class="text-xs font-semibold uppercase tracking-wide text-indigo-300">📄 Casus</div>
-    <h1 class="text-xl font-bold text-white">{lesson.title}</h1>
+    <div class="font-pixel text-[9px] uppercase tracking-wide neon-magenta">📄 Casus</div>
+    <h1 class="font-pixel text-base leading-relaxed text-white">{lesson.title}</h1>
     <p class="text-sm leading-relaxed text-slate-200">{lesson.casusIntro}</p>
-    <button class="mt-2 w-full rounded-xl bg-indigo-600 py-3 font-bold text-white hover:bg-indigo-500" on:click={() => (showIntro = false)}>Begin</button>
-    <button class="text-sm text-slate-400 hover:text-white" on:click={quit}>Annuleren</button>
+    <button class="btn-arcade mt-2 w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={() => (showIntro = false)}>Begin ▶</button>
+    <button class="font-pixel text-[9px] uppercase text-slate-500 hover:text-white" on:click={quit}>Annuleren</button>
   </div>
 {:else}
 <div class="mx-auto flex min-h-[100dvh] w-full max-w-md flex-col">
@@ -198,16 +203,11 @@
       <div class="h-full rounded-full {isBoss ? 'bg-amber-500' : 'bg-indigo-500'} transition-all duration-300" style="width:{Math.round(progressPct * 100)}%"></div>
     </div>
     {#if heartsActive()}
-      <div class="flex items-center gap-1 text-sm font-semibold text-rose-400"><span>❤️</span>{$profile.hearts}</div>
+      <div class="flex items-center gap-1 text-rose-400"><span>❤️</span><span class="font-pixel text-[10px] text-rose-300">{$profile.hearts}</span></div>
     {:else}
-      <div class="text-xs font-medium text-slate-400">{isBoss ? 'boss' : 'oefenen'}</div>
+      <div class="font-pixel text-[8px] uppercase text-slate-500">{isBoss ? 'boss' : 'oefen'}</div>
     {/if}
-    <button
-      class="text-lg leading-none {$settings.music !== false ? 'text-indigo-400' : 'text-slate-600'}"
-      on:click={() => { audio.unlock(); settings.update((s) => { s.music = s.music === false ? true : false; return s; }); }}
-      title="Muziek aan/uit"
-      aria-label="Muziek aan of uit"
-    >{$settings.music !== false ? '🎵' : '🔇'}</button>
+    <MusicControl showName={false} />
   </header>
 
   <main class="flex-1 px-4 pb-32 pt-2">
@@ -244,7 +244,7 @@
           : 'border-rose-800 bg-rose-950/95'}"
     >
       <div
-        class="mb-1 font-bold
+        class="mb-1.5 font-pixel text-[11px] uppercase tracking-wide
         {lastResult === 'correct' ? 'text-emerald-300' : lastResult === 'partial' ? 'text-amber-300' : 'text-rose-300 animate-shake'}"
       >
         {feedbackHead}
@@ -259,8 +259,8 @@
       {#if tip}
         <p class="mt-2 rounded-lg bg-slate-900/60 p-2 text-xs leading-relaxed text-indigo-200"><span class="font-semibold">💡 Tip — {tip.title}:</span> {tip.body}</p>
       {/if}
-      <button class="mt-3 w-full rounded-xl bg-white py-3 font-bold text-slate-900 hover:bg-slate-100" on:click={next}>
-        {outOfHearts || isLast ? 'Afronden' : 'Volgende'}
+      <button class="btn-arcade mt-3 w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={next}>
+        {outOfHearts || isLast ? 'Afronden ■' : 'Volgende ▶'}
       </button>
     </div>
   {/if}
