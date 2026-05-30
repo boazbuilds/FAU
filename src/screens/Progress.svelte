@@ -1,14 +1,25 @@
 <script>
+  import { get } from 'svelte/store';
+  import { go, activeSession } from '../stores/ui.js';
   import { srs } from '../stores/srsStore.js';
   import { profile } from '../stores/profile.js';
   import { topics, achievements as achievementDefs } from '../lib/content.js';
   import { topicStats } from '../lib/predict.js';
+  import { buildTagSession } from '../lib/session.js';
   import { levelProgress, leagueFromLevel } from '../lib/gamify.js';
   import Badge from '../components/Badge.svelte';
 
   $: stats = topicStats($srs);
   $: lp = levelProgress($profile.xp);
   $: league = leagueFromLevel(lp.level);
+
+  function typologieDrill() {
+    const ids = buildTagSession('typologie', 10);
+    if (ids.length) {
+      activeSession.set({ ids, mode: 'practice' });
+      go('session');
+    }
+  }
 </script>
 
 <div class="space-y-6 px-4 pb-28 pt-2">
@@ -27,6 +38,11 @@
       <div class="text-xl font-bold text-indigo-300">{lp.level}</div>
       <div class="text-[11px] text-slate-400">{league.label}</div>
     </div>
+  </div>
+
+  <div class="grid grid-cols-2 gap-2">
+    <button class="rounded-xl border border-slate-700 bg-slate-900/60 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800" on:click={() => go('mistakes')}>📕 Mijn fouten</button>
+    <button class="rounded-xl border border-slate-700 bg-slate-900/60 py-3 text-sm font-medium text-slate-200 hover:bg-slate-800" on:click={typologieDrill}>🧭 Typologie-drill</button>
   </div>
 
   <div class="space-y-3">

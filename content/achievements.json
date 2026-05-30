@@ -6,7 +6,8 @@
     { "id": "streak-7", "title": "Een week vol vuur", "description": "7 dagen op rij geoefend.", "icon": "🔥" },
     { "id": "perfect-session", "title": "Vlekkeloos", "description": "Een sessie zonder fouten.", "icon": "💯" },
     { "id": "centurion", "title": "Centurion", "description": "100 vragen beantwoord.", "icon": "🏛️" },
-    { "id": "topic-master", "title": "Onderwerp-meester", "description": "Breng een onderwerp naar 80% beheersing.", "icon": "🎓" },
+    { "id": "module-complete", "title": "Module voltooid", "description": "Haal een boss en rond een module af.", "icon": "🎓" },
+    { "id": "boss-flawless", "title": "Bazig", "description": "Haal een boss zonder fouten.", "icon": "👑" },
     { "id": "exam-ready", "title": "Tentamenklaar", "description": "Geschatte slagingskans van 80% of hoger.", "icon": "🚀" }
   ]
 }

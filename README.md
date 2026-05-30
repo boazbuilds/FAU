@@ -7,10 +7,13 @@ te halen. Korte dagelijkse vragen, XP & streaks, spaced repetition, en een eerli
 **▶️ Live:** https://boazbuilds.github.io/FAU/
 
 - 📱 Werkt op telefoon én laptop, **offline** (PWA, installeerbaar).
+- 🗺️ **Leerpad** Module → Les → Boss met sterren en ontgrendeling (Duolingo-stijl).
 - 🧠 **Spaced repetition** (Leitner) zodat je de stof onthoudt.
 - 🎮 XP, niveaus, league, streaks, levens (mild) en badges.
-- 🔮 Slagingskans + "oefen dit als eerste", gewogen naar examenbelang.
-- 🇳🇱 Nederlandstalige vragenbank; nadruk op open/begripsvragen (active recall).
+- ❓ Vraagtypen: meerkeuze, meerkeuze-meervoudig, **koppelen** en invul — met echte tentamencasussen.
+- 💡 **Examentips** als hint na je antwoord + 📕 **Spiekbriefje** ("Tab je HRA" + beslisbomen).
+- 🔮 Slagingskans + "oefen dit als eerste", gewogen naar examenbelang; 📕 foutenlogboek.
+- 🇳🇱 Nederlandse vragenbank: **8 modules, 103 vragen** (NBA-instellingstoets).
 - 🆓 Geen account, geen backend, geen kosten — alles lokaal in je browser.
 
 ## Lokaal draaien
@@ -37,14 +40,16 @@ npm run preview    # serveer de productie-build lokaal
 
 ## Vragen toevoegen
 De content staat los van de code in `content/` — zie [`content/SCHEMA.md`](content/SCHEMA.md).
-Voeg vragen toe in `content/questions/<topic>.json`, draai `npm run validate`, klaar.
-Later kan een AI-script vragen in exact hetzelfde formaat genereren.
+Voeg lessen/vragen toe in `content/course/*.json` (jouw vragenbank-formaat), draai
+`npm run validate`, klaar. Spiekbriefje uitbreiden? Pas `content/cheatsheet.json` aan.
 
 ## Structuur
 ```
-content/   topics.json, achievements.json, questions/*.json  (de vragenbank)
-src/lib/   engine: srs, grading, session, gamify, predict, storage, content
-src/stores/  Svelte stores (gekoppeld aan localStorage)
-src/components/ + src/screens/  de UI
-src/config.js  alle afstembare knoppen op één plek
+content/course/   vragenbank.json (+ casussen/techniek)  — de vragenbank
+content/          examtips.json, cheatsheet.json, achievements.json
+src/lib/          engine: content (merge+normaliseer), srs, grading, session,
+                  progress (leerpad), gamify, predict, storage, sync (online-naad)
+src/stores/       Svelte stores (gekoppeld aan localStorage)
+src/components/ + src/screens/   de UI (Path = home, Session, Results, Cheatsheet, …)
+src/config.js     alle afstembare knoppen op één plek
 ```

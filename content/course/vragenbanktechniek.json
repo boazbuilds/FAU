@@ -1,0 +1,225 @@
+{
+  "meta": {
+    "extends": "vragenbank.json",
+    "title": "Examentechniek - controle-instrumentarium",
+    "description": "Module 7: vragen die de inhoudelijke low-hanging-fruit-technieken drillen (zie examtips.json). Wordt door de app samengevoegd. Elke vraag heeft een tipRef naar de bijbehorende tip.",
+    "language": "nl",
+    "version": "1.0"
+  },
+  "addModules": [
+    {
+      "id": "m7",
+      "order": 7,
+      "icon": "🛠️",
+      "title": "Examentechniek en controle-instrumentarium",
+      "description": "De terugkerende techniektips als oefenvragen: typologie & verbandscontrole, functiescheiding, opzet-bestaan-werking, controlemix, betrouwbaarheid van controle-informatie, externe bevestigingen, gebeurtenissen na balansdatum, continuïteit, toelichtende paragrafen en professioneel-kritische instelling.",
+      "lessons": [
+        {
+          "id": "m7l1",
+          "title": "Controle-instrumentarium",
+          "questions": [
+            {
+              "id": "m7l1q1",
+              "type": "multiple_choice",
+              "tipRef": "tip12",
+              "prompt": "Je begint een controle met het bepalen van de typologie (Starreveld). Waarom is dat de eerste stap?",
+              "options": [
+                "Het bepaalt de rechtsvorm van de cliënt",
+                "Het bepaalt automatisch de materialiteit",
+                "Uit het bedrijfstype (geld- vs. goederenbeweging) volgt waar het volledigheidsrisico van de omzet zit en welke verbandscontrole sterk is",
+                "Het is niet relevant voor de controleaanpak"
+              ],
+              "correct": 2,
+              "explanation": "Techniektip: bepaal eerst het bedrijfstype. Daaruit volgt de sterkste verbandscontrole en waar het volledigheidsrisico zit. Nyenrode-casussen draaien hier vaak om - benoem het type expliciet.",
+              "difficulty": 2,
+              "tags": ["typologie", "volledigheid"]
+            },
+            {
+              "id": "m7l1q2",
+              "type": "multiple_choice",
+              "tipRef": "tip11",
+              "prompt": "Wat is de sterkste controle om de VOLLEDIGHEID van de omzet bij een handelsonderneming vast te stellen?",
+              "options": [
+                "Een saldobevestiging van de debiteuren",
+                "Een verbandscontrole inkoop -> voorraad -> verkoop en/of een brutomarge-analyse (Standaard 520)",
+                "Inspectie van een steekproef inkoopfacturen",
+                "Een bevestiging bij het management (LOR)"
+              ],
+              "correct": 1,
+              "explanation": "Volledigheid van de omzet toon je aan via verbandscontrole/cijferanalyse (520). Een saldobevestiging raakt het BESTAAN van debiteuren, niet de volledigheid van de omzet.",
+              "difficulty": 2,
+              "tags": ["volledigheid", "St.520", "verbandscontrole"]
+            },
+            {
+              "id": "m7l1q3",
+              "type": "multiple_choice",
+              "tipRef": "tip13",
+              "prompt": "Welke rij geeft de te scheiden functies in de interne beheersing weer?",
+              "options": [
+                "Beschikken, bewaren, registreren, controleren (en uitvoeren)",
+                "Plannen, uitvoeren, afronden, rapporteren",
+                "Bestaan, volledigheid, waardering, rechten",
+                "Integriteit, objectiviteit, geheimhouding, vakbekwaamheid"
+              ],
+              "correct": 0,
+              "explanation": "Functiescheiding: beschikken - bewaren - registreren - controleren (en uitvoeren). Het aanwijzen van een doorbroken functiescheiding scoort bij elke IB-vraag bijna altijd een punt.",
+              "difficulty": 2,
+              "tags": ["interne beheersing", "functiescheiding"]
+            },
+            {
+              "id": "m7l1q4",
+              "type": "multiple_choice",
+              "tipRef": "tip16",
+              "prompt": "In welke volgorde beoordeel je de interne beheersing voordat je erop mag steunen?",
+              "options": [
+                "Werking -> bestaan -> opzet",
+                "Opzet -> bestaan -> werking: pas na vaststellen van opzet én bestaan mag je de werking testen en erop steunen (systeemgericht); anders gegevensgericht",
+                "Alleen de werking testen volstaat altijd",
+                "Opzet en werking tegelijk; bestaan is niet nodig"
+              ],
+              "correct": 1,
+              "explanation": "Opzet -> bestaan -> werking. Steunen op de IB (systeemgericht) mag pas als opzet én bestaan zijn vastgesteld; lukt dat niet, dan gegevensgericht. Dit onderscheid expliciet maken levert punten.",
+              "difficulty": 2,
+              "tags": ["interne beheersing", "St.330"]
+            },
+            {
+              "id": "m7l1q5",
+              "type": "multiple_choice",
+              "tipRef": "tip17",
+              "prompt": "Je motiveert je controleaanpak. Welke drie dimensies benoem je?",
+              "options": [
+                "Prijs, planning en personeel",
+                "Bestaan, volledigheid en waardering",
+                "Materialiteit, risico en zekerheid",
+                "Aard, timing en omvang van de werkzaamheden (plus de keuze systeemgericht vs. gegevensgericht, gemotiveerd vanuit de sterkte van de interne beheersing)"
+              ],
+              "correct": 3,
+              "explanation": "De controlemix = aard, timing en omvang. Motiveer waaróm je systeemgericht of gegevensgericht werkt (sterke IB -> meer steunen). Correctoren zoeken naar die motivering.",
+              "difficulty": 2,
+              "tags": ["St.330", "controlemix"]
+            },
+            {
+              "id": "m7l1q6",
+              "type": "multiple_choice",
+              "tipRef": "tip09",
+              "prompt": "Welke controle-informatie is het meest betrouwbaar (Standaard 500)?",
+              "options": [
+                "Een mondelinge toelichting van het management",
+                "Een interne, schriftelijke vastlegging van de cliënt",
+                "Eigen waarneming door de accountant en extern verkregen, schriftelijke informatie (extern > intern, schriftelijk > mondeling)",
+                "Een door de cliënt aangeleverde kopie"
+              ],
+              "correct": 2,
+              "explanation": "Betrouwbaarheidshiërarchie (500): eigen waarneming en externe, schriftelijke bron > intern > mondeling; origineel > kopie. Eén zin hierover scoort vaak.",
+              "difficulty": 2,
+              "tags": ["St.500", "controle-informatie"]
+            }
+          ]
+        },
+        {
+          "id": "m7l2",
+          "title": "Slotwerk en randzaken bij de verklaring",
+          "questions": [
+            {
+              "id": "m7l2q1",
+              "type": "multiple_choice",
+              "tipRef": "tip20",
+              "context": "Je vraagt saldobevestigingen op bij debiteuren (Standaard 505) en krijgt van enkele debiteuren geen reactie.",
+              "prompt": "Wat doe je bij die non-respons?",
+              "options": [
+                "Niets; non-respons is geen probleem",
+                "Alternatieve werkzaamheden uitvoeren (bv. aansluiten op latere ontvangsten, onderliggende facturen en vrachtbrieven)",
+                "De debiteurenpost direct afkeuren",
+                "De hele controle staken"
+              ],
+              "correct": 1,
+              "explanation": "Standaard 505: bij non-respons voer je alternatieve werkzaamheden uit. De saldobevestiging zelf is sterke (externe) informatie voor het bestaan van debiteuren/banksaldi.",
+              "difficulty": 2,
+              "tags": ["St.505", "bestaan"]
+            },
+            {
+              "id": "m7l2q2",
+              "type": "multiple_choice",
+              "tipRef": "tip19",
+              "prompt": "Hoe behandel je gebeurtenissen na balansdatum (Standaard 560)?",
+              "options": [
+                "Alle gebeurtenissen na 31/12 negeren",
+                "Alle gebeurtenissen na balansdatum in de jaarrekening verwerken",
+                "Onderscheid maken: gebeurtenissen mét nadere informatie over de situatie op balansdatum -> verwerken; zónder -> alleen toelichten indien van belang",
+                "Dit speelt alleen bij een beoordeling"
+              ],
+              "correct": 2,
+              "explanation": "Standaard 560: gebeurtenissen die nadere informatie geven over de situatie op balansdatum worden verwerkt; gebeurtenissen die een nieuwe situatie betreffen worden alleen toegelicht indien van belang.",
+              "difficulty": 2,
+              "tags": ["St.560"]
+            },
+            {
+              "id": "m7l2q3",
+              "type": "multiple_choice",
+              "tipRef": "tip19",
+              "prompt": "Wat is de functie van de bevestiging bij het management (Letter of Representation, Standaard 580)?",
+              "options": [
+                "Aanvullende controle-informatie waarin het management zijn verantwoordelijkheden en bepaalde mededelingen schriftelijk bevestigt - géén vervanging voor andere controle-informatie",
+                "Een document dat andere controle-informatie vervangt",
+                "De verklaring die de accountant ondertekent",
+                "Een verplichte melding aan de AFM"
+              ],
+              "correct": 0,
+              "explanation": "De LOR (580) is aanvullende controle-informatie; ze vervangt nooit andere, sterkere controle-informatie. Klassieke slot-deelvraag samen met 560.",
+              "difficulty": 2,
+              "tags": ["St.580"]
+            },
+            {
+              "id": "m7l2q4",
+              "type": "multiple_choice",
+              "tipRef": "tip15",
+              "prompt": "In welke volgorde werk je een continuïteitsvraagstuk af (Standaard 570)?",
+              "options": [
+                "Direct een oordeelonthouding geven",
+                "Inschatting management beoordelen -> is er een materiële onzekerheid? -> is die adequaat toegelicht? -> gevolg voor de verklaring (aparte sectie of modificatie)",
+                "Alleen de toelichting lezen en verder niets",
+                "Eerst de materialiteit opnieuw berekenen"
+              ],
+              "correct": 1,
+              "explanation": "Standaard 570 in vier stappen: management-inschatting -> materiële onzekerheid? -> adequaat toegelicht? -> gevolg verklaring. Adequaat toegelicht = goedkeurend + aparte sectie; niet adequaat -> modificeren.",
+              "difficulty": 3,
+              "tags": ["St.570", "continuiteit"]
+            },
+            {
+              "id": "m7l2q5",
+              "type": "multiple_choice",
+              "tipRef": "tip21",
+              "prompt": "Welke uitspraak over toelichtende paragrafen klopt?",
+              "options": [
+                "706, overige aangelegenheden en 701 zijn inwisselbaar",
+                "Een benadrukking van een aangelegenheid (706) wijzigt altijd het oordeel",
+                "Kernpunten van de controle (701) gelden voor élke controle",
+                "Kernpunten van de controle (701) gelden alleen bij een oob; een benadrukking van een aangelegenheid (706) wijst op iets in de jaarrekening; géén van beide wijzigt het oordeel"
+              ],
+              "correct": 3,
+              "explanation": "701 (kernpunten/KAM) geldt alleen bij oob's; 706 (benadrukking / overige aangelegenheden) wijst op iets dat correct is verwerkt/toegelicht. Geen van beide tast het oordeel aan - niet verwarren met een modificatie (705).",
+              "difficulty": 3,
+              "tags": ["verklaring", "St.706", "St.701"]
+            },
+            {
+              "id": "m7l2q6",
+              "type": "multiple_choice",
+              "tipRef": "tip18",
+              "prompt": "Wat houdt een professioneel-kritische instelling in (Standaard 200)?",
+              "options": [
+                "De cliënt principieel wantrouwen",
+                "Een onderzoekende geest: alert op tegenstrijdige controle-informatie en signalen van fraude/fout, en informatie kritisch evalueren in plaats van klakkeloos aannemen",
+                "Alles van het management aannemen tenzij het tegendeel blijkt",
+                "Alleen nodig tijdens een fraudeonderzoek"
+              ],
+              "correct": 1,
+              "explanation": "Professioneel-kritische instelling (200): een onderzoekende geest, alert op tegenstrijdigheden - vooral bij schattingen (540) en fraude (240). Eén goede zin hierover levert vaak een punt.",
+              "difficulty": 1,
+              "tags": ["St.200", "professioneel-kritisch"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

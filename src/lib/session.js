@@ -1,6 +1,6 @@
 // Stelt een dagsessie samen: due reviews + nieuwe items, door elkaar gehusseld.
 import { CONFIG } from '../config.js';
-import { allQuestions, questionsForTopic } from './content.js';
+import { allQuestions, questionsForTopic, questionsForLesson, isObjective } from './content.js';
 import { isDue } from './srs.js';
 import { todayNumber } from './day.js';
 import { topicMasteryMap } from './predict.js';
@@ -75,5 +75,22 @@ export function buildPracticeSession(srs, topicId = null, length = CONFIG.sessio
   const base = topicId ? questionsForTopic(topicId) : allQuestions;
   let pool = base.filter((q) => items[q.id]);
   if (pool.length === 0) pool = base; // nog niets gezien: pak nieuwe
+  return interleave(shuffle(pool).slice(0, length)).map((q) => q.id);
+}
+
+// Les: alle vragen van de les, geschud (één topic, dus geen interleave nodig).
+export function buildLessonSession(lessonId) {
+  return shuffle(questionsForLesson(lessonId)).map((q) => q.id);
+}
+
+// Boss: alle objectieve vragen van de module, geschud.
+export function buildBossSession(moduleId) {
+  const pool = questionsForTopic(moduleId).filter(isObjective);
+  return shuffle(pool).map((q) => q.id);
+}
+
+// Oefenen op een tag (bv. "St.520" of "typologie"); voor drills.
+export function buildTagSession(tag, length = CONFIG.sessionLength) {
+  const pool = allQuestions.filter((q) => (q.tags ?? []).includes(tag));
   return interleave(shuffle(pool).slice(0, length)).map((q) => q.id);
 }

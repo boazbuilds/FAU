@@ -60,11 +60,37 @@ export function gradeTrueFalse(question, value) {
   return value === question.correct;
 }
 
+// Matching: mapping is { [pairId]: gekozenPairId }. Correct = identiteit (pairId === keuze).
+// Werkt op pair-id (positie), zodat dubbele 'right'-teksten zijn toegestaan.
+export function matchFraction(question, mapping) {
+  const pairs = question.pairs ?? [];
+  if (pairs.length === 0) return 0;
+  let correct = 0;
+  for (const p of pairs) {
+    if (mapping && mapping[p.id] === p.id) correct++;
+  }
+  return correct / pairs.length;
+}
+
+// 3-weg voor lessen (hergebruikt de bestaande partial-afhandeling).
+export function gradeMatchResult(question, mapping) {
+  const f = matchFraction(question, mapping);
+  if (f >= 1) return 'correct';
+  if (f >= 0.5) return 'partial';
+  return 'wrong';
+}
+
+// Binair voor objectieve paden / boss.
+export function gradeMatch(question, mapping) {
+  return matchFraction(question, mapping) >= 1;
+}
+
 // 'correct' | 'wrong' voor objectieve types. Open vragen worden zelf beoordeeld.
 export function gradeObjective(question, answer) {
   let ok = false;
   if (question.type === 'mcq') ok = gradeMcq(question, answer);
   else if (question.type === 'truefalse') ok = gradeTrueFalse(question, answer);
   else if (question.type === 'short') ok = gradeShort(question, answer);
+  else if (question.type === 'match') ok = gradeMatch(question, answer);
   return ok ? 'correct' : 'wrong';
 }
