@@ -7,9 +7,9 @@ import { modules, allQuestions, questionById, questionsForLesson, tips, tipById 
 import { defaultProgress, ensureInit, isLessonUnlocked, isModuleUnlocked, starsFor, completeLesson, recordBoss } from './progress.js';
 
 describe('content loader (merge + normalisatie)', () => {
-  it('merget tot 8 modules en 103 vragen', () => {
-    expect(modules.length).toBe(8);
-    expect(allQuestions.length).toBe(103);
+  it('merget alle losse vragenbestanden samen', () => {
+    expect(modules.length).toBe(9); // m0–m8
+    expect(allQuestions.length).toBeGreaterThanOrEqual(157); // groeit als er content bijkomt
     expect(tips.length).toBe(22);
   });
 

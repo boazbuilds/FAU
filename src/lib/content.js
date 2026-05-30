@@ -4,6 +4,7 @@
 import baseData from '../../content/course/vragenbank.json';
 import casusData from '../../content/course/vragenbankcasussen.json';
 import techniekData from '../../content/course/vragenbanktechniek.json';
+import extraData from '../../content/course/vragenbankextra.json';
 import tipsData from '../../content/examtips.json';
 import { CONFIG } from '../config.js';
 
@@ -81,7 +82,7 @@ export function isObjective(question) {
 }
 
 // --- 3. Bouw de indexen ---
-const course = mergeCourse(baseData, [casusData, techniekData]);
+const course = mergeCourse(baseData, [casusData, techniekData, extraData]);
 
 export const modules = course.modules.map((m) => ({
   id: m.id,

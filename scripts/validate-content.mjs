@@ -13,11 +13,12 @@ const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'));
 const base = readJson(join(contentDir, 'course/vragenbank.json'));
 const casus = readJson(join(contentDir, 'course/vragenbankcasussen.json'));
 const techniek = readJson(join(contentDir, 'course/vragenbanktechniek.json'));
+const extra = readJson(join(contentDir, 'course/vragenbankextra.json'));
 const tipsData = readJson(join(contentDir, 'examtips.json'));
 
 // --- merge ---
 const course = JSON.parse(JSON.stringify(base));
-for (const ext of [casus, techniek]) {
+for (const ext of [casus, techniek, extra]) {
   const addLessons = ext.addLessonsToModule || {};
   for (const m of course.modules) {
     if (addLessons[m.id]) m.lessons.push(...addLessons[m.id]);
