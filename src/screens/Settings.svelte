@@ -6,6 +6,13 @@
   import { requestPermission } from '../lib/notify.js';
   import * as audio from '../lib/audio.js';
   import { trackList, nowPlaying } from '../lib/audio.js';
+  import { ratings } from '../stores/ratings.js';
+
+  $: ratingCount = Object.keys($ratings).length;
+  function clearRatings() {
+    if (ratingCount === 0) return;
+    if (confirm('Al je 👍/👎-beoordelingen van vragen wissen?')) ratings.set({});
+  }
 
   function playTrack(id) {
     audio.unlock();
@@ -167,6 +174,7 @@
       Back-up herstellen
       <input type="file" accept="application/json" class="hidden" on:change={doImport} />
     </label>
+    <button class="w-full rounded-xl border border-slate-700 py-2.5 text-sm font-medium text-slate-200 hover:bg-slate-800 disabled:opacity-40" on:click={clearRatings} disabled={ratingCount === 0}>Vraagbeoordelingen wissen{ratingCount ? ` (${ratingCount})` : ''}</button>
     <button class="w-full rounded-xl border border-rose-800 py-2.5 text-sm font-medium text-rose-300 hover:bg-rose-950/50" on:click={reset}>Voortgang wissen</button>
     <p class="text-xs text-slate-500">Je voortgang staat lokaal in deze browser. Maak af en toe een back-up.</p>
   </section>
