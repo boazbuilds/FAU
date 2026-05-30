@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #0f172a;
+  color: #e2e8f0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Mooie, rustige achtergrond met een subtiele gloed bovenin. */
+#app {
+  min-height: 100dvh;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(79, 70, 229, 0.25), transparent 60%),
+    #0f172a;
+}
+
+button {
+  font: inherit;
+}
+
+/* Respecteer de voorkeur voor minder beweging. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Handmatige schakelaar in Instellingen. */
+.reduce-motion * {
+  animation-duration: 0.001ms !important;
+  transition-duration: 0.001ms !important;
+}

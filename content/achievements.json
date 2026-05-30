@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "achievements": [
+    { "id": "first-session", "title": "Eerste stap", "description": "Rond je eerste sessie af.", "icon": "🌱" },
+    { "id": "streak-3", "title": "Op dreef", "description": "3 dagen op rij geoefend.", "icon": "🔥" },
+    { "id": "streak-7", "title": "Een week vol vuur", "description": "7 dagen op rij geoefend.", "icon": "🔥" },
+    { "id": "perfect-session", "title": "Vlekkeloos", "description": "Een sessie zonder fouten.", "icon": "💯" },
+    { "id": "centurion", "title": "Centurion", "description": "100 vragen beantwoord.", "icon": "🏛️" },
+    { "id": "topic-master", "title": "Onderwerp-meester", "description": "Breng een onderwerp naar 80% beheersing.", "icon": "🎓" },
+    { "id": "exam-ready", "title": "Tentamenklaar", "description": "Geschatte slagingskans van 80% of hoger.", "icon": "🚀" }
+  ]
+}
