@@ -18,7 +18,7 @@ describe('App mount (jsdom)', () => {
     expect(html).toContain('Dagdoel');
     expect(html).toContain('Fundamenten'); // module m0 titel
     // mascotte (humor-laag) is gewired en rendert
-    expect(html).toContain('Vera');
+    expect(html).toContain('Rekenmachine');
     app.$destroy();
   });
 

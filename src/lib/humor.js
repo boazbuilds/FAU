@@ -1,7 +1,7 @@
 // Nerdy Big Four-accountantshumor + Duolingo-achtige feedback.
 // Alles is puur en deterministisch te seeden, zodat het testbaar blijft.
 
-export const MASCOT = { emoji: '🦉', name: 'Vera', role: 'de Rekenuil' };
+export const MASCOT = { emoji: '🧮', name: 'Plus', role: 'de Rekenmachine' };
 
 // --- Grappen (Big Four / accountancy, mild en zelfspot) ---
 export const jokes = [
@@ -31,7 +31,20 @@ export const jokes = [
   'Afschrijven is gewoon volwassen worden: elk jaar wat minder waard, maar nog steeds nuttig.',
   'Interne controle: vertrouwen is goed, het vier-ogenprincipe is beter.',
   'Hoe versier je een accountant? Fluister dat hun werkpapieren “review-proof” zijn.',
-  'Materialiteit: als je het verschil niet ziet, was het toch niet belangrijk. Zegt de accountant. Tegen zijn kapper.'
+  'Materialiteit: als je het verschil niet ziet, was het toch niet belangrijk. Zegt de accountant. Tegen zijn kapper.',
+  // --- Iets scherper: Big Four-werkdrukcultuur ---
+  'Work-life balance bij de Big Four: je laptop slaapt ook nooit.',
+  'Busy season: drie maanden waarin “heel even” vier uur betekent.',
+  'Een junior vroeg om vakantie. De partner lachte. Stond ook op de timesheet: 0,2 uur, code “humor”.',
+  'Billable hours zijn de enige uren die echt bestaan. De rest is voor mensen die slapen.',
+  'Up or out: je groeit, of je groeit ergens anders.',
+  '“We zijn een familie”, zei de partner om 23:47 uur, terwijl hij je review terugstuurde.',
+  'Mijn timesheet klopt tot op zes minuten nauwkeurig. Mijn privéleven helaas niet.',
+  'Het verschil tussen de Big Four? De kleur van het logo en welke deadline je mist.',
+  'Verlof opnemen in busy season is als afschrijven op iets wat je nog hard nodig hebt.',
+  'De koffie is gratis, want ze weten dat slaap dat niet is.',
+  'Een goede consultant lost je probleem op. Een goede auditor bewijst dat je het had.',
+  'Vakantie: theoretisch beschikbaar, in de praktijk toegelicht in de notes.'
 ];
 
 // --- Lof bij een goed antwoord (gevarieerd = verrassend) ---
@@ -72,30 +85,30 @@ const COMBO_MILESTONES = [
 // --- Mascotte-quips per context ---
 export const mascotLines = {
   pathHints: [
-    'Klaar voor een steekproef kennis?',
-    'Even de balans van je brein opmaken.',
-    'Geen materiële afwijkingen vandaag, hopelijk.',
-    'Tijd om wat journaalposten te kraken.'
+    'Ik heb het doorgerekend: vandaag wordt je beste dag. Afgerond naar boven. 📈',
+    'Glas halfvol? Onzin — het glas is volledig benut! 🥤',
+    'Even opwarmen en dan kraken we die journaalposten. Komt helemaal goed!',
+    'Going concern: jij bestaat volgend jaar nóg. Ik geloof er heilig in. ✨'
   ],
   resultPerfect: [
-    'Foutloos. Zelfs ik kan niets aanmerken. 👏',
-    'Schoon controledossier! Geen enkele bevinding. ✨'
+    'Foutloos! Ik wist het — ik reken nóóit verkeerd. 🎉',
+    'Nul afwijkingen. Dit gaan we inlijsten. ✨'
   ],
   resultGood: [
-    'Netjes! Klein toelichtinkje en het is af.',
-    'Solide werk. De review wordt een formaliteit.'
+    'Netjes! En met afronden naar boven is dit eigenlijk 100%. 😄',
+    'Solide. De curve wijst maar één kant op: omhoog. 📈'
   ],
   resultMeh: [
-    'Hmm, wat afwijkingen. Even bijboeken en opnieuw.',
-    'Nog niet sluitend — maar daar zijn correctieposten voor.'
+    'Statistisch gezien kan het alleen maar beter — goed nieuws dus! 📈',
+    'Elke fout is een afschrijving op je onwetendheid. Bijna afgeschreven! 💪'
   ],
   bossWin: [
-    'Boss verslagen! Tijd om dit te consolideren. 👑',
-    'Goedgekeurd, zonder voorbehoud! 👑'
+    'BOSS VERSLAGEN! Ik reken alvast aan je volgende winst. 👑',
+    'Goedgekeurd, zonder voorbehoud! Wist ik wel. 🎉'
   ],
   bossLose: [
-    'De boss vond te veel bevindingen. Herstelactie: oefenen.',
-    'Net niet. Pak de lessen er nog eens bij en kom terug.'
+    'Bijna! En “bijna” rondt naar boven af, toch? Volgende keer zit ie. 😄',
+    'Tegenslag is gewoon uitgestelde winst. Nog één keer! 💪'
   ]
 };
 
