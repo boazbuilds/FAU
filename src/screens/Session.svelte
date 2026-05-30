@@ -252,6 +252,8 @@
         newBadges, pred
       }
     });
+    // Cloud-push gebeurt automatisch via de store-subscriptie in App.svelte
+    // (schedulePush), dus hier niets extra nodig.
     go('results');
   }
 

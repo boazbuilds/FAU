@@ -6,6 +6,12 @@ import { VitePWA } from 'vite-plugin-pwa';
 // anders laden de assets niet. Lokaal (npm run dev) werkt dit ook prima.
 export default defineConfig({
   base: '/FAU/',
+  // Supabase in een eigen chunk; alleen lazy geladen als online aanstaat.
+  build: {
+    rollupOptions: {
+      output: { manualChunks: { supabase: ['@supabase/supabase-js'] } }
+    }
+  },
   plugins: [
     svelte(),
     VitePWA({
@@ -29,7 +35,10 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,json,woff2}']
+        globPatterns: ['**/*.{js,css,html,svg,json,woff2}'],
+        // De Supabase-chunk niet vooraf cachen: alleen ophalen als online aanstaat.
+        globIgnores: ['**/supabase-*.js'],
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024
       }
     })
   ]
