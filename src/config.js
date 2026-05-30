@@ -39,6 +39,12 @@ export const CONFIG = {
     star3Ratio: 1.0 // 100% = 3 sterren (1 ster = afgerond)
   },
 
+  // --- Sjef Delegé onderbreekt af en toe met een gedelegeerde vraag (met klok) ---
+  sjef: { chance: 0.22, maxPerSession: 3, seconds: 15, bonusXp: 15 },
+
+  // --- Snelheidsbonus: vlot goed antwoorden = extra XP (geen straf voor traag) ---
+  speedBonus: { withinMs: 12000, xp: 5 },
+
   // --- Content ---
   content: {
     earlyUnlockModules: ['m0', 'm7'], // techniek + fundamenten meteen open

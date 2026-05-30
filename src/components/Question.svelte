@@ -31,6 +31,11 @@
   $: correctSet = new Set(question?.correct ?? []);
   $: isMulti = question?.type === 'mcq' && question?.multi;
 
+  // Vergrendel de vraag van buitenaf (bv. als Sjefs klok afloopt): onthul + blokkeer.
+  export function lock() {
+    submitted = true;
+  }
+
   function submitMcq() {
     if (submitted) return;
     const answer = isMulti ? [...multiSelected] : selected == null ? [] : [selected];

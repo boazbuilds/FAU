@@ -43,7 +43,7 @@ describe('humor', () => {
   it('de eindbaas (luie partner) heeft taunts en reacties', () => {
     expect(BOSS.name).toBeTruthy();
     expect(BOSS.emoji).toBeTruthy();
-    for (const key of ['intros', 'win', 'lose']) {
+    for (const key of ['intros', 'win', 'lose', 'delegations', 'timeouts']) {
       expect(Array.isArray(BOSS[key])).toBe(true);
       expect(BOSS[key].length).toBeGreaterThan(0);
       expect(BOSS[key].every((s) => typeof s === 'string' && s.length > 0)).toBe(true);

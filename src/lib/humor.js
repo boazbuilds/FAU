@@ -65,6 +65,19 @@ export const BOSS = {
     'Sjef geeuwt: "Zie je, dáárom delegeer ik. Nog een keer?" 🦥',
     '"Ik heb het al doorgeschoven naar volgende week", zegt Sjef. Probeer opnieuw.',
     'Sjef doet niks en wint alsnog. Pak hem de volgende ronde.'
+  ],
+  // Sjef schuift midden in een sessie een vraag naar jou door (met klok):
+  delegations: [
+    'Sjef: "Even dit naar jou doorschuiven — ik moet golfen. Snel!"',
+    'Sjef: "Spoeddossier! Voor jou dan. Ik ga koffie halen. Klok loopt."',
+    'Sjef: "Doe jij dit even? Ik heb het druk met mijn dutje."',
+    'Sjef: "Ik delegeer deze. Tijdje erbij — ik kijk wel toe. Of niet."'
+  ],
+  // Je tijd is op:
+  timeouts: [
+    'Sjef: "Te traag! Zie je, dáárom doe ik niks."',
+    'Sjef: "Tijd om. Ik had het zelf óók niet gehaald, maar goed."',
+    'Sjef: "Te laat — net als mijn timesheets. Volgende!"'
   ]
 };
 
