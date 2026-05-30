@@ -4,6 +4,8 @@ Een kleine, verslavende leer-app (Duolingo-stijl) om het vak **Financial Auditin
 te halen. Korte dagelijkse vragen, XP & streaks, spaced repetition, en een eerlijke
 **"ga ik slagen?"-schatting** op basis van je oefenresultaten.
 
+**▶️ Live:** https://boazbuilds.github.io/FAU/
+
 - 📱 Werkt op telefoon én laptop, **offline** (PWA, installeerbaar).
 - 🧠 **Spaced repetition** (Leitner) zodat je de stof onthoudt.
 - 🎮 XP, niveaus, league, streaks, levens (mild) en badges.
@@ -29,7 +31,7 @@ npm run preview    # serveer de productie-build lokaal
 1. Push naar `main`.
 2. Repo → **Settings → Pages → Source: GitHub Actions**.
 3. De workflow in `.github/workflows/deploy.yml` bouwt en publiceert automatisch.
-   De app komt op `https://<gebruiker>.github.io/FAU/`.
+   De app komt op https://boazbuilds.github.io/FAU/
 
 > De `base` staat op `/FAU/` in `vite.config.js`. Wijkt je repo-naam af, pas die dan aan.
 
