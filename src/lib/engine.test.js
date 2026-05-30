@@ -3,7 +3,8 @@ import { applyResult, isDue } from './srs.js';
 import { gradeShort, gradeMcq, gradeTrueFalse, matchFraction, gradeMatchResult, gradeMatch, normalize } from './grading.js';
 import { predict } from './predict.js';
 import { levelFromXp, xpForAnswer, defaultProfile, migrateProfile } from './gamify.js';
-import { modules, allQuestions, questionById, questionsForLesson, tips, tipById } from './content.js';
+import { modules, allQuestions, questionById, questionsForLesson, tips, tipById, isObjective } from './content.js';
+import { buildBossSession } from './session.js';
 import { defaultProgress, ensureInit, isLessonUnlocked, isModuleUnlocked, starsFor, completeLesson, recordBoss } from './progress.js';
 
 describe('content loader (merge + normalisatie)', () => {
@@ -45,6 +46,20 @@ describe('content loader (merge + normalisatie)', () => {
     for (const q of allQuestions) {
       if (q.tipRef) expect(tipById[q.tipRef]).toBeTruthy();
     }
+  });
+
+  it('elke module heeft een boss-examen', () => {
+    for (const m of modules) {
+      expect(m.lessons.some((l) => l.boss)).toBe(true);
+    }
+  });
+
+  it('buildBossSession trekt een begrensde, objectieve subset', () => {
+    const ids = buildBossSession('m3');
+    expect(ids.length).toBeGreaterThan(0);
+    expect(ids.length).toBeLessThanOrEqual(12);
+    expect(new Set(ids).size).toBe(ids.length); // geen dubbele
+    for (const id of ids) expect(isObjective(questionById[id])).toBe(true);
   });
 
   it('m7 heeft examWeight 0, kennismodules samen ~1', () => {

@@ -83,10 +83,13 @@ export function buildLessonSession(lessonId) {
   return shuffle(questionsForLesson(lessonId)).map((q) => q.id);
 }
 
-// Boss: alle objectieve vragen van de module, geschud.
-export function buildBossSession(moduleId) {
+// Boss: een wisselende, begrensde subset objectieve vragen uit de hele module.
+// Elke poging is dus anders (variatie) en blijft kort/spannend.
+export function buildBossSession(moduleId, length = CONFIG.path.bossLength) {
   const pool = questionsForTopic(moduleId).filter(isObjective);
-  return shuffle(pool).map((q) => q.id);
+  return shuffle(pool)
+    .slice(0, length ?? pool.length)
+    .map((q) => q.id);
 }
 
 // Oefenen op een tag (bv. "St.520" of "typologie"); voor drills.

@@ -84,6 +84,18 @@ export function isObjective(question) {
 // --- 3. Bouw de indexen ---
 const course = mergeCourse(baseData, [casusData, techniekData, extraData]);
 
+// Genereer per module een boss-examen. Virtueel: de boss-les heeft zelf geen
+// vragen, maar buildBossSession() trekt een wisselende subset uit de modulepool
+// (zo is elke poging anders en blijft de progressie spannend/verslavend).
+for (const m of course.modules) {
+  m.lessons = m.lessons ?? [];
+  const hasBoss = m.lessons.some((l) => l.boss);
+  const hasLessen = m.lessons.some((l) => !l.boss);
+  if (!hasBoss && hasLessen) {
+    m.lessons.push({ id: m.id + 'boss', title: m.title, boss: true, questions: [] });
+  }
+}
+
 export const modules = course.modules.map((m) => ({
   id: m.id,
   title: m.title,

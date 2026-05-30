@@ -32,6 +32,7 @@ export const CONFIG = {
   // --- Leerpad / Boss ---
   path: {
     bossPassRatio: 0.8, // correct/answered nodig om de boss te halen
+    bossLength: 12, // aantal vragen in een boss (wisselende subset uit de modulepool)
     bossBonusXp: 60, // bonus bij gehaalde boss
     bossCostsHearts: false, // mild: boss tornt niet aan levens
     star2Ratio: 0.8, // ≥80% in een les = 2 sterren

@@ -31,6 +31,8 @@
       <div class="text-xs" style="color:{color}">
         {#each Array(3) as _, i}{i < stars ? '★' : '☆'}{/each}
       </div>
+    {:else if isBoss && state === 'done'}
+      <div class="text-xs font-semibold text-emerald-400">Gehaald! 👑</div>
     {:else if isBoss && state !== 'locked'}
       <div class="text-xs text-amber-400/80">Examenquiz · {Math.round(0.8 * 100)}% om te halen</div>
     {/if}
