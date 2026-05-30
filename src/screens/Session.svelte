@@ -11,6 +11,7 @@
   import { predict } from '../lib/predict.js';
   import { completeLesson, recordBoss } from '../lib/progress.js';
   import { CONFIG } from '../config.js';
+  import { praiseFor, comboMessage } from '../lib/humor.js';
   import Question from '../components/Question.svelte';
 
   const sess = get(activeSession) ?? { ids: [], mode: 'normal' };
@@ -31,6 +32,10 @@
   let sessionXp = 0;
   let lastResult = null;
   let outOfHearts = false;
+  let combo = 0;
+  let maxCombo = 0;
+  let comboMsg = null;
+  let feedbackHead = '';
 
   $: q = questionById[ids[index]];
   $: topic = q ? topicById[q.topicId] : null;
@@ -47,6 +52,16 @@
     const result = e.detail.result;
     lastResult = result;
     results = [...results, { id: q.id, result }];
+
+    // Combo (Duolingo-stijl): opbouwen bij goed, breken bij fout, gelijk bij deels.
+    if (result === 'correct') {
+      combo += 1;
+      maxCombo = Math.max(maxCombo, combo);
+    } else if (result === 'wrong') {
+      combo = 0;
+    }
+    comboMsg = result === 'correct' ? comboMessage(combo) : null;
+    feedbackHead = praiseFor(result);
     const gained = xpForAnswer(result, q.difficulty);
     sessionXp += gained;
 
@@ -140,7 +155,7 @@
     activeSession.set({
       summary: {
         answered, correct, score, xpGained: sessionXp, perfect, outOfHearts,
-        mode, lessonId, moduleId,
+        mode, lessonId, moduleId, maxCombo,
         boss: bossResult,
         newBadges, pred
       }
@@ -186,9 +201,16 @@
         <button class="mt-4 rounded-xl bg-indigo-600 px-5 py-2 font-semibold text-white" on:click={quit}>Terug</button>
       </div>
     {:else}
-      {#if topic}
-        <div class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400">{topic.icon} {topic.title}{headerLabel && !isLesson ? ` · ${headerLabel}` : ''}</div>
-      {/if}
+      <div class="mb-3 flex items-center justify-between gap-2">
+        {#if topic}
+          <div class="text-xs font-semibold uppercase tracking-wide text-slate-400">{topic.icon} {topic.title}{headerLabel && !isLesson ? ` · ${headerLabel}` : ''}</div>
+        {:else}<span></span>{/if}
+        {#if combo >= 2}
+          {#key combo}
+            <span class="inline-flex shrink-0 animate-burst items-center gap-1 rounded-full bg-amber-500/15 px-2.5 py-1 text-xs font-bold text-amber-300">🔥 {combo} op rij</span>
+          {/key}
+        {/if}
+      </div>
       {#key q.id}
         <Question question={q} on:answer={onAnswer} />
       {/key}
@@ -206,10 +228,13 @@
     >
       <div
         class="mb-1 font-bold
-        {lastResult === 'correct' ? 'text-emerald-300' : lastResult === 'partial' ? 'text-amber-300' : 'text-rose-300'}"
+        {lastResult === 'correct' ? 'text-emerald-300' : lastResult === 'partial' ? 'text-amber-300' : 'text-rose-300 animate-shake'}"
       >
-        {lastResult === 'correct' ? 'Goed! 🎉' : lastResult === 'partial' ? 'Deels goed 🟡' : 'Niet helemaal ❌'}
+        {feedbackHead}
       </div>
+      {#if comboMsg}
+        <div class="mb-2 animate-burst rounded-lg bg-amber-500/15 px-3 py-1.5 text-sm font-bold text-amber-300">🔥 {comboMsg}</div>
+      {/if}
       {#if q.type === 'short'}
         <div class="mb-1 text-sm text-slate-200">Geaccepteerd antwoord: <span class="font-semibold">{q.answer.accept[0]}</span></div>
       {/if}

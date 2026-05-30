@@ -17,6 +17,8 @@ describe('App mount (jsdom)', () => {
     // bewijs dat het echte leerpad rendert
     expect(html).toContain('Dagdoel');
     expect(html).toContain('Fundamenten'); // module m0 titel
+    // mascotte (humor-laag) is gewired en rendert
+    expect(html).toContain('Vera');
     app.$destroy();
   });
 
