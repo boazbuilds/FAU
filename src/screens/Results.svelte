@@ -8,7 +8,7 @@
   import { starsFor } from '../lib/progress.js';
   import { topicById } from '../lib/content.js';
   import { CONFIG } from '../config.js';
-  import { resultQuip, randomFrom, jokes } from '../lib/humor.js';
+  import { resultQuip, randomFrom, jokes, BOSS } from '../lib/humor.js';
   import * as audio from '../lib/audio.js';
   import Badge from '../components/Badge.svelte';
   import Mascot from '../components/Mascot.svelte';
@@ -41,6 +41,7 @@
 
   // Mascotte: passende quip + een grap als beloning.
   const quip = resultQuip({ perfect: summary.perfect, isBoss, bossPassed, accuracy });
+  const bossLine = isBoss ? randomFrom(bossPassed ? BOSS.win : BOSS.lose) : null;
   const rewardJoke = (summary.perfect || (!isBoss && accuracy >= 70) || bossPassed) ? randomFrom(jokes) : null;
   const mascotMood = bossPassed || summary.perfect ? 'cheer' : isBoss && !bossPassed ? 'oops' : accuracy >= 70 ? 'happy' : 'think';
 
@@ -106,10 +107,17 @@
   </div>
 
   {#if isBoss}
+    <div class="flex w-full items-start gap-3 rounded-2xl border p-3 text-left {bossPassed ? 'border-emerald-700/50 bg-emerald-950/20' : 'border-amber-700/40 bg-amber-950/20'}">
+      <span class="text-3xl">{BOSS.emoji}</span>
+      <div class="min-w-0">
+        <div class="font-pixel text-[8px] uppercase tracking-wide text-amber-300/80">{BOSS.name} · {BOSS.role}</div>
+        <p class="mt-1 text-sm italic leading-relaxed text-slate-200">{bossLine}</p>
+      </div>
+    </div>
     {#if bossPassed}
       <p class="text-sm text-emerald-300">Gehaald! {#if unlockedTitle}Module <span class="font-semibold">{unlockedTitle}</span> ontgrendeld. 🔓{/if}</p>
     {:else}
-      <p class="text-sm text-rose-300">Je had {accuracy}% — je hebt {Math.round(CONFIG.path.bossPassRatio * 100)}% nodig. Oefen de lessen nog eens en probeer opnieuw.</p>
+      <p class="text-sm text-rose-300">Je had {accuracy}% — je hebt {Math.round(CONFIG.path.bossPassRatio * 100)}% nodig. Oefen de lessen nog eens en versla Sjef.</p>
     {/if}
   {/if}
 

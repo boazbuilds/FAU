@@ -40,6 +40,47 @@ export const motivation = [
   'Tel je zegeningen. Ik help — dat is letterlijk mijn werk. 🧮'
 ];
 
+// --- De eindbaas: een karikatuur van een straalluie partner die álles
+//     delegeert en zelf niks doet. Terugkerende nemesis die je wil verslaan. ---
+export const BOSS = {
+  emoji: '🦥',
+  name: 'Sjef Delegé',
+  role: 'de luie partner',
+  // Taunt vóór het gevecht (intro):
+  intros: [
+    'Sjef leunt achterover, voeten op het bureau: "Ik heb het véél te druk met niksdoen. Bewijs jij maar dat je het snapt."',
+    '"Ik teken alleen, ik reken niet. Stagiair! …die is naar huis. Doe jij het dan maar."',
+    '"Delegeren ís werken, vind ik. Vooruit — laat maar zien. Ik kijk wel toe. Of niet."',
+    '"Ik heb dit dossier net doorgeschoven naar… jou. Succes ermee, ik ga golfen."',
+    '"Even mijn out-of-office aan en ik ben er klaar voor. Klaar om niets te doen."'
+  ],
+  // Jij wint:
+  win: [
+    'Sjef moet voor het eerst in jaren zélf aan het werk. Je hebt hem verslagen! 🦥→💼',
+    'Knock-out! Sjef mompelt "dit reken ik niet na" en tekent je overwinning gewoon af.',
+    'Verslagen! Sjef delegeert zijn nederlaag meteen door naar de RvC.'
+  ],
+  // Jij verliest:
+  lose: [
+    'Sjef geeuwt: "Zie je, dáárom delegeer ik. Nog een keer?" 🦥',
+    '"Ik heb het al doorgeschoven naar volgende week", zegt Sjef. Probeer opnieuw.',
+    'Sjef doet niks en wint alsnog. Pak hem de volgende ronde.'
+  ],
+  // Sjef schuift midden in een sessie een vraag naar jou door (met klok):
+  delegations: [
+    'Sjef: "Even dit naar jou doorschuiven — ik moet golfen. Snel!"',
+    'Sjef: "Spoeddossier! Voor jou dan. Ik ga koffie halen. Klok loopt."',
+    'Sjef: "Doe jij dit even? Ik heb het druk met mijn dutje."',
+    'Sjef: "Ik delegeer deze. Tijdje erbij — ik kijk wel toe. Of niet."'
+  ],
+  // Je tijd is op:
+  timeouts: [
+    'Sjef: "Te traag! Zie je, dáárom doe ik niks."',
+    'Sjef: "Tijd om. Ik had het zelf óók niet gehaald, maar goed."',
+    'Sjef: "Te laat — net als mijn timesheets. Volgende!"'
+  ]
+};
+
 // --- Grappen (Big Four / accountancy, mild en zelfspot) ---
 export const jokes = [
   'Waarom werd de accountant nooit verliefd? Niemand was materieel genoeg.',

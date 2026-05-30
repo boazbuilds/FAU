@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   jokes, praise, consolation, jokeOfTheDay, pick, randomFrom,
-  praiseFor, comboMessage, resultQuip, motivation, motivationOfDay
+  praiseFor, comboMessage, resultQuip, motivation, motivationOfDay, BOSS
 } from './humor.js';
 
 describe('humor', () => {
@@ -38,6 +38,16 @@ describe('humor', () => {
     // determinisme + geldige selectie
     expect(motivationOfDay(42)).toBe(motivationOfDay(42));
     expect(motivation).toContain(motivationOfDay(3));
+  });
+
+  it('de eindbaas (luie partner) heeft taunts en reacties', () => {
+    expect(BOSS.name).toBeTruthy();
+    expect(BOSS.emoji).toBeTruthy();
+    for (const key of ['intros', 'win', 'lose', 'delegations', 'timeouts']) {
+      expect(Array.isArray(BOSS[key])).toBe(true);
+      expect(BOSS[key].length).toBeGreaterThan(0);
+      expect(BOSS[key].every((s) => typeof s === 'string' && s.length > 0)).toBe(true);
+    }
   });
 
   it('resultQuip geeft altijd een string', () => {

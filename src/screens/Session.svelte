@@ -1,6 +1,6 @@
 <script>
   import { get } from 'svelte/store';
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { activeSession, go } from '../stores/ui.js';
   import { profile } from '../stores/profile.js';
   import { srs } from '../stores/srsStore.js';
@@ -12,7 +12,7 @@
   import { predict } from '../lib/predict.js';
   import { completeLesson, recordBoss } from '../lib/progress.js';
   import { CONFIG } from '../config.js';
-  import { praiseFor, comboMessage } from '../lib/humor.js';
+  import { praiseFor, comboMessage, BOSS, randomFrom } from '../lib/humor.js';
   import * as audio from '../lib/audio.js';
   import Question from '../components/Question.svelte';
   import MusicControl from '../components/MusicControl.svelte';
@@ -27,7 +27,8 @@
   const isLesson = mode === 'lesson';
 
   const lesson = lessonId ? lessonById[lessonId] : null;
-  let showIntro = !!lesson?.casusIntro;
+  const bossIntro = isBoss ? randomFrom(BOSS.intros) : null;
+  let showIntro = !!lesson?.casusIntro || isBoss;
 
   let index = 0;
   let phase = 'question'; // 'question' | 'feedback'
@@ -40,8 +41,60 @@
   let comboMsg = null;
   let feedbackHead = '';
 
+  // --- Tijd & Sjef-delegatie ---
+  let qComp; // ref naar de Question (voor lock() bij time-out)
+  let qStart = 0; // wanneer de vraag verscheen (snelheidsbonus)
+  let bonusXp = 0; // bonus van deze vraag (voor de feedback)
+  let isSjefQ = false; // huidige vraag is door Sjef gedelegeerd
+  let sjefTaunt = '';
+  let sjefCount = 0; // aantal Sjef-vragen deze sessie
+  let timeLeft = 0; // resterende seconden (Sjef)
+  let timer = null;
+  let lastStartedIndex = -1;
+
+  const SJEF_OK_TYPES = new Set(['mcq', 'truefalse', 'short']); // vergrendelen netjes
+
+  function clearTimer() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+
+  // Roept startQuestion aan zodra een nieuwe vraag zichtbaar wordt.
+  $: if (!showIntro && phase === 'question' && q && index !== lastStartedIndex) {
+    lastStartedIndex = index;
+    startQuestion();
+  }
+
+  function startQuestion() {
+    clearTimer();
+    qStart = Date.now();
+    bonusXp = 0;
+    timedOutNow = false;
+    isSjefQ =
+      index > 0 &&
+      sjefCount < CONFIG.sjef.maxPerSession &&
+      SJEF_OK_TYPES.has(q.type) &&
+      Math.random() < CONFIG.sjef.chance;
+    if (isSjefQ) {
+      sjefCount += 1;
+      sjefTaunt = randomFrom(BOSS.delegations);
+      timeLeft = CONFIG.sjef.seconds;
+      audio.tap();
+      timer = setInterval(() => {
+        timeLeft -= 1;
+        if (timeLeft <= 0) {
+          clearTimer();
+          if (phase === 'question') {
+            qComp?.lock?.();
+            register('wrong', true);
+          }
+        }
+      }, 1000);
+    }
+  }
+
   // Kies een (willekeurig) energiek nummer voor deze sessie; boss = intens.
   onMount(() => audio.pickSession(isBoss));
+  onDestroy(clearTimer);
 
   $: q = questionById[ids[index]];
   $: topic = q ? topicById[q.topicId] : null;
@@ -55,7 +108,12 @@
   }
 
   function onAnswer(e) {
-    const result = e.detail.result;
+    register(e.detail.result, false);
+  }
+
+  function register(result, timedOut) {
+    clearTimer();
+    const elapsed = Date.now() - qStart;
     lastResult = result;
     results = [...results, { id: q.id, result }];
 
@@ -67,18 +125,29 @@
       combo = 0;
     }
     comboMsg = result === 'correct' ? comboMessage(combo) : null;
-    feedbackHead = praiseFor(result);
+
+    // Bonussen: snelheid + Sjef (alleen bij goed, niet na een time-out).
+    bonusXp = 0;
+    if (result === 'correct' && !timedOut) {
+      if (elapsed <= CONFIG.speedBonus.withinMs) bonusXp += CONFIG.speedBonus.xp;
+      if (isSjefQ) bonusXp += CONFIG.sjef.bonusXp;
+    }
+
+    // Feedback-kop met context (time-out / Sjef-overwinning / normaal).
+    if (timedOut) feedbackHead = '⏰ ' + randomFrom(BOSS.timeouts);
+    else if (isSjefQ && result === 'correct') feedbackHead = 'Sjef baalt — knap gedaan! 🦥';
+    else feedbackHead = praiseFor(result);
 
     // Bevredigende arcade-feedback.
     if (result === 'correct') {
       audio.correct(combo);
-      if (comboMsg) audio.comboFlair(combo);
+      if (comboMsg || bonusXp) audio.comboFlair(combo);
     } else if (result === 'partial') {
       audio.partial();
     } else {
       audio.wrong();
     }
-    const gained = xpForAnswer(result, q.difficulty);
+    const gained = xpForAnswer(result, q.difficulty) + bonusXp;
     sessionXp += gained;
 
     srs.update((s) => {
@@ -180,14 +249,25 @@
   }
 
   function quit() {
+    clearTimer();
     activeSession.set(null);
     go('home');
   }
 
-  const headerLabel = isBoss ? '👑 Boss' : isPractice ? 'oefenen' : lesson ? lesson.title : '';
+  const headerLabel = isBoss ? `${BOSS.emoji} ${BOSS.name}` : isPractice ? 'oefenen' : lesson ? lesson.title : '';
 </script>
 
-{#if showIntro}
+{#if showIntro && isBoss}
+  <div class="mx-auto flex min-h-[100dvh] w-full max-w-md flex-col justify-center gap-4 px-6 text-center">
+    <div class="animate-bob text-7xl">{BOSS.emoji}</div>
+    <div class="font-pixel text-[9px] uppercase tracking-wide neon-magenta glitch">⚔️ Eindbaas</div>
+    <h1 class="font-pixel text-lg leading-relaxed text-white">{BOSS.name}</h1>
+    <p class="font-pixel text-[8px] uppercase tracking-wide text-amber-400/80">{BOSS.role}</p>
+    <p class="mx-auto max-w-sm text-sm italic leading-relaxed text-slate-200">{bossIntro}</p>
+    <button class="btn-arcade btn-arcade-magenta mt-2 w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={() => (showIntro = false)}>Versla hem ⚔️</button>
+    <button class="font-pixel text-[9px] uppercase text-slate-500 hover:text-white" on:click={quit}>Later</button>
+  </div>
+{:else if showIntro}
   <div class="mx-auto flex min-h-[100dvh] w-full max-w-md flex-col justify-center gap-4 px-6">
     <div class="font-pixel text-[9px] uppercase tracking-wide neon-magenta">📄 Casus</div>
     <h1 class="font-pixel text-base leading-relaxed text-white">{lesson.title}</h1>
@@ -228,8 +308,23 @@
           {/key}
         {/if}
       </div>
+      {#if isSjefQ && phase === 'question'}
+        <div class="mb-3 animate-floatup rounded-xl border border-amber-500/50 bg-amber-950/40 p-3">
+          <div class="flex items-center gap-2">
+            <span class="animate-wiggle text-2xl">{BOSS.emoji}</span>
+            <div class="min-w-0 flex-1">
+              <div class="font-pixel text-[8px] uppercase tracking-wide text-amber-300">Sjef delegeert!</div>
+              <p class="truncate text-xs text-amber-100/90">{sjefTaunt}</p>
+            </div>
+            <span class="font-pixel text-sm {timeLeft <= 5 ? 'animate-shake text-rose-400' : 'text-amber-300'}">{timeLeft}s</span>
+          </div>
+          <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-amber-900/50">
+            <div class="h-full {timeLeft <= 5 ? 'bg-rose-500' : 'bg-amber-400'} transition-all duration-1000 ease-linear" style="width:{Math.max(0, (timeLeft / CONFIG.sjef.seconds) * 100)}%"></div>
+          </div>
+        </div>
+      {/if}
       {#key q.id}
-        <Question question={q} on:answer={onAnswer} />
+        <Question bind:this={qComp} question={q} on:answer={onAnswer} />
       {/key}
     {/if}
   </main>
@@ -249,6 +344,9 @@
       >
         {feedbackHead}
       </div>
+      {#if bonusXp > 0}
+        <div class="mb-2 animate-burst font-pixel text-[10px] uppercase tracking-wide text-cyan-300">{isSjefQ ? '🦥 Sjef-bonus' : '⚡ Snel'} +{bonusXp} XP</div>
+      {/if}
       {#if comboMsg}
         <div class="mb-2 animate-burst rounded-lg bg-amber-500/15 px-3 py-1.5 text-sm font-bold text-amber-300">🔥 {comboMsg}</div>
       {/if}

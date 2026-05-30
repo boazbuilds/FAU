@@ -31,6 +31,10 @@
   }
 
   function lessonState(m, l) {
+    if (l.boss) {
+      if ($progress.modules?.[m.id]?.bossPassed) return 'done';
+      return isLessonUnlocked($progress, modules, m.id, l.id) ? 'available' : 'locked';
+    }
     const rec = $progress.lessons?.[l.id];
     if (rec?.completed) return 'done';
     return isLessonUnlocked($progress, modules, m.id, l.id) ? 'available' : 'locked';
