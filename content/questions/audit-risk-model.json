@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "topicId": "audit-risk-model",
+  "questions": [
+    {
+      "id": "arm-001",
+      "topicId": "audit-risk-model",
+      "type": "open",
+      "difficulty": 2,
+      "prompt": "Leg het auditrisicomodel uit en benoem de drie componenten.",
+      "modelAnswer": "Audit Risk (AR) = Inherent Risk (IR) × Control Risk (CR) × Detection Risk (DR). Het auditrisico is de kans dat de auditor een goedkeurend oordeel geeft terwijl de jaarrekening een materiële afwijking bevat. IR en CR vormen samen het 'risk of material misstatement' (eigenschappen van de entiteit); DR is het risico dat de auditor een afwijking niet ontdekt en is het enige deel dat de auditor zelf stuurt via aard, timing en omvang van de werkzaamheden.",
+      "keyPoints": ["AR = IR × CR × DR", "IR × CR = risk of material misstatement", "Auditor stuurt alleen het detectierisico (DR)", "DR via aard, timing en omvang van de werkzaamheden"],
+      "explanation": "Onthoud: alleen het detectierisico is door de auditor te beïnvloeden; IR en CR zijn kenmerken van de entiteit en haar omgeving.",
+      "reference": "ISA 200",
+      "tags": ["risicomodel"]
+    },
+    {
+      "id": "arm-002",
+      "topicId": "audit-risk-model",
+      "type": "mcq",
+      "difficulty": 1,
+      "prompt": "Welke component van het auditrisicomodel beheerst de auditor zelf via de aard, timing en omvang van de werkzaamheden?",
+      "options": [
+        { "id": "a", "text": "Inherent risico" },
+        { "id": "b", "text": "Controlerisico" },
+        { "id": "c", "text": "Detectierisico" },
+        { "id": "d", "text": "Het risk of material misstatement" }
+      ],
+      "correct": ["c"],
+      "explanation": "De auditor beïnvloedt het detectierisico door meer of effectievere werkzaamheden te plannen. IR en CR zijn eigenschappen van de entiteit.",
+      "reference": "ISA 200.A44",
+      "tags": ["detectierisico"]
+    },
+    {
+      "id": "arm-003",
+      "topicId": "audit-risk-model",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Bij een hoger ingeschat 'risk of material misstatement' moet het aanvaardbaar detectierisico omlaag.",
+      "correct": true,
+      "explanation": "Om het auditrisico laag/constant te houden, moet bij een hoger RMM het detectierisico dalen — dus meer of effectievere controlewerkzaamheden.",
+      "reference": "ISA 200",
+      "tags": ["detectierisico"]
+    },
+    {
+      "id": "arm-004",
+      "topicId": "audit-risk-model",
+      "type": "short",
+      "difficulty": 1,
+      "prompt": "Vul de formule aan: AR = IR × CR × ____",
+      "answer": { "accept": ["detectierisico", "detectie risico", "dr", "detection risk"], "normalize": "lower-trim-nodiacritics", "minSimilarity": 0.85 },
+      "explanation": "Audit Risk = Inherent Risk × Control Risk × Detection Risk.",
+      "reference": "ISA 200",
+      "tags": ["formule"]
+    },
+    {
+      "id": "arm-005",
+      "topicId": "audit-risk-model",
+      "type": "open",
+      "difficulty": 2,
+      "prompt": "Wat is het 'risk of material misstatement' (RMM) en uit welke componenten bestaat het?",
+      "modelAnswer": "Het RMM is het risico dat de jaarrekening een materiële afwijking bevat vóórdat de auditor zijn werkzaamheden uitvoert. Het bestaat uit het inherente risico (gevoeligheid van een post voor afwijking, los van beheersing) en het controlerisico (de kans dat de interne beheersing een afwijking niet voorkomt of ontdekt). RMM = IR × CR.",
+      "keyPoints": ["RMM = IR × CR", "Bestaat vóór de auditwerkzaamheden", "Inherent risico = gevoeligheid voor afwijking", "Controlerisico = beheersing voorkomt/detecteert afwijking niet"],
+      "explanation": "Het RMM wordt zowel op jaarrekeningniveau als op beweringsniveau (assertion level) ingeschat.",
+      "reference": "ISA 200, ISA 315",
+      "tags": ["RMM"]
+    },
+    {
+      "id": "arm-006",
+      "topicId": "audit-risk-model",
+      "type": "mcq",
+      "difficulty": 1,
+      "prompt": "Het auditrisico is het risico dat de auditor …",
+      "options": [
+        { "id": "a", "text": "… een afkeurend oordeel geeft terwijl de jaarrekening juist is" },
+        { "id": "b", "text": "… een goedkeurend oordeel geeft terwijl de jaarrekening een materiële afwijking bevat" },
+        { "id": "c", "text": "… te veel werkzaamheden uitvoert" },
+        { "id": "d", "text": "… de deadline van de controle niet haalt" }
+      ],
+      "correct": ["b"],
+      "explanation": "Auditrisico draait om een onterecht goedkeurend oordeel bij een materieel onjuiste jaarrekening. Optie a beschrijft eerder een efficiency-/effectiviteitsrisico.",
+      "reference": "ISA 200",
+      "tags": ["definitie"]
+    },
+    {
+      "id": "arm-007",
+      "topicId": "audit-risk-model",
+      "type": "short",
+      "difficulty": 2,
+      "prompt": "Hoe heet het risico dat de auditor een materiële afwijking niet ontdekt, ondanks zijn werkzaamheden?",
+      "answer": { "accept": ["detectierisico", "detectie risico", "dr", "detection risk"], "normalize": "lower-trim-nodiacritics", "minSimilarity": 0.85 },
+      "explanation": "Dat is het detectierisico (Detection Risk) — het enige deel van het model dat de auditor zelf stuurt.",
+      "reference": "ISA 200",
+      "tags": ["detectierisico"]
+    },
+    {
+      "id": "arm-008",
+      "topicId": "audit-risk-model",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "Het inherente risico en het controlerisico kan de auditor rechtstreeks verlagen.",
+      "correct": false,
+      "explanation": "Onjuist: IR en CR zijn eigenschappen van de entiteit. De auditor schat ze in maar verlaagt ze niet zelf; hij reageert erop via het detectierisico.",
+      "reference": "ISA 200",
+      "tags": ["risicomodel"]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "topicId": "materiality",
+  "questions": [
+    {
+      "id": "mat-001",
+      "topicId": "materiality",
+      "type": "open",
+      "difficulty": 2,
+      "prompt": "Wat is materialiteit in de context van de jaarrekeningcontrole?",
+      "modelAnswer": "Een afwijking (of het totaal van afwijkingen) is materieel als die redelijkerwijs de economische beslissingen kan beïnvloeden die gebruikers op basis van de jaarrekening nemen. Materialiteit kent een kwantitatieve dimensie (omvang) en een kwalitatieve dimensie (aard/context).",
+      "keyPoints": ["Beïnvloedt beslissingen van gebruikers", "Vanuit het perspectief van de gebruiker", "Kwantitatief (omvang) én kwalitatief (aard)"],
+      "explanation": "Materialiteit stuurt zowel de planning (omvang van de werkzaamheden) als de evaluatie van geconstateerde afwijkingen.",
+      "reference": "ISA 320",
+      "tags": ["definitie"]
+    },
+    {
+      "id": "mat-002",
+      "topicId": "materiality",
+      "type": "mcq",
+      "difficulty": 2,
+      "prompt": "Hoe verhoudt de performance materiality zich tot de overall materiality?",
+      "options": [
+        { "id": "a", "text": "Hoger" },
+        { "id": "b", "text": "Gelijk" },
+        { "id": "c", "text": "Lager" },
+        { "id": "d", "text": "Niet gerelateerd" }
+      ],
+      "correct": ["c"],
+      "explanation": "Performance materiality wordt lager gezet dan de overall materiality om de kans te verkleinen dat het totaal van niet-gecorrigeerde en niet-ontdekte afwijkingen de overall materiality overschrijdt (aggregatierisico).",
+      "reference": "ISA 320",
+      "tags": ["performance materiality"]
+    },
+    {
+      "id": "mat-003",
+      "topicId": "materiality",
+      "type": "truefalse",
+      "difficulty": 1,
+      "prompt": "Materialiteit heeft zowel een kwantitatieve als een kwalitatieve dimensie.",
+      "correct": true,
+      "explanation": "Klopt. Soms is een klein bedrag toch materieel door zijn aard (bv. fraude door de directie, of het ombuigen van winst naar verlies).",
+      "reference": "ISA 320",
+      "tags": ["dimensies"]
+    },
+    {
+      "id": "mat-004",
+      "topicId": "materiality",
+      "type": "short",
+      "difficulty": 2,
+      "prompt": "Een veelgebruikte benchmark voor de overall materiality is een percentage van de ____ (een resultaatmaatstaf vóór belasting).",
+      "answer": { "accept": ["winst voor belasting", "winst", "resultaat voor belasting", "resultaat", "profit before tax", "pbt"], "normalize": "lower-trim-nodiacritics", "minSimilarity": 0.8 },
+      "explanation": "Veelgebruikte benchmarks: winst (resultaat) vóór belasting, of anders omzet of balanstotaal, afhankelijk van de aard van de entiteit.",
+      "reference": "ISA 320",
+      "tags": ["benchmark"]
+    },
+    {
+      "id": "mat-005",
+      "topicId": "materiality",
+      "type": "open",
+      "difficulty": 3,
+      "prompt": "Waarom stelt de auditor de performance materiality lager vast dan de overall materiality?",
+      "modelAnswer": "Omdat tijdens de controle niet alle afwijkingen worden ontdekt en niet alle ontdekte afwijkingen worden gecorrigeerd. Door op een lager niveau te werken bouwt de auditor een buffer in, zodat het totaal van niet-gecorrigeerde én niet-gedetecteerde afwijkingen waarschijnlijk onder de overall materiality blijft (het aggregatierisico).",
+      "keyPoints": ["Buffer tegen aggregatierisico", "Niet alle afwijkingen worden ontdekt", "Niet alle afwijkingen worden gecorrigeerd", "Totaal blijft onder overall materiality"],
+      "explanation": "Performance materiality verlaagt het detectierisico op postniveau door een veiligheidsmarge in te bouwen.",
+      "reference": "ISA 320",
+      "tags": ["aggregatierisico"]
+    },
+    {
+      "id": "mat-006",
+      "topicId": "materiality",
+      "type": "mcq",
+      "difficulty": 2,
+      "prompt": "De 'clearly trivial threshold' (grens voor duidelijk onbeduidend) is het bedrag waaronder afwijkingen …",
+      "options": [
+        { "id": "a", "text": "… altijd materieel zijn" },
+        { "id": "b", "text": "… niet hoeven te worden geaccumuleerd omdat ze duidelijk onbeduidend zijn" },
+        { "id": "c", "text": "… automatisch leiden tot een afkeurend oordeel" },
+        { "id": "d", "text": "… gelijk zijn aan de performance materiality" }
+      ],
+      "correct": ["b"],
+      "explanation": "Afwijkingen onder de 'clearly trivial'-grens hoeft de auditor niet te verzamelen; ze zijn individueel én gezamenlijk duidelijk verwaarloosbaar. Die grens ligt ruim onder de materialiteit.",
+      "reference": "ISA 450",
+      "tags": ["clearly trivial"]
+    },
+    {
+      "id": "mat-007",
+      "topicId": "materiality",
+      "type": "open",
+      "difficulty": 2,
+      "prompt": "Noem een kwalitatieve factor die een op zichzelf klein bedrag toch materieel kan maken.",
+      "modelAnswer": "Bijvoorbeeld: de afwijking buigt een winst om in een verlies (of andersom), beïnvloedt de naleving van een leningconvenant, betreft een transactie met verbonden partijen, verhult fraude door het management, of keert een neergaande trend in resultaten om. Door de aard/context wegen zulke afwijkingen zwaarder dan hun omvang.",
+      "keyPoints": ["Winst ↔ verlies omslaan", "Effect op convenanten/regelgeving", "Fraude of verbonden partijen", "Een trend ombuigen"],
+      "explanation": "Daarom beoordeelt de auditor afwijkingen niet alleen op omvang, maar ook op aard en context.",
+      "reference": "ISA 450",
+      "tags": ["kwalitatief"]
+    },
+    {
+      "id": "mat-008",
+      "topicId": "materiality",
+      "type": "truefalse",
+      "difficulty": 2,
+      "prompt": "De materialiteit ligt aan het begin van de controle vast en wordt daarna nooit meer herzien.",
+      "correct": false,
+      "explanation": "Onjuist. De auditor herziet de materialiteit als tijdens de controle nieuwe informatie blijkt (bv. werkelijke resultaten wijken sterk af van de verwachting).",
+      "reference": "ISA 320",
+      "tags": ["herziening"]
+    }
+  ]
+}

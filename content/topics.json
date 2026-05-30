@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "course": "Financial Auditing",
+  "language": "nl",
+  "topics": [
+    {
+      "id": "audit-risk-model",
+      "title": "Auditrisicomodel",
+      "shortTitle": "Auditrisico",
+      "description": "AR = IR × CR × DR: risico's inschatten en erop reageren.",
+      "examWeight": 0.4,
+      "order": 1,
+      "icon": "🎯",
+      "color": "#6366f1"
+    },
+    {
+      "id": "internal-control",
+      "title": "Interne beheersing",
+      "shortTitle": "Interne beheersing",
+      "description": "COSO, beheersingsmaatregelen en test of controls.",
+      "examWeight": 0.35,
+      "order": 2,
+      "icon": "🛡️",
+      "color": "#10b981"
+    },
+    {
+      "id": "materiality",
+      "title": "Materialiteit",
+      "shortTitle": "Materialiteit",
+      "description": "Overall- en performance materiality; kwantitatief én kwalitatief.",
+      "examWeight": 0.25,
+      "order": 3,
+      "icon": "⚖️",
+      "color": "#f59e0b"
+    }
+  ]
+}
