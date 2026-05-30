@@ -10,7 +10,8 @@ export function defaultSettings() {
     reminderEnabled: false,
     reminderTime: '19:30',
     reducedMotion: false,
-    sound: true
+    sound: true,
+    music: true
   };
 }
 

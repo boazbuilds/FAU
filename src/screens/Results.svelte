@@ -1,5 +1,6 @@
 <script>
   import { get } from 'svelte/store';
+  import { onMount } from 'svelte';
   import { activeSession, go } from '../stores/ui.js';
   import { srs } from '../stores/srsStore.js';
   import { settings } from '../stores/settings.js';
@@ -7,11 +8,14 @@
   import { starsFor } from '../lib/progress.js';
   import { topicById } from '../lib/content.js';
   import { CONFIG } from '../config.js';
+  import { resultQuip, randomFrom, jokes } from '../lib/humor.js';
+  import * as audio from '../lib/audio.js';
   import Badge from '../components/Badge.svelte';
+  import Mascot from '../components/Mascot.svelte';
 
   const summary = get(activeSession)?.summary ?? {
     answered: 0, correct: 0, score: 0, xpGained: 0, perfect: false, outOfHearts: false,
-    mode: 'normal', newBadges: [], pred: null, boss: null
+    mode: 'normal', maxCombo: 0, newBadges: [], pred: null, boss: null
   };
   const accuracy = summary.answered ? Math.round((summary.correct / summary.answered) * 100) : 0;
   const isLesson = summary.mode === 'lesson';
@@ -35,6 +39,11 @@
 
   const unlockedTitle = summary.boss?.unlockedModuleId ? topicById[summary.boss.unlockedModuleId]?.title : null;
 
+  // Mascotte: passende quip + een grap als beloning.
+  const quip = resultQuip({ perfect: summary.perfect, isBoss, bossPassed, accuracy });
+  const rewardJoke = (summary.perfect || (!isBoss && accuracy >= 70) || bossPassed) ? randomFrom(jokes) : null;
+  const mascotMood = bossPassed || summary.perfect ? 'cheer' : isBoss && !bossPassed ? 'oops' : accuracy >= 70 ? 'happy' : 'think';
+
   function againLesson() {
     if (summary.lessonId) {
       activeSession.set({ ids: buildLessonSession(summary.lessonId), mode: 'lesson', lessonId: summary.lessonId, moduleId: summary.moduleId });
@@ -56,6 +65,13 @@
     activeSession.set(null);
     go('home');
   }
+
+  onMount(() => {
+    if (bossPassed || summary.perfect) audio.fanfare();
+    else if (summary.outOfHearts) audio.wrong();
+    else audio.correct(0);
+    if (summary.newBadges?.length) setTimeout(() => audio.levelUp(), 650);
+  });
 </script>
 
 <div class="mx-auto flex min-h-[100dvh] w-full max-w-md flex-col items-center justify-center gap-6 px-6 text-center">
@@ -77,6 +93,16 @@
       <div class="text-3xl font-bold {bossPassed || (!isBoss && accuracy >= 80) ? 'text-emerald-300' : 'text-amber-300'}">{accuracy}%</div>
       <div class="text-xs text-slate-400">{summary.correct}/{summary.answered} goed</div>
     </div>
+  </div>
+
+  {#if summary.maxCombo >= 3}
+    <div class="inline-flex items-center gap-2 rounded-full bg-amber-500/15 px-4 py-1.5 text-sm font-bold text-amber-300">🔥 Hoogste reeks: {summary.maxCombo} op rij</div>
+  {/if}
+
+  <div class="w-full text-left">
+    <Mascot mood={mascotMood} size="md">
+      {quip}{#if rewardJoke}<span class="mt-2 block border-t border-slate-700 pt-2 text-slate-300">{rewardJoke}</span>{/if}
+    </Mascot>
   </div>
 
   {#if isBoss}

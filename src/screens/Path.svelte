@@ -9,7 +9,10 @@
   import { buildSession, buildLessonSession, buildBossSession, dueCount } from '../lib/session.js';
   import { isLessonUnlocked, isModuleUnlocked, moduleProgress } from '../lib/progress.js';
   import { predict } from '../lib/predict.js';
+  import { todayNumber } from '../lib/day.js';
+  import { jokeOfTheDay, randomFrom, jokes } from '../lib/humor.js';
   import LessonNode from '../components/LessonNode.svelte';
+  import Mascot from '../components/Mascot.svelte';
 
   $: due = dueCount($srs);
   $: pred = predict($srs);
@@ -51,6 +54,13 @@
 
   const hour = new Date().getHours();
   const greeting = hour < 6 ? 'Goedenacht' : hour < 12 ? 'Goedemorgen' : hour < 18 ? 'Goedemiddag' : 'Goedenavond';
+
+  let joke = jokeOfTheDay(todayNumber());
+  function newJoke() {
+    let next = joke;
+    while (jokes.length > 1 && next === joke) next = randomFrom(jokes);
+    joke = next;
+  }
 </script>
 
 <div class="space-y-4 px-4 pb-28 pt-2">
@@ -61,6 +71,11 @@
     </div>
     <button class="rounded-xl border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:bg-slate-800" on:click={() => go('cheatsheet')}>📕 Spiek</button>
   </div>
+
+  <!-- Mascotte: grap van de dag (tik voor een nieuwe) -->
+  <button type="button" class="block w-full text-left" on:click={newJoke} aria-label="Nieuwe grap">
+    <Mascot mood="happy" hint="tik voor een nieuwe 🔁">{joke}</Mascot>
+  </button>
 
   <!-- Dagdoel + herhaling -->
   <div class="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900/60 p-4">

@@ -11,6 +11,7 @@
   import { todayNumber } from './lib/day.js';
   import { modules } from './lib/content.js';
   import { getIdentity } from './lib/sync.js';
+  import * as audio from './lib/audio.js';
   import TopBar from './components/TopBar.svelte';
   import Path from './screens/Path.svelte';
   import Session from './screens/Session.svelte';
@@ -31,11 +32,29 @@
     progress.update((pr) => ensureInit(pr, modules));
     getIdentity(get(profile)); // online-naad (no-op zolang uit)
     maybeRemind(get(profile), get(settings), todayNumber());
+
+    // Audio ontgrendelen op de eerste interactie (browser-autoplaybeleid).
+    const s = get(settings);
+    audio.setSfxEnabled(s.sound !== false);
+    audio.setMusicEnabled(s.music !== false);
+    const unlock = () => {
+      audio.unlock();
+      window.removeEventListener('pointerdown', unlock);
+      window.removeEventListener('keydown', unlock);
+    };
+    window.addEventListener('pointerdown', unlock);
+    window.addEventListener('keydown', unlock);
   });
 
   $: if (typeof document !== 'undefined') {
     document.documentElement.classList.toggle('reduce-motion', !!$settings.reducedMotion);
   }
+
+  // Audio-instellingen live volgen.
+  $: audio.setSfxEnabled($settings.sound !== false);
+  $: audio.setMusicEnabled($settings.music !== false);
+  // Track wisselen: energiek in de sessie/resultaten, rustig in de menu's.
+  $: audio.setTrack($screen === 'session' || $screen === 'results' ? 'race' : 'menu');
 
   $: chromeless = $screen === 'session' || $screen === 'results';
 
