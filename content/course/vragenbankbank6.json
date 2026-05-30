@@ -1,0 +1,650 @@
+{
+  "meta": {
+    "extends": "vragenbank.json",
+    "title": "Bank m6 - extra oefenset",
+    "note": "merge",
+    "language": "nl",
+    "scoreChanceLegend": {
+      "hoog": "70-90% - komt in (vrijwel) elke instellingstoets terug en wordt direct beloond",
+      "midden": "40-65% - komt regelmatig voor, niet gegarandeerd",
+      "laag": "20-40% - casus-/themaspecifiek; minder vaak, maar onderscheidend"
+    }
+  },
+  "addLessonsToModule": {
+    "m6": [
+      {
+        "id": "m6lb1",
+        "title": "Onafhankelijkheid en beroepsrecht - extra oefenset (deel 1)",
+        "questions": [
+          {
+            "id": "m6lb1q01",
+            "type": "multiple_choice",
+            "prompt": "In welke situatie geldt de ViO (Verordening inzake de Onafhankelijkheid)?",
+            "options": [
+              "Uitsluitend bij assurance-opdrachten",
+              "Bij elke opdracht die een accountant aanvaardt",
+              "Alleen bij het samenstellen van een jaarrekening (4410)",
+              "Alleen bij persoonsgerichte onderzoeken (Handreiking 1112)"
+            ],
+            "correct": 0,
+            "explanation": "De ViO geldt uitsluitend bij assurance-opdrachten. Bij non-assurance (4410, 4400N, 5500N, 1112) loopt de objectiviteit via de VGBA, niet via de ViO.",
+            "difficulty": 1,
+            "tags": [
+              "ViO",
+              "assurance",
+              "toepassingsbereik"
+            ],
+            "scoreChance": 80,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m6lb1q02",
+            "type": "multiple_choice",
+            "context": "Great Choice: de accountant stelt een 5500N-rapport op bij een transactie en vertegenwoordigt daarbij het bijzondere belang van zijn opdrachtgever.",
+            "prompt": "Welke uitspraak is juist?",
+            "options": [
+              "De ViO is van toepassing; er is een bedreiging van belangenbehartiging die het werk verbiedt",
+              "De ViO is niet van toepassing (non-assurance); de objectiviteit blijft wel gewaarborgd via de VGBA, ook al vertegenwoordig je een bijzonder belang (5500N.13)",
+              "De ViO is van toepassing omdat het om een transactie gaat",
+              "Noch de ViO, noch de VGBA geldt; er zijn geen objectiviteitseisen"
+            ],
+            "correct": 1,
+            "explanation": "Bij 5500N geldt de ViO niet (non-assurance). Je mag een bijzonder belang vertegenwoordigen, maar de objectiviteit (VGBA art. 11 / 5500N.13) blijft onverkort gelden.",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "5500N",
+              "objectiviteit",
+              "VGBA",
+              "Great Choice"
+            ],
+            "scoreChance": 65,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb1q03",
+            "type": "multiple_choice",
+            "prompt": "Een lid van het assuranceteam heeft de jaarrekening die nu wordt gecontroleerd, deels zelf opgesteld via een eerder afgegeven advies. Welke bedreiging is dit primair?",
+            "options": [
+              "Zelftoetsing",
+              "Eigenbelang",
+              "Belangenbehartiging",
+              "Intimidatie"
+            ],
+            "correct": 0,
+            "explanation": "Het beoordelen van je eigen eerdere werk/advies levert een bedreiging van zelftoetsing op.",
+            "difficulty": 1,
+            "tags": [
+              "ViO",
+              "bedreigingen",
+              "zelftoetsing"
+            ],
+            "scoreChance": 75,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m6lb1q04",
+            "type": "multiple_choice",
+            "context": "De controleklant dreigt de accountant te vervangen en een claim in te dienen als hij niet akkoord gaat met een agressieve waardering.",
+            "prompt": "Welke bedreiging staat hier centraal?",
+            "options": [
+              "Vertrouwdheid",
+              "Zelftoetsing",
+              "Intimidatie",
+              "Eigenbelang"
+            ],
+            "correct": 2,
+            "explanation": "Druk of dreigementen waardoor de accountant niet objectief durft te handelen vormen een bedreiging van intimidatie.",
+            "difficulty": 1,
+            "tags": [
+              "ViO",
+              "bedreigingen",
+              "intimidatie"
+            ],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m6lb1q05",
+            "type": "matching",
+            "prompt": "Koppel elke situatie aan de juiste ViO-bedreiging.",
+            "pairs": [
+              {
+                "left": "Een aanzienlijk financieel belang in de controleklant",
+                "right": "Eigenbelang"
+              },
+              {
+                "left": "Optreden als pleitbezorger/advocaat voor de standpunten van de klant",
+                "right": "Belangenbehartiging"
+              },
+              {
+                "left": "Al meer dan tien jaar dezelfde opdrachtpartner bij dezelfde klant",
+                "right": "Vertrouwdheid"
+              },
+              {
+                "left": "De klant dreigt met ontslag van de accountant",
+                "right": "Intimidatie"
+              },
+              {
+                "left": "De controle van een door het kantoor zelf ontwikkeld waarderingsmodel",
+                "right": "Zelftoetsing"
+              }
+            ],
+            "explanation": "De vijf ViO-bedreigingen: eigenbelang, zelftoetsing, belangenbehartiging, vertrouwdheid en intimidatie.",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "bedreigingen"
+            ],
+            "scoreChance": 75,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m6lb1q06",
+            "type": "multiple_choice",
+            "prompt": "Wat houdt de toets van ViO art. 5 in?",
+            "options": [
+              "Of de cliënt instemt met de gekozen oplossing",
+              "Of het kantoor financieel afhankelijk is van de klant",
+              "Of de Accountantskamer een klacht gegrond zou verklaren",
+              "Of een objectieve, redelijke en geïnformeerde derde de onafhankelijkheid voldoende gewaarborgd zou achten"
+            ],
+            "correct": 3,
+            "explanation": "ViO art. 5 hanteert de toets van de objectieve, redelijke en geïnformeerde derde: zou die de onafhankelijkheid als voldoende gewaarborgd beschouwen?",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "art.5",
+              "derde-toets"
+            ],
+            "scoreChance": 75,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m6lb1q07",
+            "type": "multiple_choice",
+            "context": "Sunpanels: de accountant verzorgt de wettelijke controle en wil daarnaast een ESG-/CSRD-adviesopdracht uitvoeren (samenloop assurance + non-assurance).",
+            "prompt": "Welke voorwaarde is bij deze samenloop het meest essentieel (ViO art. 18.2)?",
+            "options": [
+              "De accountant mag meebeslissen zolang de klant dat schriftelijk goedkeurt",
+              "De accountant mag niet meebeslissen of participeren in de besluitvorming van de klant",
+              "Samenloop is bij een niet-oob altijd absoluut verboden",
+              "Er hoeven geen maatregelen te worden getroffen zolang het advies losstaat van de cijfers"
+            ],
+            "correct": 1,
+            "explanation": "Bij samenloop mag de accountant niet meebeslissen of in de besluitvorming participeren (art. 18.2). Het beslisschema van Praktijkhandreiking 1131 leidt verder; meebeslissen is een klassieke instinker.",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "samenloop",
+              "art.18",
+              "Sunpanels"
+            ],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m6lb1q08",
+            "type": "multiple_choice",
+            "prompt": "JUIST of ONJUIST: 'Bij een 4410-samenstelopdracht moet de accountant de ViO toepassen om zijn onafhankelijkheid te toetsen.'",
+            "options": [
+              "Juist - de ViO geldt bij elke opdracht",
+              "Juist - maar alleen voor het onderdeel cooling-off",
+              "Onjuist - de ViO geldt alleen bij assurance; bij 4410 loopt objectiviteit via de VGBA (art. 11)",
+              "Onjuist - bij 4410 gelden helemaal geen objectiviteitseisen"
+            ],
+            "correct": 2,
+            "explanation": "Onjuist: de ViO geldt uitsluitend bij assurance. Een samenstelopdracht (4410) is non-assurance; objectiviteit wordt geborgd via de VGBA (art. 11).",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "4410",
+              "VGBA",
+              "instinker"
+            ],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m6lb1q09",
+            "type": "multiple_choice",
+            "context": "International Publishing: een waarderingsspecialist van het kantoor wordt ingeschakeld bij de controle en bezit aandelen in de controleklant.",
+            "prompt": "Welke uitspraak over deze specialist is juist?",
+            "options": [
+              "De specialist valt buiten het assuranceteam, dus zijn aandelenbelang is irrelevant",
+              "De specialist behoort tot het assuranceteam (rechtstreekse invloed op de uitkomst); een financieel belang in de controleklant is in beginsel verboden (art. 31)",
+              "Een aandelenbelang van een specialist is altijd toegestaan zolang het kantoor het niet weet",
+              "De ViO geldt niet voor ingeschakelde specialisten"
+            ],
+            "correct": 1,
+            "explanation": "Een ingeschakelde specialist met rechtstreekse invloed op de uitkomst hoort tot het assuranceteam. Een financieel belang in de controleklant is dan in beginsel verboden (art. 31).",
+            "difficulty": 3,
+            "tags": [
+              "ViO",
+              "assuranceteam",
+              "art.31",
+              "International Publishing",
+              "instinker"
+            ],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb1q10",
+            "type": "multiple_choice",
+            "prompt": "Wie behoren tot het 'assuranceteam' in de zin van de ViO?",
+            "options": [
+              "Het opdrachtteam plus ieder binnen kantoor of netwerk met rechtstreekse invloed op de uitkomst van de opdracht, inclusief ingeschakelde specialisten",
+              "Alleen de leden van het feitelijke opdrachtteam",
+              "Alleen de tekenend accountant en de OKB'er",
+              "Iedereen binnen het netwerk, ongeacht betrokkenheid bij de opdracht"
+            ],
+            "correct": 0,
+            "explanation": "Het assuranceteam = het opdrachtteam plus ieder binnen kantoor/netwerk met rechtstreekse invloed op de uitkomst, inclusief ingeschakelde specialisten.",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "assuranceteam",
+              "definitie"
+            ],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m6lb1q11",
+            "type": "multiple_choice",
+            "context": "Sunpanels: een voormalig lid van het OKB-/kernassuranceteam treedt in dienst als CFO (bestuurder) bij de controleklant.",
+            "prompt": "Welk ViO-artikel is hier primair aan de orde en wat is het gevolg?",
+            "options": [
+              "Art. 28 - de relatie is langdurig, dus directe roulatie van het team",
+              "Art. 38 - cooling-off: een voormalig (kern)assuranceteamlid dat bestuurder wordt bij de klant betekent dat het kantoor ongeveer een jaar geen controle mag doen",
+              "Art. 31 - financieel belang, dus het belang moet worden afgestoten",
+              "Art. 44 - persoonlijke relatie, dus enkel melden volstaat"
+            ],
+            "correct": 1,
+            "explanation": "Een voormalig (kern)assuranceteamlid dat bestuurder wordt bij de controleklant raakt art. 38 (cooling-off): gedurende circa een jaar mag het kantoor de controle niet uitvoeren.",
+            "difficulty": 3,
+            "tags": [
+              "ViO",
+              "art.38",
+              "cooling-off",
+              "Sunpanels"
+            ],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb1q12",
+            "type": "multiple_choice",
+            "context": "Sunpanels: dezelfde opdrachtpartner doet de controle al ongeveer tien jaar.",
+            "prompt": "Welk ViO-artikel adresseert dit en wat is een passende maatregel?",
+            "options": [
+              "Art. 31; het belang afstoten",
+              "Art. 38; een jaar geen controle",
+              "Art. 18; niet meebeslissen",
+              "Art. 28 (vertrouwdheid/langdurige betrokkenheid); beoordelen en zo nodig roulatie van de opdrachtpartner of een OKB inzetten"
+            ],
+            "correct": 3,
+            "explanation": "Langdurige betrokkenheid valt onder art. 28 (vertrouwdheid). Passende maatregelen: beoordelen en zo nodig partnerroulatie of een opdrachtgerichte kwaliteitsbeoordeling (OKB).",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "art.28",
+              "vertrouwdheid",
+              "roulatie",
+              "Sunpanels"
+            ],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb1q13",
+            "type": "multi_select",
+            "prompt": "Welke van onderstaande opdrachten zijn assurance-opdrachten waarbij de ViO van toepassing is? (selecteer alle juiste)",
+            "options": [
+              "Wettelijke controle van de jaarrekening (Standaard 700)",
+              "Beoordelingsopdracht (Standaard 2400)",
+              "Samenstellingsopdracht (Standaard 4410)",
+              "Persoonsgericht onderzoek (NBA-Handreiking 1112)"
+            ],
+            "correct": [
+              0,
+              1
+            ],
+            "explanation": "Controle (700) en beoordeling (2400) zijn assurance -> ViO van toepassing. Samenstellen (4410) en persoonsgericht onderzoek (1112) zijn non-assurance -> ViO niet van toepassing.",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "assurance",
+              "non-assurance"
+            ],
+            "scoreChance": 65,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb1q14",
+            "type": "multiple_choice",
+            "prompt": "De ViO-toets uit art. 5 is die van de objectieve, redelijke en geïnformeerde ___.",
+            "explanation": "Art. 5 toetst aan het oordeel van de objectieve, redelijke en geïnformeerde derde.",
+            "difficulty": 1,
+            "tags": [
+              "ViO",
+              "art.5",
+              "derde-toets"
+            ],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog",
+            "options": [
+              "toezichthouder",
+              "cliënt",
+              "derde",
+              "collega"
+            ],
+            "correct": 2
+          }
+        ]
+      },
+      {
+        "id": "m6lb2",
+        "title": "Onafhankelijkheid en beroepsrecht - extra oefenset (deel 2)",
+        "questions": [
+          {
+            "id": "m6lb2q01",
+            "type": "multiple_choice",
+            "context": "Tankprof/Sweet Pepper: een gedupeerde wil een tuchtklacht indienen over werk dat door een accountantskantoor is uitgevoerd.",
+            "prompt": "Tegen wie kan een tuchtklacht bij de Accountantskamer worden gericht?",
+            "options": [
+              "Tegen het accountantskantoor als rechtspersoon",
+              "Tegen de individuele accountant; het kantoor zelf kan niet bij de Accountantskamer worden aangeklaagd",
+              "Tegen zowel het kantoor als de NBA",
+              "Tegen de opdrachtgever van de controle"
+            ],
+            "correct": 1,
+            "explanation": "De Accountantskamer berecht individuele accountants, niet het kantoor. Een klacht tegen het kantoor kan daar niet; richt je dan op de (kwaliteits)beleidsbepaler.",
+            "difficulty": 2,
+            "tags": [
+              "tuchtrecht",
+              "Accountantskamer",
+              "Wtra",
+              "Tankprof",
+              "instinker"
+            ],
+            "scoreChance": 70,
+            "scoreChanceLabel": "hoog"
+          },
+          {
+            "id": "m6lb2q02",
+            "type": "multiple_choice",
+            "prompt": "JUIST of ONJUIST: 'Een tuchtklacht over structureel gebrekkige kwaliteit kun je rechtstreeks tegen het accountantskantoor bij de Accountantskamer indienen.'",
+            "options": [
+              "Juist - het kantoor is tuchtrechtelijk aanspreekbaar bij de Accountantskamer",
+              "Onjuist - de Accountantskamer berecht alleen individuele accountants; je richt je op de (kwaliteits)beleidsbepaler, waarna het kwaliteitsstelsel (NVKS art. 6) in beeld komt",
+              "Juist - mits het een oob-kantoor betreft",
+              "Onjuist - kwaliteitskwesties horen uitsluitend bij de civiele rechter"
+            ],
+            "correct": 1,
+            "explanation": "Onjuist: de Accountantskamer berecht individuele accountants. Bij kwaliteitskwesties richt je je op de (kwaliteits)beleidsbepaler; dan komt het kwaliteitsstelsel (NVKS art. 6, Wta art. 21) in beeld.",
+            "difficulty": 3,
+            "tags": [
+              "tuchtrecht",
+              "beleidsbepaler",
+              "NVKS",
+              "Wta",
+              "instinker"
+            ],
+            "scoreChance": 55,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb2q03",
+            "type": "matching",
+            "prompt": "Koppel elk ViO-artikel aan het onderwerp dat het regelt.",
+            "pairs": [
+              {
+                "left": "Art. 5",
+                "right": "Toets van de objectieve, redelijke en geïnformeerde derde"
+              },
+              {
+                "left": "Art. 18/19",
+                "right": "Samenloop assurance + non-assurancedienst (niet meebeslissen)"
+              },
+              {
+                "left": "Art. 28",
+                "right": "Vertrouwdheid / langdurige betrokkenheid (roulatie)"
+              },
+              {
+                "left": "Art. 31",
+                "right": "Financieel belang van een assuranceteamlid in de controleklant"
+              },
+              {
+                "left": "Art. 38",
+                "right": "Cooling-off (teamlid wordt bestuurder bij de klant)"
+              },
+              {
+                "left": "Art. 44",
+                "right": "Persoonlijke relatie"
+              }
+            ],
+            "explanation": "Kernartikelen ViO: art. 5 (derde-toets), 18/19 (samenloop), 28 (vertrouwdheid/roulatie), 31 (financieel belang), 38 (cooling-off), 44 (persoonlijke relatie).",
+            "difficulty": 3,
+            "tags": [
+              "ViO",
+              "artikelen",
+              "overzicht"
+            ],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb2q04",
+            "type": "multiple_choice",
+            "context": "Een lid van het assuranceteam houdt een klein, immaterieel aandelenbelang in de controleklant zonder enige invloed op het beheer ervan.",
+            "prompt": "Wat zegt ViO art. 31 over een financieel belang van een assuranceteamlid in de controleklant?",
+            "options": [
+              "Elk financieel belang is altijd toegestaan",
+              "Een financieel belang is alleen verboden bij oob-klanten",
+              "Een financieel belang is toegestaan zolang het kantoor het niet meldt",
+              "Een financieel belang is in beginsel verboden, tenzij het immaterieel is en zonder invloed"
+            ],
+            "correct": 3,
+            "explanation": "Art. 31: een financieel belang van een assuranceteamlid in de controleklant is in beginsel verboden, tenzij het immaterieel is en geen invloed geeft.",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "art.31",
+              "financieel belang"
+            ],
+            "scoreChance": 55,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb2q05",
+            "type": "multiple_choice",
+            "context": "De partner van een lid van het assuranceteam is financieel directeur bij de controleklant.",
+            "prompt": "Welk ViO-artikel is hier primair aan de orde?",
+            "options": [
+              "Art. 28 (vertrouwdheid door langdurige betrokkenheid)",
+              "Art. 44 (persoonlijke relatie)",
+              "Art. 38 (cooling-off)",
+              "Art. 18 (samenloop)"
+            ],
+            "correct": 1,
+            "explanation": "Een persoonlijke relatie tussen een teamlid en een sleutelfunctionaris bij de klant valt onder art. 44 (persoonlijke relatie).",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "art.44",
+              "persoonlijke relatie"
+            ],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb2q06",
+            "type": "multiple_choice",
+            "context": "Pizza Ogni Giorno: de accountant heeft een advies-/rekenmodel ontwikkeld en gebruikt de uitkomsten daarvan vervolgens in de controle.",
+            "prompt": "Welke bedreiging speelt en welk samenloopartikel is relevant?",
+            "options": [
+              "Intimidatie; art. 38",
+              "Zelftoetsing; art. 18 (samenloop) - je beoordeelt in feite je eigen advies-instrument",
+              "Belangenbehartiging; art. 44",
+              "Eigenbelang; art. 31"
+            ],
+            "correct": 1,
+            "explanation": "Het gebruik van een eigen advies-instrument in de controle leidt tot zelftoetsing; de samenloop wordt getoetst via art. 18.",
+            "difficulty": 3,
+            "tags": [
+              "ViO",
+              "zelftoetsing",
+              "art.18",
+              "samenloop",
+              "Pizza"
+            ],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb2q07",
+            "type": "multiple_choice",
+            "prompt": "JUIST of ONJUIST: 'Een ingeschakelde externe waarderingsspecialist valt altijd buiten het assuranceteam, dus de onafhankelijkheidseisen gelden niet voor hem.'",
+            "options": [
+              "Juist - alleen het opdrachtteam vormt het assuranceteam",
+              "Onjuist - wie rechtstreekse invloed op de uitkomst heeft (ook een ingeschakelde specialist) hoort tot het assuranceteam en valt onder de onafhankelijkheidseisen",
+              "Juist - specialisten zijn geen accountants",
+              "Onjuist - maar alleen bij oob-controles"
+            ],
+            "correct": 1,
+            "explanation": "Onjuist: een ingeschakelde specialist met rechtstreekse invloed op de uitkomst hoort tot het assuranceteam en valt dus onder de onafhankelijkheidseisen.",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "assuranceteam",
+              "specialist",
+              "instinker"
+            ],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb2q08",
+            "type": "multiple_choice",
+            "context": "Sunpanels: bij de controle spelen zowel een samenloop met ESG-advies als langdurige betrokkenheid van de opdrachtpartner.",
+            "prompt": "Welke maatregel is passend om de onafhankelijkheid voldoende te waarborgen?",
+            "options": [
+              "Een andere opdrachtpartner inzetten en/of een opdrachtgerichte kwaliteitsbeoordeling (OKB), met gescheiden teams voor advies en controle",
+              "De opdracht weigeren is de enige optie",
+              "De klant laten tekenen dat hij geen bezwaar heeft",
+              "Niets; bij een niet-oob zijn maatregelen niet nodig"
+            ],
+            "correct": 0,
+            "explanation": "Passende maatregelen zijn onder meer een andere opdrachtpartner en/of een OKB, met gescheiden teams. Toestemming van de klant of niets doen waarborgt de onafhankelijkheid niet.",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "maatregelen",
+              "OKB",
+              "roulatie",
+              "Sunpanels"
+            ],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb2q09",
+            "type": "multiple_choice",
+            "context": "Sweet Pepper: bij een non-assurance-opdracht (5500N) twijfelt men of de accountant wel onafhankelijk genoeg is.",
+            "prompt": "Welke uitspraak is juist?",
+            "options": [
+              "De ViO bepaalt hier of de accountant onafhankelijk genoeg is",
+              "Bij non-assurance gelden geen objectiviteits- of onafhankelijkheidseisen",
+              "De accountant moet hier roulatie toepassen volgens art. 28 ViO",
+              "De ViO geldt niet bij non-assurance; de objectiviteit wordt getoetst via de VGBA (art. 11), niet via de onafhankelijkheidseisen van de ViO"
+            ],
+            "correct": 3,
+            "explanation": "Bij non-assurance (5500N) geldt de ViO niet. De objectiviteit wordt geborgd via de VGBA (art. 11); ViO-artikelen als art. 28 zijn niet van toepassing.",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "non-assurance",
+              "5500N",
+              "VGBA",
+              "Sweet Pepper",
+              "instinker"
+            ],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb2q10",
+            "type": "multi_select",
+            "prompt": "Welke maatregelen kunnen bij samenloop of langdurige betrokkenheid de onafhankelijkheid waarborgen? (selecteer alle juiste)",
+            "options": [
+              "Een opdrachtgerichte kwaliteitsbeoordeling (OKB) inzetten",
+              "De opdrachtpartner laten rouleren",
+              "De controleklant laten verklaren dat hij vertrouwen heeft in de accountant",
+              "Gescheiden teams inzetten voor de advies- en de controleopdracht"
+            ],
+            "correct": [
+              0,
+              1,
+              3
+            ],
+            "explanation": "OKB, partnerroulatie en gescheiden teams zijn passende maatregelen. Een vertrouwensverklaring van de klant is geen waarborg voor de onafhankelijkheid.",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "maatregelen",
+              "OKB",
+              "roulatie"
+            ],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m6lb2q11",
+            "type": "multiple_choice",
+            "prompt": "De Accountantskamer berecht uitsluitend de ___ accountant, niet het accountantskantoor.",
+            "explanation": "Het tuchtrecht (Wtra) richt zich op de individuele accountant. Voor het kantoor kijk je naar de (kwaliteits)beleidsbepaler en het kwaliteitsstelsel (NVKS art. 6).",
+            "difficulty": 2,
+            "tags": [
+              "tuchtrecht",
+              "Accountantskamer",
+              "individuele accountant"
+            ],
+            "scoreChance": 65,
+            "scoreChanceLabel": "midden",
+            "options": [
+              "individuele",
+              "grootste",
+              "verantwoordelijke",
+              "tekenende"
+            ],
+            "correct": 0
+          },
+          {
+            "id": "m6lb2q12",
+            "type": "multiple_choice",
+            "prompt": "Een controleklant verzoekt de accountant om naast de controle een advies te geven en daarbij mee te beslissen over de uiteindelijke verwerking. Wat is de juiste reactie?",
+            "options": [
+              "Meebeslissen mag, zolang het advies en de controle door dezelfde persoon worden gedaan",
+              "Meebeslissen mag, mits het schriftelijk wordt vastgelegd",
+              "Meebeslissen of participeren in de besluitvorming mag niet (art. 18.2); de accountant adviseert hooguit, de klant beslist zelf",
+              "Meebeslissen mag, want bij een niet-oob gelden geen beperkingen"
+            ],
+            "correct": 2,
+            "explanation": "Bij samenloop mag de accountant niet meebeslissen of in de besluitvorming participeren (art. 18.2): adviseren mag, de klant beslist zelf. Meebeslissen is een klassieke instinker.",
+            "difficulty": 2,
+            "tags": [
+              "ViO",
+              "samenloop",
+              "art.18",
+              "instinker"
+            ],
+            "scoreChance": 65,
+            "scoreChanceLabel": "midden"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -2,7 +2,8 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { get } from 'svelte/store';
 import { ratings, rateQuestion } from '../stores/ratings.js';
-import { questionWeight, RATING_WEIGHT, buildBossSession } from './session.js';
+import { questionWeight, RATING_WEIGHT, buildBossSession, buildLessonSession } from './session.js';
+import { questionsForLesson } from './content.js';
 
 beforeEach(() => {
   localStorage.clear();
@@ -41,5 +42,17 @@ describe('vraag-beoordelingen', () => {
     }
     // groot, stabiel verschil: down verschijnt veel minder vaak
     expect(downHits).toBeLessThan(neutralHits);
+  });
+
+  it('les-sessie is begrensd en varieert bij een grote les', () => {
+    // zoek een les met ruim meer vragen dan de limiet (de extra banken hebben die)
+    const big = ['m5lb1', 'm6lb1', 'm7lb1', 'm5lb2'].find((id) => questionsForLesson(id).length > 12);
+    expect(big).toBeTruthy();
+    const a = buildLessonSession(big);
+    const b = buildLessonSession(big);
+    expect(a.length).toBeLessThanOrEqual(10); // begrensd door lessonLength
+    expect(a.length).toBeGreaterThan(0);
+    // twee trekkingen zijn (vrijwel zeker) niet identiek qua volgorde/selectie
+    expect(a.join() === b.join()).toBe(false);
   });
 });

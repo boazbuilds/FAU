@@ -8,6 +8,7 @@ export const CONFIG = {
   // --- Sessie ---
   sessionLength: 12,
   newPerSession: 5,
+  lessonLength: 10, // max vragen per les-sessie (wisselende selectie uit grote lessen)
 
   // --- Levens (mild) ---
   maxHearts: 5,

@@ -1,0 +1,627 @@
+{
+  "meta": {
+    "extends": "vragenbank.json",
+    "title": "Bank m8 - extra oefenset",
+    "note": "merge",
+    "language": "nl",
+    "scoreChanceLegend": {
+      "hoog": "70-90% - komt in (vrijwel) elke instellingstoets terug en wordt direct beloond",
+      "midden": "40-65% - komt regelmatig voor, niet gegarandeerd",
+      "laag": "20-40% - casus-/themaspecifiek; minder vaak, maar onderscheidend"
+    }
+  },
+  "addLessonsToModule": {
+    "m8": [
+      {
+        "id": "m8lb1",
+        "title": "Duurzaamheid, IT en specialistisch - extra oefenset (deel 1)",
+        "questions": [
+          {
+            "id": "m8lb1q01",
+            "type": "multiple_choice",
+            "context": "Grass BV laat zekerheid verstrekken bij haar duurzaamheidsverslag.",
+            "prompt": "Welke Standaard is hierop van toepassing en waaraan wordt getoetst?",
+            "options": [
+              "Standaard 3810N; toetsing aan het Stramien voor assurance-opdrachten met het verslaggevingsstelsel als criteria",
+              "Standaard 720; de accountant leest het verslag",
+              "Standaard 4400N; rapport van feitelijke bevindingen",
+              "Standaard 700; toetsing aan Titel 9 BW"
+            ],
+            "correct": 0,
+            "explanation": "Assurance bij een duurzaamheidsverslag valt onder Standaard 3810N, die toetst aan het Stramien voor assurance-opdrachten; de criteria zijn het verslaggevingsstelsel (GRI of ESRS).",
+            "difficulty": 1,
+            "tags": [
+              "duurzaamheid",
+              "St.3810N",
+              "Grass",
+              "criteria"
+            ],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb1q02",
+            "type": "multiple_choice",
+            "prompt": "Onder de CSRD is de wettelijk vereiste mate van zekerheid bij de duurzaamheidsrapportage (in de eerste fase)...?",
+            "options": [
+              "Redelijke (hoge) mate van zekerheid",
+              "Beperkte mate van zekerheid",
+              "Geen zekerheid",
+              "Absolute zekerheid"
+            ],
+            "correct": 1,
+            "explanation": "De CSRD vereist (eerst) een beperkte mate van zekerheid; opschaling naar redelijke zekerheid kan later. De opdracht wordt uitgevoerd conform Standaard 3810N.",
+            "difficulty": 1,
+            "tags": [
+              "duurzaamheid",
+              "CSRD",
+              "St.3810N",
+              "zekerheidsniveau"
+            ],
+            "scoreChance": 55,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb1q03",
+            "type": "multiple_choice",
+            "prompt": "Wat houdt de dubbele materialiteitsanalyse (DMA) onder de ESRS in?",
+            "options": [
+              "Eenmaal de financiele materialiteit en eenmaal de materialiteit voor de jaarrekening bepalen",
+              "Twee verschillende materialiteitsbedragen voor de omzet en het resultaat",
+              "Per onderwerp zowel de impact-materialiteit (effect van de organisatie op mens/milieu) als de financiele materialiteit (effect op de organisatie) beoordelen",
+              "De materialiteit eenmaal door de accountant en eenmaal door het bestuur laten vaststellen"
+            ],
+            "correct": 2,
+            "explanation": "De DMA beoordeelt per onderwerp twee invalshoeken: impact-materialiteit (van binnen naar buiten) en financiele materialiteit (van buiten naar binnen). Een enkel materialiteitsbedrag is hier juist fout (Standaard 3810N).",
+            "difficulty": 2,
+            "tags": [
+              "duurzaamheid",
+              "DMA",
+              "ESRS",
+              "materialiteit"
+            ],
+            "scoreChance": 55,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb1q04",
+            "type": "multiple_choice",
+            "prompt": "Een collega zegt: 'Voor het duurzaamheidsverslag bepalen we, net als bij de jaarrekening, gewoon een enkel materialiteitsbedrag.' Is dat juist?",
+            "options": [
+              "Juist: ook bij duurzaamheid geldt een enkel materialiteitsbedrag",
+              "Onjuist: bij duurzaamheid geldt een dubbele materialiteitsanalyse (impact- en financiele materialiteit) per onderwerp",
+              "Juist, mits het bedrag op de omzet wordt gebaseerd",
+              "Onjuist: er is bij duurzaamheid helemaal geen materialiteit"
+            ],
+            "correct": 1,
+            "explanation": "Klassieke instinker: bij duurzaamheidsverslaggeving (ESRS) geldt geen enkel materialiteitsbedrag maar een dubbele materialiteitsanalyse per onderwerp (Standaard 3810N).",
+            "difficulty": 2,
+            "tags": [
+              "duurzaamheid",
+              "DMA",
+              "instinker",
+              "materialiteit"
+            ],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb1q05",
+            "type": "multiple_choice",
+            "context": "Great Choice: de opdracht betreft een beperkte mate van zekerheid bij het duurzaamheidsverslag.",
+            "prompt": "Welke werkzaamheden passen bij beperkte zekerheid (3810N)?",
+            "options": [
+              "Systeemgerichte controle met toetsing van de werking van de interne beheersing en uitgebreid gegevensgericht werk",
+              "Een volledige herberekening van alle KPI's",
+              "Geen enkele werkzaamheid; beperkte zekerheid vereist alleen een verklaring",
+              "Vooral opzet en bestaan beoordelen, inlichtingen inwinnen, cijferanalyses en afstemmen; geen toetsing van de werking"
+            ],
+            "correct": 3,
+            "explanation": "Bij beperkte zekerheid toets je geen werking van de interne beheersing: opzet/bestaan beoordelen, inlichtingen, cijferanalyse en afstemmen volstaan (Standaard 3810N).",
+            "difficulty": 2,
+            "tags": [
+              "duurzaamheid",
+              "St.3810N",
+              "beperkte zekerheid",
+              "Great Choice"
+            ],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb1q06",
+            "type": "multiple_choice",
+            "context": "Great Choice: in een tweede fase wordt redelijke mate van zekerheid bij het duurzaamheidsverslag gevraagd.",
+            "prompt": "Wat verandert er dan in je aanpak ten opzichte van beperkte zekerheid?",
+            "options": [
+              "Je werkt systeemgericht met toetsing van de werking van de interne beheersing en voert uitgebreid gegevensgericht werk uit",
+              "Niets; de aanpak is identiek",
+              "Je mag juist minder werk doen omdat de zekerheid hoger is",
+              "Je stapt over op Standaard 720 (lezen)"
+            ],
+            "correct": 0,
+            "explanation": "Redelijke zekerheid is systeemgericht (werking interne beheersing toetsen) plus uitgebreid gegevensgericht werk; beperkte zekerheid blijft bij opzet/bestaan, inlichtingen en cijferanalyse (Standaard 3810N).",
+            "difficulty": 2,
+            "tags": [
+              "duurzaamheid",
+              "St.3810N",
+              "redelijke zekerheid",
+              "Great Choice"
+            ],
+            "scoreChance": 45,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb1q07",
+            "type": "multiple_choice",
+            "context": "Grass: de niet-financiele KPI's (zoals CO2 en afval) komen uit registratiesystemen buiten de financiele administratie.",
+            "prompt": "Wat betekent dat voor je werkzaamheden?",
+            "options": [
+              "Niets; je neemt de KPI's over uit het verslag",
+              "Alleen de financiele administratie controleren",
+              "Opzet/bestaan (bij redelijke zekerheid ook de werking) van die systemen beoordelen, rekenkundige juistheid en aansluiting toetsen en alert zijn op manipulatie of verwijderen van data",
+              "Uitsluitend een verklaring van het management opvragen"
+            ],
+            "correct": 2,
+            "explanation": "KPI's uit niet-financiele systemen vragen aandacht voor de primaire registratie (opzet/bestaan, bij redelijke zekerheid de werking), rekenkundige juistheid, aansluiting en het risico op manipulatie (Standaard 3810N).",
+            "difficulty": 2,
+            "tags": [
+              "duurzaamheid",
+              "St.3810N",
+              "KPI",
+              "IT",
+              "Grass"
+            ],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb1q08",
+            "type": "multiple_choice",
+            "context": "Flexscooter: het duurzaamheidsverslag claimt 'volledig CO2-neutraal' en 'draagt in hoge mate bij aan een betere wereld', zonder onderbouwende cijfers.",
+            "prompt": "Hoe duid je dit?",
+            "options": [
+              "Geen probleem; niet-kwantificeerbare claims hoef je niet te beoordelen",
+              "Je keurt het verslag direct af zonder verder onderzoek",
+              "Dit valt buiten elke standaard",
+              "Greenwashingrisico: niet-kwantificeerbare/onvoldoende onderbouwde claims vergen extra aandacht en mogen niet zonder onderbouwing blijven staan"
+            ],
+            "correct": 3,
+            "explanation": "Niet-kwantificeerbare of onvoldoende onderbouwde claims geven greenwashingrisico; daar moet de accountant kritisch op zijn (Standaard 3810N).",
+            "difficulty": 2,
+            "tags": [
+              "duurzaamheid",
+              "greenwashing",
+              "St.3810N",
+              "Flexscooter"
+            ],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb1q09",
+            "type": "multiple_choice",
+            "context": "Great Choice: een afwijking met diepgaande invloed op een kernonderwerp van het duurzaamheidsverslag wordt niet gecorrigeerd.",
+            "prompt": "Welke conclusie volgt?",
+            "options": [
+              "Een goedkeurende conclusie met een paragraaf ter benadrukking",
+              "Een conclusie met beperking",
+              "Een afkeurende conclusie",
+              "Geen gevolg; bij beperkte zekerheid kan dit niet"
+            ],
+            "correct": 2,
+            "explanation": "Een afwijking van diepgaande invloed op een kernonderwerp leidt tot een afkeurende conclusie - dezelfde 2x2-logica als bij de jaarrekening, nu binnen Standaard 3810N.",
+            "difficulty": 2,
+            "tags": [
+              "duurzaamheid",
+              "St.3810N",
+              "afkeurend",
+              "Great Choice"
+            ],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb1q10",
+            "type": "multiple_choice",
+            "prompt": "Bij een opdracht met BEPERKTE zekerheid blijken er aanwijzingen voor een mogelijk diepgaande afwijking. Een collega oppert: 'Houd het gewoon op beperkte zekerheid, dan hoeven we geen negatieve conclusie te geven.' Wat is juist?",
+            "options": [
+              "Juist: bij beperkte zekerheid kun je een negatieve conclusie altijd vermijden",
+              "Juist, mits de opdrachtgever ermee instemt",
+              "Onjuist: je moet altijd naar redelijke zekerheid opschalen",
+              "Onjuist: je mag het zekerheidsniveau niet verlagen of laag houden om een negatieve conclusie te ontlopen (3810N.8)"
+            ],
+            "correct": 3,
+            "explanation": "Standaard 3810N.8 verbiedt het kiezen of handhaven van een lager zekerheidsniveau om een afkeurende of afwijzende conclusie te ontwijken.",
+            "difficulty": 3,
+            "tags": [
+              "duurzaamheid",
+              "St.3810N",
+              "instinker",
+              "zekerheidsniveau"
+            ],
+            "scoreChance": 40,
+            "scoreChanceLabel": "laag"
+          },
+          {
+            "id": "m8lb1q11",
+            "type": "multiple_choice",
+            "context": "Grass: voor de berekening van de CO2-footprint en de waardering van een sponsoring/natuurproject schakelt de accountant een specialist in.",
+            "prompt": "Wat beoordeel je bij het gebruik van deze deskundige (Standaard 620)?",
+            "options": [
+              "Alleen of de deskundige goedkoop is",
+              "De competentie, capaciteiten en objectiviteit van de deskundige en de geschiktheid van zijn werk (methode, aannames en data)",
+              "Niets; je neemt de uitkomst over",
+              "Alleen of de deskundige een diploma heeft"
+            ],
+            "correct": 1,
+            "explanation": "Standaard 620: beoordeel competentie/capaciteiten/objectiviteit van de deskundige en of het werk (methode, aannames, data) geschikt is als controle-informatie.",
+            "difficulty": 2,
+            "tags": [
+              "St.620",
+              "deskundige",
+              "duurzaamheid",
+              "Grass"
+            ],
+            "scoreChance": 45,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb1q12",
+            "type": "multiple_choice",
+            "context": "Het bestuursverslag van een onderneming bevat een passage over de strategie en enkele duurzaamheidsambities.",
+            "prompt": "Wat is de rol van de accountant ten aanzien van het bestuursverslag?",
+            "options": [
+              "Hij geeft er assurance bij onder Standaard 3810N",
+              "Hij controleert het volledig onder de 700-serie",
+              "Hij leest het (Standaard 720) en let op materiele inconsistenties met de jaarrekening en zijn kennis; geen assurance",
+              "Hij hoeft er niets mee te doen"
+            ],
+            "correct": 2,
+            "explanation": "Het bestuursverslag valt onder 'andere informatie': de accountant leest het (Standaard 720) en signaleert materiele inconsistenties, maar geeft er geen assurance bij.",
+            "difficulty": 1,
+            "tags": [
+              "St.720",
+              "bestuursverslag",
+              "andere informatie"
+            ],
+            "scoreChance": 60,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb1q13",
+            "type": "multiple_choice",
+            "prompt": "Assurance bij een duurzaamheidsverslag wordt uitgevoerd volgens Standaard ___.",
+            "explanation": "Duurzaamheidsassurance valt onder de specifieke Standaard 3810N (toetsing aan het Stramien voor assurance-opdrachten).",
+            "difficulty": 1,
+            "tags": [
+              "duurzaamheid",
+              "St.3810N"
+            ],
+            "scoreChance": 55,
+            "scoreChanceLabel": "midden",
+            "options": [
+              "720",
+              "3810N",
+              "4410",
+              "700"
+            ],
+            "correct": 1
+          }
+        ]
+      },
+      {
+        "id": "m8lb2",
+        "title": "Duurzaamheid, IT en specialistisch - extra oefenset (deel 2)",
+        "questions": [
+          {
+            "id": "m8lb2q01",
+            "type": "multiple_choice",
+            "context": "Flexscooter: de accountant leest het bestuursverslag en stelt een inconsistentie van materieel belang met de gecontroleerde jaarrekening vast die het bestuur niet wil aanpassen.",
+            "prompt": "Wat doet de accountant?",
+            "options": [
+              "Een afkeurend oordeel bij de jaarrekening geven",
+              "De inconsistentie beschrijven in de sectie 'Andere informatie' van de controleverklaring (Standaard 720)",
+              "Niets; het bestuursverslag valt buiten zijn werk",
+              "Assurance bij het bestuursverslag verstrekken"
+            ],
+            "correct": 1,
+            "explanation": "Een niet-gecorrigeerde materiele inconsistentie in de andere informatie wordt vermeld in de sectie 'Andere informatie' van de verklaring (Standaard 720); het is geen oordeel over de jaarrekening zelf.",
+            "difficulty": 2,
+            "tags": [
+              "St.720",
+              "andere informatie",
+              "bestuursverslag",
+              "Flexscooter"
+            ],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb2q02",
+            "type": "multiple_choice",
+            "context": "Sweet Pepper: de nieuwe eigenaar laat onderzoeken of de oud-DGA opzettelijk onterecht heeft gehandeld.",
+            "prompt": "Onder welk kader valt dit onderzoek?",
+            "options": [
+              "NBA-Handreiking 1112 (persoonsgericht onderzoek); geen COS-Standaard",
+              "Standaard 4400N (overeengekomen specifieke werkzaamheden)",
+              "Standaard 5500N (transactiegerelateerde adviesdienst)",
+              "Standaard 3000A (assurance)"
+            ],
+            "correct": 0,
+            "explanation": "Onderzoek naar het handelen/nalaten van een (rechts)persoon is een persoonsgericht onderzoek onder NBA-Handreiking 1112 - geen COS-Standaard, en dus niet 4400N of 5500N.",
+            "difficulty": 2,
+            "tags": [
+              "Hr.1112",
+              "persoonsgericht",
+              "Sweet Pepper",
+              "non-assurance"
+            ],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb2q03",
+            "type": "multiple_choice",
+            "prompt": "Een collega stelt: 'Een persoonsgericht onderzoek doen we onder Standaard 4400N, want we spreken specifieke werkzaamheden af.' Is dat juist?",
+            "options": [
+              "Juist: persoonsgericht onderzoek valt onder 4400N",
+              "Onjuist: persoonsgericht onderzoek valt onder NBA-Handreiking 1112, niet onder 4400N of 5500N",
+              "Juist, mits er geen zekerheid wordt verstrekt",
+              "Onjuist: het valt onder Standaard 3000A"
+            ],
+            "correct": 1,
+            "explanation": "Persoonsgericht onderzoek valt onder NBA-Handreiking 1112 (verifiërend, met hoor en wederhoor). Het onderbrengen onder 4400N of 5500N is een klassieke val.",
+            "difficulty": 2,
+            "tags": [
+              "Hr.1112",
+              "St.4400N",
+              "instinker",
+              "persoonsgericht"
+            ],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb2q04",
+            "type": "multiple_choice",
+            "prompt": "Wat is essentieel voordat in een persoonsgericht onderzoek (Hr 1112) schriftelijk wordt gerapporteerd?",
+            "options": [
+              "Direct publiceren zonder de betrokkene te informeren",
+              "De opdrachtgever de eindconclusie laten schrijven",
+              "Hoor en wederhoor: het concept aan de betrokkene(n) voorleggen met een redelijke reactietermijn",
+              "Een goedkeurende verklaring afgeven"
+            ],
+            "correct": 2,
+            "explanation": "Hr 1112 vereist dat de schriftelijke rapportage pas volgt NA hoor en wederhoor: het concept voorleggen met een redelijke reactietermijn, zorgvuldig en objectief.",
+            "difficulty": 2,
+            "tags": [
+              "Hr.1112",
+              "hoor-en-wederhoor",
+              "persoonsgericht"
+            ],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb2q05",
+            "type": "multiple_choice",
+            "context": "International Publishing: je hebt een steekproef getrokken op de omzet en de gevonden fouten geprojecteerd naar de populatie.",
+            "prompt": "Hoe ga je om met een vastgestelde atypische (afwijkende) fout?",
+            "options": [
+              "Je projecteert ook de atypische fout evenredig naar de hele populatie",
+              "Je sluit de atypische fout uit van de projectie, maar neemt het effect ervan apart wel mee",
+              "Je negeert de atypische fout volledig",
+              "Je verwerpt de hele steekproef"
+            ],
+            "correct": 1,
+            "explanation": "Standaard 530: een atypische/afwijkende fout wordt niet meegeprojecteerd, maar het effect ervan wordt apart bij de evaluatie betrokken.",
+            "difficulty": 2,
+            "tags": [
+              "St.530",
+              "steekproef",
+              "atypische fout",
+              "International Publishing"
+            ],
+            "scoreChance": 45,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb2q06",
+            "type": "multiple_choice",
+            "context": "International Publishing: de som van de geprojecteerde fout plus de atypische fout overschrijdt de toelaatbare fout.",
+            "prompt": "Wat is het gevolg?",
+            "options": [
+              "Je trekt zonder meer de conclusie dat de populatie juist is",
+              "Je verlaagt de toelaatbare fout zodat het wel past",
+              "Je kunt geen conclusie trekken: vraag het management om nader onderzoek/correctie en verricht aanvullend werk",
+              "Je accepteert de afwijking zonder vervolg"
+            ],
+            "correct": 2,
+            "explanation": "Overschrijdt de beste schatting van de fout (geprojecteerd + atypisch) de toelaatbare fout, dan is geen conclusie mogelijk: management laten onderzoeken/corrigeren en aanvullende werkzaamheden verrichten (Standaard 530).",
+            "difficulty": 3,
+            "tags": [
+              "St.530",
+              "steekproef",
+              "toelaatbare fout",
+              "International Publishing"
+            ],
+            "scoreChance": 45,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb2q07",
+            "type": "multiple_choice",
+            "context": "Tankprof / Sunpanels: een deel van de relevante IT-verwerking is uitbesteed aan een serviceorganisatie.",
+            "prompt": "Waarop steun je in eerste instantie (Standaard 402 / ISAE 3402)?",
+            "options": [
+              "Niets; uitbesteed betekent dat het buiten je controle valt",
+              "Alleen de factuur van de serviceorganisatie",
+              "Een schriftelijke bevestiging bij het eigen management",
+              "Een ISAE 3402- / Standaard 3402-rapportage van de serviceorganisatie"
+            ],
+            "correct": 3,
+            "explanation": "Bij uitbesteding aan een serviceorganisatie steun je op een ISAE 3402-/Standaard 3402-rapportage over de interne beheersing (Standaard 402).",
+            "difficulty": 2,
+            "tags": [
+              "St.402",
+              "ISAE3402",
+              "serviceorganisatie",
+              "Tankprof"
+            ],
+            "scoreChance": 45,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb2q08",
+            "type": "multiple_choice",
+            "context": "Sunpanels: er is GEEN ISAE 3402-rapportage van de serviceorganisatie beschikbaar.",
+            "prompt": "Wat doe je dan?",
+            "options": [
+              "Je vertrouwt zonder meer op de uitbestede verwerking",
+              "Je onderzoekt zelf (of via een IT-auditor) de interne beheersing bij de serviceorganisatie",
+              "Je geeft direct een verklaring met beperking",
+              "Je negeert de uitbestede processen"
+            ],
+            "correct": 1,
+            "explanation": "Ontbreekt een 3402-rapportage, dan onderzoek je zelf - of via een IT-auditor - de interne beheersing van de serviceorganisatie (Standaard 402).",
+            "difficulty": 2,
+            "tags": [
+              "St.402",
+              "ISAE3402",
+              "serviceorganisatie",
+              "Sunpanels"
+            ],
+            "scoreChance": 45,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb2q09",
+            "type": "multiple_choice",
+            "context": "Property XL beoordeelt een bedrijfsschadeclaim (gederfde winst en doorlopende kosten) die tegen de polisvoorwaarden moet worden vastgesteld.",
+            "prompt": "Welk kader past hierbij?",
+            "options": [
+              "Standaard 700; de jaarrekening als criterium",
+              "NBA-Handreiking 1112",
+              "Standaard 805/3400, met de polisvoorwaarden als criteria",
+              "Standaard 4410 (samenstellen)"
+            ],
+            "correct": 2,
+            "explanation": "Een schadeberekening betreft een enkel element/overzicht (805) met een toekomstgerichte component (3400); de polisvoorwaarden vormen de criteria.",
+            "difficulty": 3,
+            "tags": [
+              "St.805",
+              "St.3400",
+              "bedrijfsschade",
+              "Property XL"
+            ],
+            "scoreChance": 35,
+            "scoreChanceLabel": "laag"
+          },
+          {
+            "id": "m8lb2q10",
+            "type": "multiple_choice",
+            "prompt": "Bij de controle van een geautomatiseerde omgeving wil je steunen op application controls. Wat is daarvoor een voorwaarde?",
+            "options": [
+              "Niets; application controls werken altijd zelfstandig",
+              "Dat je elke transactie handmatig narekent",
+              "Dat de serviceorganisatie een factuur stuurt",
+              "Dat de algemene IT-beheersingsmaatregelen (GITC) effectief zijn, zodat je op de werking van de application controls kunt steunen"
+            ],
+            "correct": 3,
+            "explanation": "Application controls zijn alleen betrouwbaar als de GITC (toegangsbeveiliging, wijzigingsbeheer, IT-operations) effectief zijn; daarop steunt de geprogrammeerde controle.",
+            "difficulty": 2,
+            "tags": [
+              "IT",
+              "GITC",
+              "application controls"
+            ],
+            "scoreChance": 45,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb2q11",
+            "type": "multiple_choice",
+            "prompt": "Wat houdt een 'test of one' bij geautomatiseerde (geprogrammeerde) controles in?",
+            "options": [
+              "Een steekproef van minimaal honderd transacties",
+              "Eenmaal vaststellen dat de geprogrammeerde controle werkt, mits de GITC effectief zijn zodat de instelling ongewijzigd blijft gedurende de periode",
+              "Eenmalig de jaarrekening doorlezen",
+              "Een enkel interview met de IT-manager"
+            ],
+            "correct": 1,
+            "explanation": "Bij effectieve GITC volstaat voor een geprogrammeerde controle in beginsel een 'test of one': werkt de instelling eenmaal, dan werkt zij consistent gedurende de periode (IT-controle).",
+            "difficulty": 3,
+            "tags": [
+              "IT",
+              "test-of-one",
+              "GITC",
+              "application controls"
+            ],
+            "scoreChance": 40,
+            "scoreChanceLabel": "laag"
+          },
+          {
+            "id": "m8lb2q12",
+            "type": "multi_select",
+            "prompt": "Welke van de volgende uitspraken over duurzaamheidsassurance (3810N) zijn JUIST? (meerdere antwoorden)",
+            "options": [
+              "De criteria zijn het verslaggevingsstelsel, zoals GRI of ESRS",
+              "De CSRD vereist in de eerste fase beperkte mate van zekerheid",
+              "Bij beperkte zekerheid toets je de werking van de interne beheersing",
+              "Je mag het zekerheidsniveau verlagen om een afkeurende conclusie te ontwijken"
+            ],
+            "correct": [
+              0,
+              1
+            ],
+            "explanation": "Criteria = GRI/ESRS en CSRD vereist (eerst) beperkte zekerheid (juist). Werking toetsen hoort bij redelijke zekerheid, en downgraden om een conclusie te ontwijken mag niet (3810N.8).",
+            "difficulty": 2,
+            "tags": [
+              "duurzaamheid",
+              "St.3810N",
+              "CSRD",
+              "multi_select"
+            ],
+            "scoreChance": 45,
+            "scoreChanceLabel": "midden"
+          },
+          {
+            "id": "m8lb2q13",
+            "type": "matching",
+            "prompt": "Koppel elke korte casus aan het juiste kader/de juiste Standaard.",
+            "pairs": [
+              {
+                "left": "Zekerheid bij duurzaamheidsverslag (Grass)",
+                "right": "Standaard 3810N"
+              },
+              {
+                "left": "Inconsistentie in het bestuursverslag (Flexscooter)",
+                "right": "Standaard 720"
+              },
+              {
+                "left": "Onderzoek naar handelen oud-DGA (Sweet Pepper)",
+                "right": "NBA-Handreiking 1112"
+              },
+              {
+                "left": "Uitbestede IT bij serviceorganisatie (Tankprof)",
+                "right": "Standaard 402 / ISAE 3402"
+              }
+            ],
+            "explanation": "Duurzaamheidsassurance -> 3810N; andere informatie/bestuursverslag -> 720 (lezen); persoonsgericht onderzoek -> Hr 1112; serviceorganisatie -> 402/ISAE 3402.",
+            "difficulty": 2,
+            "tags": [
+              "matching",
+              "St.3810N",
+              "St.720",
+              "Hr.1112",
+              "St.402"
+            ],
+            "scoreChance": 50,
+            "scoreChanceLabel": "midden"
+          }
+        ]
+      }
+    ]
+  }
+}

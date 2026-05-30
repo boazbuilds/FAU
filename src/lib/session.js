@@ -108,9 +108,13 @@ export function buildPracticeSession(srs, topicId = null, length = CONFIG.sessio
   return interleave(weightedSample(pool, length)).map((q) => q.id);
 }
 
-// Les: alle vragen van de les, geschud (één topic, dus geen interleave nodig).
-export function buildLessonSession(lessonId) {
-  return shuffle(questionsForLesson(lessonId)).map((q) => q.id);
+// Les: een wisselende selectie uit de lesvragen (rating-gewogen). Korte lessen
+// tonen alles; grote lessen (door de extra banken) krijgen elke keer een andere,
+// frisse set i.p.v. steeds dezelfde — minder herhaling, meer variatie.
+export function buildLessonSession(lessonId, length = CONFIG.lessonLength) {
+  const pool = questionsForLesson(lessonId);
+  const n = Math.min(length ?? pool.length, pool.length);
+  return weightedSample(pool, n).map((q) => q.id);
 }
 
 // Boss: een wisselende, begrensde subset objectieve vragen uit de hele module.

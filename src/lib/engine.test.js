@@ -9,8 +9,8 @@ import { defaultProgress, ensureInit, isLessonUnlocked, isModuleUnlocked, starsF
 
 describe('content loader (merge + normalisatie)', () => {
   it('merget alle losse vragenbestanden samen', () => {
-    expect(modules.length).toBe(9); // m0–m8
-    expect(allQuestions.length).toBeGreaterThanOrEqual(157); // groeit als er content bijkomt
+    expect(modules.length).toBe(10); // m0–m9
+    expect(allQuestions.length).toBeGreaterThanOrEqual(465); // groeit als er content bijkomt
     expect(tips.length).toBe(22);
   });
 
@@ -52,6 +52,13 @@ describe('content loader (merge + normalisatie)', () => {
     for (const m of modules) {
       expect(m.lessons.some((l) => l.boss)).toBe(true);
     }
+  });
+
+  it('module m9 (skeletten/instinkers) bestaat en heeft vragen', () => {
+    const m9 = modules.find((m) => m.id === 'm9');
+    expect(m9).toBeTruthy();
+    expect(questionById['m9l1q1']).toBeTruthy(); // intro-les
+    expect(questionById['m9lb1q01']).toBeTruthy(); // via bank9 toegevoegd
   });
 
   it('buildBossSession trekt een begrensde, objectieve subset', () => {
