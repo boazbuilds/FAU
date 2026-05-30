@@ -101,16 +101,8 @@
           },
           {
             "id": "m0lb1q05",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "prompt": "De omzet rond de balansdatum loopt vooral risico op de bewering ___ (de juiste periodetoerekening).",
-            "answer": "afgrenzing",
-            "accept": [
-              "afgrenzing",
-              "cut-off",
-              "cutoff",
-              "de afgrenzing",
-              "afgrenzing (cut-off)"
-            ],
             "explanation": "Periodetoerekening van transacties = afgrenzing (cut-off), een transactiebewering. Te vroeg geboekte omzet raakt ook 'voorkomen'.",
             "difficulty": 2,
             "tags": [
@@ -119,7 +111,14 @@
               "omzet"
             ],
             "scoreChance": 60,
-            "scoreChanceLabel": "midden"
+            "scoreChanceLabel": "midden",
+            "options": [
+              "volledigheid",
+              "bestaan",
+              "afgrenzing (cut-off)",
+              "waardering"
+            ],
+            "correct": 2
           },
           {
             "id": "m0lb1q06",
@@ -205,14 +204,8 @@
           },
           {
             "id": "m0lb1q09",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "prompt": "Het VGBA-beginsel dat eist dat de accountant zich onthoudt van handelen dat het accountantsberoep in diskrediet brengt, heet ___.",
-            "answer": "professioneel gedrag",
-            "accept": [
-              "professioneel gedrag",
-              "professioneel-gedrag",
-              "het professioneel gedrag"
-            ],
             "explanation": "Professioneel gedrag: handelen in lijn met wet- en regelgeving en niets doen wat het beroep in diskrediet brengt.",
             "difficulty": 1,
             "tags": [
@@ -220,7 +213,14 @@
               "professioneel gedrag"
             ],
             "scoreChance": 60,
-            "scoreChanceLabel": "midden"
+            "scoreChanceLabel": "midden",
+            "options": [
+              "integriteit",
+              "objectiviteit",
+              "professioneel gedrag",
+              "geheimhouding"
+            ],
+            "correct": 2
           },
           {
             "id": "m0lb1q10",
@@ -422,14 +422,8 @@
           },
           {
             "id": "m0lb2q05",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "prompt": "Geen enkele assurance-opdracht geeft 100% zekerheid; zelfs een controle geeft slechts een ___ mate van zekerheid.",
-            "answer": "redelijke",
-            "accept": [
-              "redelijke",
-              "redelijk",
-              "redelijke mate"
-            ],
             "explanation": "Een controle geeft een redelijke (niet absolute) mate van zekerheid. Absolute zekerheid is onhaalbaar door de inherente beperkingen van een controle.",
             "difficulty": 1,
             "tags": [
@@ -438,7 +432,14 @@
               "St.700"
             ],
             "scoreChance": 65,
-            "scoreChanceLabel": "midden"
+            "scoreChanceLabel": "midden",
+            "options": [
+              "beperkte",
+              "redelijke",
+              "absolute",
+              "volledige"
+            ],
+            "correct": 1
           },
           {
             "id": "m0lb2q06",
@@ -463,18 +464,8 @@
           },
           {
             "id": "m0lb2q07",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "prompt": "In het conceptueel raamwerk geldt: als geen enkele maatregel de bedreiging tot een aanvaardbaar niveau terugbrengt, dan moet de accountant de opdracht ___.",
-            "answer": "weigeren of beeindigen",
-            "accept": [
-              "weigeren of beeindigen",
-              "beeindigen",
-              "weigeren",
-              "niet aanvaarden of beeindigen",
-              "teruggeven",
-              "weigeren/beeindigen",
-              "weigeren of teruggeven"
-            ],
             "explanation": "Kan een bedreiging niet met waarborgen tot een aanvaardbaar niveau worden teruggebracht, dan wordt de opdracht geweigerd of beeindigd (uiterste maatregel).",
             "difficulty": 2,
             "tags": [
@@ -482,7 +473,14 @@
               "maatregel"
             ],
             "scoreChance": 55,
-            "scoreChanceLabel": "midden"
+            "scoreChanceLabel": "midden",
+            "options": [
+              "zonder meer aanvaarden",
+              "aan een collega overdragen",
+              "tegen een hoger honorarium aannemen",
+              "weigeren of beëindigen"
+            ],
+            "correct": 3
           },
           {
             "id": "m0lb2q08",

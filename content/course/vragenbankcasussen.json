@@ -18,11 +18,20 @@
             "type": "multiple_choice",
             "context": "Great Choice (VJ21): accountantsorganisatie Duurzaam moet assurance verschaffen bij passages uit het duurzaamheidsverslag (aantal magic boxen, klantwaardering, vervangen milieuschadelijke materialen).",
             "prompt": "Welke Standaard is hierop van toepassing?",
-            "options": ["Standaard 3000A", "Standaard 3810N", "Standaard 3400", "Standaard 2400"],
+            "options": [
+              "Standaard 3000A",
+              "Standaard 3810N",
+              "Standaard 3400",
+              "Standaard 2400"
+            ],
             "correct": 1,
             "explanation": "Assurance bij duurzaamheidsinformatie -> Standaard 3810N (kan zowel redelijke als beperkte zekerheid betreffen). 3000A is de algemene assurance-kapstok; voor duurzaamheid is 3810N de specifieke Standaard.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.3810N", "duurzaamheid"]
+            "tags": [
+              "opdrachtsoorten",
+              "St.3810N",
+              "duurzaamheid"
+            ]
           },
           {
             "id": "m1l2q2",
@@ -38,18 +47,30 @@
             "correct": 0,
             "explanation": "Due diligence / transactiegerelateerde adviesdienst -> Standaard 5500N, geen assurance. Let op: objectiviteit (VGBA art. 11) blijft gelden, ook al vertegenwoordig je het bijzondere belang van de cliënt (5500N.13).",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.5500N"]
+            "tags": [
+              "opdrachtsoorten",
+              "St.5500N"
+            ]
           },
           {
             "id": "m1l2q3",
             "type": "multiple_choice",
             "context": "Tankprof (VJ20): assurance bij de financiële eindafrekening van een DKTI-subsidie (waterstofinstallatie), met een controleprotocol.",
             "prompt": "Welke Standaard is leidend (naast het controleprotocol)?",
-            "options": ["Standaard 2400", "Standaard 800 (evt. 805)", "Standaard 3400", "Standaard 4400N"],
+            "options": [
+              "Standaard 2400",
+              "Standaard 800 (evt. 805)",
+              "Standaard 3400",
+              "Standaard 4400N"
+            ],
             "correct": 1,
             "explanation": "Controle met een bijzonder doel (subsidie, specifiek stelsel/controleprotocol) -> Standaard 800; bij één overzicht/element kan 805. Het controleprotocol bepaalt mede de (vaak lagere) materialiteit.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.800", "subsidie"]
+            "tags": [
+              "opdrachtsoorten",
+              "St.800",
+              "subsidie"
+            ]
           },
           {
             "id": "m1l2q4",
@@ -65,45 +86,84 @@
             "correct": 1,
             "explanation": "Het management ondersteunen bij opstellen/presenteren zonder zekerheid -> samenstellen, Standaard 4410 (hier met NBA-Handreiking 1136 voor de NIWO-vermogensopstelling).",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.4410"]
+            "tags": [
+              "opdrachtsoorten",
+              "St.4410"
+            ]
           },
           {
             "id": "m1l2q5",
             "type": "multiple_choice",
             "context": "De Groot transport: voor een TLN-hercertificering voert de accountant alleen vooraf afgesproken aansluitingen op de loongegevens uit en rapporteert de feitelijke bevindingen, zonder oordeel.",
             "prompt": "Welke Standaard?",
-            "options": ["Standaard 4410", "Standaard 4400N", "Standaard 2400", "Standaard 3000A"],
+            "options": [
+              "Standaard 4410",
+              "Standaard 4400N",
+              "Standaard 2400",
+              "Standaard 3000A"
+            ],
             "correct": 1,
             "explanation": "Vooraf overeengekomen specifieke werkzaamheden + rapport van feitelijke bevindingen, geen oordeel/zekerheid -> Standaard 4400N. Vermijd assurance-termen.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.4400N"]
+            "tags": [
+              "opdrachtsoorten",
+              "St.4400N"
+            ]
           },
           {
             "id": "m1l2q6",
             "type": "multiple_choice",
             "context": "De Groot / Mondzorg: een meerjarenprognose (begroting) waarbij de accountant beperkte zekerheid geeft.",
             "prompt": "Welke Standaard?",
-            "options": ["Standaard 3000A", "Standaard 3400", "Standaard 2400", "Standaard 5500N"],
+            "options": [
+              "Standaard 3000A",
+              "Standaard 3400",
+              "Standaard 2400",
+              "Standaard 5500N"
+            ],
             "correct": 1,
             "explanation": "Toekomstgerichte financiële informatie -> Standaard 3400. Je beoordeelt totstandkoming én inhoud; door het toekomstkarakter is er inherente onzekerheid.",
             "difficulty": 1,
-            "tags": ["opdrachtsoorten", "St.3400"]
+            "tags": [
+              "opdrachtsoorten",
+              "St.3400"
+            ]
           },
           {
             "id": "m1l2q7",
             "type": "matching",
             "prompt": "Koppel elke casus-opdracht aan de juiste Standaard.",
             "pairs": [
-              {"left": "Assurance bij duurzaamheidsverslag (Great Choice)", "right": "3810N"},
-              {"left": "Due diligence voor een koper (Great Choice/Mondzorg)", "right": "5500N"},
-              {"left": "Subsidie-eindafrekening (Tankprof)", "right": "800"},
-              {"left": "NIWO-vermogensopstelling samenstellen (De Groot)", "right": "4410"},
-              {"left": "Meerjarenprognose, beperkte zekerheid", "right": "3400"},
-              {"left": "TLN-loongegevens, feitelijke bevindingen", "right": "4400N"}
+              {
+                "left": "Assurance bij duurzaamheidsverslag (Great Choice)",
+                "right": "3810N"
+              },
+              {
+                "left": "Due diligence voor een koper (Great Choice/Mondzorg)",
+                "right": "5500N"
+              },
+              {
+                "left": "Subsidie-eindafrekening (Tankprof)",
+                "right": "800"
+              },
+              {
+                "left": "NIWO-vermogensopstelling samenstellen (De Groot)",
+                "right": "4410"
+              },
+              {
+                "left": "Meerjarenprognose, beperkte zekerheid",
+                "right": "3400"
+              },
+              {
+                "left": "TLN-loongegevens, feitelijke bevindingen",
+                "right": "4400N"
+              }
             ],
             "explanation": "De instellingstoets test juist deze waaier. Reflex: het doel + het zekerheidsniveau bepalen de Standaard.",
             "difficulty": 3,
-            "tags": ["opdrachtsoorten"]
+            "tags": [
+              "opdrachtsoorten"
+            ]
           }
         ]
       }
@@ -127,7 +187,11 @@
             "correct": 1,
             "explanation": "VGBA art. 15a: bij overname pleeg je collegiaal overleg met de voorgaande accountant; zo komen signalen over integriteit/conflicten boven tafel.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "VGBA", "art.15a"]
+            "tags": [
+              "aanvaarding",
+              "VGBA",
+              "art.15a"
+            ]
           },
           {
             "id": "m2l3q2",
@@ -143,7 +207,10 @@
             "correct": 1,
             "explanation": "Minder historische basis en hogere openingsrisico's -> reden voor consultatie/OKB en heldere opdrachtvoorwaarden.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "St.2400"]
+            "tags": [
+              "aanvaarding",
+              "St.2400"
+            ]
           },
           {
             "id": "m2l3q3",
@@ -159,7 +226,11 @@
             "correct": 1,
             "explanation": "Wwft-cliëntenonderzoek: UBO + risicoprofiel + doel/aard relatie + identiteit/bevoegdheid vertegenwoordiger. Verscherpt bij een hoog risico.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "Wwft", "UBO"]
+            "tags": [
+              "aanvaarding",
+              "Wwft",
+              "UBO"
+            ]
           },
           {
             "id": "m2l3q4",
@@ -175,7 +246,12 @@
             "correct": 1,
             "explanation": "Deelnemen aan de besluitvorming/onderhandeling náást een assuranceopdracht = ontoelaatbare samenloop (objectiviteit/zelftoetsing). Oplossing: beoordeling teruggeven of een gescheiden CF-praktijk inschakelen.",
             "difficulty": 3,
-            "tags": ["aanvaarding", "ViO", "samenloop", "St.5500N"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "samenloop",
+              "St.5500N"
+            ]
           },
           {
             "id": "m2l3q5",
@@ -191,7 +267,11 @@
             "correct": 1,
             "explanation": "ViO art. 38: een voormalig assurance-teamlid dat bestuurder wordt bij de klant blokkeert de controle ~1 jaar. Is die termijn verstreken, dan kan continueren mits extra waarborgen (nieuwe opdrachtpartner/OKB; vgl. art. 44 persoonlijke relatie).",
             "difficulty": 3,
-            "tags": ["aanvaarding", "ViO", "art.38"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "art.38"
+            ]
           },
           {
             "id": "m2l3q6",
@@ -207,7 +287,11 @@
             "correct": 1,
             "explanation": "Langdurige betrokkenheid -> vertrouwdheids-/eigenbelangbedreiging (ViO art. 28). Maatregel: beoordelen + vastleggen, eventueel partnerroulatie of OKB.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "ViO", "art.28"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "art.28"
+            ]
           },
           {
             "id": "m2l3q7",
@@ -223,7 +307,11 @@
             "correct": 0,
             "explanation": "Assurance vereist: (1) drie partijen, (2) een geschikt object, (3) geschikte criteria, (4) voldoende en geschikte informatie, (5) een schriftelijk rapport met conclusie. Ontbreekt er één, dan is het geen assurance-opdracht.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "Stramien", "assurance"]
+            "tags": [
+              "aanvaarding",
+              "Stramien",
+              "assurance"
+            ]
           }
         ]
       }
@@ -247,7 +335,10 @@
             "correct": 0,
             "explanation": "Inherente risicofactoren (St. 315): complexiteit, subjectiviteit, verandering, onzekerheid en tendentie. Bij Sunpanels stuwt de EBIT-bonus de tendentie -> frauderisico op de omzet.",
             "difficulty": 3,
-            "tags": ["risico", "St.315"]
+            "tags": [
+              "risico",
+              "St.315"
+            ]
           },
           {
             "id": "m3l3q2",
@@ -263,7 +354,11 @@
             "correct": 1,
             "explanation": "Bonus op EBIT + druk = motief voor opwaartse sturing -> significant frauderisico op omzet (voorkomen) en management override. Bij een significant risico altijd gegevensgericht werk.",
             "difficulty": 2,
-            "tags": ["risico", "St.240", "fraude"]
+            "tags": [
+              "risico",
+              "St.240",
+              "fraude"
+            ]
           },
           {
             "id": "m3l3q3",
@@ -279,7 +374,12 @@
             "correct": 1,
             "explanation": "OHP/POC is een significant schattingsrisico: challenge de POC-onderbouwing per project, betrek het annulerings-/terugbetaalrisico, en doe een retrospectieve toets (St. 540).",
             "difficulty": 3,
-            "tags": ["risico", "St.540", "St.330", "werkzaamheden"]
+            "tags": [
+              "risico",
+              "St.540",
+              "St.330",
+              "werkzaamheden"
+            ]
           },
           {
             "id": "m3l3q4",
@@ -295,7 +395,12 @@
             "correct": 1,
             "explanation": "Tendentie bij subsidies: kosten/investeringen te hoog of ten onrechte als subsidiabel voorstellen, of dubbel declareren. Daarom is de protocol-materialiteit vaak laag en werk je sterk gegevensgericht/detail.",
             "difficulty": 2,
-            "tags": ["risico", "subsidie", "St.800", "tendentie"]
+            "tags": [
+              "risico",
+              "subsidie",
+              "St.800",
+              "tendentie"
+            ]
           },
           {
             "id": "m3l3q5",
@@ -311,7 +416,11 @@
             "correct": 1,
             "explanation": "St. 3400: beoordeel totstandkoming én inhoud, doe een gevoeligheidsanalyse en let op de tendentie (opbrengsten te hoog, kosten te laag om financiering/vergunning te halen). Je geeft beperkte zekerheid.",
             "difficulty": 2,
-            "tags": ["risico", "St.3400", "prognose"]
+            "tags": [
+              "risico",
+              "St.3400",
+              "prognose"
+            ]
           },
           {
             "id": "m3l3q6",
@@ -327,7 +436,11 @@
             "correct": 2,
             "explanation": "Bij een beoordeling stel je wél materialiteit vast, maar GEEN uitvoeringsmaterialiteit en geen gegevensgerichte 520-cijferanalyses met drempelwaarden. Werkzaamheden = inlichtingen + cijferanalyse, passend bij beperkte zekerheid.",
             "difficulty": 3,
-            "tags": ["risico", "St.2400", "materialiteit"]
+            "tags": [
+              "risico",
+              "St.2400",
+              "materialiteit"
+            ]
           },
           {
             "id": "m3l3q7",
@@ -343,7 +456,11 @@
             "correct": 1,
             "explanation": "Redelijke zekerheid = systeemgericht (werking IB) + uitgebreid gegevensgericht. Beperkte zekerheid = geen werkingstoetsing, alleen opzet/bestaan + inlichtingen + cijferanalyse + afstemmen.",
             "difficulty": 3,
-            "tags": ["risico", "St.3810N", "zekerheidsniveau"]
+            "tags": [
+              "risico",
+              "St.3810N",
+              "zekerheidsniveau"
+            ]
           }
         ]
       }
@@ -367,7 +484,11 @@
             "correct": 2,
             "explanation": "Een materiële afwijking op een sleutelonderwerp die het beeld als geheel raakt = van diepgaande invloed -> afkeurend. (Beperkt tot een ondergeschikte post zou tot een beperking leiden.)",
             "difficulty": 3,
-            "tags": ["verklaring", "St.3810N", "diepgaand"]
+            "tags": [
+              "verklaring",
+              "St.3810N",
+              "diepgaand"
+            ]
           },
           {
             "id": "m4l2q2",
@@ -383,7 +504,10 @@
             "correct": 1,
             "explanation": "Je mag een opdracht niet downgraden om een negatieve conclusie te omzeilen (3810N.8). Breder: geen opdrachtwijziging zonder deugdelijke grond.",
             "difficulty": 2,
-            "tags": ["verklaring", "St.3810N"]
+            "tags": [
+              "verklaring",
+              "St.3810N"
+            ]
           },
           {
             "id": "m4l2q3",
@@ -399,7 +523,11 @@
             "correct": 1,
             "explanation": "Eerst de oorzaak achterhalen. Gecorrigeerde fout -> goedkeurend. Niet-gecorrigeerde, materiële (>drempel) fout -> afkeurend. Bij aanwijzing fraude: aanvullende werkzaamheden + evt. NOCLAR richting subsidieverstrekker.",
             "difficulty": 3,
-            "tags": ["verklaring", "St.800", "subsidie"]
+            "tags": [
+              "verklaring",
+              "St.800",
+              "subsidie"
+            ]
           },
           {
             "id": "m4l2q4",
@@ -415,17 +543,29 @@
             "correct": 1,
             "explanation": "Bij een gebleken materiële onjuistheid ná afgifte: fact-finding, correctie afdwingen, de gebruiker (RVO) informeren en zo nodig de machtiging tot gebruik van de verklaring intrekken. Let ook op de integriteit van het management (niet gemeld).",
             "difficulty": 3,
-            "tags": ["verklaring", "St.800", "integriteit"]
+            "tags": [
+              "verklaring",
+              "St.800",
+              "integriteit"
+            ]
           },
           {
             "id": "m4l2q5",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "prompt": "Een afwijking die niet beperkt is tot één post maar het beeld van de jaarrekening/het verslag als geheel raakt, noem je van ___ invloed.",
-            "answer": "diepgaande",
-            "accept": ["diepgaande", "diepgaand", "pervasive"],
             "explanation": "Van diepgaande invloed (pervasive) -> afkeurend (bij een afwijking) of onthouding (bij een beperking in de controle). Anders -> beperking.",
             "difficulty": 2,
-            "tags": ["verklaring", "St.705"]
+            "tags": [
+              "verklaring",
+              "St.705"
+            ],
+            "options": [
+              "materiële",
+              "diepgaande",
+              "beperkte",
+              "incidentele"
+            ],
+            "correct": 1
           }
         ]
       }
@@ -449,7 +589,10 @@
             "correct": 1,
             "explanation": "NV NOCLAR-stappenplan: eerst feiten verifiëren en bespreken met de leiding + aandringen op herstel. Pas daarna eventueel externe melding. Eerst aankondigen dat je gaat melden zou tipping-off-achtig zijn.",
             "difficulty": 2,
-            "tags": ["NOCLAR", "fraude"]
+            "tags": [
+              "NOCLAR",
+              "fraude"
+            ]
           },
           {
             "id": "m5l3q2",
@@ -465,7 +608,11 @@
             "correct": 1,
             "explanation": "VGBA art. 7: bij (dreigend) niet-integer handelen neem je maatregelen om het te (laten) beëindigen; blijft herstel uit -> relatie beëindigen en eventueel melden.",
             "difficulty": 2,
-            "tags": ["NOCLAR", "VGBA", "art.7"]
+            "tags": [
+              "NOCLAR",
+              "VGBA",
+              "art.7"
+            ]
           },
           {
             "id": "m5l3q3",
@@ -481,7 +628,10 @@
             "correct": 1,
             "explanation": "Accijns valt onder de Douane (Meldpunt Accijns). FIU-Nederland is voor ongebruikelijke transacties onder de Wwft - een ander spoor.",
             "difficulty": 2,
-            "tags": ["NOCLAR", "accijns"]
+            "tags": [
+              "NOCLAR",
+              "accijns"
+            ]
           },
           {
             "id": "m5l3q4",
@@ -497,7 +647,11 @@
             "correct": 1,
             "explanation": "Branchebrede overtredingen zijn een rode vlag voor de integriteit van de cliënt en een NOCLAR-aanleiding. Het beïnvloedt de acceptatie (NVKS art. 5) en je alertheid op niet-naleving (St. 250).",
             "difficulty": 2,
-            "tags": ["NOCLAR", "integriteit", "NVKS"]
+            "tags": [
+              "NOCLAR",
+              "integriteit",
+              "NVKS"
+            ]
           },
           {
             "id": "m5l3q5",
@@ -513,7 +667,11 @@
             "correct": 1,
             "explanation": "Bonus + tone-at-the-top -> risico op management override en opwaartse winststuring. St. 240 vereist hierop altijd specifieke werkzaamheden (o.a. de journaalpostentoets).",
             "difficulty": 2,
-            "tags": ["fraude", "St.240", "management-override"]
+            "tags": [
+              "fraude",
+              "St.240",
+              "management-override"
+            ]
           },
           {
             "id": "m5l3q6",
@@ -529,7 +687,10 @@
             "correct": 1,
             "explanation": "Bij subsidiefraude kan NV NOCLAR + het controleprotocol vergen dat je de subsidieverstrekker informeert. Een Wwft-FIU-melding is hier niet automatisch aan de orde; kies het juiste spoor.",
             "difficulty": 3,
-            "tags": ["NOCLAR", "subsidie"]
+            "tags": [
+              "NOCLAR",
+              "subsidie"
+            ]
           }
         ]
       }
@@ -561,7 +722,12 @@
               "correct": 1,
               "explanation": "Bij een niet-oob is samenloop niet per se verboden, maar je toetst via het ViO-raamwerk (art. 18/19, handreiking 1131): niet meebeslissen, geen materiële invloed op het object, geen zelftoetsing/subjectiviteit, en pas maatregelen toe (gescheiden teams, OKB). Bij subjectiviteit/niet-routinematigheid: niet toegestaan.",
               "difficulty": 3,
-              "tags": ["ViO", "samenloop", "art.18", "art.19"]
+              "tags": [
+                "ViO",
+                "samenloop",
+                "art.18",
+                "art.19"
+              ]
             },
             {
               "id": "m6l1q2",
@@ -576,21 +742,38 @@
               "correct": 1,
               "explanation": "ViO art. 5: zou een objectieve, redelijke en geïnformeerde derde concluderen dat de onafhankelijkheid is aangetast? Die externe blik is de maatstaf.",
               "difficulty": 2,
-              "tags": ["ViO", "art.5"]
+              "tags": [
+                "ViO",
+                "art.5"
+              ]
             },
             {
               "id": "m6l1q3",
               "type": "matching",
               "prompt": "Koppel de ViO-situatie aan het juiste artikel / de juiste maatregel.",
               "pairs": [
-                {"left": "Ex-OKB'er/teamlid wordt bestuurder bij de klant", "right": "Cooling-off, ViO art. 38 (binnen ~1 jaar geen controle)"},
-                {"left": "Accountant al 10 jaar dezelfde klant", "right": "Vertrouwdheid, ViO art. 28 (beoordelen/roulatie)"},
-                {"left": "Persoonlijke relatie opdrachtpartner-CFO", "right": "ViO art. 44 (extra maatregelen, bv. andere partner/OKB)"},
-                {"left": "Advies náást assurance", "right": "Samenloop, ViO art. 18/19"}
+                {
+                  "left": "Ex-OKB'er/teamlid wordt bestuurder bij de klant",
+                  "right": "Cooling-off, ViO art. 38 (binnen ~1 jaar geen controle)"
+                },
+                {
+                  "left": "Accountant al 10 jaar dezelfde klant",
+                  "right": "Vertrouwdheid, ViO art. 28 (beoordelen/roulatie)"
+                },
+                {
+                  "left": "Persoonlijke relatie opdrachtpartner-CFO",
+                  "right": "ViO art. 44 (extra maatregelen, bv. andere partner/OKB)"
+                },
+                {
+                  "left": "Advies náást assurance",
+                  "right": "Samenloop, ViO art. 18/19"
+                }
               ],
               "explanation": "Ken de kapstokartikelen: art. 28 (vertrouwdheid/duur), art. 38 (cooling-off in dienst klant), art. 44 (persoonlijke relaties), art. 18/19 (samenloop).",
               "difficulty": 3,
-              "tags": ["ViO"]
+              "tags": [
+                "ViO"
+              ]
             },
             {
               "id": "m6l1q4",
@@ -606,7 +789,11 @@
               "correct": 1,
               "explanation": "Passende waarborgen: partnerroulatie en/of een OKB op het oordeel. Zo wordt het vertrouwdheids-/eigenbelangrisico tot een aanvaardbaar niveau teruggebracht.",
               "difficulty": 2,
-              "tags": ["ViO", "OKB", "maatregel"]
+              "tags": [
+                "ViO",
+                "OKB",
+                "maatregel"
+              ]
             }
           ]
         },
@@ -628,7 +815,11 @@
               "correct": 1,
               "explanation": "De Accountantskamer berecht individuele accountants. Wil je het kantoor raken, formuleer de klacht dan tegen de (kwaliteits)beleidsbepaler; dan komt het kwaliteitsstelsel (NVKS art. 6) in beeld.",
               "difficulty": 3,
-              "tags": ["tuchtrecht", "Wta", "Accountantskamer"]
+              "tags": [
+                "tuchtrecht",
+                "Wta",
+                "Accountantskamer"
+              ]
             },
             {
               "id": "m6l2q2",
@@ -644,7 +835,11 @@
               "correct": 1,
               "explanation": "Bij 5500N geldt ViO niet, maar objectiviteit (VGBA art. 11) blijft onverkort; plus vakbekwaamheid als hij buiten zijn expertise (juridisch/fiscaal) opereerde. Klacht via de Accountantskamer.",
               "difficulty": 3,
-              "tags": ["tuchtrecht", "VGBA", "St.5500N"]
+              "tags": [
+                "tuchtrecht",
+                "VGBA",
+                "St.5500N"
+              ]
             },
             {
               "id": "m6l2q3",
@@ -659,7 +854,11 @@
               "correct": 1,
               "explanation": "NVKS: je mag alleen aanvaarden/uitvoeren bij (a) een integere cliënt (art. 5) en (b) een werkend kwaliteitsstelsel op kantoor (art. 6).",
               "difficulty": 1,
-              "tags": ["NVKS", "art.5", "art.6"]
+              "tags": [
+                "NVKS",
+                "art.5",
+                "art.6"
+              ]
             }
           ]
         }

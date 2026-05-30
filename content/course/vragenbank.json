@@ -36,7 +36,10 @@
               "correct": 1,
               "explanation": "Activa en opbrengsten kunnen te HOOG worden voorgesteld -> reflex: bestaan en waardering. Volledigheid is juist het risico bij verplichtingen en kosten.",
               "difficulty": 1,
-              "tags": ["beweringen", "St.315"]
+              "tags": [
+                "beweringen",
+                "St.315"
+              ]
             },
             {
               "id": "m0l1q2",
@@ -51,7 +54,9 @@
               "correct": 0,
               "explanation": "Verplichtingen en kosten kunnen te LAAG of onvolledig worden voorgesteld -> reflex: volledigheid (is alles wat erin hoort ook opgenomen?).",
               "difficulty": 1,
-              "tags": ["beweringen"]
+              "tags": [
+                "beweringen"
+              ]
             },
             {
               "id": "m0l1q3",
@@ -66,31 +71,55 @@
               "correct": 1,
               "explanation": "Transacties: voorkomen, volledigheid, nauwkeurigheid, afgrenzing, classificatie, presentatie. Saldi: bestaan, rechten en verplichtingen, volledigheid, waardering, classificatie, presentatie.",
               "difficulty": 2,
-              "tags": ["beweringen"]
+              "tags": [
+                "beweringen"
+              ]
             },
             {
               "id": "m0l1q4",
-              "type": "fill_blank",
+              "type": "multiple_choice",
               "prompt": "Bij schattingsposten (zoals een voorziening) is de meest kritische bewering de ___.",
-              "answer": "waardering",
-              "accept": ["waardering", "de waardering"],
               "explanation": "Schattingen draaien om de juiste hoogte -> waardering. Denk aan Standaard 540 (schattingen) en de retrospectieve toets.",
               "difficulty": 1,
-              "tags": ["beweringen", "St.540"]
+              "tags": [
+                "beweringen",
+                "St.540"
+              ],
+              "options": [
+                "Bestaan",
+                "Waardering",
+                "Volledigheid",
+                "Rechten en verplichtingen"
+              ],
+              "correct": 1
             },
             {
               "id": "m0l1q5",
               "type": "matching",
               "prompt": "Koppel elke post aan de bewering die het meeste risico loopt.",
               "pairs": [
-                {"left": "Voorraad (actief)", "right": "Bestaan en waardering"},
-                {"left": "Crediteuren", "right": "Volledigheid"},
-                {"left": "Voorziening reorganisatie", "right": "Waardering"},
-                {"left": "Omzet rond jaareinde", "right": "Voorkomen en afgrenzing"}
+                {
+                  "left": "Voorraad (actief)",
+                  "right": "Bestaan en waardering"
+                },
+                {
+                  "left": "Crediteuren",
+                  "right": "Volledigheid"
+                },
+                {
+                  "left": "Voorziening reorganisatie",
+                  "right": "Waardering"
+                },
+                {
+                  "left": "Omzet rond jaareinde",
+                  "right": "Voorkomen en afgrenzing"
+                }
               ],
               "explanation": "Activa/opbrengsten -> bestaan/voorkomen; verplichtingen/kosten -> volledigheid; schattingen -> waardering; transacties rond balansdatum -> afgrenzing (cut-off).",
               "difficulty": 2,
-              "tags": ["beweringen"]
+              "tags": [
+                "beweringen"
+              ]
             }
           ]
         },
@@ -102,11 +131,18 @@
               "id": "m0l2q1",
               "type": "multiple_choice",
               "prompt": "Hoeveel fundamentele beginselen kent de VGBA?",
-              "options": ["3", "4", "5", "6"],
+              "options": [
+                "3",
+                "4",
+                "5",
+                "6"
+              ],
               "correct": 2,
               "explanation": "Vijf: integriteit, objectiviteit, vakbekwaamheid en zorgvuldigheid, geheimhouding, en professioneel gedrag.",
               "difficulty": 1,
-              "tags": ["VGBA"]
+              "tags": [
+                "VGBA"
+              ]
             },
             {
               "id": "m0l2q2",
@@ -121,7 +157,9 @@
               "correct": 1,
               "explanation": "Je beoordeelt je eigen eerdere werk/oordeel -> zelftoetsing (self-review).",
               "difficulty": 1,
-              "tags": ["ViO"]
+              "tags": [
+                "ViO"
+              ]
             },
             {
               "id": "m0l2q3",
@@ -136,7 +174,9 @@
               "correct": 0,
               "explanation": "Langdurige of persoonlijke band -> vertrouwdheid (familiarity). Mogelijke maatregel: roulatie van de (eind)verantwoordelijke.",
               "difficulty": 1,
-              "tags": ["ViO"]
+              "tags": [
+                "ViO"
+              ]
             },
             {
               "id": "m0l2q4",
@@ -151,22 +191,42 @@
               "correct": 1,
               "explanation": "Signaleren -> beoordelen (is de bedreiging van belang?) -> waarborg/maatregel treffen -> opnieuw beoordelen. Komt het niet op een aanvaardbaar niveau, dan weiger/beeindig je de opdracht.",
               "difficulty": 2,
-              "tags": ["VGBA", "ViO"]
+              "tags": [
+                "VGBA",
+                "ViO"
+              ]
             },
             {
               "id": "m0l2q5",
               "type": "matching",
               "prompt": "Koppel de situatie aan de juiste ViO-bedreiging.",
               "pairs": [
-                {"left": "Accountant houdt aandelen in de cliënt", "right": "Eigenbelang"},
-                {"left": "Eigen advieswerk controleren", "right": "Zelftoetsing"},
-                {"left": "Optreden als pleitbezorger van de cliënt", "right": "Belangenbehartiging"},
-                {"left": "Cliënt dreigt over te stappen bij kritiek", "right": "Intimidatie"},
-                {"left": "Jarenlange hechte relatie", "right": "Vertrouwdheid"}
+                {
+                  "left": "Accountant houdt aandelen in de cliënt",
+                  "right": "Eigenbelang"
+                },
+                {
+                  "left": "Eigen advieswerk controleren",
+                  "right": "Zelftoetsing"
+                },
+                {
+                  "left": "Optreden als pleitbezorger van de cliënt",
+                  "right": "Belangenbehartiging"
+                },
+                {
+                  "left": "Cliënt dreigt over te stappen bij kritiek",
+                  "right": "Intimidatie"
+                },
+                {
+                  "left": "Jarenlange hechte relatie",
+                  "right": "Vertrouwdheid"
+                }
               ],
               "explanation": "De vijf bedreigingen van de onafhankelijkheid: eigenbelang, zelftoetsing, belangenbehartiging, vertrouwdheid en intimidatie.",
               "difficulty": 2,
-              "tags": ["ViO"]
+              "tags": [
+                "ViO"
+              ]
             }
           ]
         }
@@ -188,36 +248,72 @@
               "type": "matching",
               "prompt": "Koppel elke opdracht aan de juiste Standaard.",
               "pairs": [
-                {"left": "Beoordeling jaarrekening", "right": "Standaard 2400"},
-                {"left": "Controle subsidiedeclaratie", "right": "Standaard 800"},
-                {"left": "Overeengekomen specifieke werkzaamheden (AUP)", "right": "Standaard 4400N"},
-                {"left": "Samenstellen jaarrekening", "right": "Standaard 4410"},
-                {"left": "Prognose / toekomstgerichte info", "right": "Standaard 3400"},
-                {"left": "Due diligence / transactiedienst", "right": "Standaard 5500N"}
+                {
+                  "left": "Beoordeling jaarrekening",
+                  "right": "Standaard 2400"
+                },
+                {
+                  "left": "Controle subsidiedeclaratie",
+                  "right": "Standaard 800"
+                },
+                {
+                  "left": "Overeengekomen specifieke werkzaamheden (AUP)",
+                  "right": "Standaard 4400N"
+                },
+                {
+                  "left": "Samenstellen jaarrekening",
+                  "right": "Standaard 4410"
+                },
+                {
+                  "left": "Prognose / toekomstgerichte info",
+                  "right": "Standaard 3400"
+                },
+                {
+                  "left": "Due diligence / transactiedienst",
+                  "right": "Standaard 5500N"
+                }
               ],
               "explanation": "Kern-map van de instellingstoets. Onthoud ook: assurance niet-historische info -> 3000A; serviceorganisatie -> ISAE 3402; persoonsgericht/forensisch -> NBA-Handreiking 1112 (geen COS).",
               "difficulty": 2,
-              "tags": ["opdrachtsoorten"]
+              "tags": [
+                "opdrachtsoorten"
+              ]
             },
             {
               "id": "m1l1q2",
               "type": "multiple_choice",
               "prompt": "De gemeente vraagt een accountantsproduct bij de eindafrekening van een subsidie. Welke Standaard?",
-              "options": ["2400", "800", "3000A", "4410"],
+              "options": [
+                "2400",
+                "800",
+                "3000A",
+                "4410"
+              ],
               "correct": 1,
               "explanation": "Controle met een bijzonder doel (een specifiek verslaggevingsstelsel zoals de subsidievoorwaarden) -> 800-serie. Eén overzicht/element -> 805; samenvatting -> 810.",
               "difficulty": 1,
-              "tags": ["opdrachtsoorten", "St.800"]
+              "tags": [
+                "opdrachtsoorten",
+                "St.800"
+              ]
             },
             {
               "id": "m1l1q3",
               "type": "multiple_choice",
               "prompt": "Een klant wil zekerheid bij alleen het omzetcijfer (één specifiek element). Welke Standaard?",
-              "options": ["800", "805", "810", "4400N"],
+              "options": [
+                "800",
+                "805",
+                "810",
+                "4400N"
+              ],
               "correct": 1,
               "explanation": "805 = controle van één financieel overzicht of één specifiek element/post. 810 = controle van een samenvatting van een jaarrekening.",
               "difficulty": 2,
-              "tags": ["opdrachtsoorten", "St.805"]
+              "tags": [
+                "opdrachtsoorten",
+                "St.805"
+              ]
             },
             {
               "id": "m1l1q4",
@@ -232,7 +328,10 @@
               "correct": 1,
               "explanation": "Samenstellen (4410) is géén assurance -> geen zekerheid; je ordent en presenteert informatie. Beoordeling = beperkte zekerheid; controle/assurance = redelijke zekerheid.",
               "difficulty": 2,
-              "tags": ["opdrachtsoorten", "St.4410"]
+              "tags": [
+                "opdrachtsoorten",
+                "St.4410"
+              ]
             },
             {
               "id": "m1l1q5",
@@ -247,7 +346,10 @@
               "correct": 2,
               "explanation": "Bij een AUP rapporteer je uitsluitend de feitelijke bevindingen van de afgesproken werkzaamheden; je geeft geen conclusie of zekerheid. De gebruiker trekt zelf zijn conclusies.",
               "difficulty": 2,
-              "tags": ["opdrachtsoorten", "St.4400N"]
+              "tags": [
+                "opdrachtsoorten",
+                "St.4400N"
+              ]
             },
             {
               "id": "m1l1q6",
@@ -262,27 +364,46 @@
               "correct": 2,
               "explanation": "Persoonsgericht onderzoek kent geen eigen COS-Standaard; leidend is NBA-Handreiking 1112 (persoonsgerichte onderzoeken).",
               "difficulty": 3,
-              "tags": ["opdrachtsoorten", "Handreiking1112"]
+              "tags": [
+                "opdrachtsoorten",
+                "Handreiking1112"
+              ]
             },
             {
               "id": "m1l1q7",
               "type": "multiple_choice",
               "prompt": "Een prognose/begroting (toekomstgerichte financiële informatie) onderzoek je onder...",
-              "options": ["3000A", "3400", "3402", "2400"],
+              "options": [
+                "3000A",
+                "3400",
+                "3402",
+                "2400"
+              ],
               "correct": 1,
               "explanation": "Toekomstgerichte financiële informatie -> Standaard 3400. Let op de inherente onzekerheid: je kunt geen zekerheid geven dat de prognose uitkomt, wel over de onderbouwing/veronderstellingen.",
               "difficulty": 2,
-              "tags": ["opdrachtsoorten", "St.3400"]
+              "tags": [
+                "opdrachtsoorten",
+                "St.3400"
+              ]
             },
             {
               "id": "m1l1q8",
-              "type": "fill_blank",
+              "type": "multiple_choice",
               "prompt": "Assurance bij NIET-historische (bijv. niet-financiële) informatie valt onder Standaard ___.",
-              "answer": "3000A",
-              "accept": ["3000A", "3000", "standaard 3000A"],
               "explanation": "3000A is de kapstok-standaard voor assurance-opdrachten anders dan controles/beoordelingen van historische financiële informatie (bijv. duurzaamheidsinformatie).",
               "difficulty": 2,
-              "tags": ["opdrachtsoorten", "St.3000A"]
+              "tags": [
+                "opdrachtsoorten",
+                "St.3000A"
+              ],
+              "options": [
+                "Standaard 3810N",
+                "Standaard 3000A",
+                "Standaard 4400N",
+                "Standaard 3400"
+              ],
+              "correct": 1
             }
           ]
         }
@@ -314,7 +435,10 @@
               "correct": 1,
               "explanation": "Het is een vervolg op de beoordeling 2023 -> continuering. Standaard 2400.38: ga na of de opdrachtvoorwaarden nog gelden en of nieuwe omstandigheden herziening vereisen.",
               "difficulty": 2,
-              "tags": ["aanvaarding", "St.2400"]
+              "tags": [
+                "aanvaarding",
+                "St.2400"
+              ]
             },
             {
               "id": "m2l1q2",
@@ -330,7 +454,9 @@
               "correct": 2,
               "explanation": "Oude en nieuwe omstandigheden cumuleren. Het niet-gemelde memo en de omzetdiscussie raken de integriteit van de cliënt en blijven dus meewegen, naast de nieuwe risico's.",
               "difficulty": 2,
-              "tags": ["aanvaarding"]
+              "tags": [
+                "aanvaarding"
+              ]
             },
             {
               "id": "m2l1q3",
@@ -346,7 +472,10 @@
               "correct": 1,
               "explanation": "49% is een minderheidsbelang -> geen formele wijziging van zeggenschap. De winstprikkel (KPI-rentekorting) is wel een tendentie-driver richting te hoge cijfers.",
               "difficulty": 3,
-              "tags": ["aanvaarding", "tendentie"]
+              "tags": [
+                "aanvaarding",
+                "tendentie"
+              ]
             },
             {
               "id": "m2l1q4",
@@ -359,10 +488,16 @@
                 "Vakbekwaamheid en zorgvuldigheid - je zou onvoldoende deskundig zijn",
                 "Geheimhouding - je dreigt vertrouwelijke informatie te lekken"
               ],
-              "correct": [0, 1],
+              "correct": [
+                0,
+                1
+              ],
               "explanation": "Twee assen: (a) is de cliënt integer? (integriteit) en (b) blijf ik zelf objectief? (objectiviteit via een eigenbelang-bedreiging). Vakbekwaamheid is hier geen issue; geheimhouding speelt niet.",
               "difficulty": 3,
-              "tags": ["aanvaarding", "VGBA"]
+              "tags": [
+                "aanvaarding",
+                "VGBA"
+              ]
             },
             {
               "id": "m2l1q5",
@@ -378,7 +513,10 @@
               "correct": 1,
               "explanation": "Eén assuranceopdracht -> geen samenloop. De onafhankelijkheid toets je wel: eigenbelang en vertrouwdheid door de langdurige relatie.",
               "difficulty": 3,
-              "tags": ["aanvaarding", "ViO"]
+              "tags": [
+                "aanvaarding",
+                "ViO"
+              ]
             },
             {
               "id": "m2l1q6",
@@ -394,7 +532,11 @@
               "correct": 2,
               "explanation": "Continuering is voorwaardelijk: voorwaarden herzien + waarborgen (OKB/consultatie) + fact-finding naar de integriteit. Lukt vaststelling niet of zijn waarborgen onvoldoende -> weigeren/beeindigen.",
               "difficulty": 3,
-              "tags": ["aanvaarding", "NVKS", "conclusie"]
+              "tags": [
+                "aanvaarding",
+                "NVKS",
+                "conclusie"
+              ]
             }
           ]
         },
@@ -415,7 +557,11 @@
               "correct": 0,
               "explanation": "Twee assen: (1) integriteit van de cliënt (NVKS art. 5) en (2) je eigen objectiviteit/onafhankelijkheid (VGBA/ViO). Beide moeten op orde zijn.",
               "difficulty": 1,
-              "tags": ["aanvaarding", "VGBA", "NVKS"]
+              "tags": [
+                "aanvaarding",
+                "VGBA",
+                "NVKS"
+              ]
             },
             {
               "id": "m2l2q2",
@@ -430,17 +576,29 @@
               "correct": 1,
               "explanation": "Bij verhoogd risico is een OKB (art. 13 NVKS) een passende waarborg: een onafhankelijke beoordeling van het oordeel vóór afgifte van de verklaring, eventueel aangevuld met consultatie.",
               "difficulty": 2,
-              "tags": ["aanvaarding", "NVKS", "OKB"]
+              "tags": [
+                "aanvaarding",
+                "NVKS",
+                "OKB"
+              ]
             },
             {
               "id": "m2l2q3",
-              "type": "fill_blank",
+              "type": "multiple_choice",
               "prompt": "Een opdracht mag je alleen aanvaarden/continueren bij een ___ cliënt (NVKS art. 5).",
-              "answer": "integere",
-              "accept": ["integere", "integer"],
               "explanation": "NVKS art. 5: alleen aanvaarden/continueren als de cliënt integer is. Twijfel je daaraan, dan eerst fact-finding; blijft de twijfel, dan weigeren.",
               "difficulty": 1,
-              "tags": ["aanvaarding", "NVKS"]
+              "tags": [
+                "aanvaarding",
+                "NVKS"
+              ],
+              "options": [
+                "winstgevende",
+                "grote",
+                "integere",
+                "nieuwe"
+              ],
+              "correct": 2
             }
           ]
         }
@@ -472,7 +630,10 @@
               "correct": 2,
               "explanation": "Tendentie = overwaardering van omzet/resultaat, gedreven door de prikkel om de KPI's te halen. De richting van de vertekening stuurt je hele risicoanalyse.",
               "difficulty": 2,
-              "tags": ["risico", "tendentie"]
+              "tags": [
+                "risico",
+                "tendentie"
+              ]
             },
             {
               "id": "m3l1q2",
@@ -488,7 +649,10 @@
               "correct": 2,
               "explanation": "Een actief dat te hoog kan staan -> bestaan (bestaat de vordering wel?) en waardering (is die niet te hoog?).",
               "difficulty": 2,
-              "tags": ["risico", "beweringen"]
+              "tags": [
+                "risico",
+                "beweringen"
+              ]
             },
             {
               "id": "m3l1q3",
@@ -504,7 +668,11 @@
               "correct": 1,
               "explanation": "Schattingspost + management bias + prikkel -> significant risico met frauderisico-component. Bij een significant risico zijn altijd gegevensgerichte werkzaamheden vereist.",
               "difficulty": 3,
-              "tags": ["risico", "St.315", "St.240"]
+              "tags": [
+                "risico",
+                "St.315",
+                "St.240"
+              ]
             },
             {
               "id": "m3l1q4",
@@ -520,7 +688,11 @@
               "correct": 3,
               "explanation": "Het zekerheidsniveau van de opdracht bepaalt de diepgang. Beoordeling = cijferanalyse + inlichtingen; verzwaren zodra iets wijst op een mogelijke materiële afwijking.",
               "difficulty": 3,
-              "tags": ["risico", "St.2400", "opdrachtsoorten"]
+              "tags": [
+                "risico",
+                "St.2400",
+                "opdrachtsoorten"
+              ]
             },
             {
               "id": "m3l1q5",
@@ -536,7 +708,11 @@
               "correct": 2,
               "explanation": "Bij schattingen: challenge de assumpties en doe een retrospectieve toets (St. 540). Leun niet op enkel een aansluiting of een mededeling van het management.",
               "difficulty": 3,
-              "tags": ["risico", "St.540", "werkzaamheden"]
+              "tags": [
+                "risico",
+                "St.540",
+                "werkzaamheden"
+              ]
             },
             {
               "id": "m3l1q6",
@@ -552,7 +728,11 @@
               "correct": 1,
               "explanation": "Onvoldoende informatie = een beperking in het onderzoek. Materieel maar niet diepgaand -> conclusie met beperking; diepgaand -> onthouding van conclusie.",
               "difficulty": 3,
-              "tags": ["risico", "verklaring", "St.2400"]
+              "tags": [
+                "risico",
+                "verklaring",
+                "St.2400"
+              ]
             }
           ]
         },
@@ -573,17 +753,28 @@
               "correct": 1,
               "explanation": "Bij een significant risico moet je altijd gegevensgerichte werkzaamheden uitvoeren; je mag niet uitsluitend op de interne beheersing steunen.",
               "difficulty": 2,
-              "tags": ["risico", "St.330"]
+              "tags": [
+                "risico",
+                "St.330"
+              ]
             },
             {
               "id": "m3l2q2",
-              "type": "fill_blank",
+              "type": "multiple_choice",
               "prompt": "De grens waarboven afwijkingen de beslissingen van gebruikers kunnen beïnvloeden, heet de ___.",
-              "answer": "materialiteit",
-              "accept": ["materialiteit", "materieel belang"],
               "explanation": "Materialiteit (St. 320): de drempel waarboven afwijkingen relevant zijn voor gebruikers. Bepaalt de aard, timing en omvang van je werkzaamheden én weegt mee bij het oordeel.",
               "difficulty": 1,
-              "tags": ["materialiteit", "St.320"]
+              "tags": [
+                "materialiteit",
+                "St.320"
+              ],
+              "options": [
+                "uitvoeringsmaterialiteit",
+                "detectierisico",
+                "steekproefomvang",
+                "materialiteit"
+              ],
+              "correct": 3
             },
             {
               "id": "m3l2q3",
@@ -598,7 +789,10 @@
               "correct": 1,
               "explanation": "De tendentie = welke kant de cijfers waarschijnlijk vertekend zijn (te hoog/te laag) en waarom (het motief). Dit stuurt waar je je werkzaamheden op richt.",
               "difficulty": 2,
-              "tags": ["risico", "tendentie"]
+              "tags": [
+                "risico",
+                "tendentie"
+              ]
             }
           ]
         }
@@ -620,14 +814,29 @@
               "type": "matching",
               "prompt": "Koppel elke combinatie aan de juiste strekking van het oordeel.",
               "pairs": [
-                {"left": "Afwijking in jaarrekening - materieel, niet diepgaand", "right": "Oordeel met beperking"},
-                {"left": "Afwijking in jaarrekening - materieel én diepgaand", "right": "Afkeurend oordeel"},
-                {"left": "Beperking in de controle - materieel, niet diepgaand", "right": "Oordeel met beperking"},
-                {"left": "Beperking in de controle - materieel én diepgaand", "right": "Oordeelonthouding"}
+                {
+                  "left": "Afwijking in jaarrekening - materieel, niet diepgaand",
+                  "right": "Oordeel met beperking"
+                },
+                {
+                  "left": "Afwijking in jaarrekening - materieel én diepgaand",
+                  "right": "Afkeurend oordeel"
+                },
+                {
+                  "left": "Beperking in de controle - materieel, niet diepgaand",
+                  "right": "Oordeel met beperking"
+                },
+                {
+                  "left": "Beperking in de controle - materieel én diepgaand",
+                  "right": "Oordeelonthouding"
+                }
               ],
               "explanation": "Twee assen: bron (afwijking ín de jaarrekening vs. beperking in de controle/het onderzoek) x diepgaandheid (niet-pervasive vs. pervasive). Onthoud: materieel is NIET hetzelfde als diepgaand.",
               "difficulty": 3,
-              "tags": ["verklaring", "St.705"]
+              "tags": [
+                "verklaring",
+                "St.705"
+              ]
             },
             {
               "id": "m4l1q2",
@@ -643,7 +852,10 @@
               "correct": 1,
               "explanation": "Een afwijking in de jaarrekening die materieel maar NIET diepgaand is -> oordeel met beperking ('met uitzondering van'). Eén geïsoleerde fout is zelden diepgaand.",
               "difficulty": 2,
-              "tags": ["verklaring", "St.705"]
+              "tags": [
+                "verklaring",
+                "St.705"
+              ]
             },
             {
               "id": "m4l1q3",
@@ -659,7 +871,10 @@
               "correct": 2,
               "explanation": "Een beperking in de controle die materieel ÉN diepgaand (pervasive) is -> oordeelonthouding. Je kunt simpelweg geen oordeel onderbouwen.",
               "difficulty": 2,
-              "tags": ["verklaring", "St.705"]
+              "tags": [
+                "verklaring",
+                "St.705"
+              ]
             },
             {
               "id": "m4l1q4",
@@ -675,7 +890,10 @@
               "correct": 2,
               "explanation": "Een benadrukking van een aangelegenheid (St. 706) tast het oordeel NIET aan; je vestigt alleen de aandacht op iets dat correct en adequaat is verwerkt/toegelicht.",
               "difficulty": 2,
-              "tags": ["verklaring", "St.706"]
+              "tags": [
+                "verklaring",
+                "St.706"
+              ]
             },
             {
               "id": "m4l1q5",
@@ -691,17 +909,28 @@
               "correct": 2,
               "explanation": "Adequaat toegelichte continuïteitsonzekerheid -> goedkeurend (ongewijzigd) oordeel + een aparte sectie. Je modificeert (beperking/afkeuring) alleen als de toelichting ontoereikend is of de continuïteitsveronderstelling onterecht.",
               "difficulty": 3,
-              "tags": ["verklaring", "St.570"]
+              "tags": [
+                "verklaring",
+                "St.570"
+              ]
             },
             {
               "id": "m4l1q6",
-              "type": "fill_blank",
-              "prompt": "Geheugensteun: 'materieel' is NIET hetzelfde als '___' (diepgaand). Eén geïsoleerde fout = beperking, niet afkeurend.",
-              "answer": "diepgaand",
-              "accept": ["diepgaand", "pervasive", "van diepgaande invloed"],
+              "type": "multiple_choice",
+              "prompt": "Geheugensteun: 'materieel' is NIET hetzelfde als ___. Eén geïsoleerde fout = beperking, niet afkeurend.",
               "explanation": "Diepgaand (pervasive) is het pas als de fout niet beperkt is tot specifieke posten, of een groot deel van de jaarrekening raakt, of een fundamentele toelichting betreft.",
               "difficulty": 2,
-              "tags": ["verklaring", "St.705"]
+              "tags": [
+                "verklaring",
+                "St.705"
+              ],
+              "options": [
+                "onjuist",
+                "diepgaand (pervasive)",
+                "onzeker",
+                "frauduleus"
+              ],
+              "correct": 1
             }
           ]
         }
@@ -733,7 +962,11 @@
               "correct": 1,
               "explanation": "Opzet = fraude (St. 240). Een mogelijke wetsovertreding = NOCLAR (St. 250). Witwassen raakt bovendien de Wwft. Alle drie tegelijk dus.",
               "difficulty": 2,
-              "tags": ["fraude", "NOCLAR", "Wwft"]
+              "tags": [
+                "fraude",
+                "NOCLAR",
+                "Wwft"
+              ]
             },
             {
               "id": "m5l1q2",
@@ -749,7 +982,10 @@
               "correct": 3,
               "explanation": "NOCLAR (beroepsregel, publiek belang) en de Wwft-meldplicht (wettelijke verplichting, FIU-Nederland) zijn twee aparte sporen die je allebei moet doorlopen.",
               "difficulty": 3,
-              "tags": ["NOCLAR", "Wwft"]
+              "tags": [
+                "NOCLAR",
+                "Wwft"
+              ]
             },
             {
               "id": "m5l1q3",
@@ -765,7 +1001,9 @@
               "correct": 2,
               "explanation": "Eerst fact-finding + bespreken met governance en aandringen op correctie. Externe melding/beëindiging komt pas later. Optie d schendt bovendien het tipping-off-verbod.",
               "difficulty": 2,
-              "tags": ["NOCLAR"]
+              "tags": [
+                "NOCLAR"
+              ]
             },
             {
               "id": "m5l1q4",
@@ -781,7 +1019,10 @@
               "correct": 1,
               "explanation": "Wwft: meld ONGEBRUIKELIJKE transacties (niet pas 'verdacht') bij FIU-Nederland en actualiseer het cliëntenonderzoek (incl. UBO en risicoprofiel). De meldplicht is laagdrempelig.",
               "difficulty": 2,
-              "tags": ["Wwft", "FIU"]
+              "tags": [
+                "Wwft",
+                "FIU"
+              ]
             },
             {
               "id": "m5l1q5",
@@ -797,7 +1038,10 @@
               "correct": 3,
               "explanation": "Het tipping-off-verbod: je mag de cliënt niet informeren over (het overwegen van) een melding. Geheimhouding wijkt wél voor de wettelijke meldplicht, maar je tipt de cliënt nooit.",
               "difficulty": 2,
-              "tags": ["Wwft", "tipping-off"]
+              "tags": [
+                "Wwft",
+                "tipping-off"
+              ]
             },
             {
               "id": "m5l1q6",
@@ -813,7 +1057,11 @@
               "correct": 2,
               "explanation": "Naast melden: heroverweeg de cliënt (integriteit), beoordeel de impact op de verklaring (afwijking? -> matrix) en documenteer. Onvoldoende vertrouwen of herstel -> opdracht beëindigen.",
               "difficulty": 3,
-              "tags": ["NOCLAR", "NVKS", "verklaring"]
+              "tags": [
+                "NOCLAR",
+                "NVKS",
+                "verklaring"
+              ]
             }
           ]
         },
@@ -834,7 +1082,10 @@
               "correct": 1,
               "explanation": "Het onderscheid zit in de OPZET. Fraude = bewuste misleiding; fout = onopzettelijke onjuistheid. Twee soorten fraude: frauduleuze verslaggeving en oneigenlijke toe-eigening van activa.",
               "difficulty": 1,
-              "tags": ["fraude", "St.240"]
+              "tags": [
+                "fraude",
+                "St.240"
+              ]
             },
             {
               "id": "m5l2q2",
@@ -849,27 +1100,46 @@
               "correct": 0,
               "explanation": "Fraudedriehoek: prikkel/druk (motief), gelegenheid (zwakke beheersing) en rationalisatie (houding). Frauderisicofactoren herken je langs deze drie assen.",
               "difficulty": 2,
-              "tags": ["fraude", "St.240"]
+              "tags": [
+                "fraude",
+                "St.240"
+              ]
             },
             {
               "id": "m5l2q3",
-              "type": "fill_blank",
+              "type": "multiple_choice",
               "prompt": "Het risico dat het management de interne beheersing doorbreekt, heet management ___.",
-              "answer": "override",
-              "accept": ["override", "override of controls"],
               "explanation": "Management override of controls: het bestuur kan om de interne beheersing heen. St. 240 vereist hierop altijd specifieke werkzaamheden, zoals het testen van journaalposten.",
               "difficulty": 2,
-              "tags": ["fraude", "St.240"]
+              "tags": [
+                "fraude",
+                "St.240"
+              ],
+              "options": [
+                "bias",
+                "override",
+                "tendentie",
+                "collusie"
+              ],
+              "correct": 1
             },
             {
               "id": "m5l2q4",
-              "type": "fill_blank",
+              "type": "multiple_choice",
               "prompt": "Een ongebruikelijke transactie meld je bij ___ (Wwft).",
-              "answer": "FIU-Nederland",
-              "accept": ["FIU-Nederland", "FIU", "FIU Nederland", "de FIU"],
               "explanation": "FIU-Nederland (Financial Intelligence Unit) is het meldpunt voor ongebruikelijke transacties onder de Wwft - niet de politie, AFM of Belastingdienst.",
               "difficulty": 1,
-              "tags": ["Wwft", "FIU"]
+              "tags": [
+                "Wwft",
+                "FIU"
+              ],
+              "options": [
+                "de AFM",
+                "de Belastingdienst",
+                "FIU-Nederland",
+                "de NBA"
+              ],
+              "correct": 2
             }
           ]
         }

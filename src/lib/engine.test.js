@@ -29,10 +29,10 @@ describe('content loader (merge + normalisatie)', () => {
     expect(q.pairs[0].id).toBe('p0');
   });
 
-  it('normaliseert fill_blank naar short met accept', () => {
-    const q = questionById['m0l1q4'];
-    expect(q.type).toBe('short');
-    expect(q.answer.accept).toContain('waardering');
+  it('bevat geen invul-vragen meer (omgezet naar keuze/koppel)', () => {
+    expect(allQuestions.some((q) => q.type === 'short')).toBe(false);
+    // voorheen een fill_blank; nu meerkeuze
+    expect(questionById['m0l1q4'].type).toBe('mcq');
   });
 
   it('normaliseert multi_select naar mcq multi', () => {
