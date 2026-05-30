@@ -12,7 +12,7 @@
   import { predict } from '../lib/predict.js';
   import { completeLesson, recordBoss } from '../lib/progress.js';
   import { CONFIG } from '../config.js';
-  import { praiseFor, comboMessage } from '../lib/humor.js';
+  import { praiseFor, comboMessage, BOSS, randomFrom } from '../lib/humor.js';
   import * as audio from '../lib/audio.js';
   import Question from '../components/Question.svelte';
   import MusicControl from '../components/MusicControl.svelte';
@@ -27,7 +27,8 @@
   const isLesson = mode === 'lesson';
 
   const lesson = lessonId ? lessonById[lessonId] : null;
-  let showIntro = !!lesson?.casusIntro;
+  const bossIntro = isBoss ? randomFrom(BOSS.intros) : null;
+  let showIntro = !!lesson?.casusIntro || isBoss;
 
   let index = 0;
   let phase = 'question'; // 'question' | 'feedback'
@@ -184,10 +185,20 @@
     go('home');
   }
 
-  const headerLabel = isBoss ? '👑 Boss' : isPractice ? 'oefenen' : lesson ? lesson.title : '';
+  const headerLabel = isBoss ? `${BOSS.emoji} ${BOSS.name}` : isPractice ? 'oefenen' : lesson ? lesson.title : '';
 </script>
 
-{#if showIntro}
+{#if showIntro && isBoss}
+  <div class="mx-auto flex min-h-[100dvh] w-full max-w-md flex-col justify-center gap-4 px-6 text-center">
+    <div class="animate-bob text-7xl">{BOSS.emoji}</div>
+    <div class="font-pixel text-[9px] uppercase tracking-wide neon-magenta glitch">⚔️ Eindbaas</div>
+    <h1 class="font-pixel text-lg leading-relaxed text-white">{BOSS.name}</h1>
+    <p class="font-pixel text-[8px] uppercase tracking-wide text-amber-400/80">{BOSS.role}</p>
+    <p class="mx-auto max-w-sm text-sm italic leading-relaxed text-slate-200">{bossIntro}</p>
+    <button class="btn-arcade btn-arcade-magenta mt-2 w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={() => (showIntro = false)}>Versla hem ⚔️</button>
+    <button class="font-pixel text-[9px] uppercase text-slate-500 hover:text-white" on:click={quit}>Later</button>
+  </div>
+{:else if showIntro}
   <div class="mx-auto flex min-h-[100dvh] w-full max-w-md flex-col justify-center gap-4 px-6">
     <div class="font-pixel text-[9px] uppercase tracking-wide neon-magenta">📄 Casus</div>
     <h1 class="font-pixel text-base leading-relaxed text-white">{lesson.title}</h1>
