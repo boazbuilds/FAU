@@ -25,7 +25,11 @@
             "correct": 3,
             "explanation": "Eerst de aard/status (nieuw of doorlopend; St. 210, continuering 2400.38), dan de omstandigheden, dan de VGBA-assen, ViO (alleen assurance), Wwft, NOCLAR/NVKS en pas dan de conclusie met maatregel.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "skelet", "St.210"]
+            "tags": [
+              "aanvaarding",
+              "skelet",
+              "St.210"
+            ]
           },
           {
             "id": "m2lb1q02",
@@ -42,7 +46,10 @@
             "correct": 0,
             "explanation": "As 1 = integriteit van de cliënt (VGBA integriteit + NVKS art. 5); as 2 = mijn eigen objectiviteit/onafhankelijkheid (VGBA objectiviteit, bij assurance uitgewerkt via de ViO).",
             "difficulty": 1,
-            "tags": ["aanvaarding", "VGBA"]
+            "tags": [
+              "aanvaarding",
+              "VGBA"
+            ]
           },
           {
             "id": "m2lb1q03",
@@ -60,7 +67,10 @@
             "correct": 1,
             "explanation": "Na aard/status volgt het inventariseren van de relevante omstandigheden; bij continuering stapelen oude en nieuwe feiten op. Pas daarna komen de VGBA-assen.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "skelet"]
+            "tags": [
+              "aanvaarding",
+              "skelet"
+            ]
           },
           {
             "id": "m2lb1q04",
@@ -77,7 +87,11 @@
             "correct": 2,
             "explanation": "De ViO geldt ALLEEN bij assurance-opdrachten. Bij non-assurance (4410, 5500N, 4400N, Hr 1112) borg je je onpartijdigheid via de VGBA-objectiviteit, niet via de ViO.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "ViO", "assurance"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "assurance"
+            ]
           },
           {
             "id": "m2lb1q05",
@@ -95,7 +109,12 @@
             "correct": 3,
             "explanation": "5500N is non-assurance -> ViO niet van toepassing. Je toetst objectiviteit (VGBA) en vakbekwaamheid (passende deskundigheid voor de transactiedienst). Dit is de casus Great Choice.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "ViO", "St.5500N", "vakbekwaamheid"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "St.5500N",
+              "vakbekwaamheid"
+            ]
           },
           {
             "id": "m2lb1q06",
@@ -113,7 +132,12 @@
             "correct": 1,
             "explanation": "Een 5500N náást een lopende assuranceopdracht levert samenloop op die de onafhankelijkheid bij de assuranceopdracht raakt: assuranceopdracht teruggeven of een gescheiden team. Kerninstinker uit Mondzorg.",
             "difficulty": 3,
-            "tags": ["aanvaarding", "samenloop", "St.5500N", "St.2400"]
+            "tags": [
+              "aanvaarding",
+              "samenloop",
+              "St.5500N",
+              "St.2400"
+            ]
           },
           {
             "id": "m2lb1q07",
@@ -131,7 +155,12 @@
             "correct": 3,
             "explanation": "Een persoonlijke vriendschap (ViO art. 44) -> vertrouwdheid, plus een eigenbelang-component. Passende maatregel: een andere accountant/tekenbevoegde inzetten.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "ViO", "art.44", "vertrouwdheid"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "art.44",
+              "vertrouwdheid"
+            ]
           },
           {
             "id": "m2lb1q08",
@@ -149,7 +178,11 @@
             "correct": 2,
             "explanation": "Bij een te grote vertrouwdheids-/eigenbelangbedreiging is roulatie naar een andere, niet-bevriende accountant de logische waarborg. Komt het niet op een aanvaardbaar niveau, dan weigeren.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "ViO", "maatregel"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "maatregel"
+            ]
           },
           {
             "id": "m2lb1q09",
@@ -167,7 +200,12 @@
             "correct": 0,
             "explanation": "Contante salarissen aan arbeidsmigranten raken de integriteit van de cliënt en NV NOCLAR; vastgoed is witwasgevoelig -> Wwft cliëntenonderzoek/UBO/risicoprofiel.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "integriteit", "Wwft", "NOCLAR"]
+            "tags": [
+              "aanvaarding",
+              "integriteit",
+              "Wwft",
+              "NOCLAR"
+            ]
           },
           {
             "id": "m2lb1q10",
@@ -185,7 +223,11 @@
             "correct": 0,
             "explanation": "Bij overname schrijft VGBA art. 15a collegiaal overleg met de voorgaande accountant voor: heeft die bezwaren/beroepsmatige redenen die opname in de weg staan?",
             "difficulty": 2,
-            "tags": ["aanvaarding", "VGBA", "art.15a"]
+            "tags": [
+              "aanvaarding",
+              "VGBA",
+              "art.15a"
+            ]
           },
           {
             "id": "m2lb1q11",
@@ -203,7 +245,11 @@
             "correct": 0,
             "explanation": "Het is een overname -> VGBA art. 15a (collegiaal overleg). De lange duur speelt bij de vórige accountant; voor jouw aanvaarding telt vooral het collegiaal overleg.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "VGBA", "art.15a"]
+            "tags": [
+              "aanvaarding",
+              "VGBA",
+              "art.15a"
+            ]
           },
           {
             "id": "m2lb1q12",
@@ -221,7 +267,12 @@
             "correct": 1,
             "explanation": "Eerst samenstellen en daarna beoordelen van datzelfde werk -> zelftoetsing. Een beoordeling (2400) is assurance, dus de onafhankelijkheid (ViO) is wél in het geding.",
             "difficulty": 3,
-            "tags": ["aanvaarding", "ViO", "zelftoetsing", "samenloop"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "zelftoetsing",
+              "samenloop"
+            ]
           },
           {
             "id": "m2lb1q13",
@@ -239,7 +290,11 @@
             "correct": 2,
             "explanation": "Een (recente) overstap van een teamlid/OKB'er naar een sleutelfunctie bij de cliënt raakt de cooling-off-regeling, ViO art. 38, vanwege vertrouwdheid/eigenbelang.",
             "difficulty": 3,
-            "tags": ["continuering", "ViO", "art.38"]
+            "tags": [
+              "continuering",
+              "ViO",
+              "art.38"
+            ]
           },
           {
             "id": "m2lb1q14",
@@ -257,7 +312,11 @@
             "correct": 0,
             "explanation": "De duur van de betrokkenheid (vertrouwdheid) wordt geadresseerd in ViO art. 28; mogelijke maatregel is roulatie van de eindverantwoordelijke/het team.",
             "difficulty": 2,
-            "tags": ["continuering", "ViO", "art.28"]
+            "tags": [
+              "continuering",
+              "ViO",
+              "art.28"
+            ]
           },
           {
             "id": "m2lb1q15",
@@ -274,7 +333,10 @@
             "correct": 2,
             "explanation": "Standaard 2400.38: bij continuering ga je na of de opdrachtvoorwaarden nog gelden en of nieuwe omstandigheden herziening van de voorwaarden vereisen. (St. 210 is de basis bij een nieuwe opdracht.)",
             "difficulty": 2,
-            "tags": ["continuering", "St.2400"]
+            "tags": [
+              "continuering",
+              "St.2400"
+            ]
           },
           {
             "id": "m2lb1q16",
@@ -291,7 +353,11 @@
             "correct": 0,
             "explanation": "NVKS art. 5 koppelt aanvaarding/continuering aan de integriteit van de cliënt. Art. 6 gaat over het kwaliteitsstelsel; art. 13 over de OKB.",
             "difficulty": 1,
-            "tags": ["aanvaarding", "NVKS", "art.5"]
+            "tags": [
+              "aanvaarding",
+              "NVKS",
+              "art.5"
+            ]
           },
           {
             "id": "m2lb1q17",
@@ -308,7 +374,12 @@
             "correct": 2,
             "explanation": "NVKS art. 13 regelt de OKB: een onafhankelijke kwaliteitsbeoordeling van het oordeel vóór afgifte. Art. 5 = integere cliënt, art. 6 = kwaliteitsstelsel.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "NVKS", "art.13", "OKB"]
+            "tags": [
+              "aanvaarding",
+              "NVKS",
+              "art.13",
+              "OKB"
+            ]
           },
           {
             "id": "m2lb1q18",
@@ -322,10 +393,18 @@
               "Cliënt- en identiteitsverificatie",
               "Het afgeven van een goedkeurende controleverklaring"
             ],
-            "correct": [0, 1, 2],
+            "correct": [
+              0,
+              1,
+              2
+            ],
             "explanation": "Wwft-cliëntenonderzoek = identificatie/verificatie, UBO vaststellen, doel/aard van de relatie en een risicoprofiel. Een verklaring afgeven is geen onderdeel van het cliëntenonderzoek.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "Wwft", "UBO"]
+            "tags": [
+              "aanvaarding",
+              "Wwft",
+              "UBO"
+            ]
           }
         ]
       },
@@ -348,7 +427,12 @@
             "correct": 1,
             "explanation": "Kerninstinker: de ViO geldt alleen bij assurance. Bij 4410 (geen zekerheid) borg je je onpartijdigheid via de VGBA-objectiviteit. Objectiviteit blijft dus wél vereist.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "ViO", "St.4410", "instinker"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "St.4410",
+              "instinker"
+            ]
           },
           {
             "id": "m2lb2q02",
@@ -365,7 +449,11 @@
             "correct": 3,
             "explanation": "Bij continuering (2400.38) stapelen relevante omstandigheden: niet-opgeloste integriteitssignalen uit eerdere jaren blijven meewegen naast de nieuwe feiten.",
             "difficulty": 2,
-            "tags": ["continuering", "skelet", "instinker"]
+            "tags": [
+              "continuering",
+              "skelet",
+              "instinker"
+            ]
           },
           {
             "id": "m2lb2q03",
@@ -382,7 +470,12 @@
             "correct": 1,
             "explanation": "De ViO is voorbehouden aan assurance-opdrachten. Bij non-assurance gebruik je VGBA, Wwft en NVKS; de ViO past hier niet.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "ViO", "non-assurance", "instinker"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "non-assurance",
+              "instinker"
+            ]
           },
           {
             "id": "m2lb2q04",
@@ -400,7 +493,11 @@
             "correct": 1,
             "explanation": "Bij een eerstejaarsopdracht let je extra op de openingscijfers/beginbalans en de aansluiting met de voorgaande periode; de aanvaardingstoets (incl. ViO bij deze assuranceopdracht) blijft volledig gelden.",
             "difficulty": 3,
-            "tags": ["aanvaarding", "St.2400", "eerstejaars"]
+            "tags": [
+              "aanvaarding",
+              "St.2400",
+              "eerstejaars"
+            ]
           },
           {
             "id": "m2lb2q05",
@@ -418,7 +515,11 @@
             "correct": 1,
             "explanation": "Een opdracht binnenhalen via je eigen vereniging raakt eigenbelang (en kan vertrouwdheid meebrengen). Signaleren -> beoordelen -> maatregel.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "ViO", "eigenbelang"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "eigenbelang"
+            ]
           },
           {
             "id": "m2lb2q06",
@@ -436,7 +537,12 @@
             "correct": 3,
             "explanation": "Bij specialistische/onbekende materie staat vakbekwaamheid en zorgvuldigheid centraal: zorg voor passende deskundigheid of schakel een deskundige in. (ViO speelt niet bij deze 5500N.)",
             "difficulty": 2,
-            "tags": ["aanvaarding", "VGBA", "vakbekwaamheid", "St.5500N"]
+            "tags": [
+              "aanvaarding",
+              "VGBA",
+              "vakbekwaamheid",
+              "St.5500N"
+            ]
           },
           {
             "id": "m2lb2q07",
@@ -454,7 +560,12 @@
             "correct": 1,
             "explanation": "Een witwassignaal raakt de integriteit van de cliënt (NVKS art. 5 / VGBA). Eerst fact-finding; daarnaast lopen NV NOCLAR en de Wwft-meldplicht. Onvoldoende vertrouwen -> niet continueren.",
             "difficulty": 3,
-            "tags": ["continuering", "integriteit", "NOCLAR", "Wwft"]
+            "tags": [
+              "continuering",
+              "integriteit",
+              "NOCLAR",
+              "Wwft"
+            ]
           },
           {
             "id": "m2lb2q08",
@@ -472,7 +583,10 @@
             "correct": 0,
             "explanation": "Bij signalen van niet-naleving (non-compliance) volg je de NV NOCLAR: feiten vaststellen, bespreken met governance, aandringen op herstel, en zo nodig melden/beëindigen.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "NOCLAR"]
+            "tags": [
+              "aanvaarding",
+              "NOCLAR"
+            ]
           },
           {
             "id": "m2lb2q09",
@@ -490,7 +604,12 @@
             "correct": 1,
             "explanation": "Eén assuranceopdracht -> geen samenloop. De ViO geldt wél (beoordeling = assurance): je toetst eigenbelang en vertrouwdheid door de relatie/duur.",
             "difficulty": 3,
-            "tags": ["continuering", "ViO", "samenloop", "St.2400"]
+            "tags": [
+              "continuering",
+              "ViO",
+              "samenloop",
+              "St.2400"
+            ]
           },
           {
             "id": "m2lb2q10",
@@ -507,7 +626,11 @@
             "correct": 1,
             "explanation": "Vastgoed en contant geld zijn witwasgevoelig -> de Wwft vraagt (verscherpt) cliëntenonderzoek, UBO-vaststelling en een risicoprofiel. Dit speelt o.a. bij Sweet Pepper.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "Wwft", "UBO"]
+            "tags": [
+              "aanvaarding",
+              "Wwft",
+              "UBO"
+            ]
           },
           {
             "id": "m2lb2q11",
@@ -524,7 +647,11 @@
             "correct": 2,
             "explanation": "Het conceptueel raamwerk: signaleren -> beoordelen of de bedreiging van belang is -> waarborg/maatregel -> opnieuw beoordelen. Niet op aanvaardbaar niveau te brengen -> weigeren/beëindigen.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "ViO", "raamwerk"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "raamwerk"
+            ]
           },
           {
             "id": "m2lb2q12",
@@ -542,7 +669,12 @@
             "correct": 0,
             "explanation": "Een financieel belang in de cliënt valt onder ViO art. 31 en levert een eigenbelang-bedreiging op; bij een controle is dit doorgaans onverenigbaar (belang afstoten of teamlid vervangen).",
             "difficulty": 3,
-            "tags": ["aanvaarding", "ViO", "art.31", "eigenbelang"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "art.31",
+              "eigenbelang"
+            ]
           },
           {
             "id": "m2lb2q13",
@@ -560,7 +692,12 @@
             "correct": 2,
             "explanation": "Bij verhoogd risico met een integere cliënt aanvaard je mét waarborgen: een OKB (art. 13 NVKS) en/of consultatie. Weigeren is pas aan de orde als waarborgen onvoldoende zijn.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "NVKS", "OKB", "maatregel"]
+            "tags": [
+              "aanvaarding",
+              "NVKS",
+              "OKB",
+              "maatregel"
+            ]
           },
           {
             "id": "m2lb2q14",
@@ -569,15 +706,34 @@
             "scoreChanceLabel": "hoog",
             "prompt": "Koppel elke ViO-situatie aan het juiste artikel.",
             "pairs": [
-              {"left": "Persoonlijke relatie/vriendschap met de cliënt", "right": "Art. 44"},
-              {"left": "Afkoelperiode na overstap naar de cliënt", "right": "Art. 38"},
-              {"left": "Financieel belang in de cliënt", "right": "Art. 31"},
-              {"left": "Lange duur van de betrokkenheid (vertrouwdheid)", "right": "Art. 28"},
-              {"left": "Samenloop van opdrachten", "right": "Art. 18/19"}
+              {
+                "left": "Persoonlijke relatie/vriendschap met de cliënt",
+                "right": "Art. 44"
+              },
+              {
+                "left": "Afkoelperiode na overstap naar de cliënt",
+                "right": "Art. 38"
+              },
+              {
+                "left": "Financieel belang in de cliënt",
+                "right": "Art. 31"
+              },
+              {
+                "left": "Lange duur van de betrokkenheid (vertrouwdheid)",
+                "right": "Art. 28"
+              },
+              {
+                "left": "Samenloop van opdrachten",
+                "right": "Art. 18/19"
+              }
             ],
             "explanation": "ViO-kapstok: art. 18/19 samenloop, art. 28 duur/vertrouwdheid, art. 31 financieel belang, art. 38 cooling-off, art. 44 persoonlijke relatie.",
             "difficulty": 3,
-            "tags": ["aanvaarding", "ViO", "artikelen"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "artikelen"
+            ]
           },
           {
             "id": "m2lb2q15",
@@ -586,39 +742,78 @@
             "scoreChanceLabel": "midden",
             "prompt": "Koppel elke casus-situatie aan de juiste bedreiging/regel.",
             "pairs": [
-              {"left": "Sweet Pepper: partner bevriend met DGA via Rotary/raceteam", "right": "Vertrouwdheid (ViO art. 44)"},
-              {"left": "Sunpanels: ex-OKB'er is nu CFO bij de cliënt", "right": "Cooling-off (ViO art. 38)"},
-              {"left": "De Groot: overstap na 12-13 jaar", "right": "Collegiaal overleg (VGBA art. 15a)"},
-              {"left": "De Groot: samenstellen én beoordelen", "right": "Zelftoetsing"},
-              {"left": "Sweet Pepper: vastgoed en contant geld", "right": "Wwft (witwasgevoelig)"}
+              {
+                "left": "Sweet Pepper: partner bevriend met DGA via Rotary/raceteam",
+                "right": "Vertrouwdheid (ViO art. 44)"
+              },
+              {
+                "left": "Sunpanels: ex-OKB'er is nu CFO bij de cliënt",
+                "right": "Cooling-off (ViO art. 38)"
+              },
+              {
+                "left": "De Groot: overstap na 12-13 jaar",
+                "right": "Collegiaal overleg (VGBA art. 15a)"
+              },
+              {
+                "left": "De Groot: samenstellen én beoordelen",
+                "right": "Zelftoetsing"
+              },
+              {
+                "left": "Sweet Pepper: vastgoed en contant geld",
+                "right": "Wwft (witwasgevoelig)"
+              }
             ],
             "explanation": "Vaste casuskoppelingen: vertrouwdheid (art. 44), cooling-off (art. 38), overname (art. 15a), zelftoetsing bij samenstellen+beoordelen, en de Wwft bij witwasgevoelige activiteiten.",
             "difficulty": 3,
-            "tags": ["aanvaarding", "casus", "ViO", "Wwft"]
+            "tags": [
+              "aanvaarding",
+              "casus",
+              "ViO",
+              "Wwft"
+            ]
           },
           {
             "id": "m2lb2q16",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "scoreChance": 60,
             "scoreChanceLabel": "midden",
             "prompt": "Bij overname van een opdracht schrijft VGBA art. ___ collegiaal overleg met de vorige accountant voor.",
-            "answer": "15a",
-            "accept": ["15a", "art. 15a", "artikel 15a"],
             "explanation": "VGBA art. 15a verplicht tot collegiaal overleg met de voorgaande accountant bij overname, o.a. om te checken of er beroepsmatige bezwaren tegen aanvaarding zijn.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "VGBA", "art.15a"]
+            "tags": [
+              "aanvaarding",
+              "VGBA",
+              "art.15a"
+            ],
+            "options": [
+              "11",
+              "15a",
+              "21",
+              "5"
+            ],
+            "correct": 1
           },
           {
             "id": "m2lb2q17",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "scoreChance": 70,
             "scoreChanceLabel": "hoog",
             "prompt": "De onafhankelijkheidsregels van de ViO pas je uitsluitend toe bij ___-opdrachten.",
-            "answer": "assurance",
-            "accept": ["assurance", "assurance-opdrachten", "assurance opdrachten"],
             "explanation": "De ViO geldt alleen bij assurance (controle/beoordeling/overige assurance). Bij non-assurance (4410/5500N/4400N/Hr 1112) borg je je onpartijdigheid via de VGBA-objectiviteit.",
             "difficulty": 1,
-            "tags": ["aanvaarding", "ViO", "assurance", "instinker"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "assurance",
+              "instinker"
+            ],
+            "options": [
+              "non-assurance",
+              "samenstel",
+              "assurance",
+              "advies"
+            ],
+            "correct": 2
           }
         ]
       }

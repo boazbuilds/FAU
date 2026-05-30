@@ -17,14 +17,30 @@
             "scoreChanceLabel": "midden",
             "prompt": "Zet de denklijn 'van risico naar werkzaamheden' in de juiste volgorde (1 = eerst).",
             "pairs": [
-              {"left": "Stap 1", "right": "Risico + tendentie (motief en richting) bepalen"},
-              {"left": "Stap 2", "right": "Koppelen aan bewering(en) en kwalificeren (significant/fraude, St. 315/240)"},
-              {"left": "Stap 3", "right": "Materialiteit bepalen (St. 320) en de aard van de werkzaamheden kiezen"},
-              {"left": "Stap 4", "right": "Concrete werkzaamheid uitvoeren en het gevolg benoemen"}
+              {
+                "left": "Stap 1",
+                "right": "Risico + tendentie (motief en richting) bepalen"
+              },
+              {
+                "left": "Stap 2",
+                "right": "Koppelen aan bewering(en) en kwalificeren (significant/fraude, St. 315/240)"
+              },
+              {
+                "left": "Stap 3",
+                "right": "Materialiteit bepalen (St. 320) en de aard van de werkzaamheden kiezen"
+              },
+              {
+                "left": "Stap 4",
+                "right": "Concrete werkzaamheid uitvoeren en het gevolg benoemen"
+              }
             ],
             "explanation": "De vaste denklijn: risico+tendentie -> bewering + significant/fraude (315/240) -> materialiteit (320) + aard werkzaamheden -> concrete werkzaamheid -> gevolg. Eerst het risico scherp krijgen, dan pas de werkzaamheid.",
             "difficulty": 2,
-            "tags": ["risico", "denklijn", "structuur"]
+            "tags": [
+              "risico",
+              "denklijn",
+              "structuur"
+            ]
           },
           {
             "id": "m3lb1q02",
@@ -42,7 +58,11 @@
             "correct": 0,
             "explanation": "Tendentie = motief (EBIT-bonus) + richting (opwaarts). Een resultaatafhankelijke beloning is een inherente risicofactor 'tendentie' (St. 315) en een frauderisico-indicator (St. 240).",
             "difficulty": 2,
-            "tags": ["risico", "tendentie", "St.315"]
+            "tags": [
+              "risico",
+              "tendentie",
+              "St.315"
+            ]
           },
           {
             "id": "m3lb1q03",
@@ -60,7 +80,12 @@
             "correct": 1,
             "explanation": "Bij subsidies is het motief 'meer subsidie' -> kosten te hoog of ten onrechte als subsidiabel opvoeren (voorkomen/nauwkeurigheid, rechtmatigheid). Daarom is de protocol-materialiteit vaak laag en werk je sterk gegevensgericht (St. 800).",
             "difficulty": 2,
-            "tags": ["risico", "tendentie", "subsidie", "rechtmatigheid"]
+            "tags": [
+              "risico",
+              "tendentie",
+              "subsidie",
+              "rechtmatigheid"
+            ]
           },
           {
             "id": "m3lb1q04",
@@ -78,7 +103,11 @@
             "correct": 1,
             "explanation": "Een voorziening is een verplichting (reflex: volledigheid - is hij niet te laag?) én een schatting (St. 540 -> waardering). Bij schattingsposten is waardering de kritische bewering.",
             "difficulty": 2,
-            "tags": ["beweringen", "St.540", "volledigheid"]
+            "tags": [
+              "beweringen",
+              "St.540",
+              "volledigheid"
+            ]
           },
           {
             "id": "m3lb1q05",
@@ -96,7 +125,11 @@
             "correct": 1,
             "explanation": "POC = subjectiviteit en onzekerheid; samen met de bonus-tendentie wordt dit een significant risico met frauderisico-component (St. 315/240). Bij een significant risico zijn altijd gegevensgerichte werkzaamheden vereist.",
             "difficulty": 2,
-            "tags": ["risico", "St.315", "St.240"]
+            "tags": [
+              "risico",
+              "St.315",
+              "St.240"
+            ]
           },
           {
             "id": "m3lb1q06",
@@ -110,22 +143,38 @@
               "Materialiteit",
               "Tendentie (incl. fraude-incentive)"
             ],
-            "correct": [0, 1, 3],
+            "correct": [
+              0,
+              1,
+              3
+            ],
             "explanation": "De inherente risicofactoren (St. 315) zijn: complexiteit, subjectiviteit, verandering, onzekerheid en tendentie. Materialiteit (St. 320) is geen risicofactor maar een drempelwaarde.",
             "difficulty": 2,
-            "tags": ["risico", "St.315"]
+            "tags": [
+              "risico",
+              "St.315"
+            ]
           },
           {
             "id": "m3lb1q07",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "scoreChance": 55,
             "scoreChanceLabel": "midden",
             "prompt": "Bij een significant risico (St. 315/330) mag je niet uitsluitend op de interne beheersing steunen; je moet altijd ___ werkzaamheden uitvoeren.",
-            "answer": "gegevensgerichte",
-            "accept": ["gegevensgerichte", "gegevensgericht", "gegevensgerichte controle"],
             "explanation": "Standaard 330: bij een significant risico zijn gegevensgerichte werkzaamheden verplicht; louter systeemgericht steunen mag dan niet.",
             "difficulty": 2,
-            "tags": ["risico", "St.330", "gegevensgericht"]
+            "tags": [
+              "risico",
+              "St.330",
+              "gegevensgericht"
+            ],
+            "options": [
+              "systeemgerichte",
+              "cijferanalytische",
+              "gegevensgerichte",
+              "oriënterende"
+            ],
+            "correct": 2
           },
           {
             "id": "m3lb1q08",
@@ -143,7 +192,11 @@
             "correct": 2,
             "explanation": "Bij een beoordeling (St. 2400) stel je wél materialiteit vast, maar GEEN uitvoeringsmaterialiteit en geen gegevensgerichte 520-drempelanalyses; dat past niet bij beperkte zekerheid. Klassieke instinker.",
             "difficulty": 3,
-            "tags": ["materialiteit", "St.2400", "St.320"]
+            "tags": [
+              "materialiteit",
+              "St.2400",
+              "St.320"
+            ]
           },
           {
             "id": "m3lb1q09",
@@ -160,7 +213,10 @@
             "correct": 0,
             "explanation": "Uitvoeringsmaterialiteit (St. 320) ligt lager dan de materialiteit voor de jaarrekening als geheel, om het aggregatierisico van afwijkingen af te dekken. Ze geldt bij een controle, niet bij een beoordeling.",
             "difficulty": 2,
-            "tags": ["materialiteit", "St.320"]
+            "tags": [
+              "materialiteit",
+              "St.320"
+            ]
           },
           {
             "id": "m3lb1q10",
@@ -177,19 +233,32 @@
             "correct": 1,
             "explanation": "Systeemgericht = steunen op de effectieve werking van de IB; gegevensgericht = de posten zelf onderzoeken. Bij een significant risico is gegevensgericht werk altijd vereist (St. 330).",
             "difficulty": 1,
-            "tags": ["systeemgericht", "gegevensgericht", "St.330"]
+            "tags": [
+              "systeemgericht",
+              "gegevensgericht",
+              "St.330"
+            ]
           },
           {
             "id": "m3lb1q11",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "scoreChance": 60,
             "scoreChanceLabel": "midden",
             "prompt": "De volgorde waarin je de interne beheersing beoordeelt voordat je erop mag steunen is: opzet -> bestaan -> ___.",
-            "answer": "werking",
-            "accept": ["werking", "de werking", "effectieve werking"],
             "explanation": "Opzet -> bestaan -> werking. Pas als opzet én bestaan zijn vastgesteld mag je de werking testen en systeemgericht steunen (St. 330); lukt dat niet, dan gegevensgericht.",
             "difficulty": 1,
-            "tags": ["systeemgericht", "opzet-bestaan-werking", "St.330"]
+            "tags": [
+              "systeemgericht",
+              "opzet-bestaan-werking",
+              "St.330"
+            ],
+            "options": [
+              "waardering",
+              "werking",
+              "volledigheid",
+              "naleving"
+            ],
+            "correct": 1
           },
           {
             "id": "m3lb1q12",
@@ -203,10 +272,17 @@
               "Omvang (hoeveel: steekproef/100%)",
               "De rechtsvorm van de cliënt"
             ],
-            "correct": [0, 1, 2],
+            "correct": [
+              0,
+              1,
+              2
+            ],
             "explanation": "De controlemix = aard, timing en omvang van de werkzaamheden. Die drie stel je af op het ingeschatte risico (St. 330). De rechtsvorm hoort er niet bij.",
             "difficulty": 2,
-            "tags": ["controlemix", "St.330"]
+            "tags": [
+              "controlemix",
+              "St.330"
+            ]
           },
           {
             "id": "m3lb1q13",
@@ -224,7 +300,11 @@
             "correct": 1,
             "explanation": "Volledigheid van omzet toon je aan met een verbandscontrole/cijferanalyse (St. 520): fee = 15% x onderliggende omzet. Een saldobevestiging raakt het bestaan, niet de volledigheid.",
             "difficulty": 2,
-            "tags": ["volledigheid", "St.520", "verbandscontrole"]
+            "tags": [
+              "volledigheid",
+              "St.520",
+              "verbandscontrole"
+            ]
           },
           {
             "id": "m3lb1q14",
@@ -241,7 +321,11 @@
             "correct": 1,
             "explanation": "De typologie bepaalt of er een sterke goederen-/geldbeweging is om de omzet aan te koppelen (verbandscontrole, St. 520). Bij een dominante kasstroom zonder goederenbeweging is het volledigheidsrisico van de omzet juist groot.",
             "difficulty": 2,
-            "tags": ["typologie", "volledigheid", "St.520"]
+            "tags": [
+              "typologie",
+              "volledigheid",
+              "St.520"
+            ]
           },
           {
             "id": "m3lb1q15",
@@ -259,7 +343,11 @@
             "correct": 0,
             "explanation": "Standaard 501: bijwonen van de telling, in twee richtingen. Van administratie->vloer toetst bestaan, van vloer->administratie toetst volledigheid. Eigen waarneming is de sterkste controle-informatie (St. 500).",
             "difficulty": 2,
-            "tags": ["bestaan", "St.501", "voorraad"]
+            "tags": [
+              "bestaan",
+              "St.501",
+              "voorraad"
+            ]
           },
           {
             "id": "m3lb1q16",
@@ -276,7 +364,11 @@
             "correct": 2,
             "explanation": "Een saldobevestiging (St. 505) onderbouwt vooral het bestaan van de vordering (extern, schriftelijk = sterk, St. 500). Voor volledigheid van de omzet gebruik je een verbandscontrole (520); inbaarheid is een aparte waarderingstoets.",
             "difficulty": 2,
-            "tags": ["bestaan", "St.505", "St.500"]
+            "tags": [
+              "bestaan",
+              "St.505",
+              "St.500"
+            ]
           },
           {
             "id": "m3lb1q17",
@@ -294,7 +386,11 @@
             "correct": 1,
             "explanation": "Bij non-respons (St. 505) voer je alternatieve werkzaamheden uit: betalingen na balansdatum, facturen, leveringsbewijzen. 'Geen antwoord = akkoord' is onjuist.",
             "difficulty": 2,
-            "tags": ["St.505", "non-respons", "alternatieve werkzaamheden"]
+            "tags": [
+              "St.505",
+              "non-respons",
+              "alternatieve werkzaamheden"
+            ]
           },
           {
             "id": "m3lb1q18",
@@ -303,14 +399,29 @@
             "scoreChanceLabel": "midden",
             "prompt": "Koppel elk instrument aan het primaire doel/bewering waarvoor het wordt ingezet.",
             "pairs": [
-              {"left": "Verbandscontrole (St. 520)", "right": "Volledigheid van de omzet"},
-              {"left": "Bijwonen voorraadtelling (St. 501)", "right": "Bestaan van de voorraad"},
-              {"left": "Saldobevestiging (St. 505)", "right": "Bestaan van de vordering"},
-              {"left": "Retrospectieve toets (St. 540)", "right": "Waardering van een schatting"}
+              {
+                "left": "Verbandscontrole (St. 520)",
+                "right": "Volledigheid van de omzet"
+              },
+              {
+                "left": "Bijwonen voorraadtelling (St. 501)",
+                "right": "Bestaan van de voorraad"
+              },
+              {
+                "left": "Saldobevestiging (St. 505)",
+                "right": "Bestaan van de vordering"
+              },
+              {
+                "left": "Retrospectieve toets (St. 540)",
+                "right": "Waardering van een schatting"
+              }
             ],
             "explanation": "520 = volledigheid omzet; 501 = bestaan voorraad; 505 = bestaan vordering; 540/backtesting = waardering schatting. Koppel elk instrument altijd aan zijn bewering/doel.",
             "difficulty": 2,
-            "tags": ["instrumentarium", "beweringen"]
+            "tags": [
+              "instrumentarium",
+              "beweringen"
+            ]
           },
           {
             "id": "m3lb1q19",
@@ -328,7 +439,12 @@
             "correct": 1,
             "explanation": "Klassieke instinker: een saldobevestiging (505) toont bestaan, geen volledigheid. Volledigheid van de omzet onderbouw je met een verbandscontrole (520).",
             "difficulty": 2,
-            "tags": ["instinker", "St.505", "St.520", "volledigheid"]
+            "tags": [
+              "instinker",
+              "St.505",
+              "St.520",
+              "volledigheid"
+            ]
           },
           {
             "id": "m3lb1q20",
@@ -346,7 +462,11 @@
             "correct": 1,
             "explanation": "Standaard 540: bij schattingen doe je een retrospectieve toets (vergelijk eerdere schatting met realisatie). Dat legt eventuele tendentie/management bias bloot en toetst de methodiek.",
             "difficulty": 2,
-            "tags": ["St.540", "schattingen", "waardering"]
+            "tags": [
+              "St.540",
+              "schattingen",
+              "waardering"
+            ]
           }
         ]
       },
@@ -370,7 +490,10 @@
             "correct": 0,
             "explanation": "Standaard 620: bij specialistische kennis schakel je een deskundige in en beoordeel je competentie, objectiviteit en de geschiktheid van diens werk. Je blijft als accountant eindverantwoordelijk.",
             "difficulty": 2,
-            "tags": ["St.620", "deskundige"]
+            "tags": [
+              "St.620",
+              "deskundige"
+            ]
           },
           {
             "id": "m3lb2q02",
@@ -384,10 +507,17 @@
               "De geschiktheid van het werk en de redelijkheid van de uitkomsten/aannames",
               "Of de deskundige een goedkeurende verklaring afgeeft"
             ],
-            "correct": [0, 1, 2],
+            "correct": [
+              0,
+              1,
+              2
+            ],
             "explanation": "St. 620: beoordeel competentie, objectiviteit én de geschiktheid van het werk (aannames, methode, uitkomst). Een deskundige geeft geen controleverklaring af.",
             "difficulty": 2,
-            "tags": ["St.620", "deskundige"]
+            "tags": [
+              "St.620",
+              "deskundige"
+            ]
           },
           {
             "id": "m3lb2q03",
@@ -405,19 +535,32 @@
             "correct": 3,
             "explanation": "Je steunt pas op application controls als de GITC (toegang, change management, operations) effectief zijn. Bij effectieve GITC + een geautomatiseerde control volstaat soms een 'test of one'.",
             "difficulty": 3,
-            "tags": ["GITC", "application controls", "IT"]
+            "tags": [
+              "GITC",
+              "application controls",
+              "IT"
+            ]
           },
           {
             "id": "m3lb2q04",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "scoreChance": 40,
             "scoreChanceLabel": "laag",
             "prompt": "Bij effectieve general IT controls en een volledig geautomatiseerde applicatiebeheersing volstaat soms een test van slechts één geval: een '___'.",
-            "answer": "test of one",
-            "accept": ["test of one", "test-of-one", "testofone"],
             "explanation": "Bij effectieve GITC werkt een geautomatiseerde control consistent; daarom kan een 'test of one' (één geval) volstaan om de werking aan te tonen.",
             "difficulty": 3,
-            "tags": ["GITC", "application controls", "test of one"]
+            "tags": [
+              "GITC",
+              "application controls",
+              "test of one"
+            ],
+            "options": [
+              "deelwaarneming",
+              "integrale controle",
+              "test of one",
+              "lijncontrole"
+            ],
+            "correct": 2
           },
           {
             "id": "m3lb2q05",
@@ -435,7 +578,11 @@
             "correct": 3,
             "explanation": "Standaard 402 / ISAE 3402: leun op het assurancerapport (type I opzet/bestaan, type II ook werking) van de serviceorganisatie en toets de complementaire gebruikerscontroles bij de cliënt.",
             "difficulty": 3,
-            "tags": ["St.402", "ISAE3402", "serviceorganisatie"]
+            "tags": [
+              "St.402",
+              "ISAE3402",
+              "serviceorganisatie"
+            ]
           },
           {
             "id": "m3lb2q06",
@@ -453,7 +600,11 @@
             "correct": 2,
             "explanation": "Standaard 530: projecteer de steekproeffout naar de populatie. Een fout mag je alleen als atypisch uitsluiten als je aantoont dat hij niet representatief is voor de rest van de populatie.",
             "difficulty": 3,
-            "tags": ["St.530", "steekproef", "projectie"]
+            "tags": [
+              "St.530",
+              "steekproef",
+              "projectie"
+            ]
           },
           {
             "id": "m3lb2q07",
@@ -470,7 +621,11 @@
             "correct": 2,
             "explanation": "Data-analyse op 100% van de populatie elimineert het steekproefrisico (geen projectie nodig) en laat je gericht afwijkingen/uitschieters selecteren. De risico-inschatting en de beoordeling van betrouwbaarheid van de data blijven nodig.",
             "difficulty": 2,
-            "tags": ["data-analyse", "St.530", "populatie"]
+            "tags": [
+              "data-analyse",
+              "St.530",
+              "populatie"
+            ]
           },
           {
             "id": "m3lb2q08",
@@ -479,14 +634,29 @@
             "scoreChanceLabel": "midden",
             "prompt": "Rangschik de controle-informatie van zwak naar sterk volgens Standaard 500 (1 = zwakst).",
             "pairs": [
-              {"left": "Niveau 1 (zwakst)", "right": "Mondelinge mededeling van het management"},
-              {"left": "Niveau 2", "right": "Intern, schriftelijk vastgelegd door de cliënt"},
-              {"left": "Niveau 3", "right": "Extern verkregen, schriftelijk (bijv. saldobevestiging)"},
-              {"left": "Niveau 4 (sterkst)", "right": "Eigen waarneming door de accountant"}
+              {
+                "left": "Niveau 1 (zwakst)",
+                "right": "Mondelinge mededeling van het management"
+              },
+              {
+                "left": "Niveau 2",
+                "right": "Intern, schriftelijk vastgelegd door de cliënt"
+              },
+              {
+                "left": "Niveau 3",
+                "right": "Extern verkregen, schriftelijk (bijv. saldobevestiging)"
+              },
+              {
+                "left": "Niveau 4 (sterkst)",
+                "right": "Eigen waarneming door de accountant"
+              }
             ],
             "explanation": "Standaard 500: extern > intern, schriftelijk > mondeling, en eigen waarneming is het sterkst. Een mondelinge mededeling is de zwakste vorm.",
             "difficulty": 2,
-            "tags": ["St.500", "betrouwbaarheid informatie"]
+            "tags": [
+              "St.500",
+              "betrouwbaarheid informatie"
+            ]
           },
           {
             "id": "m3lb2q09",
@@ -503,7 +673,10 @@
             "correct": 1,
             "explanation": "Standaard 500: eigen waarneming is de sterkste vorm van controle-informatie, daarna extern-schriftelijk, dan intern-schriftelijk, en als zwakste mondeling.",
             "difficulty": 1,
-            "tags": ["St.500", "betrouwbaarheid informatie"]
+            "tags": [
+              "St.500",
+              "betrouwbaarheid informatie"
+            ]
           },
           {
             "id": "m3lb2q10",
@@ -521,7 +694,12 @@
             "correct": 3,
             "explanation": "Bij een goederenbeweging onderbouw je volledigheid van de omzet via de goederenbeweging (inkoop/voorraad/verkoop) en de brutomarge (St. 520). Dat is een verbandscontrole, geen saldobevestiging.",
             "difficulty": 2,
-            "tags": ["St.520", "verbandscontrole", "volledigheid", "typologie"]
+            "tags": [
+              "St.520",
+              "verbandscontrole",
+              "volledigheid",
+              "typologie"
+            ]
           },
           {
             "id": "m3lb2q11",
@@ -538,7 +716,10 @@
             "correct": 0,
             "explanation": "Functiescheiding: beschikken - bewaren - registreren - controleren (en uitvoeren). Een doorbroken functiescheiding is een opzet-/bestaanszwakte die het frauderisico verhoogt.",
             "difficulty": 2,
-            "tags": ["functiescheiding", "interne beheersing"]
+            "tags": [
+              "functiescheiding",
+              "interne beheersing"
+            ]
           },
           {
             "id": "m3lb2q12",
@@ -556,7 +737,11 @@
             "correct": 3,
             "explanation": "De bonuspuntenverplichting is een schatting van toekomstige inwisseling -> Standaard 540, bewering waardering (en volledigheid omdat een verplichting niet te laag mag zijn).",
             "difficulty": 2,
-            "tags": ["St.540", "schattingen", "waardering"]
+            "tags": [
+              "St.540",
+              "schattingen",
+              "waardering"
+            ]
           },
           {
             "id": "m3lb2q13",
@@ -574,7 +759,11 @@
             "correct": 2,
             "explanation": "Een structureel slecht presterend actief is een impairment-trigger: toets de realiseerbare waarde tegen de boekwaarde en herzie eventueel de afschrijvingstermijn. Dit raakt de bewering waardering.",
             "difficulty": 2,
-            "tags": ["impairment", "waardering", "St.540"]
+            "tags": [
+              "impairment",
+              "waardering",
+              "St.540"
+            ]
           },
           {
             "id": "m3lb2q14",
@@ -592,7 +781,11 @@
             "correct": 1,
             "explanation": "Beperkte zekerheid (2400) = inlichtingen + cijferanalyse, geen werkingstoetsing, geen uitvoeringsmaterialiteit/520-drempels. Redelijke zekerheid = systeemgericht (werking) + uitgebreid gegevensgericht.",
             "difficulty": 3,
-            "tags": ["St.2400", "zekerheidsniveau", "aard werkzaamheden"]
+            "tags": [
+              "St.2400",
+              "zekerheidsniveau",
+              "aard werkzaamheden"
+            ]
           },
           {
             "id": "m3lb2q15",
@@ -606,23 +799,39 @@
               "De effectieve werking van de interne beheersing toetsen",
               "Een uitvoeringsmaterialiteit met 520-drempelanalyses hanteren"
             ],
-            "correct": [0, 1],
+            "correct": [
+              0,
+              1
+            ],
             "explanation": "Bij beperkte zekerheid (2400) zijn inlichtingen + cijferanalyse de kern. Werkingstoetsing en uitvoeringsmaterialiteit/520-drempels horen bij een controle (redelijke zekerheid), niet bij een beoordeling.",
             "difficulty": 2,
-            "tags": ["St.2400", "aard werkzaamheden", "materialiteit"]
+            "tags": [
+              "St.2400",
+              "aard werkzaamheden",
+              "materialiteit"
+            ]
           },
           {
             "id": "m3lb2q16",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "scoreChance": 50,
             "scoreChanceLabel": "midden",
             "context": "Sunpanels: de directie heeft een resultaatafhankelijke bonus en kan journaalposten forceren.",
             "prompt": "Het risico dat het management de interne beheersing omzeilt en de cijfers stuurt, heet management ___ (Standaard 240).",
-            "answer": "override",
-            "accept": ["override", "override of controls", "overschrijving"],
             "explanation": "Management override of controls (St. 240) is een verplicht te onderkennen frauderisico; je toetst onder meer ongebruikelijke journaalposten en schattingen op bias.",
             "difficulty": 2,
-            "tags": ["St.240", "fraude", "management override"]
+            "tags": [
+              "St.240",
+              "fraude",
+              "management override"
+            ],
+            "options": [
+              "bias",
+              "collusie",
+              "override",
+              "tendentie"
+            ],
+            "correct": 2
           },
           {
             "id": "m3lb2q17",
@@ -640,7 +849,11 @@
             "correct": 1,
             "explanation": "Instinker: bij 2400 wel een materialiteit, maar geen uitvoeringsmaterialiteit en geen 520-drempelanalyses. Cijferanalyse mag - maar niet met de drempel-/projectiemechaniek van een controle.",
             "difficulty": 3,
-            "tags": ["instinker", "St.2400", "materialiteit"]
+            "tags": [
+              "instinker",
+              "St.2400",
+              "materialiteit"
+            ]
           },
           {
             "id": "m3lb2q18",
@@ -658,7 +871,12 @@
             "correct": 1,
             "explanation": "Een lage (protocol)materialiteit dwingt tot meer en diepere werkzaamheden: sterk gegevensgericht/detail, gericht op verschuiving van niet-subsidiabel naar subsidiabel en dubbel declareren (St. 800/320).",
             "difficulty": 2,
-            "tags": ["materialiteit", "subsidie", "St.800", "gegevensgericht"]
+            "tags": [
+              "materialiteit",
+              "subsidie",
+              "St.800",
+              "gegevensgericht"
+            ]
           },
           {
             "id": "m3lb2q19",
@@ -676,7 +894,12 @@
             "correct": 1,
             "explanation": "Ook bij een beoordeling onderken je het frauderisico/tendentie, maar de werkzaamheden blijven inlichtingen + cijferanalyse (beperkte zekerheid). Bij aanwijzingen voor een materiële afwijking voer je aanvullende werkzaamheden uit (St. 2400/240).",
             "difficulty": 3,
-            "tags": ["St.2400", "St.240", "tendentie", "aard werkzaamheden"]
+            "tags": [
+              "St.2400",
+              "St.240",
+              "tendentie",
+              "aard werkzaamheden"
+            ]
           },
           {
             "id": "m3lb2q20",
@@ -694,7 +917,12 @@
             "correct": 1,
             "explanation": "De denklijn eindigt met het gevolg: vertaal de bevinding naar het oordeel (St. 705/2400). Materieel + niet-diepgaand -> beperking; materieel + diepgaand -> afkeurend (afwijking) of onthouding (beperking in de controle).",
             "difficulty": 3,
-            "tags": ["gevolg", "verklaring", "St.705", "St.2400"]
+            "tags": [
+              "gevolg",
+              "verklaring",
+              "St.705",
+              "St.2400"
+            ]
           }
         ]
       }

@@ -33,7 +33,11 @@
             "correct": 2,
             "explanation": "Persoonsgericht onderzoek = NBA-Handreiking 1112, geen COS-Standaard. In de CA kost het verwijzen naar 4400N/5500N de helft van de punten - een klassieke val.",
             "difficulty": 3,
-            "tags": ["opdrachtsoorten", "Hr.1112", "persoonsgericht"]
+            "tags": [
+              "opdrachtsoorten",
+              "Hr.1112",
+              "persoonsgericht"
+            ]
           },
           {
             "id": "m1l3q2",
@@ -42,11 +46,20 @@
             "scoreChanceLabel": "midden",
             "context": "Grass BV: een onderneming laat vrijwillig assurance verstrekken bij haar duurzaamheids-/maatschappelijk verslag.",
             "prompt": "Welke Standaard is van toepassing?",
-            "options": ["Standaard 3000A", "Standaard 3810N", "Standaard 3400", "Standaard 4410"],
+            "options": [
+              "Standaard 3000A",
+              "Standaard 3810N",
+              "Standaard 3400",
+              "Standaard 4410"
+            ],
             "correct": 1,
             "explanation": "Assurance bij duurzaamheidsverslaggeving -> Standaard 3810N (toetsing aan het Stramien). 3000A is de algemene kapstok; 3810N is de specifieke.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.3810N", "duurzaamheid"]
+            "tags": [
+              "opdrachtsoorten",
+              "St.3810N",
+              "duurzaamheid"
+            ]
           },
           {
             "id": "m1l3q3",
@@ -64,7 +77,11 @@
             "correct": 1,
             "explanation": "Een schadeberekening tegen polisvoorwaarden is een onderzoek van een specifiek overzicht/element (805) of toekomstgerichte component (3400). De polis vormt de criteria.",
             "difficulty": 3,
-            "tags": ["opdrachtsoorten", "St.805", "St.3400"]
+            "tags": [
+              "opdrachtsoorten",
+              "St.805",
+              "St.3400"
+            ]
           },
           {
             "id": "m1l3q4",
@@ -73,15 +90,32 @@
             "scoreChanceLabel": "hoog",
             "prompt": "Koppel de opdracht aan het juiste kader (let op de non-assurance-soorten).",
             "pairs": [
-              {"left": "Samenstellen jaarrekening/vermogensopstelling (Sweet Pepper)", "right": "4410"},
-              {"left": "Subsidie-eindafrekening (Property XL, Tankprof)", "right": "800"},
-              {"left": "Due diligence voor een koper (Sweet Pepper, Mondzorg)", "right": "5500N"},
-              {"left": "Persoonsgericht fraudeonderzoek (Sweet Pepper)", "right": "NBA-Hr 1112"},
-              {"left": "Assurance duurzaamheidsverslag (Grass)", "right": "3810N"}
+              {
+                "left": "Samenstellen jaarrekening/vermogensopstelling (Sweet Pepper)",
+                "right": "4410"
+              },
+              {
+                "left": "Subsidie-eindafrekening (Property XL, Tankprof)",
+                "right": "800"
+              },
+              {
+                "left": "Due diligence voor een koper (Sweet Pepper, Mondzorg)",
+                "right": "5500N"
+              },
+              {
+                "left": "Persoonsgericht fraudeonderzoek (Sweet Pepper)",
+                "right": "NBA-Hr 1112"
+              },
+              {
+                "left": "Assurance duurzaamheidsverslag (Grass)",
+                "right": "3810N"
+              }
             ],
             "explanation": "De instellingstoets test de hele waaier. Let vooral op de niet-COS-opdracht (persoonsgericht = Hr 1112) en de non-assurance-soorten (4410, 5500N).",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten"]
+            "tags": [
+              "opdrachtsoorten"
+            ]
           },
           {
             "id": "m1l3q5",
@@ -98,7 +132,10 @@
             "correct": 2,
             "explanation": "Samenstellen (4410) geeft geen zekerheid -> non-assurance. Ook 4400N, 5500N en Hr 1112 zijn non-assurance. 2400/700/3810N zijn wel assurance.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "assurance"]
+            "tags": [
+              "opdrachtsoorten",
+              "assurance"
+            ]
           },
           {
             "id": "m1l3q6",
@@ -115,7 +152,11 @@
             "correct": 0,
             "explanation": "Beide zijn non-assurance, maar verschillend: 4400N rapporteert feitelijke bevindingen over afgesproken werkzaamheden; 4410 stelt de jaarrekening samen.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.4400N", "St.4410"]
+            "tags": [
+              "opdrachtsoorten",
+              "St.4400N",
+              "St.4410"
+            ]
           }
         ]
       }
@@ -141,7 +182,12 @@
             "correct": 1,
             "explanation": "Terugkerende val: de ViO is alleen voor assurance. Bij samenstellen/advies toets je objectiviteit via de VGBA. In de CA's wordt 'ViO erbij halen' bij non-assurance fout gerekend.",
             "difficulty": 3,
-            "tags": ["aanvaarding", "ViO", "VGBA", "non-assurance"]
+            "tags": [
+              "aanvaarding",
+              "ViO",
+              "VGBA",
+              "non-assurance"
+            ]
           },
           {
             "id": "m2l4q2",
@@ -159,7 +205,11 @@
             "correct": 1,
             "explanation": "VGBA art. 15a: collegiaal overleg met de voorgaande accountant. Zeker bij een lopend geschil komen relevante signalen zo boven tafel.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "VGBA", "art.15a"]
+            "tags": [
+              "aanvaarding",
+              "VGBA",
+              "art.15a"
+            ]
           },
           {
             "id": "m2l4q3",
@@ -177,7 +227,11 @@
             "correct": 1,
             "explanation": "Persoonlijke band + aantrekkelijke opdracht = vertrouwdheids-/eigenbelangbedreiging van de objectiviteit. Maatregel: andere accountant/partner inzetten, eventueel OKB.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "VGBA", "objectiviteit"]
+            "tags": [
+              "aanvaarding",
+              "VGBA",
+              "objectiviteit"
+            ]
           },
           {
             "id": "m2l4q4",
@@ -195,7 +249,11 @@
             "correct": 1,
             "explanation": "Vastgoed is een hoog-risicosector voor witwassen -> verscherpt cliëntenonderzoek en UBO-vaststelling, ook van betrokken partijen.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "Wwft", "UBO"]
+            "tags": [
+              "aanvaarding",
+              "Wwft",
+              "UBO"
+            ]
           },
           {
             "id": "m2l4q5",
@@ -213,7 +271,12 @@
             "correct": 1,
             "explanation": "Zwart geld + branchemisstanden = integriteits-/NOCLAR-signalen. Acceptatie alleen bij een integere cliënt (NVKS art. 5); wees alert op niet-naleving.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "NVKS", "NOCLAR", "integriteit"]
+            "tags": [
+              "aanvaarding",
+              "NVKS",
+              "NOCLAR",
+              "integriteit"
+            ]
           },
           {
             "id": "m2l4q6",
@@ -227,10 +290,19 @@
               "NVKS (art. 5 integere cliënt, art. 6 kwaliteitsstelsel)",
               "IFRS 15 (opbrengstverantwoording)"
             ],
-            "correct": [0, 1, 2],
+            "correct": [
+              0,
+              1,
+              2
+            ],
             "explanation": "Het vaste acceptatie-rijtje: VGBA + Wwft + NVKS (+ ViO bij assurance, + NV NOCLAR bij signalen). IFRS 15 is verslaggeving, geen acceptatieregel.",
             "difficulty": 2,
-            "tags": ["aanvaarding", "VGBA", "Wwft", "NVKS"]
+            "tags": [
+              "aanvaarding",
+              "VGBA",
+              "Wwft",
+              "NVKS"
+            ]
           }
         ]
       }
@@ -256,7 +328,11 @@
             "correct": 1,
             "explanation": "Standaard 530: projecteer de fout op de populatie en vergelijk met de toelaatbare fout. Overschrijding -> geen conclusie mogelijk, management laten onderzoeken/corrigeren.",
             "difficulty": 3,
-            "tags": ["risico", "St.530", "steekproef"]
+            "tags": [
+              "risico",
+              "St.530",
+              "steekproef"
+            ]
           },
           {
             "id": "m3l4q2",
@@ -274,7 +350,11 @@
             "correct": 1,
             "explanation": "Een atypische (afwijkende) fout sluit je uit van projectie (530.13), maar je telt het effect wel apart mee. Soms aanleiding voor integrale controle van dat deel.",
             "difficulty": 3,
-            "tags": ["risico", "St.530", "atypisch"]
+            "tags": [
+              "risico",
+              "St.530",
+              "atypisch"
+            ]
           },
           {
             "id": "m3l4q3",
@@ -292,7 +372,11 @@
             "correct": 1,
             "explanation": "Standaard 620: gebruik het werk van een deskundige, maar beoordeel diens competentie/objectiviteit en of zijn werk geschikte controle-informatie oplevert.",
             "difficulty": 2,
-            "tags": ["risico", "St.620", "deskundige"]
+            "tags": [
+              "risico",
+              "St.620",
+              "deskundige"
+            ]
           },
           {
             "id": "m3l4q4",
@@ -310,7 +394,12 @@
             "correct": 1,
             "explanation": "Volledigheid van omzet/fee -> verbandscontrole + cijferanalyse (520), leunend op de IT-controls. Een saldobevestiging raakt bestaan, niet volledigheid.",
             "difficulty": 2,
-            "tags": ["risico", "St.520", "verbandscontrole", "volledigheid"]
+            "tags": [
+              "risico",
+              "St.520",
+              "verbandscontrole",
+              "volledigheid"
+            ]
           },
           {
             "id": "m3l4q5",
@@ -328,7 +417,12 @@
             "correct": 1,
             "explanation": "Application controls zijn alleen betrouwbaar als de GITC (wijzigingsbeheer, toegang, etc.) effectief zijn. Dan volstaat vaak een 'test of one'.",
             "difficulty": 3,
-            "tags": ["risico", "IT", "GITC", "St.330"]
+            "tags": [
+              "risico",
+              "IT",
+              "GITC",
+              "St.330"
+            ]
           },
           {
             "id": "m3l4q6",
@@ -346,7 +440,11 @@
             "correct": 1,
             "explanation": "Standaard 540: backtesting van vorige schattingen, model/veronderstellingen challengen, en de schattingsonzekerheid + toelichting beoordelen.",
             "difficulty": 2,
-            "tags": ["risico", "St.540", "schattingen"]
+            "tags": [
+              "risico",
+              "St.540",
+              "schattingen"
+            ]
           },
           {
             "id": "m3l4q7",
@@ -364,7 +462,11 @@
             "correct": 1,
             "explanation": "Een prestatie-/marktsignaal is een impairment-trigger: toets de terugverdiencapaciteit en de afschrijvingstermijn (te lang = te hoge boekwaarde).",
             "difficulty": 2,
-            "tags": ["risico", "impairment", "waardering"]
+            "tags": [
+              "risico",
+              "impairment",
+              "waardering"
+            ]
           },
           {
             "id": "m3l4q8",
@@ -382,7 +484,12 @@
             "correct": 1,
             "explanation": "Subsidies: tendentie tot te hoge/onterechte verantwoording. Daarom is de protocol-materialiteit laag en werk je sterk gegevensgericht (vaak integrale detailcontrole).",
             "difficulty": 2,
-            "tags": ["risico", "subsidie", "St.800", "rechtmatigheid"]
+            "tags": [
+              "risico",
+              "subsidie",
+              "St.800",
+              "rechtmatigheid"
+            ]
           },
           {
             "id": "m3l4q9",
@@ -400,7 +507,12 @@
             "correct": 1,
             "explanation": "Standaard 501: bijwonen van de telling, beide richtingen, om bestaan én volledigheid van de voorraad/activa te onderbouwen.",
             "difficulty": 2,
-            "tags": ["risico", "St.501", "bestaan", "voorraad"]
+            "tags": [
+              "risico",
+              "St.501",
+              "bestaan",
+              "voorraad"
+            ]
           }
         ]
       }
@@ -426,7 +538,11 @@
             "correct": 1,
             "explanation": "Standaard 720: 'lezen' en op inconsistenties van materieel belang letten. Geen controle, geen assurance bij het bestuursverslag.",
             "difficulty": 2,
-            "tags": ["verklaring", "St.720", "andere informatie"]
+            "tags": [
+              "verklaring",
+              "St.720",
+              "andere informatie"
+            ]
           },
           {
             "id": "m4l3q2",
@@ -444,7 +560,10 @@
             "correct": 1,
             "explanation": "Niet-gecorrigeerde inconsistentie -> melden in de sectie 'Andere informatie'. Dat raakt niet het oordeel over de jaarrekening zelf.",
             "difficulty": 3,
-            "tags": ["verklaring", "St.720"]
+            "tags": [
+              "verklaring",
+              "St.720"
+            ]
           },
           {
             "id": "m4l3q3",
@@ -462,7 +581,11 @@
             "correct": 1,
             "explanation": "Bij subsidiecontroles bepaalt de protocol-materialiteitstabel de strekking. 8,33% valt in dit voorbeeld in de bandbreedte 'verklaring met beperking'.",
             "difficulty": 3,
-            "tags": ["verklaring", "St.800", "materialiteit"]
+            "tags": [
+              "verklaring",
+              "St.800",
+              "materialiteit"
+            ]
           },
           {
             "id": "m4l3q4",
@@ -480,7 +603,12 @@
             "correct": 1,
             "explanation": "Bij oob's bepaalt art. 11 EU-verordening de minimuminhoud van het (aanvullende) accountantsverslag aan de organen belast met governance.",
             "difficulty": 3,
-            "tags": ["verklaring", "EU-Vo", "oob", "rapportage"]
+            "tags": [
+              "verklaring",
+              "EU-Vo",
+              "oob",
+              "rapportage"
+            ]
           },
           {
             "id": "m4l3q5",
@@ -498,7 +626,11 @@
             "correct": 1,
             "explanation": "Materiële, niet-diepgaande afwijking die niet wordt gecorrigeerd -> oordeel met beperking. Speelt fraude, dan heroverwegen of een beperking toereikend is.",
             "difficulty": 2,
-            "tags": ["verklaring", "St.705", "St.450"]
+            "tags": [
+              "verklaring",
+              "St.705",
+              "St.450"
+            ]
           },
           {
             "id": "m4l3q6",
@@ -515,7 +647,11 @@
             "correct": 1,
             "explanation": "Adequaat toegelicht -> ongewijzigd (goedkeurend) oordeel + aparte continuïteitssectie (570). Niet adequaat -> modificeren. (Klassieke valkuil: niet automatisch clausuleren.)",
             "difficulty": 2,
-            "tags": ["verklaring", "St.570", "continuiteit"]
+            "tags": [
+              "verklaring",
+              "St.570",
+              "continuiteit"
+            ]
           },
           {
             "id": "m4l3q7",
@@ -532,7 +668,11 @@
             "correct": 1,
             "explanation": "701 (KAM) geldt alleen bij oob's. Verwar het niet met de benadrukking (706) of de continuïteitssectie (570).",
             "difficulty": 2,
-            "tags": ["verklaring", "St.701", "oob"]
+            "tags": [
+              "verklaring",
+              "St.701",
+              "oob"
+            ]
           }
         ]
       }
@@ -558,7 +698,12 @@
             "correct": 1,
             "explanation": "Bewust manipuleren van periodetoerekening met medewerking management = fraudesignaal (240/250). Aanpak herzien, breder onderzoeken en escaleren naar governance.",
             "difficulty": 3,
-            "tags": ["fraude", "St.240", "St.250", "NOCLAR"]
+            "tags": [
+              "fraude",
+              "St.240",
+              "St.250",
+              "NOCLAR"
+            ]
           },
           {
             "id": "m5l4q2",
@@ -576,7 +721,11 @@
             "correct": 1,
             "explanation": "IB-leemte -> verhoogd (fraude)risico op betalingen. Data-analyse op gewijzigde IBAN's + rapporteren in de managementletter/het accountantsverslag (260/265).",
             "difficulty": 2,
-            "tags": ["fraude", "data-analyse", "St.265"]
+            "tags": [
+              "fraude",
+              "data-analyse",
+              "St.265"
+            ]
           },
           {
             "id": "m5l4q3",
@@ -594,7 +743,10 @@
             "correct": 1,
             "explanation": "Branche-/arbeidsmisstanden zijn NOCLAR-signalen (mogelijke wetsovertreding). Wegen mee bij integriteit (NVKS art. 5) en bij je alertheid (St. 250).",
             "difficulty": 2,
-            "tags": ["NOCLAR", "integriteit"]
+            "tags": [
+              "NOCLAR",
+              "integriteit"
+            ]
           },
           {
             "id": "m5l4q4",
@@ -611,7 +763,11 @@
             "correct": 1,
             "explanation": "Management override is altijd een significant risico -> journaalpostentoets (240.31) en aandacht voor ongebruikelijke/handmatige boekingen.",
             "difficulty": 2,
-            "tags": ["fraude", "St.240", "management-override"]
+            "tags": [
+              "fraude",
+              "St.240",
+              "management-override"
+            ]
           },
           {
             "id": "m5l4q5",
@@ -625,10 +781,18 @@
               "Geheimhouding (VGBA) wijkt voor een wettelijke meldplicht",
               "Accijnsfraude meld je bij FIU-Nederland"
             ],
-            "correct": [0, 1, 2],
+            "correct": [
+              0,
+              1,
+              2
+            ],
             "explanation": "NOCLAR en Wwft zijn twee sporen; cliënt nooit tippen; geheimhouding wijkt voor de wet. Accijns -> Douane/Meldpunt Accijns, niet FIU.",
             "difficulty": 3,
-            "tags": ["NOCLAR", "Wwft", "tipping-off"]
+            "tags": [
+              "NOCLAR",
+              "Wwft",
+              "tipping-off"
+            ]
           }
         ]
       }
@@ -654,7 +818,11 @@
             "correct": 1,
             "explanation": "Een ingeschakelde specialist behoort tot het assuranceteam. Een financieel belang is in beginsel verboden (ViO art. 31); alleen toegestaan bij immateriële betekenis zonder invloed.",
             "difficulty": 3,
-            "tags": ["ViO", "art.31", "assuranceteam"]
+            "tags": [
+              "ViO",
+              "art.31",
+              "assuranceteam"
+            ]
           },
           {
             "id": "m6l3q2",
@@ -672,7 +840,12 @@
             "correct": 1,
             "explanation": "Een instrument bouwen dat je later zelf in de controle 'tegenkomt' = zelftoetsing. ViO art. 18: niet meebeslissen; toets via het beslisschema van Ph 1131.",
             "difficulty": 3,
-            "tags": ["ViO", "art.18", "zelftoetsing", "Ph1131"]
+            "tags": [
+              "ViO",
+              "art.18",
+              "zelftoetsing",
+              "Ph1131"
+            ]
           },
           {
             "id": "m6l3q3",
@@ -690,7 +863,12 @@
             "correct": 1,
             "explanation": "De Accountantskamer berecht individuele accountants. Het kantoor raak je via de (kwaliteits)beleidsbepaler; dan komt het kwaliteitsstelsel (NVKS art. 6) in beeld.",
             "difficulty": 2,
-            "tags": ["tuchtrecht", "Wta", "NVKS", "Accountantskamer"]
+            "tags": [
+              "tuchtrecht",
+              "Wta",
+              "NVKS",
+              "Accountantskamer"
+            ]
           },
           {
             "id": "m6l3q4",
@@ -707,7 +885,10 @@
             "correct": 1,
             "explanation": "Het assuranceteam = opdrachtteam + allen die rechtstreeks invloed op de uitkomst kunnen uitoefenen (ook netwerkpersonen/specialisten). Daarom telt hun onafhankelijkheid mee.",
             "difficulty": 2,
-            "tags": ["ViO", "assuranceteam"]
+            "tags": [
+              "ViO",
+              "assuranceteam"
+            ]
           },
           {
             "id": "m6l3q5",
@@ -724,7 +905,11 @@
             "correct": 1,
             "explanation": "Cooling-off = ViO art. 38. Verwar het niet met art. 28 (duur/vertrouwdheid), art. 44 (persoonlijke relaties) of art. 18 (samenloop advies/assurance).",
             "difficulty": 2,
-            "tags": ["ViO", "art.38", "cooling-off"]
+            "tags": [
+              "ViO",
+              "art.38",
+              "cooling-off"
+            ]
           }
         ]
       }
@@ -750,7 +935,11 @@
             "correct": 1,
             "explanation": "Duurzaamheidsverslaggeving kent dubbele materialiteit (DMA): de impact op mens/milieu én de financiële impact op de onderneming, per onderwerp.",
             "difficulty": 3,
-            "tags": ["materialiteit", "duurzaamheid", "DMA"]
+            "tags": [
+              "materialiteit",
+              "duurzaamheid",
+              "DMA"
+            ]
           },
           {
             "id": "m7l3q2",
@@ -767,7 +956,10 @@
             "correct": 1,
             "explanation": "Data-analyse maakt integrale (100%) toetsing en gerichte uitzonderingsanalyse mogelijk - krachtiger dan een steekproef, maar vergt betrouwbare data/IT.",
             "difficulty": 2,
-            "tags": ["data-analyse", "techniek"]
+            "tags": [
+              "data-analyse",
+              "techniek"
+            ]
           },
           {
             "id": "m7l3q3",
@@ -784,7 +976,11 @@
             "correct": 1,
             "explanation": "Een geautomatiseerde controle werkt deterministisch; bij effectieve GITC (m.n. wijzigingsbeheer) volstaat het bewijs dat hij één keer juist werkt.",
             "difficulty": 3,
-            "tags": ["IT", "GITC", "test-of-one"]
+            "tags": [
+              "IT",
+              "GITC",
+              "test-of-one"
+            ]
           },
           {
             "id": "m7l3q4",
@@ -801,7 +997,10 @@
             "correct": 1,
             "explanation": "De LOR (580) is aanvullend bewijs; het is nooit een vervanging voor zelf te verkrijgen, sterkere controle-informatie.",
             "difficulty": 1,
-            "tags": ["St.580", "techniek"]
+            "tags": [
+              "St.580",
+              "techniek"
+            ]
           },
           {
             "id": "m7l3q5",
@@ -819,19 +1018,30 @@
             "correct": 1,
             "explanation": "De claim bestond al op balansdatum; de schikking geeft nadere informatie -> in de jaarrekening verwerken (adjusting event).",
             "difficulty": 2,
-            "tags": ["St.560", "gebeurtenissen-na-balansdatum"]
+            "tags": [
+              "St.560",
+              "gebeurtenissen-na-balansdatum"
+            ]
           },
           {
             "id": "m7l3q6",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "scoreChance": 55,
             "scoreChanceLabel": "midden",
             "prompt": "De controle waarbij je inkoop, voorraad en verkoop met elkaar in verband brengt om de volledigheid van de omzet vast te stellen, heet een ___.",
-            "answer": "verbandscontrole",
-            "accept": ["verbandscontrole", "verbandscontroles", "verbandcontrole"],
             "explanation": "De verbandscontrole (geld-/goederenbeweging) is dé volledigheidscontrole bij handels-/productieondernemingen.",
             "difficulty": 1,
-            "tags": ["verbandscontrole", "volledigheid"]
+            "tags": [
+              "verbandscontrole",
+              "volledigheid"
+            ],
+            "options": [
+              "cijferbeoordeling",
+              "verbandscontrole",
+              "saldobevestiging",
+              "deelwaarneming"
+            ],
+            "correct": 1
           }
         ]
       }
@@ -855,11 +1065,20 @@
               "scoreChance": 35,
               "scoreChanceLabel": "laag",
               "prompt": "Onder de CSRD is de wettelijk vereiste mate van zekerheid bij duurzaamheidsrapportage (voorlopig)...?",
-              "options": ["Redelijke zekerheid", "Beperkte mate van zekerheid", "Geen zekerheid", "Absolute zekerheid"],
+              "options": [
+                "Redelijke zekerheid",
+                "Beperkte mate van zekerheid",
+                "Geen zekerheid",
+                "Absolute zekerheid"
+              ],
               "correct": 1,
               "explanation": "De CSRD vereist (in de eerste fase) beperkte mate van zekerheid; redelijke zekerheid kan later/optioneel. Werk je conform Standaard 3810N.",
               "difficulty": 2,
-              "tags": ["duurzaamheid", "St.3810N", "CSRD"]
+              "tags": [
+                "duurzaamheid",
+                "St.3810N",
+                "CSRD"
+              ]
             },
             {
               "id": "m8l1q2",
@@ -877,7 +1096,11 @@
               "correct": 1,
               "explanation": "De criteria zijn het gehanteerde verslaggevingsstelsel: GRI of ESRS. Daaraan toets je of de informatie getrouw/toereikend is.",
               "difficulty": 2,
-              "tags": ["duurzaamheid", "GRI", "ESRS"]
+              "tags": [
+                "duurzaamheid",
+                "GRI",
+                "ESRS"
+              ]
             },
             {
               "id": "m8l1q3",
@@ -895,7 +1118,11 @@
               "correct": 1,
               "explanation": "KPI's uit niet-financiële systemen vergen aandacht voor de primaire registratie (opzet/bestaan/werking), aansluiting en het risico op manipulatie.",
               "difficulty": 2,
-              "tags": ["duurzaamheid", "IT", "St.3810N"]
+              "tags": [
+                "duurzaamheid",
+                "IT",
+                "St.3810N"
+              ]
             },
             {
               "id": "m8l1q4",
@@ -913,7 +1140,11 @@
               "correct": 1,
               "explanation": "Niet-kwantificeerbare claims = greenwashingrisico. Onder 720 lees je en let je op inconsistenties van materieel belang; geen assurance bij het bestuursverslag.",
               "difficulty": 2,
-              "tags": ["duurzaamheid", "St.720", "greenwashing"]
+              "tags": [
+                "duurzaamheid",
+                "St.720",
+                "greenwashing"
+              ]
             },
             {
               "id": "m8l1q5",
@@ -931,7 +1162,11 @@
               "correct": 1,
               "explanation": "Een sleutelonderwerp dat materieel en diepgaand afwijkt -> afkeurend. Dezelfde 2x2-matrix als bij de jaarrekening, nu binnen 3810N.",
               "difficulty": 3,
-              "tags": ["duurzaamheid", "verklaring", "St.3810N"]
+              "tags": [
+                "duurzaamheid",
+                "verklaring",
+                "St.3810N"
+              ]
             }
           ]
         },
@@ -955,7 +1190,10 @@
               "correct": 1,
               "explanation": "Persoonsgericht onderzoek (Hr 1112) onderzoekt het handelen van een persoon, verifiërend, met hoor en wederhoor. Het is geen assurance en geen COS-Standaard.",
               "difficulty": 3,
-              "tags": ["Hr.1112", "persoonsgericht"]
+              "tags": [
+                "Hr.1112",
+                "persoonsgericht"
+              ]
             },
             {
               "id": "m8l2q2",
@@ -972,7 +1210,10 @@
               "correct": 1,
               "explanation": "Hoor en wederhoor is essentieel bij persoonsgericht onderzoek (Hr 1112): concept voorleggen, redelijke reactietermijn, zorgvuldigheid/objectiviteit.",
               "difficulty": 2,
-              "tags": ["Hr.1112", "hoor-en-wederhoor"]
+              "tags": [
+                "Hr.1112",
+                "hoor-en-wederhoor"
+              ]
             },
             {
               "id": "m8l2q3",
@@ -990,7 +1231,11 @@
               "correct": 1,
               "explanation": "Overschrijdt de beste schatting van de fout de toelaatbare fout, dan geen conclusie mogelijk: management laten onderzoeken/corrigeren en aanvullend werk verrichten (530).",
               "difficulty": 3,
-              "tags": ["St.530", "steekproef", "materialiteit"]
+              "tags": [
+                "St.530",
+                "steekproef",
+                "materialiteit"
+              ]
             },
             {
               "id": "m8l2q4",
@@ -1007,7 +1252,10 @@
               "correct": 1,
               "explanation": "Standaard 620: beoordeel competentie/objectiviteit van de deskundige én of zijn werk geschikte en toereikende controle-informatie oplevert.",
               "difficulty": 2,
-              "tags": ["St.620", "deskundige"]
+              "tags": [
+                "St.620",
+                "deskundige"
+              ]
             },
             {
               "id": "m8l2q5",
@@ -1025,7 +1273,12 @@
               "correct": 1,
               "explanation": "Bij uitbesteding steun je op een 3402-/ISAE 3402-rapportage; ontbreekt die, dan zelf (of via IT-auditor) de interne beheersing van de serviceorganisatie onderzoeken.",
               "difficulty": 2,
-              "tags": ["St.402", "ISAE3402", "serviceorganisatie", "IT"]
+              "tags": [
+                "St.402",
+                "ISAE3402",
+                "serviceorganisatie",
+                "IT"
+              ]
             }
           ]
         }

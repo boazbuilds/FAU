@@ -23,7 +23,11 @@
             "correct": 0,
             "explanation": "Controle van een historische jaarrekening valt onder de 700-serie en geeft redelijke mate van zekerheid. 2400 geeft slechts beperkte zekerheid; 4410 geeft geen zekerheid.",
             "difficulty": 1,
-            "tags": ["opdrachtsoorten", "St.700", "controle"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.700",
+              "controle"
+            ],
             "scoreChance": 80,
             "scoreChanceLabel": "hoog"
           },
@@ -40,7 +44,12 @@
             "correct": 0,
             "explanation": "Het opstellen/samenstellen van een jaarrekening valt onder Standaard 4410 en levert geen zekerheid op. 4400N is voor overeengekomen specifieke werkzaamheden met rapport van feitelijke bevindingen.",
             "difficulty": 1,
-            "tags": ["opdrachtsoorten", "St.4410", "samenstellen", "non-assurance"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.4410",
+              "samenstellen",
+              "non-assurance"
+            ],
             "scoreChance": 75,
             "scoreChanceLabel": "hoog"
           },
@@ -57,7 +66,12 @@
             "correct": 3,
             "explanation": "Een beoordeling geeft beperkte zekerheid. Standaard 2410 mag alleen wanneer je ook de (huis)accountant bent die de jaarrekening controleert; anders geldt 2400.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.2400", "St.2410", "beoordeling"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.2400",
+              "St.2410",
+              "beoordeling"
+            ],
             "scoreChance": 65,
             "scoreChanceLabel": "midden"
           },
@@ -74,7 +88,12 @@
             "correct": 1,
             "explanation": "Tussentijdse cijfers beoordeeld door de eigen/huisaccountant vallen onder Standaard 2410. Was je niet de huisaccountant, dan zou 2400 gelden.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.2410", "beoordeling", "tussentijds"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.2410",
+              "beoordeling",
+              "tussentijds"
+            ],
             "scoreChance": 55,
             "scoreChanceLabel": "midden"
           },
@@ -92,7 +111,12 @@
             "correct": 2,
             "explanation": "Een volledige verantwoording opgesteld volgens een bijzonder kader (zoals een subsidieregeling) valt onder Standaard 800. 805 is voor een enkel element en 810 voor samenvattende overzichten.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.800", "subsidie", "Tankprof"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.800",
+              "subsidie",
+              "Tankprof"
+            ],
             "scoreChance": 70,
             "scoreChanceLabel": "hoog"
           },
@@ -109,7 +133,11 @@
             "correct": 1,
             "explanation": "De controle van een afzonderlijk element/overzicht (zoals alleen de omzet) valt onder Standaard 805. 800 betreft een volledige verantwoording, 810 een samenvatting van een gecontroleerde jaarrekening.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.805", "element"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.805",
+              "element"
+            ],
             "scoreChance": 60,
             "scoreChanceLabel": "midden"
           },
@@ -126,7 +154,11 @@
             "correct": 2,
             "explanation": "Een verklaring bij samenvattende/verkorte overzichten die zijn afgeleid van een gecontroleerde jaarrekening valt onder Standaard 810.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.810", "samenvatting"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.810",
+              "samenvatting"
+            ],
             "scoreChance": 45,
             "scoreChanceLabel": "midden"
           },
@@ -144,7 +176,12 @@
             "correct": 3,
             "explanation": "Assurance bij een duurzaamheidsverslag valt onder de specifieke Standaard 3810N. 3000A is de algemene kapstok voor assurance-opdrachten anders dan controle/beoordeling van historische informatie.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.3810N", "duurzaamheid", "Grass"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.3810N",
+              "duurzaamheid",
+              "Grass"
+            ],
             "scoreChance": 60,
             "scoreChanceLabel": "midden"
           },
@@ -161,7 +198,11 @@
             "correct": 1,
             "explanation": "Standaard 3000A is de algemene assurance-standaard voor andere dan historische financiele informatie. 3810N is specifiek voor duurzaamheidsverslaggeving.",
             "difficulty": 3,
-            "tags": ["opdrachtsoorten", "St.3000A", "assurance"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.3000A",
+              "assurance"
+            ],
             "scoreChance": 50,
             "scoreChanceLabel": "midden"
           },
@@ -178,7 +219,11 @@
             "correct": 0,
             "explanation": "Onderzoek van prognoses/begrotingen (toekomstgerichte financiele informatie) valt onder Standaard 3400.",
             "difficulty": 1,
-            "tags": ["opdrachtsoorten", "St.3400", "prognose"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.3400",
+              "prognose"
+            ],
             "scoreChance": 60,
             "scoreChanceLabel": "midden"
           },
@@ -196,7 +241,13 @@
             "correct": 3,
             "explanation": "Een due diligence ter ondersteuning van een transactiebesluit valt onder Standaard 5500N. Dit is een non-assurance-opdracht: er wordt geen zekerheid verstrekt, maar de objectiviteit (VGBA art. 11) blijft gelden.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.5500N", "due diligence", "Great Choice", "non-assurance"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.5500N",
+              "due diligence",
+              "Great Choice",
+              "non-assurance"
+            ],
             "scoreChance": 60,
             "scoreChanceLabel": "midden"
           },
@@ -214,7 +265,13 @@
             "correct": 2,
             "explanation": "Onderzoek naar het handelen van een persoon is een persoonsgericht onderzoek: NBA-Handreiking 1112 (met hoor en wederhoor), geen COS-Standaard. Verwijzen naar 4400N/5500N is een klassieke val.",
             "difficulty": 3,
-            "tags": ["opdrachtsoorten", "Hr.1112", "persoonsgericht", "Sweet Pepper", "non-assurance"],
+            "tags": [
+              "opdrachtsoorten",
+              "Hr.1112",
+              "persoonsgericht",
+              "Sweet Pepper",
+              "non-assurance"
+            ],
             "scoreChance": 55,
             "scoreChanceLabel": "midden"
           },
@@ -231,7 +288,12 @@
             "correct": 0,
             "explanation": "Vooraf overeengekomen specifieke werkzaamheden met enkel een rapport van feitelijke bevindingen vallen onder Standaard 4400N. Er wordt geen enkele vorm van zekerheid verstrekt.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.4400N", "AUP", "non-assurance"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.4400N",
+              "AUP",
+              "non-assurance"
+            ],
             "scoreChance": 65,
             "scoreChanceLabel": "midden"
           },
@@ -248,7 +310,13 @@
             "correct": 2,
             "explanation": "Rapportage over interne beheersing bij een serviceorganisatie valt onder ISAE 3402 / Standaard 3402. Dit is een assurance-opdracht.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.3402", "ISAE3402", "serviceorganisatie", "assurance"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.3402",
+              "ISAE3402",
+              "serviceorganisatie",
+              "assurance"
+            ],
             "scoreChance": 40,
             "scoreChanceLabel": "laag"
           },
@@ -266,7 +334,13 @@
             "correct": 3,
             "explanation": "Ook bij een oob blijft een controle van de historische jaarrekening onder de 700-serie vallen (met aanvullende oob-eisen). Het blijft een controle met redelijke mate van zekerheid.",
             "difficulty": 1,
-            "tags": ["opdrachtsoorten", "St.700", "controle", "oob", "International Publishing"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.700",
+              "controle",
+              "oob",
+              "International Publishing"
+            ],
             "scoreChance": 65,
             "scoreChanceLabel": "midden"
           },
@@ -283,7 +357,13 @@
             "correct": 2,
             "explanation": "De zekerheidsladder: samenstellen (geen) < beoordeling 2400 (beperkt) < controle 700 (redelijk/hoog). Samenstellen levert nooit zekerheid op.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "zekerheidsladder", "St.700", "St.2400", "St.4410"],
+            "tags": [
+              "opdrachtsoorten",
+              "zekerheidsladder",
+              "St.700",
+              "St.2400",
+              "St.4410"
+            ],
             "scoreChance": 70,
             "scoreChanceLabel": "hoog"
           },
@@ -300,7 +380,12 @@
             "correct": 2,
             "explanation": "ViO geldt alleen bij assurance-opdrachten, zoals de controle (700). Bij non-assurance (4410, 4400N, 5500N) geldt ViO niet, al blijft de VGBA met objectiviteit (art. 11) van kracht.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "ViO", "assurance", "VGBA"],
+            "tags": [
+              "opdrachtsoorten",
+              "ViO",
+              "assurance",
+              "VGBA"
+            ],
             "scoreChance": 60,
             "scoreChanceLabel": "midden"
           },
@@ -317,7 +402,12 @@
             "correct": 2,
             "explanation": "Samenstellen (4410) is non-assurance: er wordt geen zekerheid verstrekt. 2400, 800 en 3810N zijn alle assurance-opdrachten.",
             "difficulty": 1,
-            "tags": ["opdrachtsoorten", "assurance", "St.4410", "non-assurance"],
+            "tags": [
+              "opdrachtsoorten",
+              "assurance",
+              "St.4410",
+              "non-assurance"
+            ],
             "scoreChance": 65,
             "scoreChanceLabel": "midden"
           }
@@ -340,7 +430,12 @@
             "correct": 0,
             "explanation": "Beide geven beperkte zekerheid. Standaard 2410 is specifiek voor tussentijdse informatie beoordeeld door de eigen/huisaccountant; ben je dat niet, dan val je terug op 2400.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.2400", "St.2410", "onderscheid"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.2400",
+              "St.2410",
+              "onderscheid"
+            ],
             "scoreChance": 55,
             "scoreChanceLabel": "midden"
           },
@@ -357,7 +452,12 @@
             "correct": 3,
             "explanation": "2410 is voorbehouden aan de eigen/huisaccountant. Ben je dat niet, dan geldt voor een beoordeling Standaard 2400. Klassieke val: ten onrechte 2410 kiezen.",
             "difficulty": 3,
-            "tags": ["opdrachtsoorten", "St.2400", "St.2410", "instinker"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.2400",
+              "St.2410",
+              "instinker"
+            ],
             "scoreChance": 50,
             "scoreChanceLabel": "midden"
           },
@@ -374,7 +474,12 @@
             "correct": 0,
             "explanation": "800 = controle van een volledige verantwoording met bijzonder doel (bijv. een complete subsidieverantwoording); 805 = controle van een enkel overzicht/element (bijv. alleen de omzet). Beide zijn assurance.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.800", "St.805", "onderscheid"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.800",
+              "St.805",
+              "onderscheid"
+            ],
             "scoreChance": 55,
             "scoreChanceLabel": "midden"
           },
@@ -391,7 +496,13 @@
             "correct": 3,
             "explanation": "3000A is de algemene kapstok voor assurance bij andere dan historische financiele informatie; 3810N is de specifieke standaard voor duurzaamheidsverslaggeving.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.3000A", "St.3810N", "onderscheid", "duurzaamheid"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.3000A",
+              "St.3810N",
+              "onderscheid",
+              "duurzaamheid"
+            ],
             "scoreChance": 50,
             "scoreChanceLabel": "midden"
           },
@@ -408,7 +519,13 @@
             "correct": 1,
             "explanation": "5500N is gericht op een transactie/besluitvorming (bijv. due diligence); 1112 is een persoonsgericht onderzoek naar het handelen van iemand, met hoor en wederhoor. Beide zijn non-assurance.",
             "difficulty": 3,
-            "tags": ["opdrachtsoorten", "St.5500N", "Hr.1112", "onderscheid", "non-assurance"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.5500N",
+              "Hr.1112",
+              "onderscheid",
+              "non-assurance"
+            ],
             "scoreChance": 55,
             "scoreChanceLabel": "midden"
           },
@@ -422,10 +539,17 @@
               "Samenstellen (4410)",
               "Due diligence (5500N)"
             ],
-            "correct": [0, 1],
+            "correct": [
+              0,
+              1
+            ],
             "explanation": "Assurance: 700-serie en 2400 (en bv. 2410/3000A/3400/3810N/800/805/810/3402). Samenstellen (4410) en due diligence (5500N) zijn non-assurance.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "assurance", "non-assurance"],
+            "tags": [
+              "opdrachtsoorten",
+              "assurance",
+              "non-assurance"
+            ],
             "scoreChance": 60,
             "scoreChanceLabel": "midden"
           },
@@ -439,10 +563,18 @@
               "Beoordeling (Standaard 2400)",
               "Transactiegerelateerde adviesdienst / due diligence (Standaard 5500N)"
             ],
-            "correct": [0, 1, 3],
+            "correct": [
+              0,
+              1,
+              3
+            ],
             "explanation": "4410, 4400N en 5500N zijn non-assurance en geven geen zekerheid. Een beoordeling (2400) geeft wel zekerheid: beperkte mate.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "non-assurance", "zekerheidsladder"],
+            "tags": [
+              "opdrachtsoorten",
+              "non-assurance",
+              "zekerheidsladder"
+            ],
             "scoreChance": 60,
             "scoreChanceLabel": "midden"
           },
@@ -451,14 +583,30 @@
             "type": "matching",
             "prompt": "Koppel elke korte casusbeschrijving aan de juiste Standaard/het juiste kader.",
             "pairs": [
-              {"left": "Vrijwillige assurance bij duurzaamheidsverslag (Grass)", "right": "Standaard 3810N"},
-              {"left": "Due diligence bij overname (Great Choice)", "right": "Standaard 5500N"},
-              {"left": "Controle volledige subsidieverantwoording (Tankprof)", "right": "Standaard 800"},
-              {"left": "Beoordeling jaarrekening (LEGAL notarissen)", "right": "Standaard 2400"}
+              {
+                "left": "Vrijwillige assurance bij duurzaamheidsverslag (Grass)",
+                "right": "Standaard 3810N"
+              },
+              {
+                "left": "Due diligence bij overname (Great Choice)",
+                "right": "Standaard 5500N"
+              },
+              {
+                "left": "Controle volledige subsidieverantwoording (Tankprof)",
+                "right": "Standaard 800"
+              },
+              {
+                "left": "Beoordeling jaarrekening (LEGAL notarissen)",
+                "right": "Standaard 2400"
+              }
             ],
             "explanation": "Duurzaamheid->3810N; transactie/due diligence->5500N; volledige subsidieverantwoording->800; beoordeling jaarrekening->2400.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "matching", "casus"],
+            "tags": [
+              "opdrachtsoorten",
+              "matching",
+              "casus"
+            ],
             "scoreChance": 55,
             "scoreChanceLabel": "midden"
           },
@@ -467,40 +615,74 @@
             "type": "matching",
             "prompt": "Koppel elke opdracht aan het bijbehorende zekerheidsniveau.",
             "pairs": [
-              {"left": "Controle (700-serie)", "right": "Redelijke (hoge) mate van zekerheid"},
-              {"left": "Beoordeling (2400)", "right": "Beperkte mate van zekerheid"},
-              {"left": "Samenstellen (4410)", "right": "Geen zekerheid"},
-              {"left": "Overeengekomen specifieke werkzaamheden (4400N)", "right": "Geen zekerheid (rapport feitelijke bevindingen)"}
+              {
+                "left": "Controle (700-serie)",
+                "right": "Redelijke (hoge) mate van zekerheid"
+              },
+              {
+                "left": "Beoordeling (2400)",
+                "right": "Beperkte mate van zekerheid"
+              },
+              {
+                "left": "Samenstellen (4410)",
+                "right": "Geen zekerheid"
+              },
+              {
+                "left": "Overeengekomen specifieke werkzaamheden (4400N)",
+                "right": "Geen zekerheid (rapport feitelijke bevindingen)"
+              }
             ],
             "explanation": "Zekerheidsladder: controle = redelijk; beoordeling = beperkt; samenstellen en 4400N = geen zekerheid.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "matching", "zekerheidsladder"],
+            "tags": [
+              "opdrachtsoorten",
+              "matching",
+              "zekerheidsladder"
+            ],
             "scoreChance": 65,
             "scoreChanceLabel": "midden"
           },
           {
             "id": "m1lb2q10",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "prompt": "Een persoonsgericht/forensisch onderzoek naar het handelen van een individu valt niet onder een COS-Standaard, maar onder NBA-Handreiking ___.",
-            "answer": "1112",
-            "accept": ["1112", "Handreiking 1112", "Hr 1112", "Hr1112", "1112 persoonsgericht"],
             "explanation": "Persoonsgerichte onderzoeken vallen onder NBA-Handreiking 1112 (met hoor en wederhoor), niet onder 4400N of 5500N.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "Hr.1112", "persoonsgericht"],
+            "tags": [
+              "opdrachtsoorten",
+              "Hr.1112",
+              "persoonsgericht"
+            ],
             "scoreChance": 50,
-            "scoreChanceLabel": "midden"
+            "scoreChanceLabel": "midden",
+            "options": [
+              "1131",
+              "1112",
+              "1141",
+              "1124"
+            ],
+            "correct": 1
           },
           {
             "id": "m1lb2q11",
-            "type": "fill_blank",
+            "type": "multiple_choice",
             "prompt": "Het samenstellen van een jaarrekening valt onder Standaard ___ en geeft geen zekerheid.",
-            "answer": "4410",
-            "accept": ["4410", "Standaard 4410", "COS 4410"],
             "explanation": "Samenstellen = Standaard 4410, een non-assurance-opdracht zonder zekerheid.",
             "difficulty": 1,
-            "tags": ["opdrachtsoorten", "St.4410", "samenstellen"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.4410",
+              "samenstellen"
+            ],
             "scoreChance": 55,
-            "scoreChanceLabel": "midden"
+            "scoreChanceLabel": "midden",
+            "options": [
+              "4400N",
+              "4410",
+              "2400",
+              "700"
+            ],
+            "correct": 1
           },
           {
             "id": "m1lb2q12",
@@ -516,7 +698,14 @@
             "correct": 1,
             "explanation": "Beoordeling jaarrekening = 2400 (geen huisaccountant->niet 2410); due diligence = 5500N; prognose = 3400; volledige subsidieverantwoording = 800.",
             "difficulty": 3,
-            "tags": ["opdrachtsoorten", "Mondzorg", "St.2400", "St.5500N", "St.3400", "St.800"],
+            "tags": [
+              "opdrachtsoorten",
+              "Mondzorg",
+              "St.2400",
+              "St.5500N",
+              "St.3400",
+              "St.800"
+            ],
             "scoreChance": 45,
             "scoreChanceLabel": "midden"
           },
@@ -534,7 +723,14 @@
             "correct": 0,
             "explanation": "Beoordeling = 2400; samenstellen NIWO = 4410; prognose = 3400; overeengekomen specifieke werkzaamheden TLN = 4400N.",
             "difficulty": 3,
-            "tags": ["opdrachtsoorten", "De Groot", "St.2400", "St.4410", "St.3400", "St.4400N"],
+            "tags": [
+              "opdrachtsoorten",
+              "De Groot",
+              "St.2400",
+              "St.4410",
+              "St.3400",
+              "St.4400N"
+            ],
             "scoreChance": 45,
             "scoreChanceLabel": "midden"
           },
@@ -552,7 +748,13 @@
             "correct": 1,
             "explanation": "Volledige subsidieverantwoording = 800; een schadeberekening tegen polisvoorwaarden is een onderzoek van een specifiek overzicht/element (805) en/of een toekomstgerichte component (3400), met de polis als criterium.",
             "difficulty": 3,
-            "tags": ["opdrachtsoorten", "Property XL", "St.800", "St.805", "St.3400"],
+            "tags": [
+              "opdrachtsoorten",
+              "Property XL",
+              "St.800",
+              "St.805",
+              "St.3400"
+            ],
             "scoreChance": 35,
             "scoreChanceLabel": "laag"
           },
@@ -569,7 +771,13 @@
             "correct": 1,
             "explanation": "Samenstellen = 4410 (non-assurance, geen zekerheid). ViO geldt alleen bij assurance; de VGBA - waaronder objectiviteit (art. 11) - blijft altijd gelden.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "St.4410", "VGBA", "ViO", "non-assurance"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.4410",
+              "VGBA",
+              "ViO",
+              "non-assurance"
+            ],
             "scoreChance": 55,
             "scoreChanceLabel": "midden"
           },
@@ -586,7 +794,13 @@
             "correct": 1,
             "explanation": "Persoonsgericht onderzoek valt onder NBA-Handreiking 1112 (met hoor en wederhoor). 4400N (specifieke werkzaamheden) of 5500N (transactie) kiezen is een klassieke val.",
             "difficulty": 2,
-            "tags": ["opdrachtsoorten", "Hr.1112", "St.4400N", "instinker", "persoonsgericht"],
+            "tags": [
+              "opdrachtsoorten",
+              "Hr.1112",
+              "St.4400N",
+              "instinker",
+              "persoonsgericht"
+            ],
             "scoreChance": 50,
             "scoreChanceLabel": "midden"
           },
@@ -604,7 +818,12 @@
             "correct": 0,
             "explanation": "Het betreft een controle van de historische jaarrekening: de 700-serie (redelijke mate van zekerheid). De POC-methode raakt de uitvoering, niet de opdrachtsoort.",
             "difficulty": 1,
-            "tags": ["opdrachtsoorten", "St.700", "controle", "Sunpanels"],
+            "tags": [
+              "opdrachtsoorten",
+              "St.700",
+              "controle",
+              "Sunpanels"
+            ],
             "scoreChance": 55,
             "scoreChanceLabel": "midden"
           }
