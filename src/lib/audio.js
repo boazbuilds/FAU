@@ -6,6 +6,10 @@ import { writable } from 'svelte/store';
 // Naam van het spelende nummer (voor de UI). Leeg = niets/uit.
 export const nowPlaying = writable('');
 
+// Of de audio echt "draait" (AudioContext === running). false = nog geen geluid
+// mogelijk (bv. iOS vóór de eerste geslaagde gesture). Voedt een UI-hint.
+export const audioReady = writable(false);
+
 let ctx = null;
 let master = null; // master gain → destination (via compressor)
 let musicBus = null; // muziek loopt hierdoor (apart regelbaar)
@@ -631,18 +635,47 @@ function silentPing() {
   }
 }
 
+// iOS-specifiek: een stil, loopend <audio>-element. Web Audio wordt op iOS
+// gedempt door de hardware mute-switch; een spelend media-element zet iOS in de
+// 'playback'-sessie waardoor Web Audio hoorbaar wordt, óók met de mute-switch
+// aan. (Aanpak van unmute.js / Howler.) Geen asset nodig: korte stille WAV.
+let silentEl = null;
+const SILENT_WAV =
+  'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
+function kickSilentMediaElement() {
+  if (typeof Audio === 'undefined') return;
+  try {
+    if (!silentEl) {
+      silentEl = new Audio(SILENT_WAV);
+      silentEl.loop = true;
+      silentEl.volume = 0.0001; // praktisch stil, maar wél "echte" media
+      silentEl.setAttribute('playsinline', '');
+    }
+    const p = silentEl.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  } catch (e) {
+    /* genegeerd */
+  }
+}
+
 // Roep aan vanuit een user-gesture. Idempotent en zelfherstellend: als de
 // context nog 'suspended' is (iOS slikt de eerste resume soms), probeert de
 // volgende gesture het opnieuw.
+function syncReady() {
+  audioReady.set(!!ctx && ctx.state === 'running');
+}
+
 export function unlock() {
   if (!ensure()) return;
+  kickSilentMediaElement(); // iOS: open de media-sessie (mute-switch omzeilen)
   silentPing();
   const afterResume = () => {
+    syncReady();
     if (musicOn) startMusic();
   };
   if (ctx.state === 'suspended') {
     const p = ctx.resume();
-    if (p && typeof p.then === 'function') p.then(afterResume).catch(() => {});
+    if (p && typeof p.then === 'function') p.then(afterResume).catch(syncReady);
     else afterResume();
   } else {
     afterResume();
@@ -657,6 +690,7 @@ export function armGestureUnlock() {
   gestureBound = true;
   const handler = () => {
     unlock();
+    syncReady();
     // Pas afkoppelen als het echt gelukt is (anders volgende tik opnieuw proberen).
     if (ctx && ctx.state === 'running' && (musicTimer || !musicOn)) {
       window.removeEventListener('pointerdown', handler);
@@ -670,10 +704,12 @@ export function armGestureUnlock() {
   window.addEventListener('touchend', handler, { passive: true });
   window.addEventListener('keydown', handler);
   window.addEventListener('click', handler);
-  // Herstel na terugkeren naar het tabblad (mobiel suspend't de context).
+  // Herstel na terugkeren naar het tabblad (mobiel suspend't de context én
+  // pauzeert het stille media-element).
   document.addEventListener('visibilitychange', () => {
-    if (!document.hidden && ctx && ctx.state === 'suspended' && musicOn) {
-      ctx.resume().then(() => startMusic()).catch(() => {});
+    if (!document.hidden && musicOn) {
+      kickSilentMediaElement();
+      if (ctx && ctx.state === 'suspended') ctx.resume().then(() => startMusic()).catch(() => {});
     }
   });
 }

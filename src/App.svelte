@@ -16,6 +16,7 @@
   import { modules } from './lib/content.js';
   import { getIdentity } from './lib/sync.js';
   import * as audio from './lib/audio.js';
+  import { audioReady } from './lib/audio.js';
   import TopBar from './components/TopBar.svelte';
   import Path from './screens/Path.svelte';
   import Session from './screens/Session.svelte';
@@ -85,6 +86,15 @@
 </script>
 
 <div class="mx-auto min-h-[100dvh] w-full max-w-md">
+  {#if $settings.music !== false && !$audioReady}
+    <!-- iOS/mobiel: geluid kan pas na een echte tik. Directe click-handler = betrouwbaarst. -->
+    <button
+      type="button"
+      class="fixed inset-x-0 top-0 z-30 mx-auto w-full max-w-md bg-cyan-500/90 py-2 text-center font-pixel text-[9px] uppercase tracking-wide text-slate-950"
+      on:click={() => audio.unlock()}
+    >🔊 Tik om geluid aan te zetten</button>
+  {/if}
+
   {#if !chromeless}
     <TopBar />
   {/if}
