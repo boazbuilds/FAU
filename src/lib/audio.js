@@ -36,18 +36,13 @@ function ensure() {
     const AC = window.AudioContext || window.webkitAudioContext;
     ctx = new AC();
 
-    // Master-keten: alles → compressor (lijmt de mix, maakt 'm luider/strakker) → out.
-    const comp = ctx.createDynamicsCompressor();
-    comp.threshold.value = -18;
-    comp.knee.value = 24;
-    comp.ratio.value = 3;
-    comp.attack.value = 0.006;
-    comp.release.value = 0.22;
-    comp.connect(ctx.destination);
-
+    // Master → destination, RECHTSTREEKS. Géén DynamicsCompressor in het pad:
+    // op iOS Safari geeft die node soms stilte (bug). De testtoon werkte (direct
+    // naar destination) terwijl alles via de compressor stil bleef → compressor
+    // eruit. Iets lagere master-gain compenseert het verlies aan "loudness glue".
     master = ctx.createGain();
-    master.gain.value = 0.92;
-    master.connect(comp);
+    master.gain.value = 0.8;
+    master.connect(ctx.destination);
 
     // Muziek: alle stemmen → musicSum → sidechain-VCA (musicBus) → master.
     // De VCA "dipt" bij elke kick = de pompende dance-ademhaling.
