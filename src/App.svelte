@@ -40,16 +40,12 @@
     maybeRemind(get(profile), get(settings), todayNumber());
 
     // Audio ontgrendelen op de eerste interactie (browser-autoplaybeleid).
+    // armGestureUnlock blijft proberen tot het echt lukt (mobiel faalt vaak de
+    // 1e keer) en herstelt na terugkeren naar het tabblad.
     const s = get(settings);
     audio.setSfxEnabled(s.sound !== false);
     audio.setMusicEnabled(s.music !== false);
-    const unlock = () => {
-      audio.unlock();
-      window.removeEventListener('pointerdown', unlock);
-      window.removeEventListener('keydown', unlock);
-    };
-    window.addEventListener('pointerdown', unlock);
-    window.addEventListener('keydown', unlock);
+    audio.armGestureUnlock();
 
     // Online (uit tenzij geconfigureerd): account + cloud-sync.
     initAuth();
