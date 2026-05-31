@@ -53,6 +53,7 @@ describe('audio-engine', () => {
       audio.setSfxEnabled(true);
       audio.setMusicEnabled(true);
       audio.unlock();
+      audio.armGestureUnlock();
       audio.correct(0);
       audio.correct(7);
       audio.wrong();

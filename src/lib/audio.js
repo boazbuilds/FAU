@@ -358,6 +358,44 @@ function stab(t, freqs, dur, gain = 0.06) {
   freqs.forEach((fq) => supersaw(t, fq, dur, { gain, voices: 5, detune: 18, lp: 3400, release: 0.05, reverb: 0.2, delay: 0.18 }));
 }
 
+// Zingende lead-noot: square+saw met een vleugje galm/delay = een melodie die
+// blijft hangen. Dit geeft de tracks een herkenbare "topline".
+function lead(t, freq, dur, opts = {}) {
+  if (!ctx) return;
+  const { gain = 0.12, lp = 5200, release = 0.08, type = 'square' } = opts;
+  const f = ctx.createBiquadFilter();
+  const g = ctx.createGain();
+  f.type = 'lowpass';
+  f.frequency.value = lp;
+  env(g, t, dur, gain, 0.005, release);
+  const o1 = ctx.createOscillator();
+  o1.type = type;
+  o1.frequency.value = freq;
+  const o2 = ctx.createOscillator();
+  o2.type = 'sawtooth';
+  o2.frequency.value = freq;
+  o2.detune.value = 6; // lichte chorus
+  o1.connect(f);
+  o2.connect(f);
+  f.connect(g);
+  g.connect(musicSum);
+  sendTo(g, reverbSend, gain * 0.18);
+  sendTo(g, delaySend, gain * 0.28);
+  o1.start(t); o1.stop(t + dur + release + 0.03);
+  o2.start(t); o2.stop(t + dur + release + 0.03);
+}
+
+// Melodieregels per track (16 stappen; null = stilte). Tonen = halve-toon-offset
+// t.o.v. de grondtoon van de huidige maat (+ octaaf via de play-functie).
+const MEL = {
+  stadium: [0, null, 7, null, 12, null, 7, 10, 12, null, 10, 7, null, 5, 3, null],
+  turbo: [12, 12, null, 10, 7, null, 12, null, 14, 12, 10, null, 7, null, 10, null],
+  chiptune: [0, 4, 7, 12, 7, 4, null, 7, 9, null, 7, 4, 0, null, 2, null],
+  synthwave: [7, null, null, 5, null, 4, null, null, 3, null, 5, null, 7, null, null, null],
+  pursuit: [0, null, 3, null, 7, 6, 7, null, 10, null, 7, null, 3, null, 0, null],
+  menu: [null, null, 7, null, null, null, 5, null, null, null, 3, null, null, null, null, null]
+};
+
 function pad(t, freqs, dur, gain = 0.05) {
   freqs.forEach((fq) => supersaw(t, fq, dur, { gain, voices: 7, detune: 18, lp: 2600, release: 0.5, reverb: 0.35, delay: 0.12 }));
 }
@@ -396,10 +434,8 @@ const TRACKS = {
       if (s === 4 || s === 12) snare(t, 0.3);
       if (s % 4 === 2) hat(t, false, 0.05);
       if (s === 0) pad(t, b.chord.map((c) => F(b.root + 12 + c)), 1.7, 0.045);
-      if (s % 4 === 0) {
-        const tn = b.chord[(s / 4) % b.chord.length];
-        supersaw(t, F(b.root + 24 + tn), 0.4, { gain: 0.05, voices: 2, detune: 8, lp: 2600, release: 0.3 });
-      }
+      const m = MEL.menu[s];
+      if (m != null) lead(t, F(b.root + 24 + m), 0.4, { gain: 0.07, lp: 2800, release: 0.3 });
     }
   },
   stadium: {
@@ -416,8 +452,10 @@ const TRACKS = {
       if (s % 4 !== 0) sawBass(t, F(b.root - 12 + (s % 2 ? 12 : 0)), 0.1, 0.24, 1100);
       else sawBass(t, F(b.root - 12), 0.1, 0.26, 1000);
       const tn = b.chord[s % b.chord.length];
-      supersaw(t, F(b.root + 24 + tn), 0.1, { gain: 0.09, voices: 5, detune: 14, lp: 4400, release: 0.04 });
+      supersaw(t, F(b.root + 24 + tn), 0.1, { gain: 0.06, voices: 5, detune: 14, lp: 4400, release: 0.04 });
       if (s === 0) stab(t, b.chord.slice(0, 3).map((c) => F(b.root + 12 + c)), 0.45, 0.05);
+      const m = MEL.stadium[s];
+      if (m != null) lead(t, F(b.root + 24 + m), 0.14, { gain: 0.13, lp: 5000 });
     }
   },
   turbo: {
@@ -434,10 +472,8 @@ const TRACKS = {
         stab(t, b.chord.slice(0, 3).map((c) => F(b.root + 12 + c)), 0.15, 0.06);
       }
       if (s % 2 === 0) sawBass(t, F(b.root - 12), 0.11, 0.28, 1300);
-      if (s % 2 === 1) {
-        const tn = b.chord[s % b.chord.length];
-        supersaw(t, F(b.root + 36 + tn), 0.08, { gain: 0.06, voices: 3, detune: 18, lp: 5200, release: 0.03 });
-      }
+      const m = MEL.turbo[s];
+      if (m != null) lead(t, F(b.root + 24 + m), 0.11, { gain: 0.12, lp: 5600 });
     }
   },
   chiptune: {
@@ -450,9 +486,11 @@ const TRACKS = {
       if (s === 4 || s === 12) snare(t, 0.35);
       if (s % 2 === 1) hat(t, false, 0.05);
       if (s % 2 === 0) tone(F(b.root - 12), t, 0.12, { type: 'triangle', gain: 0.26, bus: musicSum, release: 0.02 });
+      // begeleidende arp zachtjes, plus een duidelijke chiptune-melodie erboven
       const arp = [0, b.chord[1], b.chord[2], b.chord[1]];
-      tone(F(b.root + 24 + arp[s % arp.length]), t, 0.09, { type: 'square', gain: 0.14, bus: musicSum, release: 0.03 });
-      if (s % 8 === 0) tone(F(b.root + 36), t, 0.06, { type: 'square', gain: 0.05, bus: musicSum });
+      tone(F(b.root + 24 + arp[s % arp.length]), t, 0.08, { type: 'square', gain: 0.08, bus: musicSum, release: 0.03 });
+      const m = MEL.chiptune[s];
+      if (m != null) lead(t, F(b.root + 24 + m), 0.1, { gain: 0.13, lp: 6000, type: 'square' });
     }
   },
   synthwave: {
@@ -466,10 +504,8 @@ const TRACKS = {
       if (s % 2 === 1) hat(t, false, 0.04);
       if (s % 4 === 0) sawBass(t, F(b.root - 12), 0.4, 0.2, 800);
       if (s === 0) pad(t, b.chord.map((c) => F(b.root + 12 + c)), 1.85, 0.045);
-      if (s % 2 === 0) {
-        const tn = b.chord[Math.floor(s / 2) % b.chord.length];
-        supersaw(t, F(b.root + 24 + tn), 0.18, { gain: 0.05, voices: 2, detune: 10, lp: 3000, release: 0.15 });
-      }
+      const m = MEL.synthwave[s];
+      if (m != null) lead(t, F(b.root + 12 + m), 0.5, { gain: 0.1, lp: 3200, release: 0.25, type: 'sawtooth' });
     }
   },
   pursuit: {
@@ -484,8 +520,10 @@ const TRACKS = {
       hat(t, s % 4 === 2, 0.08);
       sawBass(t, F(b.root - 12), 0.075, 0.24, 1500);
       const tn = b.chord[s % b.chord.length];
-      supersaw(t, F(b.root + 24 + tn), 0.09, { gain: 0.1, voices: 4, detune: 20, lp: 3900, release: 0.03 });
+      supersaw(t, F(b.root + 24 + tn), 0.09, { gain: 0.07, voices: 4, detune: 20, lp: 3900, release: 0.03 });
       if (s === 0) stab(t, b.chord.slice(0, 3).map((c) => F(b.root + 12 + c)), 0.4, 0.06);
+      const m = MEL.pursuit[s];
+      if (m != null) lead(t, F(b.root + 24 + m), 0.1, { gain: 0.12, lp: 4800, type: 'sawtooth' });
     }
   }
 };
@@ -519,7 +557,8 @@ export function startMusic(trackId) {
   if (!ensure()) return;
   if (trackId && TRACKS[trackId]) currentTrack = trackId;
   if (!musicOn) return;
-  if (ctx.state === 'suspended') ctx.resume();
+  // Mobiel suspend't de context regelmatig; altijd proberen te hervatten.
+  if (ctx.state === 'suspended') ctx.resume().catch(() => {});
   nowPlaying.set(TRACKS[currentTrack]?.name ?? '');
   if (musicTimer) return; // loopt al
   nextStepTime = ctx.currentTime + 0.08;
@@ -577,10 +616,66 @@ export function setContext(screen) {
 //  Aansturing
 // =========================================================================
 
+// Speelt een onhoorbare buffer af binnen de user-gesture. Dit is op iOS/Safari
+// vaak de enige manier om de AudioContext betrouwbaar te "ontgrendelen".
+function silentPing() {
+  if (!ctx) return;
+  try {
+    const buf = ctx.createBuffer(1, 1, ctx.sampleRate);
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+    src.connect(ctx.destination);
+    src.start(0);
+  } catch (e) {
+    /* genegeerd */
+  }
+}
+
+// Roep aan vanuit een user-gesture. Idempotent en zelfherstellend: als de
+// context nog 'suspended' is (iOS slikt de eerste resume soms), probeert de
+// volgende gesture het opnieuw.
 export function unlock() {
   if (!ensure()) return;
-  if (ctx.state === 'suspended') ctx.resume();
-  if (musicOn) startMusic();
+  silentPing();
+  const afterResume = () => {
+    if (musicOn) startMusic();
+  };
+  if (ctx.state === 'suspended') {
+    const p = ctx.resume();
+    if (p && typeof p.then === 'function') p.then(afterResume).catch(() => {});
+    else afterResume();
+  } else {
+    afterResume();
+  }
+}
+
+let gestureBound = false;
+// Bind globale gesture-handlers die de audio ontgrendelen. Blijven gebonden tot
+// de context echt draait én de muziek loopt (mobiel faalt vaak de 1e keer).
+export function armGestureUnlock() {
+  if (gestureBound || typeof window === 'undefined') return;
+  gestureBound = true;
+  const handler = () => {
+    unlock();
+    // Pas afkoppelen als het echt gelukt is (anders volgende tik opnieuw proberen).
+    if (ctx && ctx.state === 'running' && (musicTimer || !musicOn)) {
+      window.removeEventListener('pointerdown', handler);
+      window.removeEventListener('touchend', handler);
+      window.removeEventListener('keydown', handler);
+      window.removeEventListener('click', handler);
+      gestureBound = false;
+    }
+  };
+  window.addEventListener('pointerdown', handler, { passive: true });
+  window.addEventListener('touchend', handler, { passive: true });
+  window.addEventListener('keydown', handler);
+  window.addEventListener('click', handler);
+  // Herstel na terugkeren naar het tabblad (mobiel suspend't de context).
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && ctx && ctx.state === 'suspended' && musicOn) {
+      ctx.resume().then(() => startMusic()).catch(() => {});
+    }
+  });
 }
 
 export function setSfxEnabled(on) {
