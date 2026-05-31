@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { applyResult, isDue } from './srs.js';
-import { gradeShort, gradeMcq, gradeTrueFalse, matchFraction, gradeMatchResult, gradeMatch, normalize } from './grading.js';
+import { gradeShort, gradeMcq, gradeTrueFalse, matchFraction, gradeMatchResult, gradeMatch, normalize, buildScore, buildMaxPoints, gradeBuildResult } from './grading.js';
 import { predict } from './predict.js';
 import { levelFromXp, xpForAnswer, defaultProfile, migrateProfile } from './gamify.js';
 import { modules, allQuestions, questionById, questionsForLesson, tips, tipById, isObjective } from './content.js';
@@ -9,8 +9,8 @@ import { defaultProgress, ensureInit, isLessonUnlocked, isModuleUnlocked, starsF
 
 describe('content loader (merge + normalisatie)', () => {
   it('merget alle losse vragenbestanden samen', () => {
-    expect(modules.length).toBe(10); // m0–m9
-    expect(allQuestions.length).toBeGreaterThanOrEqual(465); // groeit als er content bijkomt
+    expect(modules.length).toBe(11); // m0–m9 + instellingstoets-module mi1
+    expect(allQuestions.length).toBeGreaterThanOrEqual(473); // groeit als er content bijkomt
     expect(tips.length).toBe(22);
   });
 
@@ -101,6 +101,47 @@ describe('grading', () => {
   it('truefalse en normalize', () => {
     expect(gradeTrueFalse({ correct: true }, true)).toBe(true);
     expect(normalize('Détéctie, risico!')).toBe('detectie risico');
+  });
+
+  it('casus_bouw: punten, juist/verkeerd slot, instinker/afleider, partial-drempels', () => {
+    const q = {
+      type: 'build',
+      blocks: [
+        { id: 'b1', role: 'kern', slot: 's1', points: 3 },
+        { id: 'b2', role: 'kern', slot: 's2', points: 2 },
+        { id: 'i1', role: 'instinker' },
+        { id: 'd1', role: 'afleider' }
+      ]
+    };
+    expect(buildMaxPoints(q)).toBe(5);
+    // alles juist → 1.0 → correct
+    expect(buildScore(q, { b1: 's1', b2: 's2' })).toBe(1);
+    expect(gradeBuildResult(q, { b1: 's1', b2: 's2' })).toBe('correct');
+    // kern in verkeerd slot = halve punten: (1.5 + 2)/5 = 0.7 → partial
+    expect(buildScore(q, { b1: 's2', b2: 's2' })).toBeCloseTo(0.7, 5);
+    expect(gradeBuildResult(q, { b1: 's2', b2: 's2' })).toBe('partial');
+    // instinker gekozen kapt 'correct' af op 'partial', ook al is de kern goed
+    expect(gradeBuildResult(q, { b1: 's1', b2: 's2', i1: 's1' })).toBe('partial');
+    // instinker/afleider leveren zelf 0 punten op
+    expect(buildScore(q, { i1: 's1', d1: 's1' })).toBe(0);
+    expect(gradeBuildResult(q, { i1: 's1' })).toBe('wrong');
+    // niets geplaatst → 0 → wrong
+    expect(buildScore(q, {})).toBe(0);
+  });
+
+  it('casus_bouw normaliseert naar type "build" met slots en blocks', () => {
+    const q = questionById['mi1ceb'];
+    expect(q).toBeTruthy();
+    expect(q.type).toBe('build');
+    expect(q.slots.length).toBeGreaterThanOrEqual(2);
+    expect(q.blocks.some((b) => b.role === 'kern')).toBe(true);
+    expect(q.blocks.some((b) => b.role === 'instinker')).toBe(true);
+    expect(buildMaxPoints(q)).toBe(15);
+  });
+
+  it('buildBossSession gebruikt de expliciete Eindbaas-vraag van module mi1', () => {
+    const ids = buildBossSession('mi1');
+    expect(ids).toEqual(['mi1ceb']); // de casus_bouw, niet een willekeurige trekking
   });
 });
 

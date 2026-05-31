@@ -17,11 +17,12 @@ const extra = readJson(join(contentDir, 'course/vragenbankextra.json'));
 const banks04 = [0, 1, 2, 3, 4].map((n) => readJson(join(contentDir, `course/vragenbankbank${n}.json`)));
 const moduleM9 = readJson(join(contentDir, 'course/vragenbankm9.json')); // definieert m9 (vóór bank9)
 const banks59 = [5, 6, 7, 8, 9].map((n) => readJson(join(contentDir, `course/vragenbankbank${n}.json`)));
+const examenMi1 = readJson(join(contentDir, 'course/examen-mi1.json'));
 const tipsData = readJson(join(contentDir, 'examtips.json'));
 
 // --- merge --- (m9-moduledefinitie vóór bank9, anders vallen die lessen weg)
 const course = JSON.parse(JSON.stringify(base));
-for (const ext of [casus, techniek, extra, ...banks04, moduleM9, ...banks59]) {
+for (const ext of [casus, techniek, extra, ...banks04, moduleM9, ...banks59, examenMi1]) {
   const addLessons = ext.addLessonsToModule || {};
   for (const m of course.modules) {
     if (addLessons[m.id]) m.lessons.push(...addLessons[m.id]);
@@ -104,13 +105,47 @@ for (const m of course.modules) {
         case 'fill_blank':
           if (!q.answer) errors.push(`${q.id}: fill_blank mist answer`);
           break;
+        case 'casus_bouw': {
+          const slots = q.slots ?? [];
+          const blocks = q.blocks ?? [];
+          if (slots.length < 1) errors.push(`${q.id}: casus_bouw heeft geen slots`);
+          if (blocks.length < 2) errors.push(`${q.id}: casus_bouw heeft < 2 bouwstenen`);
+          const slotIds = new Set();
+          for (const s of slots) {
+            if (!s.id || !s.label) errors.push(`${q.id}: slot mist id/label`);
+            if (slotIds.has(s.id)) errors.push(`${q.id}: dubbele slot-id '${s.id}'`);
+            slotIds.add(s.id);
+          }
+          const blockIds = new Set();
+          let kernCount = 0;
+          let kernPoints = 0;
+          for (const b of blocks) {
+            if (!b.id || !b.text) errors.push(`${q.id}: bouwsteen mist id/text`);
+            if (blockIds.has(b.id)) errors.push(`${q.id}: dubbele bouwsteen-id '${b.id}'`);
+            blockIds.add(b.id);
+            if (!['kern', 'instinker', 'afleider'].includes(b.role)) {
+              errors.push(`${q.id}: bouwsteen '${b.id}' heeft ongeldige role '${b.role}'`);
+            }
+            if (b.role === 'kern') {
+              kernCount++;
+              kernPoints += b.points ?? 0;
+              if (!(b.points > 0)) errors.push(`${q.id}: kern-bouwsteen '${b.id}' mist points>0`);
+              if (!slotIds.has(b.slot)) errors.push(`${q.id}: kern-bouwsteen '${b.id}' verwijst naar onbekend slot '${b.slot}'`);
+            }
+          }
+          if (kernCount < 1) errors.push(`${q.id}: casus_bouw heeft geen kern-bouwstenen`);
+          if (q.punten != null && q.punten !== kernPoints) {
+            warnings.push(`${q.id}: punten (${q.punten}) ≠ som kern-points (${kernPoints})`);
+          }
+          break;
+        }
         default:
           errors.push(`${q.id}: onbekend type '${q.type}'`);
       }
 
-      // bossvragen (lessen met boss:true) moeten objectief zijn
-      if (l.boss && !OBJECTIVE.has(q.type)) {
-        errors.push(`${q.id}: boss-les mag alleen objectieve typen bevatten`);
+      // bossvragen moeten objectief óf casus_bouw zijn (alle gesloten/auto-scoorbaar)
+      if (l.boss && !OBJECTIVE.has(q.type) && q.type !== 'casus_bouw') {
+        errors.push(`${q.id}: boss-les mag alleen objectieve typen of casus_bouw bevatten`);
       }
     }
   }

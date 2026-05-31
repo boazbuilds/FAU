@@ -1,0 +1,182 @@
+{
+  "meta": {
+    "extends": "vragenbank.json",
+    "title": "Instellingstoets-module 1 — Acceptatie & continuering (A/B/C)",
+    "note": "Eerste examen-module met sub-lessen A (kennis), B (techniek & tips) en C (Eindbaas: casus_bouw). C is de boss/poort."
+  },
+  "addModules": [
+    {
+      "id": "mi1",
+      "order": 20,
+      "icon": "🎓",
+      "title": "Instellingstoets · Acceptatie",
+      "description": "Examen-module in A/B/C-vorm: A kennis (opdrachtsoorten/zekerheid, VGBA/ViO/Wwft/NVKS), B techniek & tips, C Eindbaas — bouw het acceptatie-antwoord uit bouwstenen, net als in een echte CA.",
+      "lessons": [
+        {
+          "id": "mi1a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "mi1aq1",
+              "type": "multiple_choice",
+              "phase": "kennis",
+              "prompt": "Bij welk soort opdracht is de ViO (onafhankelijkheid) van toepassing?",
+              "options": [
+                "Bij elke opdracht die een accountant aanneemt",
+                "Alleen bij assurance-opdrachten (bv. controle 700, beoordeling 2400)",
+                "Alleen bij samenstellen (4410)",
+                "Alleen bij een due diligence (5500N)"
+              ],
+              "correct": 1,
+              "explanation": "De ViO geldt uitsluitend bij assurance. Bij non-assurance (4410/4400N/5500N/Hr 1112) borg je objectiviteit via de VGBA.",
+              "difficulty": 1,
+              "ref": "ViO art. 1 / VGBA art. 11",
+              "tags": ["aanvaarding", "ViO", "assurance"]
+            },
+            {
+              "id": "mi1aq2",
+              "type": "multiple_choice",
+              "phase": "kennis",
+              "prompt": "Een onderneming vraagt een volledige subsidieverantwoording te controleren volgens een subsidieregeling (bijzonder doel). Welke Standaard?",
+              "options": ["Standaard 805", "Standaard 810", "Standaard 800", "Standaard 4410"],
+              "correct": 2,
+              "explanation": "Een volledige verantwoording volgens een bijzonder kader valt onder Standaard 800. 805 = enkel element; 810 = samenvattend overzicht.",
+              "difficulty": 2,
+              "ref": "Standaard 800",
+              "tags": ["opdrachtsoorten", "St.800", "subsidie"]
+            },
+            {
+              "id": "mi1aq3",
+              "type": "multi_select",
+              "phase": "kennis",
+              "prompt": "Welke regelingen betrek je standaard bij klant-/opdrachtaanvaarding? (meerdere)",
+              "options": [
+                "VGBA (integriteit + objectiviteit)",
+                "Wwft (cliëntenonderzoek/UBO)",
+                "NVKS (art. 5 integere cliënt)",
+                "IFRS 15 (opbrengstverantwoording)"
+              ],
+              "correct": [0, 1, 2],
+              "explanation": "Vaste acceptatie-set: VGBA + Wwft + NVKS (+ ViO bij assurance). IFRS 15 is verslaggeving, geen acceptatieregel.",
+              "difficulty": 2,
+              "ref": "VGBA / Wwft / NVKS art. 5",
+              "tags": ["aanvaarding", "VGBA", "Wwft", "NVKS"]
+            },
+            {
+              "id": "mi1aq4",
+              "type": "multiple_choice",
+              "phase": "kennis",
+              "prompt": "Waar staat UBO voor in de Wwft?",
+              "options": [
+                "Uiteindelijk belanghebbende (Ultimate Beneficial Owner)",
+                "Uniform Bancair Onderzoek",
+                "Uitgebreid Boekenonderzoek",
+                "Uitvoerend Bestuursorgaan"
+              ],
+              "correct": 0,
+              "explanation": "UBO = de natuurlijke persoon die de cliënt uiteindelijk bezit/controleert (>25%). Vaststellen hoort bij het cliëntenonderzoek.",
+              "difficulty": 1,
+              "ref": "Wwft (cliëntenonderzoek)",
+              "tags": ["Wwft", "UBO", "aanvaarding"]
+            }
+          ]
+        },
+        {
+          "id": "mi1b",
+          "title": "B · Techniek & Tips",
+          "questions": [
+            {
+              "id": "mi1bq1",
+              "type": "multiple_choice",
+              "phase": "techniek",
+              "prompt": "Een kandidaat behandelt bij een 4410-samenstelopdracht uitgebreid de ViO. Wat is fout?",
+              "options": [
+                "Niets; de ViO geldt altijd",
+                "De ViO geldt alleen bij assurance; bij 4410 toets je objectiviteit via de VGBA (art. 11)",
+                "De ViO had vóór de VGBA gemoeten",
+                "Bij 4410 geldt geen enkele beroepsregel"
+              ],
+              "correct": 1,
+              "explanation": "Klassieke instinker: ViO is voorbehouden aan assurance. Bij samenstellen borg je je onpartijdigheid via de VGBA-objectiviteit.",
+              "difficulty": 2,
+              "ref": "ViO art. 1 / VGBA art. 11",
+              "tipRef": "tip10",
+              "tags": ["instinker", "ViO", "VGBA", "aanvaarding"]
+            },
+            {
+              "id": "mi1bq2",
+              "type": "multiple_choice",
+              "phase": "techniek",
+              "prompt": "Bij overname van een opdracht van een ander kantoor: welke VGBA-verplichting geldt specifiek?",
+              "options": [
+                "VGBA art. 15a: collegiaal overleg met de vorige accountant",
+                "VGBA art. 11: objectiviteit",
+                "ViO art. 38: cooling-off",
+                "Er geldt geen specifieke verplichting"
+              ],
+              "correct": 0,
+              "explanation": "Bij overname schrijft VGBA art. 15a collegiaal overleg met de voorgaande accountant voor (zijn er beroepsmatige bezwaren?).",
+              "difficulty": 2,
+              "ref": "VGBA art. 15a",
+              "tags": ["aanvaarding", "VGBA", "art.15a"]
+            },
+            {
+              "id": "mi1bq3",
+              "type": "matching",
+              "phase": "techniek",
+              "prompt": "Koppel elke opdracht aan het juiste zekerheidsniveau.",
+              "pairs": [
+                { "left": "Controle (700-serie)", "right": "Redelijke (hoge) zekerheid" },
+                { "left": "Beoordeling (2400)", "right": "Beperkte zekerheid" },
+                { "left": "Samenstellen (4410)", "right": "Geen zekerheid" },
+                { "left": "Overeengekomen specifieke werkzaamheden (4400N)", "right": "Geen zekerheid (feitelijke bevindingen)" }
+              ],
+              "explanation": "Zekerheidsladder: controle = redelijk; beoordeling = beperkt; samenstellen en 4400N = geen zekerheid.",
+              "difficulty": 2,
+              "ref": "Stramien / NV COS",
+              "tags": ["opdrachtsoorten", "zekerheidsladder"]
+            }
+          ]
+        },
+        {
+          "id": "mi1c",
+          "title": "C · Eindbaas",
+          "boss": true,
+          "questions": [
+            {
+              "id": "mi1ceb",
+              "type": "casus_bouw",
+              "phase": "toepassing",
+              "punten": 15,
+              "difficulty": 3,
+              "context": "Stichting UGN ontvangt een MDT-subsidie. Kantoor 'Sport & Zeker' krijgt een controle-opdracht bij de subsidieverantwoording (Standaard 800) én daarnaast een 4400N-opdracht. Het is een nieuwe cliënt; het bestuur is deels onbekend en de stichting is actief met vastgoed.",
+              "prompt": "Bouw het antwoord: onder welke voorwaarden kunnen cliënt én opdrachten worden aanvaard? Sleep de juiste bouwstenen naar de juiste stap; laat afleiders liggen.",
+              "slots": [
+                { "id": "s1", "label": "1 · Cliëntonderzoek (Wwft)" },
+                { "id": "s2", "label": "2 · Beroepsregels (NVKS/VGBA/ViO)" },
+                { "id": "s3", "label": "3 · Opdrachtvoorwaarden (Std. 210)" },
+                { "id": "s4", "label": "4 · Maatregel" },
+                { "id": "s5", "label": "5 · Conclusie" }
+              ],
+              "blocks": [
+                { "id": "b1", "text": "UBO (>25%) vaststellen en verifiëren; vastgoed = verscherpt cliëntenonderzoek", "role": "kern", "slot": "s1", "points": 3 },
+                { "id": "b2", "text": "Integriteit van het (deels onbekende) bestuur toetsen (NVKS art. 5)", "role": "kern", "slot": "s2", "points": 2 },
+                { "id": "b3", "text": "Samenloop controle (800) + 4400N → zelftoetsing/objectiviteit toetsen (ViO bij de assurance-opdracht)", "role": "kern", "slot": "s2", "points": 4 },
+                { "id": "b4", "text": "Randvoorwaarden + opdrachtbevestiging schriftelijk overeenkomen (Std. 210)", "role": "kern", "slot": "s3", "points": 3 },
+                { "id": "b5", "text": "OKB (NVKS art. 13) als waarborg bij het verhoogde risico", "role": "kern", "slot": "s4", "points": 1 },
+                { "id": "b6", "text": "Conclusie: aanvaardbaar mits de waarborgen worden getroffen", "role": "kern", "slot": "s5", "points": 2 },
+                { "id": "b7", "text": "De ViO toepassen op de 4400N-opdracht zelf", "role": "instinker", "explain": "ViO geldt alleen bij assurance; 4400N is non-assurance → objectiviteit via de VGBA." },
+                { "id": "b8", "text": "Een uitvoeringsmaterialiteit van 75% bepalen", "role": "instinker", "explain": "Hoort bij de uitvoering van een controle, niet bij acceptatie." },
+                { "id": "b9", "text": "Steunen op het samenstelwerk van het vorige kantoor", "role": "instinker", "explain": "Een controle kan niet leunen op werk dat geen/beperkte zekerheid geeft." },
+                { "id": "b10", "text": "Het volledige Stramien uitschrijven", "role": "afleider", "explain": "Niet gevraagd; kost tijd, levert geen punten." }
+              ],
+              "explanation": "Acceptatieskelet: Wwft-cliëntonderzoek (UBO + verscherpt bij vastgoed) → beroepsregels (integriteit NVKS art. 5; samenloop/ViO bij de assurance-opdracht) → opdrachtvoorwaarden (Std. 210) → maatregel (OKB) → conclusie (aanvaardbaar mits waarborgen). Let op de instinkers: ViO niet op 4400N; geen uitvoeringsmaterialiteit bij acceptatie; niet steunen op samenstelwerk.",
+              "ref": "Wwft · NVKS art. 5/13 · ViO · Standaard 210/800",
+              "tags": ["aanvaarding", "casus", "instinker", "toepassing"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -85,6 +85,45 @@ export function gradeMatch(question, mapping) {
   return matchFraction(question, mapping) >= 1;
 }
 
+// --- casus_bouw ("bouw het antwoord uit bouwstenen") ---
+// assignment = { [blockId]: slotId }. Kern in juist slot = +points; kern in
+// verkeerd slot = halve points; instinker/afleider gekozen = 0 (en didactische
+// uitleg in de UI); gemiste kern telt niet mee in 'behaald'.
+export function buildMaxPoints(question) {
+  return (question.blocks ?? [])
+    .filter((b) => b.role === 'kern')
+    .reduce((s, b) => s + (b.points ?? 0), 0);
+}
+
+export function buildScore(question, assignment) {
+  const max = buildMaxPoints(question);
+  if (max <= 0) return 0;
+  const a = assignment ?? {};
+  let got = 0;
+  for (const b of question.blocks ?? []) {
+    const placed = Object.prototype.hasOwnProperty.call(a, b.id); // in een slot gezet?
+    if (b.role !== 'kern') continue; // instinker/afleider leveren niets op
+    if (!placed) continue; // gemiste kern
+    if (a[b.id] === b.slot) got += b.points ?? 0; // juist slot
+    else got += (b.points ?? 0) / 2; // juist element, verkeerd slot
+  }
+  return Math.max(0, Math.min(1, got / max));
+}
+
+// 3-weg resultaat met dezelfde drempels als matching, zodat XP/SRS/combo
+// ongewijzigd blijven. Een gekozen instinker kapt het resultaat af op 'partial'
+// (je had een valkuil te pakken, ook al was de rest goed).
+export function gradeBuildResult(question, assignment) {
+  const f = buildScore(question, assignment);
+  const a = assignment ?? {};
+  const choseInstinker = (question.blocks ?? []).some(
+    (b) => b.role === 'instinker' && Object.prototype.hasOwnProperty.call(a, b.id)
+  );
+  if (f >= 1 && !choseInstinker) return 'correct';
+  if (f >= 0.5) return 'partial';
+  return 'wrong';
+}
+
 // 'correct' | 'wrong' voor objectieve types. Open vragen worden zelf beoordeeld.
 export function gradeObjective(question, answer) {
   let ok = false;

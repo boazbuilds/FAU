@@ -17,7 +17,11 @@
     answered: 0, correct: 0, score: 0, xpGained: 0, perfect: false, outOfHearts: false,
     mode: 'normal', maxCombo: 0, newBadges: [], pred: null, boss: null
   };
-  const accuracy = summary.answered ? Math.round((summary.correct / summary.answered) * 100) : 0;
+  // Bij een bouwsteen-Eindbaas is de score een fractie (punten), niet goed/totaal.
+  const isBuild = !!summary.isBuild;
+  const accuracy = isBuild
+    ? Math.round((summary.score ?? 0) * 100)
+    : summary.answered ? Math.round((summary.correct / summary.answered) * 100) : 0;
   const isLesson = summary.mode === 'lesson';
   const isBoss = summary.mode === 'boss';
   const bossPassed = isBoss && summary.boss?.passed;
@@ -92,7 +96,9 @@
     </div>
     <div class="arcade-panel rounded-2xl p-4">
       <div class="font-pixel text-lg {bossPassed || (!isBoss && accuracy >= 80) ? 'text-emerald-300' : 'text-amber-300'}">{accuracy}%</div>
-      <div class="mt-1.5 font-pixel text-[7px] uppercase tracking-wide text-slate-400">{summary.correct}/{summary.answered} goed</div>
+      <div class="mt-1.5 font-pixel text-[7px] uppercase tracking-wide text-slate-400">
+        {#if isBuild && summary.punten != null}{summary.gotPunten}/{summary.punten} punten{:else}{summary.correct}/{summary.answered} goed{/if}
+      </div>
     </div>
   </div>
 

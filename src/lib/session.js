@@ -1,7 +1,7 @@
 // Stelt een dagsessie samen: due reviews + nieuwe items, door elkaar gehusseld.
 import { get } from 'svelte/store';
 import { CONFIG } from '../config.js';
-import { allQuestions, questionsForTopic, questionsForLesson, isObjective } from './content.js';
+import { allQuestions, questionsForTopic, questionsForLesson, isObjective, modules } from './content.js';
 import { isDue } from './srs.js';
 import { todayNumber } from './day.js';
 import { topicMasteryMap } from './predict.js';
@@ -122,9 +122,15 @@ export function buildLessonSession(lessonId, length = CONFIG.lessonLength) {
   return weightedSample(pool, n).map((q) => q.id);
 }
 
-// Boss: een wisselende, begrensde subset objectieve vragen uit de hele module.
-// Elke poging is dus anders (variatie) en blijft kort/spannend.
+// Boss: heeft de module een expliciete boss-les met eigen vragen (bv. een
+// casus_bouw-Eindbaas), gebruik dan díe vragen. Anders een wisselende,
+// begrensde subset objectieve modulevragen (auto-boss, backward compatible).
 export function buildBossSession(moduleId, length = CONFIG.path.bossLength) {
+  const mod = modules.find((m) => m.id === moduleId);
+  const bossLesson = mod?.lessons?.find((l) => l.boss);
+  if (bossLesson && (bossLesson.questionIds?.length ?? 0) > 0) {
+    return [...bossLesson.questionIds]; // expliciete Eindbaas-vragen, in volgorde
+  }
   const pool = questionsForTopic(moduleId).filter(isObjective);
   return weightedSample(pool, length ?? pool.length).map((q) => q.id);
 }
