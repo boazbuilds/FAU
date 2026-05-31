@@ -17,12 +17,12 @@ const extra = readJson(join(contentDir, 'course/vragenbankextra.json'));
 const banks04 = [0, 1, 2, 3, 4].map((n) => readJson(join(contentDir, `course/vragenbankbank${n}.json`)));
 const moduleM9 = readJson(join(contentDir, 'course/vragenbankm9.json')); // definieert m9 (vóór bank9)
 const banks59 = [5, 6, 7, 8, 9].map((n) => readJson(join(contentDir, `course/vragenbankbank${n}.json`)));
-const examenMi1 = readJson(join(contentDir, 'course/examen-mi1.json'));
+const examenModules = [1, 2, 3, 4].map((n) => readJson(join(contentDir, `course/examen-mi${n}.json`)));
 const tipsData = readJson(join(contentDir, 'examtips.json'));
 
 // --- merge --- (m9-moduledefinitie vóór bank9, anders vallen die lessen weg)
 const course = JSON.parse(JSON.stringify(base));
-for (const ext of [casus, techniek, extra, ...banks04, moduleM9, ...banks59, examenMi1]) {
+for (const ext of [casus, techniek, extra, ...banks04, moduleM9, ...banks59, ...examenModules]) {
   const addLessons = ext.addLessonsToModule || {};
   for (const m of course.modules) {
     if (addLessons[m.id]) m.lessons.push(...addLessons[m.id]);

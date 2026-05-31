@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "extends": "vragenbank.json",
+    "title": "Instellingstoets-module 3 — Werkzaamheden per niveau (A/B/C)",
+    "note": "Examen-module in A/B/C-vorm; C is de boss (casus_bouw)."
+  },
+  "addModules": [
+    {
+      "id": "mi3",
+      "order": 22,
+      "icon": "🎓",
+      "title": "Instellingstoets · Werkzaamheden",
+      "description": "Examen-module A/B/C: systeem- vs. gegevensgericht, de controlemix en de 7 controlemiddelen, en de aard van het werk per zekerheidsniveau. C Eindbaas — bouw de werkzaamheden bij een controle en verwerp het verkeerde niveau.",
+      "lessons": [
+        {
+          "id": "mi3a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "mi3aq1",
+              "type": "multiple_choice",
+              "phase": "kennis",
+              "prompt": "Wat is het verschil tussen een systeemgerichte en een gegevensgerichte aanpak?",
+              "options": [
+                "Systeemgericht = steunen op de werking van de interne beheersing; gegevensgericht = de transacties/saldi zelf onderzoeken",
+                "Systeemgericht = de cijfers narekenen; gegevensgericht = de IB beoordelen",
+                "Ze zijn synoniem",
+                "Systeemgericht mag alleen bij een beoordeling"
+              ],
+              "correct": 0,
+              "explanation": "Systeemgericht = steunen op de effectieve werking van de IB; gegevensgericht = de posten zelf onderzoeken (detail/cijferanalyse).",
+              "difficulty": 1,
+              "ref": "Standaard 330",
+              "tags": ["systeemgericht", "gegevensgericht", "St.330"]
+            },
+            {
+              "id": "mi3aq2",
+              "type": "multi_select",
+              "phase": "kennis",
+              "prompt": "Uit welke drie dimensies bestaat de controlemix? (meerdere)",
+              "options": [
+                "Aard van de werkzaamheden",
+                "Timing (interim of eindejaar)",
+                "Omvang (steekproef/100%)",
+                "De rechtsvorm van de cliënt"
+              ],
+              "correct": [0, 1, 2],
+              "explanation": "Controlemix = aard, timing en omvang van de werkzaamheden (Standaard 330). De rechtsvorm hoort er niet bij.",
+              "difficulty": 2,
+              "ref": "Standaard 330",
+              "tags": ["controlemix", "St.330"]
+            },
+            {
+              "id": "mi3aq3",
+              "type": "multiple_choice",
+              "phase": "kennis",
+              "prompt": "Bij een significant risico (Standaard 315/330) mag je…",
+              "options": [
+                "niet uitsluitend op de interne beheersing steunen; altijd gegevensgerichte werkzaamheden uitvoeren",
+                "volstaan met alleen een cijferanalyse",
+                "de post overslaan als de IB goed is",
+                "uitsluitend systeemgericht steunen"
+              ],
+              "correct": 0,
+              "explanation": "Standaard 330: bij een significant risico zijn gegevensgerichte werkzaamheden verplicht; louter systeemgericht steunen mag dan niet.",
+              "difficulty": 2,
+              "ref": "Standaard 330",
+              "tags": ["risico", "St.330", "gegevensgericht"]
+            },
+            {
+              "id": "mi3aq4",
+              "type": "multiple_choice",
+              "phase": "kennis",
+              "prompt": "Voor welke bewering is een externe saldobevestiging (Standaard 505) de sterkste werkzaamheid?",
+              "options": [
+                "Volledigheid van de omzet",
+                "Bestaan (en deels rechten) van de vordering",
+                "Afgrenzing van de inkopen",
+                "Waardering van de voorraad"
+              ],
+              "correct": 1,
+              "explanation": "Een saldobevestiging onderbouwt vooral het bestaan van het saldo. Volledigheid van de omzet → verbandscontrole (520).",
+              "difficulty": 2,
+              "ref": "Standaard 505",
+              "tags": ["bestaan", "St.505"]
+            }
+          ]
+        },
+        {
+          "id": "mi3b",
+          "title": "B · Techniek & Tips",
+          "questions": [
+            {
+              "id": "mi3bq1",
+              "type": "multiple_choice",
+              "phase": "techniek",
+              "prompt": "Een kandidaat schrijft bij een BEOORDELING (2400) een uitvoeringsmaterialiteit en 520-drempelanalyses uit. Waarom kost dat punten?",
+              "options": [
+                "Omdat je bij een beoordeling geen materialiteit mag noemen",
+                "Omdat uitvoeringsmaterialiteit en 520-drempels bij de controle horen, niet bij een beoordeling (beperkte zekerheid)",
+                "Omdat cijferanalyse bij een beoordeling verboden is",
+                "Omdat je bij een beoordeling juist méér moet doen"
+              ],
+              "correct": 1,
+              "explanation": "Instinker: bij 2400 wel een materialiteit, maar géén uitvoeringsmaterialiteit en géén gegevensgerichte 520-drempelmechaniek. Dat suggereert ten onrechte controle-diepgang.",
+              "difficulty": 3,
+              "ref": "Standaard 2400 / 320",
+              "tipRef": "tip08",
+              "tags": ["instinker", "St.2400", "materialiteit"]
+            },
+            {
+              "id": "mi3bq2",
+              "type": "multiple_choice",
+              "phase": "techniek",
+              "prompt": "In welke volgorde beoordeel je de interne beheersing voordat je erop mag steunen?",
+              "options": [
+                "Opzet → bestaan → werking",
+                "Werking → opzet → bestaan",
+                "Bestaan → werking → opzet",
+                "Opzet → werking (bestaan is overbodig)"
+              ],
+              "correct": 0,
+              "explanation": "Opzet → bestaan → werking. Pas na opzet én bestaan mag je de werking testen en systeemgericht steunen (330); lukt dat niet, dan gegevensgericht.",
+              "difficulty": 1,
+              "ref": "Standaard 330",
+              "tipRef": "tip16",
+              "tags": ["opzet-bestaan-werking", "St.330"]
+            },
+            {
+              "id": "mi3bq3",
+              "type": "matching",
+              "phase": "techniek",
+              "prompt": "Koppel elk instrument aan de bewering waarvoor het primair wordt ingezet.",
+              "pairs": [
+                { "left": "Verbandscontrole (520)", "right": "Volledigheid van de omzet" },
+                { "left": "Bijwonen voorraadtelling (501)", "right": "Bestaan van de voorraad" },
+                { "left": "Saldobevestiging (505)", "right": "Bestaan van de vordering" },
+                { "left": "Retrospectieve toets (540)", "right": "Waardering van een schatting" }
+              ],
+              "explanation": "Koppel elk instrument aan zijn bewering: 520→volledigheid omzet; 501→bestaan voorraad; 505→bestaan vordering; 540→waardering schatting.",
+              "difficulty": 2,
+              "ref": "Standaard 500-serie / 540",
+              "tipRef": "tip02",
+              "tags": ["instrumentarium", "beweringen"]
+            }
+          ]
+        },
+        {
+          "id": "mi3c",
+          "title": "C · Eindbaas",
+          "boss": true,
+          "questions": [
+            {
+              "id": "mi3ceb",
+              "type": "casus_bouw",
+              "phase": "toepassing",
+              "punten": 12,
+              "difficulty": 3,
+              "context": "Je controleert (redelijke zekerheid, 700-serie) de omzet en de voorraad van een handelsonderneming. De interne beheersing rond verkoop is sterk; de voorraad is materieel. Een collega stelt voor om, omdat de IB goed is, overal op te steunen en verder weinig te doen.",
+              "prompt": "Bouw de werkzaamheden: kies per doel de juiste, casuspassende werkzaamheid. Laat de afleiders (verkeerd niveau / verkeerde bewering) liggen.",
+              "slots": [
+                { "id": "s1", "label": "1 · Volledigheid van de omzet" },
+                { "id": "s2", "label": "2 · Bestaan van de voorraad" },
+                { "id": "s3", "label": "3 · Steunen op de IB (systeemgericht)" },
+                { "id": "s4", "label": "4 · Conclusie aanpak" }
+              ],
+              "blocks": [
+                { "id": "b1", "text": "Verbandscontrole inkoop→voorraad→verkoop + brutomarge-analyse (520)", "role": "kern", "slot": "s1", "points": 3 },
+                { "id": "b2", "text": "Voorraadtelling bijwonen in twee richtingen (501)", "role": "kern", "slot": "s2", "points": 3 },
+                { "id": "b3", "text": "Opzet→bestaan→werking toetsen; bij effectieve werking systeemgericht steunen (330)", "role": "kern", "slot": "s3", "points": 3 },
+                { "id": "b4", "text": "Combineer systeemgericht met gegevensgericht werk; louter steunen volstaat niet", "role": "kern", "slot": "s4", "points": 3 },
+                { "id": "b5", "text": "Saldobevestiging bij debiteuren voor de volledigheid van de omzet", "role": "instinker", "explain": "Een saldobevestiging raakt bestaan, niet de volledigheid van de omzet (daarvoor 520)." },
+                { "id": "b6", "text": "Alleen een cijferanalyse, want de IB is sterk", "role": "instinker", "explain": "Bij een materiële post en een controle volstaat louter steunen/cijferanalyse niet; gegevensgericht werk blijft nodig." },
+                { "id": "b7", "text": "Een LOR (580) vervangt de telling van de voorraad", "role": "instinker", "explain": "De LOR is aanvullend bewijs en vervangt nooit sterkere controle-informatie." },
+                { "id": "b8", "text": "De fiscale aangifte van de DGA controleren", "role": "afleider", "explain": "Niet relevant voor omzet/voorraad in deze controle." }
+              ],
+              "explanation": "Volledigheid omzet = verbandscontrole (520); bestaan voorraad = telling bijwonen (501); systeemgericht steunen vereist opzet→bestaan→werking (330); en bij een controle combineer je systeem- met gegevensgericht (louter steunen volstaat niet). Instinkers: saldobevestiging≠volledigheid, alleen cijferanalyse, LOR vervangt geen telling.",
+              "ref": "Standaard 330 · 520 · 501 · 580",
+              "tags": ["risico", "werkzaamheden", "casus", "instinker", "toepassing"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
