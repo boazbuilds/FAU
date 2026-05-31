@@ -16,6 +16,7 @@ import bank6 from '../../content/course/vragenbankbank6.json';
 import bank7 from '../../content/course/vragenbankbank7.json';
 import bank8 from '../../content/course/vragenbankbank8.json';
 import bank9 from '../../content/course/vragenbankbank9.json';
+import examenMi1 from '../../content/course/examen-mi1.json';
 import tipsData from '../../content/examtips.json';
 import { CONFIG } from '../config.js';
 
@@ -46,7 +47,9 @@ function normalizeQuestion(q, moduleId, lessonId) {
     explanation: q.explanation ?? '',
     tags: q.tags ?? [],
     context: q.context ?? null,
-    tipRef: q.tipRef ?? null
+    tipRef: q.tipRef ?? null,
+    phase: q.phase ?? null, // 'kennis' | 'techniek' | 'toepassing'; ontbreekt ⇒ als kennis behandeld
+    ref: q.ref ?? null // wet/Standaard-verwijzing (bv. "Standaard 240.31"), getoond na het antwoord
   };
 
   switch (q.type) {
@@ -81,6 +84,22 @@ function normalizeQuestion(q, moduleId, lessonId) {
           minSimilarity: 0.85
         }
       };
+    case 'casus_bouw':
+      // "Bouw het antwoord": sleep/plaats bouwstenen in de juiste structuurstap.
+      return {
+        ...common,
+        type: 'build',
+        punten: q.punten ?? null, // CA-voorblad-punten (voor de score-presentatie)
+        slots: (q.slots ?? []).map((s) => ({ id: s.id, label: s.label })),
+        blocks: (q.blocks ?? []).map((b) => ({
+          id: b.id,
+          text: b.text,
+          role: b.role, // 'kern' | 'instinker' | 'afleider'
+          slot: b.slot ?? null, // alleen relevant voor kern-blokken
+          points: b.points ?? 0,
+          explain: b.explain ?? null
+        }))
+      };
     default:
       // onbekend type: laat door, maar markeer (validator vangt dit af)
       return { ...common, type: q.type };
@@ -97,7 +116,8 @@ const course = mergeCourse(baseData, [
   casusData, techniekData, extraData,
   bank0, bank1, bank2, bank3, bank4,
   moduleM9, // definieert module m9 (moet vóór bank9 staan)
-  bank5, bank6, bank7, bank8, bank9
+  bank5, bank6, bank7, bank8, bank9,
+  examenMi1 // instellingstoets-module 1 (A/B/C met casus_bouw-Eindbaas)
 ]);
 
 // Genereer per module een boss-examen. Virtueel: de boss-les heeft zelf geen

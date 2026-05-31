@@ -19,6 +19,7 @@
   import TopBar from './components/TopBar.svelte';
   import Path from './screens/Path.svelte';
   import Session from './screens/Session.svelte';
+  import Blitz from './screens/Blitz.svelte';
   import Results from './screens/Results.svelte';
   import Progress from './screens/Progress.svelte';
   import Predict from './screens/Predict.svelte';
@@ -77,7 +78,7 @@
   // Track wisselen: energiek in de sessie/resultaten, rustig in de menu's.
   $: audio.setContext($screen);
 
-  $: chromeless = $screen === 'session' || $screen === 'results';
+  $: chromeless = $screen === 'session' || $screen === 'results' || $screen === 'blitz';
 
   const nav = [
     { id: 'home', label: 'Pad', icon: '🗺️' },
@@ -96,6 +97,8 @@
     <Path />
   {:else if $screen === 'session'}
     <Session />
+  {:else if $screen === 'blitz'}
+    <Blitz />
   {:else if $screen === 'results'}
     <Results />
   {:else if $screen === 'progress'}

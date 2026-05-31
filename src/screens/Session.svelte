@@ -114,7 +114,9 @@
     rateQuestion(q.id, value);
   }
 
+  let lastFraction = null; // exacte score van een casus_bouw (voor boss-slagen)
   function onAnswer(e) {
+    lastFraction = e.detail.fraction ?? null;
     register(e.detail.result, false);
   }
 
@@ -122,7 +124,7 @@
     clearTimer();
     const elapsed = Date.now() - qStart;
     lastResult = result;
-    results = [...results, { id: q.id, result }];
+    results = [...results, { id: q.id, result, fraction: timedOut ? 0 : lastFraction }];
 
     // Combo (Duolingo-stijl): opbouwen bij goed, breken bij fout, gelijk bij deels.
     if (result === 'correct') {
@@ -196,7 +198,13 @@
   function finish() {
     const answered = results.length;
     const correct = results.filter((r) => r.result === 'correct').length;
-    const score = answered ? correct / answered : 0;
+    // Score: gebruik exacte fracties als die er zijn (casus_bouw), anders goed/totaal.
+    const hasFractions = results.some((r) => typeof r.fraction === 'number');
+    const score = answered
+      ? hasFractions
+        ? results.reduce((s, r) => s + (typeof r.fraction === 'number' ? r.fraction : r.result === 'correct' ? 1 : 0), 0) / answered
+        : correct / answered
+      : 0;
     const perfect = answered > 0 && !outOfHearts && results.every((r) => r.result === 'correct');
 
     let bonus = 0;
@@ -244,12 +252,19 @@
       return p;
     });
 
+    // Bouwsteen-Eindbaas: toon de score in punten (CA-voorblad-stijl).
+    const buildQ = ids.length === 1 ? questionById[ids[0]] : null;
+    const isBuild = buildQ?.type === 'build';
+
     activeSession.set({
       summary: {
         answered, correct, score, xpGained: sessionXp, perfect, outOfHearts,
         mode, lessonId, moduleId, maxCombo,
         boss: bossResult,
-        newBadges, pred
+        newBadges, pred,
+        isBuild,
+        punten: isBuild ? buildQ.punten ?? null : null,
+        gotPunten: isBuild && buildQ.punten != null ? Math.round(score * buildQ.punten) : null
       }
     });
     // Cloud-push gebeurt automatisch via de store-subscriptie in App.svelte

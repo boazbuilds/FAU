@@ -2,6 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import { gradeMcq, gradeShort } from '../lib/grading.js';
   import MatchQuestion from './MatchQuestion.svelte';
+  import BuildQuestion from './BuildQuestion.svelte';
 
   export let question;
 
@@ -143,6 +144,11 @@
   {:else if question.type === 'match'}
     {#key question.id}
       <MatchQuestion {question} on:answer={onMatch} />
+    {/key}
+
+  {:else if question.type === 'build'}
+    {#key question.id}
+      <BuildQuestion {question} on:answer={onMatch} />
     {/key}
 
   {:else if question.type === 'open'}

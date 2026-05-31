@@ -1,7 +1,7 @@
 // Stelt een dagsessie samen: due reviews + nieuwe items, door elkaar gehusseld.
 import { get } from 'svelte/store';
 import { CONFIG } from '../config.js';
-import { allQuestions, questionsForTopic, questionsForLesson, isObjective } from './content.js';
+import { allQuestions, questionsForTopic, questionsForLesson, isObjective, modules } from './content.js';
 import { isDue } from './srs.js';
 import { todayNumber } from './day.js';
 import { topicMasteryMap } from './predict.js';
@@ -23,8 +23,13 @@ export function questionWeight(id, r) {
   return v ? (RATING_WEIGHT[v] ?? 1) : 1;
 }
 
+// Hoort een vraag bij de kennis-fase? (ontbrekende phase ⇒ ja, backward compatible)
+export function isKnowledge(q) {
+  return !q.phase || q.phase === 'kennis';
+}
+
 // Trekt n items met gewogen kans (zonder teruglegging), o.b.v. de beoordelingen.
-function weightedSample(items, n, r = get(ratings)) {
+export function weightedSample(items, n, r = get(ratings)) {
   const pool = items.map((q) => ({ q, w: questionWeight(q.id, r) }));
   const out = [];
   while (pool.length && out.length < n) {
@@ -117,11 +122,35 @@ export function buildLessonSession(lessonId, length = CONFIG.lessonLength) {
   return weightedSample(pool, n).map((q) => q.id);
 }
 
-// Boss: een wisselende, begrensde subset objectieve vragen uit de hele module.
-// Elke poging is dus anders (variatie) en blijft kort/spannend.
+// Boss: heeft de module een expliciete boss-les met eigen vragen (bv. een
+// casus_bouw-Eindbaas), gebruik dan díe vragen. Anders een wisselende,
+// begrensde subset objectieve modulevragen (auto-boss, backward compatible).
 export function buildBossSession(moduleId, length = CONFIG.path.bossLength) {
+  const mod = modules.find((m) => m.id === moduleId);
+  const bossLesson = mod?.lessons?.find((l) => l.boss);
+  if (bossLesson && (bossLesson.questionIds?.length ?? 0) > 0) {
+    return [...bossLesson.questionIds]; // expliciete Eindbaas-vragen, in volgorde
+  }
   const pool = questionsForTopic(moduleId).filter(isObjective);
   return weightedSample(pool, length ?? pool.length).map((q) => q.id);
+}
+
+// Kennis-Blitz: ruime, rating-gewogen pool objectieve kennisvragen. Prioriteert
+// SRS-due en zwakke topics, maar blijft gevarieerd. Lijst is lang genoeg dat de
+// klok eerder op is dan de vragen.
+export function buildBlitzSession(srs, length = CONFIG.blitz.poolSize) {
+  const items = srs?.items ?? {};
+  const today = todayNumber();
+  const pool = allQuestions.filter((q) => isObjective(q) && isKnowledge(q));
+  const mastery = topicMasteryMap(srs);
+  // Trek gewogen (down-rated zakt weg), en sorteer dan zwakke topics + due eerst.
+  const sample = weightedSample(pool, Math.min(length, pool.length));
+  sample.sort((a, b) => {
+    const dueA = isDue(items[a.id], today) ? 0 : 1;
+    const dueB = isDue(items[b.id], today) ? 0 : 1;
+    return dueA - dueB || (mastery[a.topicId] ?? 1) - (mastery[b.topicId] ?? 1);
+  });
+  return interleave(sample).map((q) => q.id);
 }
 
 // Oefenen op een tag (bv. "St.520" of "typologie"); voor drills.
