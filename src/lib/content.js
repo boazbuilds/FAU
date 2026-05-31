@@ -46,7 +46,9 @@ function normalizeQuestion(q, moduleId, lessonId) {
     explanation: q.explanation ?? '',
     tags: q.tags ?? [],
     context: q.context ?? null,
-    tipRef: q.tipRef ?? null
+    tipRef: q.tipRef ?? null,
+    phase: q.phase ?? null, // 'kennis' | 'techniek' | 'toepassing'; ontbreekt ⇒ als kennis behandeld
+    ref: q.ref ?? null // wet/Standaard-verwijzing (bv. "Standaard 240.31"), getoond na het antwoord
   };
 
   switch (q.type) {

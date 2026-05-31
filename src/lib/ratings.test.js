@@ -2,8 +2,9 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { get } from 'svelte/store';
 import { ratings, rateQuestion } from '../stores/ratings.js';
-import { questionWeight, RATING_WEIGHT, buildBossSession, buildLessonSession } from './session.js';
-import { questionsForLesson } from './content.js';
+import { questionWeight, RATING_WEIGHT, buildBossSession, buildLessonSession, buildBlitzSession, isKnowledge } from './session.js';
+import { questionsForLesson, questionById, isObjective } from './content.js';
+import { CONFIG } from '../config.js';
 
 beforeEach(() => {
   localStorage.clear();
@@ -53,6 +54,31 @@ describe('vraag-beoordelingen', () => {
     expect(a.length).toBeLessThanOrEqual(10); // begrensd door lessonLength
     expect(a.length).toBeGreaterThan(0);
     // twee trekkingen zijn (vrijwel zeker) niet identiek qua volgorde/selectie
+    expect(a.join() === b.join()).toBe(false);
+  });
+});
+
+describe('Kennis-Blitz pool', () => {
+  it('isKnowledge: ontbrekende phase telt als kennis', () => {
+    expect(isKnowledge({})).toBe(true);
+    expect(isKnowledge({ phase: 'kennis' })).toBe(true);
+    expect(isKnowledge({ phase: 'toepassing' })).toBe(false);
+  });
+
+  it('buildBlitzSession levert objectieve kennisvragen, begrensd en variërend', () => {
+    const a = buildBlitzSession({ items: {} });
+    expect(a.length).toBeGreaterThan(0);
+    expect(a.length).toBeLessThanOrEqual(CONFIG.blitz.poolSize);
+    // alleen objectieve kennisvragen
+    for (const id of a) {
+      const q = questionById[id];
+      expect(isObjective(q)).toBe(true);
+      expect(isKnowledge(q)).toBe(true);
+    }
+    // geen dubbele
+    expect(new Set(a).size).toBe(a.length);
+    // varieert tussen rondes
+    const b = buildBlitzSession({ items: {} });
     expect(a.join() === b.join()).toBe(false);
   });
 });

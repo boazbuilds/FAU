@@ -71,4 +71,12 @@ describe('mergeSnapshot — nooit voortgang verliezen', () => {
     expect(mergeSnapshot(a, b).profile.dailyGoalXp).toBe(80);
     expect(mergeSnapshot(b, a).profile.dailyGoalXp).toBe(80);
   });
+
+  it('blitz-highscore: het hoogste wint over apparaten', () => {
+    const a = snap({ profile: { ...snap().profile, blitz: { best: 120, lastScore: 120, plays: 3 } } });
+    const b = snap({ profile: { ...snap().profile, blitz: { best: 200, lastScore: 50, plays: 5 } } });
+    const m = mergeSnapshot(a, b);
+    expect(m.profile.blitz.best).toBe(200);
+    expect(m.profile.blitz.plays).toBe(5);
+  });
 });

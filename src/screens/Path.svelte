@@ -56,6 +56,10 @@
     go('session');
   }
 
+  function startBlitz() {
+    go('blitz');
+  }
+
   const hour = new Date().getHours();
   const greeting = hour < 6 ? 'Goedenacht' : hour < 12 ? 'Goedemorgen' : hour < 18 ? 'Goedemiddag' : 'Goedenavond';
 
@@ -98,6 +102,25 @@
       title="Herhaal vragen die vandaag aan de beurt zijn"
     >🔁 Herhaal{due > 0 ? ` (${due})` : ''}</button>
   </div>
+
+  <!-- Kennis-Blitz: getimede arcade-modus -->
+  <button
+    type="button"
+    class="arcade-panel flex w-full items-center justify-between rounded-2xl p-4 text-left transition hover:border-cyan-400/50"
+    on:click={startBlitz}
+  >
+    <div class="flex items-center gap-3">
+      <span class="text-3xl">⚡</span>
+      <div>
+        <div class="font-pixel text-[10px] uppercase tracking-wide neon-cyan">Kennis-Blitz</div>
+        <div class="mt-1 text-xs text-slate-400">Zoveel mogelijk goed tegen de klok</div>
+      </div>
+    </div>
+    <div class="text-right">
+      <div class="font-pixel text-[7px] uppercase tracking-wide text-slate-500">Highscore</div>
+      <div class="font-pixel text-sm neon-magenta">{$profile.blitz?.best ?? 0}</div>
+    </div>
+  </button>
 
   <!-- Modules -->
   {#each modules as m (m.id)}

@@ -54,6 +54,11 @@ function mergeProfile(a = {}, b = {}, aNewer) {
     },
     today: pickPeriod(a.today, b.today, 'day'),
     week: pickPeriod(a.week, b.week, 'weekKey'),
+    blitz: {
+      best: maxNum(a.blitz?.best, b.blitz?.best), // hoogste highscore wint
+      lastScore: (newer.blitz ?? older.blitz ?? {}).lastScore ?? 0,
+      plays: maxNum(a.blitz?.plays, b.blitz?.plays)
+    },
     achievements: { ...(a.achievements || {}), ...(b.achievements || {}) },
     unlockedAchievements: Array.from(
       new Set([...(a.unlockedAchievements ?? []), ...(b.unlockedAchievements ?? [])])

@@ -10,6 +10,16 @@ export const CONFIG = {
   newPerSession: 5,
   lessonLength: 10, // max vragen per les-sessie (wisselende selectie uit grote lessen)
 
+  // --- Kennis-Blitz (getimede modus: zoveel mogelijk goed tegen de klok) ---
+  blitz: {
+    seconds: 60, // duur van een ronde
+    timeBonusSec: 2, // tijd erbij per goed antwoord
+    wrongPenaltySec: 0, // (optioneel) tijd eraf bij fout; 0 = geen straf
+    poolSize: 50, // ruime pool zodat de klok eerder op is dan de vragen
+    pointsPerCorrect: 10, // basispunten per goed antwoord (los van XP)
+    comboStep: 2 // extra punten per goed-op-rij (combo × step)
+  },
+
   // --- Levens (mild) ---
   maxHearts: 5,
   heartRegenHours: 2,
