@@ -541,6 +541,17 @@ let energeticChoice = 'stadium';
 const SWING = 0.18; // shuffle: oneven 16e-noten iets later = groove
 function tick() {
   if (!ctx) return;
+  // Mobiel bevriest de context bij suspend; bij hervatten loopt de planner
+  // achter op de audioklok. Noten "in het verleden" plannen → iOS negeert ze
+  // (= stilte). Daarom: als we te ver achterlopen, her-anker op 'nu'.
+  if (ctx.state !== 'running') {
+    ctx.resume().catch(() => {});
+    musicTimer = setTimeout(tick, 60); // wacht tot de klok weer loopt
+    return;
+  }
+  if (nextStepTime < ctx.currentTime - 0.05) {
+    nextStepTime = ctx.currentTime + 0.06; // her-anker, geen verleden-noten
+  }
   const track = TRACKS[currentTrack] ?? TRACKS.menu;
   const stepDur = 60 / track.bpm / 4; // zestiende noot
   while (nextStepTime < ctx.currentTime + 0.12) {
@@ -552,23 +563,35 @@ function tick() {
   musicTimer = setTimeout(tick, 25);
 }
 
-export function startMusic(trackId) {
-  if (!ensure()) return;
-  if (trackId && TRACKS[trackId]) currentTrack = trackId;
-  if (!musicOn) return;
-  // Mobiel suspend't de context regelmatig; altijd proberen te hervatten.
-  if (ctx.state === 'suspended') ctx.resume().catch(() => {});
-  nowPlaying.set(TRACKS[currentTrack]?.name ?? '');
-  if (musicTimer) return; // loopt al
+// Anker de planner op de actuele audioklok en start (of herstart) de loop.
+function startLoop() {
+  if (!ctx || !musicBus || !musicSum) return;
   nextStepTime = ctx.currentTime + 0.08;
   stepCounter = 0;
-  // musicBus = sidechain-VCA (door duck() bestuurd); de in/uit-fade zit op musicSum.
   musicBus.gain.cancelScheduledValues(ctx.currentTime);
   musicBus.gain.setValueAtTime(MUSIC_VOL, ctx.currentTime);
   musicSum.gain.cancelScheduledValues(ctx.currentTime);
   musicSum.gain.setValueAtTime(Math.max(0.0001, musicSum.gain.value), ctx.currentTime);
   musicSum.gain.linearRampToValueAtTime(1, ctx.currentTime + 0.6);
+  if (musicTimer) clearTimeout(musicTimer);
   tick();
+}
+
+export function startMusic(trackId) {
+  if (!ensure()) return;
+  if (trackId && TRACKS[trackId]) currentTrack = trackId;
+  if (!musicOn) return;
+  nowPlaying.set(TRACKS[currentTrack]?.name ?? '');
+  if (musicTimer) return; // loopt al
+  // Mobiel: anker de loop pas NA een geslaagde resume (anders mis-getimede start).
+  if (ctx.state === 'suspended') {
+    const p = ctx.resume();
+    if (p && typeof p.then === 'function') {
+      p.then(startLoop).catch(() => startLoop());
+      return;
+    }
+  }
+  startLoop();
 }
 
 export function stopMusic() {
@@ -700,11 +723,13 @@ export function armGestureUnlock() {
   window.addEventListener('keydown', handler);
   window.addEventListener('click', handler);
   // Herstel na terugkeren naar het tabblad (mobiel suspend't de context én
-  // pauzeert het stille media-element).
+  // pauzeert het stille media-element). Forceer een schone her-anker van de loop.
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden && musicOn) {
       kickSilentMediaElement();
-      if (ctx && ctx.state === 'suspended') ctx.resume().then(() => startMusic()).catch(() => {});
+      const restart = () => { if (musicTimer) { clearTimeout(musicTimer); musicTimer = null; } startMusic(); };
+      if (ctx && ctx.state === 'suspended') ctx.resume().then(restart).catch(restart);
+      else restart();
     }
   });
 }
