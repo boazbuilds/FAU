@@ -11,6 +11,8 @@
   import { auth } from '../stores/auth.js';
   import { signIn, signUp, signOut } from '../lib/cloud/sync.js';
 
+  let diag = ''; // geluidsdiagnose-uitvoer
+
   let email = '';
   let password = '';
   let username = '';
@@ -204,6 +206,18 @@
       </div>
     </div>
     <p class="-mt-1 text-xs text-slate-500">Arcade-deuntjes en bevredigende effecten — volledig gesynthetiseerd. Tik ⏭ in de balk voor het volgende nummer.</p>
+
+    <!-- Geluidsdiagnose (helpt bij 'geen geluid op telefoon') -->
+    <div class="rounded-xl border border-slate-700 bg-slate-900/60 p-3">
+      <button
+        class="btn-arcade w-full rounded-xl py-2.5 font-pixel text-[10px] uppercase"
+        on:click={() => (diag = audio.testTone())}
+      >🔔 Test toon (recht naar speaker)</button>
+      {#if diag}
+        <p class="mt-2 break-words font-mono text-[10px] leading-relaxed text-cyan-200">{diag}</p>
+        <p class="mt-1 text-[10px] text-slate-500">Hoor je de piep wél maar de muziek niet? Dan zit het in de mix. Hoor je ook de piep niet? Dan blokkeert iOS het geluid zelf.</p>
+      {/if}
+    </div>
   </section>
 
   <section class="space-y-4 rounded-2xl border border-slate-800 bg-slate-900/60 p-5">

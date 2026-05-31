@@ -728,3 +728,51 @@ export function setMusicEnabled(on) {
 export function isMusicOn() {
   return musicOn;
 }
+
+// --- Diagnose (voor het oplossen van "geen geluid op mobiel") ---
+
+// Live status van de audio-engine, als leesbare tekst voor in de UI.
+export function diagnostics() {
+  if (typeof window === 'undefined') return 'geen window';
+  if (!supported()) return 'Web Audio niet ondersteund';
+  if (!ctx) return 'context: niet aangemaakt';
+  return [
+    'state: ' + ctx.state,
+    'rate: ' + Math.round(ctx.sampleRate),
+    'out: ' + (ctx.destination?.maxChannelCount ?? '?') + 'ch',
+    'music: ' + (musicOn ? 'aan' : 'uit'),
+    'loop: ' + (musicTimer ? 'ja' : 'nee'),
+    'musicBus: ' + (musicBus ? musicBus.gain.value.toFixed(3) : '—'),
+    'musicSum: ' + (musicSum ? musicSum.gain.value.toFixed(3) : '—'),
+    'master: ' + (master ? master.gain.value.toFixed(2) : '—'),
+    'track: ' + currentTrack
+  ].join(' · ');
+}
+
+// Speelt een luide testtoon RECHTSTREEKS naar de speaker (bypasst de hele
+// muziek-/effectketen: geen master, compressor, musicBus of sidechain). Splitst
+// het probleem: hoor je dit wél maar de muziek niet → keten-bug; hoor je dit
+// óók niet → iOS-routing/hardware. Geeft de diagnose-tekst terug.
+export function testTone() {
+  if (!ensure()) return 'geen context';
+  kickSilentMediaElement();
+  if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+  syncReady();
+  try {
+    const t = ctx.currentTime;
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'square';
+    o.frequency.setValueAtTime(880, t);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.5, t + 0.02); // flink hoorbaar
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.6);
+    o.connect(g);
+    g.connect(ctx.destination); // ← direct naar de speaker
+    o.start(t);
+    o.stop(t + 0.65);
+  } catch (e) {
+    return 'fout: ' + (e?.message ?? e);
+  }
+  return diagnostics();
+}
