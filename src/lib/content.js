@@ -17,6 +17,9 @@ import bank7 from '../../content/course/vragenbankbank7.json';
 import bank8 from '../../content/course/vragenbankbank8.json';
 import bank9 from '../../content/course/vragenbankbank9.json';
 import examenMi1 from '../../content/course/examen-mi1.json';
+import examenMi2 from '../../content/course/examen-mi2.json';
+import examenMi3 from '../../content/course/examen-mi3.json';
+import examenMi4 from '../../content/course/examen-mi4.json';
 import tipsData from '../../content/examtips.json';
 import { CONFIG } from '../config.js';
 
@@ -117,7 +120,7 @@ const course = mergeCourse(baseData, [
   bank0, bank1, bank2, bank3, bank4,
   moduleM9, // definieert module m9 (moet vóór bank9 staan)
   bank5, bank6, bank7, bank8, bank9,
-  examenMi1 // instellingstoets-module 1 (A/B/C met casus_bouw-Eindbaas)
+  examenMi1, examenMi2, examenMi3, examenMi4 // instellingstoets-modules (A/B/C met casus_bouw-Eindbaas)
 ]);
 
 // Genereer per module een boss-examen. Virtueel: de boss-les heeft zelf geen

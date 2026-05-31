@@ -9,8 +9,8 @@ import { defaultProgress, ensureInit, isLessonUnlocked, isModuleUnlocked, starsF
 
 describe('content loader (merge + normalisatie)', () => {
   it('merget alle losse vragenbestanden samen', () => {
-    expect(modules.length).toBe(11); // m0–m9 + instellingstoets-module mi1
-    expect(allQuestions.length).toBeGreaterThanOrEqual(473); // groeit als er content bijkomt
+    expect(modules.length).toBe(14); // m0–m9 + instellingstoets-modules mi1–mi4
+    expect(allQuestions.length).toBeGreaterThanOrEqual(497); // groeit als er content bijkomt
     expect(tips.length).toBe(22);
   });
 
@@ -139,9 +139,13 @@ describe('grading', () => {
     expect(buildMaxPoints(q)).toBe(15);
   });
 
-  it('buildBossSession gebruikt de expliciete Eindbaas-vraag van module mi1', () => {
-    const ids = buildBossSession('mi1');
-    expect(ids).toEqual(['mi1ceb']); // de casus_bouw, niet een willekeurige trekking
+  it('elke instellingstoets-module (mi1–mi4) heeft een casus_bouw-Eindbaas als boss', () => {
+    for (const n of [1, 2, 3, 4]) {
+      const ids = buildBossSession('mi' + n);
+      expect(ids).toEqual([`mi${n}ceb`]); // de casus_bouw, niet een willekeurige trekking
+      expect(questionById[`mi${n}ceb`].type).toBe('build');
+      expect(buildMaxPoints(questionById[`mi${n}ceb`])).toBeGreaterThan(0);
+    }
   });
 });
 
