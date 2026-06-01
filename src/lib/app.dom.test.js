@@ -11,16 +11,17 @@ beforeEach(() => {
 });
 
 describe('App mount (jsdom)', () => {
-  it('mount het pad-scherm zonder runtime-errors en toont modules', async () => {
+  it('mount het modi-startscherm zonder runtime-errors', async () => {
     const App = (await import('../App.svelte')).default;
     const target = document.body.appendChild(document.createElement('div'));
     const app = new App({ target });
     await new Promise((r) => setTimeout(r, 50));
     const html = target.innerHTML;
     expect(html.length).toBeGreaterThan(200);
-    // bewijs dat het echte leerpad rendert
+    // bewijs dat het modi-menu rendert
     expect(html).toContain('Dagdoel');
-    expect(html).toContain('Fundamenten'); // module m0 titel
+    expect(html).toContain('Snel oefenen'); // modus-knop
+    expect(html).toContain('Het pad'); // modus-knop
     // mascotte (humor-laag) is gewired en rendert
     expect(html).toContain('motivatie-maatje');
     app.$destroy();

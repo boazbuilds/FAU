@@ -1,43 +1,12 @@
-// Laadt de content (los van de engine). Merge't Boaz' vragenbank-schema en normaliseert
-// elke vraag naar de interne runtime-vorm die de engine/components al kennen.
-// Vite bundelt de JSON bij de build in.
-import baseData from '../../content/course/vragenbank.json';
-import casusData from '../../content/course/vragenbankcasussen.json';
-import techniekData from '../../content/course/vragenbanktechniek.json';
-import extraData from '../../content/course/vragenbankextra.json';
-import bank0 from '../../content/course/vragenbankbank0.json';
-import bank1 from '../../content/course/vragenbankbank1.json';
-import bank2 from '../../content/course/vragenbankbank2.json';
-import bank3 from '../../content/course/vragenbankbank3.json';
-import bank4 from '../../content/course/vragenbankbank4.json';
-import moduleM9 from '../../content/course/vragenbankm9.json';
-import bank5 from '../../content/course/vragenbankbank5.json';
-import bank6 from '../../content/course/vragenbankbank6.json';
-import bank7 from '../../content/course/vragenbankbank7.json';
-import bank8 from '../../content/course/vragenbankbank8.json';
-import bank9 from '../../content/course/vragenbankbank9.json';
-import examenMi1 from '../../content/course/examen-mi1.json';
-import examenMi2 from '../../content/course/examen-mi2.json';
-import examenMi3 from '../../content/course/examen-mi3.json';
-import examenMi4 from '../../content/course/examen-mi4.json';
-import tipsData from '../../content/examtips.json';
+// Laadt de content uit één zelfstandig app-bestand (app-instellingstoets.json) en
+// normaliseert elke vraag naar de interne runtime-vorm die de engine/components al
+// kennen. Het bestand is self-contained: { meta, _howto, modes[], modules[] (met
+// 'track'), instinkers[], tips[] }. Vite bundelt de JSON bij de build in.
+import appData from '../../content/app-instellingstoets.json';
+import achievementsData from '../../content/achievements.json';
 import { CONFIG } from '../config.js';
 
-// --- 1. Merge: base + extensies (per README-regel) ---
-function mergeCourse(base, extensions) {
-  const course = structuredClone(base);
-  for (const ext of extensions) {
-    const addLessons = ext.addLessonsToModule || {};
-    for (const m of course.modules) {
-      if (addLessons[m.id]) m.lessons.push(...structuredClone(addLessons[m.id]));
-    }
-    if (ext.addModules) course.modules.push(...structuredClone(ext.addModules));
-  }
-  course.modules.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-  return course;
-}
-
-// --- 2. Normaliseer een bronvraag naar de interne vorm ---
+// --- 1. Normaliseer een bronvraag naar de interne vorm ---
 const LETTERS = 'abcdefghijklmnopqrstuvwxyz';
 
 function normalizeQuestion(q, moduleId, lessonId) {
@@ -89,18 +58,22 @@ function normalizeQuestion(q, moduleId, lessonId) {
       };
     case 'casus_bouw':
       // "Bouw het antwoord": sleep/plaats bouwstenen in de juiste structuurstap.
+      // Het app-bestand gebruikt Nederlandse veldnamen (bouwstenen/tekst/rol/punten/
+      // feedback); we mappen ze naar de interne vorm (blocks/text/role/points/explain).
       return {
         ...common,
         type: 'build',
         punten: q.punten ?? null, // CA-voorblad-punten (voor de score-presentatie)
+        modelantwoord: q.modelantwoord ?? null,
         slots: (q.slots ?? []).map((s) => ({ id: s.id, label: s.label })),
-        blocks: (q.blocks ?? []).map((b) => ({
+        blocks: (q.bouwstenen ?? q.blocks ?? []).map((b) => ({
           id: b.id,
-          text: b.text,
-          role: b.role, // 'kern' | 'instinker' | 'afleider'
+          text: b.tekst ?? b.text ?? '',
+          role: b.rol ?? b.role, // 'kern' | 'instinker' | 'afleider'
           slot: b.slot ?? null, // alleen relevant voor kern-blokken
-          points: b.points ?? 0,
-          explain: b.explain ?? null
+          points: b.punten ?? b.points ?? 0,
+          explain: b.feedback ?? b.explain ?? null,
+          ref: b.ref ?? null
         }))
       };
     default:
@@ -114,20 +87,20 @@ export function isObjective(question) {
   return OBJECTIVE_TYPES.has(question.type);
 }
 
-// --- 3. Bouw de indexen ---
-const course = mergeCourse(baseData, [
-  casusData, techniekData, extraData,
-  bank0, bank1, bank2, bank3, bank4,
-  moduleM9, // definieert module m9 (moet vóór bank9 staan)
-  bank5, bank6, bank7, bank8, bank9,
-  examenMi1, examenMi2, examenMi3, examenMi4 // instellingstoets-modules (A/B/C met casus_bouw-Eindbaas)
-]);
+// --- 2. Modules (één self-contained bestand; geen merge nodig) ---
+const course = { modules: structuredClone(appData.modules) };
+course.modules.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
 // Genereer per module een boss-examen. Virtueel: de boss-les heeft zelf geen
 // vragen, maar buildBossSession() trekt een wisselende subset uit de modulepool
 // (zo is elke poging anders en blijft de progressie spannend/verslavend).
 for (const m of course.modules) {
   m.lessons = m.lessons ?? [];
+  // De Eindbaas: markeer de laatste casus_bouw-les als boss (de poort van de
+  // module). Heeft een module geen casus (bv. de basis-track m0–m9), dan een
+  // auto-boss met een wisselende subset objectieve modulevragen.
+  const casusLessons = m.lessons.filter((l) => (l.questions ?? []).some((q) => q.type === 'casus_bouw'));
+  if (casusLessons.length) casusLessons[casusLessons.length - 1].boss = true;
   const hasBoss = m.lessons.some((l) => l.boss);
   const hasLessen = m.lessons.some((l) => !l.boss);
   if (!hasBoss && hasLessen) {
@@ -143,10 +116,11 @@ export const modules = course.modules.map((m) => ({
   order: m.order ?? 0,
   icon: m.icon ?? '📘',
   color: m.color ?? '#6366f1',
+  track: m.track ?? 'basis', // 'basis' | 'pad' | 'leercurve' | 'examen'
   lessons: (m.lessons ?? []).map((l) => ({
     id: l.id,
     title: l.title,
-    casusIntro: l.casusIntro ?? null,
+    casusIntro: l.casusIntro ?? l.context ?? null,
     boss: !!l.boss,
     questionIds: (l.questions ?? []).map((q) => q.id)
   }))
@@ -187,6 +161,16 @@ export function questionsForLesson(lessonId) {
   return questionsByLesson[lessonId] ?? [];
 }
 
+// --- 3. Tracks & modi (uit het app-bestand) ---
+// modes[] = de knoppen (snel/pad/leercurve/examen); elke module heeft een 'track'.
+export const modes = appData.modes ?? [];
+export const TRACKS = ['basis', 'pad', 'leercurve', 'examen'];
+export const modulesByTrack = {};
+for (const m of modules) (modulesByTrack[m.track] ??= []).push(m);
+export function modulesForTrack(track) {
+  return [...(modulesByTrack[track] ?? [])].sort((a, b) => a.order - b.order);
+}
+
 // --- 4. Examengewichten afleiden (proportioneel aan vraagaantal; overrides uit config) ---
 function deriveWeights() {
   const overrides = CONFIG.content.moduleWeightOverrides ?? {};
@@ -205,10 +189,10 @@ function deriveWeights() {
 }
 deriveWeights();
 
-// --- Examentips ---
-export const tips = tipsData.tips ?? [];
+// --- Examentips + instinkers (coaching) — ingesloten in het app-bestand ---
+export const tips = appData.tips ?? [];
 export const tipById = Object.fromEntries(tips.map((t) => [t.id, t]));
+export const instinkers = appData.instinkers ?? [];
 
 // --- Achievements ---
-import achievementsData from '../../content/achievements.json';
 export const achievements = achievementsData.achievements ?? [];

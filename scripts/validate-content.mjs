@@ -1,5 +1,6 @@
 // Valideert de content vóór een build. Geen dependencies nodig.
-// Merge't base + extensies en controleert het schema van Boaz' vragenbank.
+// Leest het zelfstandige app-bestand (app-instellingstoets.json) en controleert
+// het schema: modules/lessen/vragen, unieke id's, vraagtypen, casus_bouw, tipRef.
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -10,30 +11,11 @@ const errors = [];
 const warnings = [];
 const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'));
 
-const base = readJson(join(contentDir, 'course/vragenbank.json'));
-const casus = readJson(join(contentDir, 'course/vragenbankcasussen.json'));
-const techniek = readJson(join(contentDir, 'course/vragenbanktechniek.json'));
-const extra = readJson(join(contentDir, 'course/vragenbankextra.json'));
-const banks04 = [0, 1, 2, 3, 4].map((n) => readJson(join(contentDir, `course/vragenbankbank${n}.json`)));
-const moduleM9 = readJson(join(contentDir, 'course/vragenbankm9.json')); // definieert m9 (vóór bank9)
-const banks59 = [5, 6, 7, 8, 9].map((n) => readJson(join(contentDir, `course/vragenbankbank${n}.json`)));
-const examenModules = [1, 2, 3, 4].map((n) => readJson(join(contentDir, `course/examen-mi${n}.json`)));
-const tipsData = readJson(join(contentDir, 'examtips.json'));
+const app = readJson(join(contentDir, 'app-instellingstoets.json'));
 
-// --- merge --- (m9-moduledefinitie vóór bank9, anders vallen die lessen weg)
-const course = JSON.parse(JSON.stringify(base));
-for (const ext of [casus, techniek, extra, ...banks04, moduleM9, ...banks59, ...examenModules]) {
-  const addLessons = ext.addLessonsToModule || {};
-  for (const m of course.modules) {
-    if (addLessons[m.id]) m.lessons.push(...addLessons[m.id]);
-  }
-  if (ext.addModules) course.modules.push(...ext.addModules);
-}
-course.modules.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
-
-// --- tips ---
-const tipIds = new Set((tipsData.tips ?? []).map((t) => t.id));
-if (tipIds.size === 0) errors.push('examtips.json bevat geen tips');
+// --- tips (ingesloten) ---
+const tipIds = new Set((app.tips ?? []).map((t) => t.id));
+if (tipIds.size === 0) errors.push('app-instellingstoets.json bevat geen tips');
 
 // --- modules / lessen / vragen ---
 const moduleIds = new Set();
@@ -43,7 +25,7 @@ let qCount = 0;
 let lessonCount = 0;
 const OBJECTIVE = new Set(['multiple_choice', 'multi_select', 'matching', 'fill_blank']);
 
-for (const m of course.modules) {
+for (const m of app.modules ?? []) {
   if (!m.id) errors.push('Module zonder id');
   else if (moduleIds.has(m.id)) errors.push(`Dubbele module-id: ${m.id}`);
   else moduleIds.add(m.id);
@@ -90,9 +72,6 @@ for (const m of course.modules) {
         case 'matching': {
           if (!Array.isArray(q.pairs) || q.pairs.length < 2) errors.push(`${q.id}: matching heeft < 2 pairs`);
           else {
-            // De grader matcht op pair-positie, niet op tekst, dus dubbele 'right'
-            // is toegestaan (bv. 2x 'Oordeel met beperking' in de 2x2-matrix).
-            // Dubbele 'left' is wel ambigu en niet toegestaan.
             const lefts = new Set();
             for (const p of q.pairs) {
               if (!p.left || !p.right) errors.push(`${q.id}: pair met lege left/right`);
@@ -106,8 +85,9 @@ for (const m of course.modules) {
           if (!q.answer) errors.push(`${q.id}: fill_blank mist answer`);
           break;
         case 'casus_bouw': {
+          // Veldnamen uit het app-bestand: slots[], bouwstenen[] (tekst/rol/punten/slot).
           const slots = q.slots ?? [];
-          const blocks = q.blocks ?? [];
+          const blocks = q.bouwstenen ?? q.blocks ?? [];
           if (slots.length < 1) errors.push(`${q.id}: casus_bouw heeft geen slots`);
           if (blocks.length < 2) errors.push(`${q.id}: casus_bouw heeft < 2 bouwstenen`);
           const slotIds = new Set();
@@ -120,22 +100,25 @@ for (const m of course.modules) {
           let kernCount = 0;
           let kernPoints = 0;
           for (const b of blocks) {
-            if (!b.id || !b.text) errors.push(`${q.id}: bouwsteen mist id/text`);
+            const text = b.tekst ?? b.text;
+            const role = b.rol ?? b.role;
+            const points = b.punten ?? b.points;
+            if (!b.id || !text) errors.push(`${q.id}: bouwsteen mist id/tekst`);
             if (blockIds.has(b.id)) errors.push(`${q.id}: dubbele bouwsteen-id '${b.id}'`);
             blockIds.add(b.id);
-            if (!['kern', 'instinker', 'afleider'].includes(b.role)) {
-              errors.push(`${q.id}: bouwsteen '${b.id}' heeft ongeldige role '${b.role}'`);
+            if (!['kern', 'instinker', 'afleider'].includes(role)) {
+              errors.push(`${q.id}: bouwsteen '${b.id}' heeft ongeldige rol '${role}'`);
             }
-            if (b.role === 'kern') {
+            if (role === 'kern') {
               kernCount++;
-              kernPoints += b.points ?? 0;
-              if (!(b.points > 0)) errors.push(`${q.id}: kern-bouwsteen '${b.id}' mist points>0`);
+              kernPoints += points ?? 0;
+              if (!(points > 0)) errors.push(`${q.id}: kern-bouwsteen '${b.id}' mist punten>0`);
               if (!slotIds.has(b.slot)) errors.push(`${q.id}: kern-bouwsteen '${b.id}' verwijst naar onbekend slot '${b.slot}'`);
             }
           }
           if (kernCount < 1) errors.push(`${q.id}: casus_bouw heeft geen kern-bouwstenen`);
           if (q.punten != null && q.punten !== kernPoints) {
-            warnings.push(`${q.id}: punten (${q.punten}) ≠ som kern-points (${kernPoints})`);
+            warnings.push(`${q.id}: punten (${q.punten}) ≠ som kern-punten (${kernPoints})`);
           }
           break;
         }
@@ -152,8 +135,8 @@ for (const m of course.modules) {
 }
 
 if (warnings.length) {
-  console.warn('\n⚠️  Waarschuwingen:');
-  for (const w of warnings) console.warn(`  - ${w}`);
+  console.warn(`\n⚠️  ${warnings.length} waarschuwing(en) (eerste 20):`);
+  for (const w of warnings.slice(0, 20)) console.warn(`  - ${w}`);
 }
 if (errors.length) {
   console.error('\n❌ Contentfouten:');

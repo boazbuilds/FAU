@@ -18,6 +18,7 @@
   import * as audio from './lib/audio.js';
   import { audioReady } from './lib/audio.js';
   import TopBar from './components/TopBar.svelte';
+  import Home from './screens/Home.svelte';
   import Path from './screens/Path.svelte';
   import Session from './screens/Session.svelte';
   import Blitz from './screens/Blitz.svelte';
@@ -84,7 +85,7 @@
   $: gated = $auth.ready && !$auth.user && !$guest;
 
   const nav = [
-    { id: 'home', label: 'Pad', icon: '🗺️' },
+    { id: 'home', label: 'Oefenen', icon: '🎮' },
     { id: 'progress', label: 'Voortgang', icon: '📊' },
     { id: 'leaderboard', label: 'Ranglijst', icon: '🏆' },
     { id: 'settings', label: 'Meer', icon: '⚙️' }
@@ -114,6 +115,8 @@
   {/if}
 
   {#if $screen === 'home'}
+    <Home />
+  {:else if $screen === 'path'}
     <Path />
   {:else if $screen === 'session'}
     <Session />
