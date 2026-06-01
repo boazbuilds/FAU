@@ -1,7 +1,7 @@
 // Stelt een dagsessie samen: due reviews + nieuwe items, door elkaar gehusseld.
 import { get } from 'svelte/store';
 import { CONFIG } from '../config.js';
-import { allQuestions, questionsForTopic, questionsForLesson, isObjective, modules } from './content.js';
+import { allQuestions, questionsForTopic, questionsForLesson, isObjective, modules, questionsForScope, modulesForTrack } from './content.js';
 import { isDue } from './srs.js';
 import { todayNumber } from './day.js';
 import { topicMasteryMap } from './predict.js';
@@ -138,10 +138,10 @@ export function buildBossSession(moduleId, length = CONFIG.path.bossLength) {
 // Kennis-Blitz: ruime, rating-gewogen pool objectieve kennisvragen. Prioriteert
 // SRS-due en zwakke topics, maar blijft gevarieerd. Lijst is lang genoeg dat de
 // klok eerder op is dan de vragen.
-export function buildBlitzSession(srs, length = CONFIG.blitz.poolSize) {
+export function buildBlitzSession(srs, length = CONFIG.blitz.poolSize, scope = 'instelling') {
   const items = srs?.items ?? {};
   const today = todayNumber();
-  const pool = allQuestions.filter((q) => isObjective(q) && isKnowledge(q));
+  const pool = questionsForScope(scope).filter((q) => isObjective(q) && isKnowledge(q));
   const mastery = topicMasteryMap(srs);
   // Trek gewogen (down-rated zakt weg), en sorteer dan zwakke topics + due eerst.
   const sample = weightedSample(pool, Math.min(length, pool.length));
@@ -153,11 +153,18 @@ export function buildBlitzSession(srs, length = CONFIG.blitz.poolSize) {
   return interleave(sample).map((q) => q.id);
 }
 
-// ⚡ Snel oefenen: random uit álle tracks, maar zonder casus_bouw (type 'build',
-// traag) en zonder fill_blank (type 'short', typen) — die staan standaard uit.
-export function buildQuickSession(srs, length = CONFIG.sessionLength) {
-  const pool = allQuestions.filter((q) => q.type !== 'build' && q.type !== 'short');
+// ⚡ Snel oefenen: random uit het gekozen tentamen (scope), zonder casus_bouw
+// (type 'build', traag) en zonder fill_blank (type 'short', typen) — standaard uit.
+export function buildQuickSession(srs, length = CONFIG.sessionLength, scope = 'instelling') {
+  const pool = questionsForScope(scope).filter((q) => q.type !== 'build' && q.type !== 'short');
   return interleave(weightedSample(pool, Math.min(length, pool.length))).map((q) => q.id);
+}
+
+// ⏱️ DEADLINE: de leercurve-set (ins12–ins18, 100 vragen) als één lange toets.
+// Objectief-eerst (tempo), casus_bouw achteraan; in vaste module-/lesvolgorde.
+export function buildDeadlineSession() {
+  const qs = modulesForTrack('leercurve').flatMap((m) => questionsForTopic(m.id));
+  return [...qs.filter(isObjective), ...qs.filter((q) => !isObjective(q))].map((q) => q.id);
 }
 
 // Oefenen op een tag (bv. "St.520" of "typologie"); voor drills.

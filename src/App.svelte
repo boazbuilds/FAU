@@ -22,6 +22,7 @@
   import Path from './screens/Path.svelte';
   import Session from './screens/Session.svelte';
   import Blitz from './screens/Blitz.svelte';
+  import Deadline from './screens/Deadline.svelte';
   import Results from './screens/Results.svelte';
   import Progress from './screens/Progress.svelte';
   import Predict from './screens/Predict.svelte';
@@ -77,7 +78,7 @@
   // Track wisselen: energiek in de sessie/resultaten, rustig in de menu's.
   $: audio.setContext($screen);
 
-  $: chromeless = $screen === 'session' || $screen === 'results' || $screen === 'blitz';
+  $: chromeless = $screen === 'session' || $screen === 'results' || $screen === 'blitz' || $screen === 'deadline';
 
   // Login-first: zodra online aanstaat en niemand is ingelogd, tonen we eerst het
   // inlogscherm — tenzij je als gast verdergaat. Zonder online-config is auth meteen
@@ -122,6 +123,8 @@
     <Session />
   {:else if $screen === 'blitz'}
     <Blitz />
+  {:else if $screen === 'deadline'}
+    <Deadline />
   {:else if $screen === 'results'}
     <Results />
   {:else if $screen === 'progress'}

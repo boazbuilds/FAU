@@ -69,6 +69,7 @@ export function defaultProfile() {
     totals: { answered: 0, correct: 0, sessions: 0 },
     achievements: {},
     blitz: { best: 0, lastScore: 0, plays: 0 },
+    deadlineBonus: 0, // +punt op het geschatte instellingstoets-cijfer (DEADLINE voltooid)
     createdAt: today
   };
 }
@@ -79,6 +80,7 @@ export function migrateProfile(profile) {
   if (!profile.userId) profile.userId = uuid();
   if (!profile.week) profile.week = { weekKey: weekNumber(), xp: 0, bestXp: 0 };
   if (!profile.blitz) profile.blitz = { best: 0, lastScore: 0, plays: 0 };
+  if (profile.deadlineBonus == null) profile.deadlineBonus = 0;
   if ((profile.v ?? 1) < 2) profile.v = 2;
   return profile;
 }
