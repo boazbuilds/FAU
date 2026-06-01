@@ -6,6 +6,7 @@
   import { isConfigured } from '../lib/cloud/online.js';
   import { guest } from '../stores/auth.js';
   import { signIn, signUp, signInAnonymously } from '../lib/cloud/sync.js';
+  import { resetLocal } from '../lib/cloud/snapshot.js';
 
   let email = '';
   let password = '';
@@ -43,6 +44,8 @@
   async function playAsGuest() {
     guestErr = '';
     guestBusy = true;
+    // Een nieuwe gast begint schoon op 0 — niet de voortgang van dit apparaat erven.
+    resetLocal();
     try {
       if (isConfigured() && guestName.trim()) {
         // Echte (anonieme) sessie → de gast krijgt een rij in 'players' en komt
