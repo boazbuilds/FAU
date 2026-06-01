@@ -62,8 +62,8 @@ describe('audio-engine', () => {
       audio.comboFlair(5);
       audio.levelUp();
       audio.tap();
-      audio.startMusic('stadium');
-      audio.setTrack('menu');
+      audio.startMusic('lofi');
+      audio.setTrack('ambient');
       audio.nextTrack();
       audio.pickSession(false);
       audio.pickSession(true);
@@ -75,7 +75,7 @@ describe('audio-engine', () => {
   });
 
   it('biedt meerdere muzieknummers', () => {
-    expect(audio.trackList.length).toBeGreaterThanOrEqual(5);
+    expect(audio.trackList.length).toBeGreaterThanOrEqual(2);
     expect(audio.trackList.every((t) => t.id && t.name)).toBe(true);
   });
 
@@ -101,10 +101,8 @@ describe('audio-engine', () => {
     expect(oscCount).toBeGreaterThan(beforeSfx);
     expect(startCount).toBeGreaterThan(0);
 
-    const beforeMusic = oscCount;
-    a.setMusicEnabled(true); // context bestaat → sequencer schedulet stappen
-    expect(oscCount).toBeGreaterThan(beforeMusic);
-    expect(get(a.nowPlaying)).toBeTruthy(); // UI weet welk nummer speelt
+    a.setMusicEnabled(true); // muziek is file-based (Howler) → geen synth-oscillators
+    expect(get(a.nowPlaying)).toBeTruthy(); // UI weet wel welk nummer speelt
 
     const before = get(a.nowPlaying);
     a.nextTrack(); // jukebox: volgend nummer
