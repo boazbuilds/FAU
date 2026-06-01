@@ -103,8 +103,8 @@
   $: isLast = index + 1 >= ids.length;
 
   function heartsActive() {
-    // mild: oefenen én boss kosten geen levens
-    return mode !== 'practice' && mode !== 'boss' && get(settings).heartsEnabled;
+    // mild: oefenen, boss, snel én mock kosten geen levens
+    return !['practice', 'boss', 'quick', 'mock'].includes(mode) && get(settings).heartsEnabled;
   }
 
   $: rating = q ? $ratings[q.id] : undefined;

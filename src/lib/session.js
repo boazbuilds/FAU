@@ -153,6 +153,13 @@ export function buildBlitzSession(srs, length = CONFIG.blitz.poolSize) {
   return interleave(sample).map((q) => q.id);
 }
 
+// ⚡ Snel oefenen: random uit álle tracks, maar zonder casus_bouw (type 'build',
+// traag) en zonder fill_blank (type 'short', typen) — die staan standaard uit.
+export function buildQuickSession(srs, length = CONFIG.sessionLength) {
+  const pool = allQuestions.filter((q) => q.type !== 'build' && q.type !== 'short');
+  return interleave(weightedSample(pool, Math.min(length, pool.length))).map((q) => q.id);
+}
+
 // Oefenen op een tag (bv. "St.520" of "typologie"); voor drills.
 export function buildTagSession(tag, length = CONFIG.sessionLength) {
   const pool = allQuestions.filter((q) => (q.tags ?? []).includes(tag));

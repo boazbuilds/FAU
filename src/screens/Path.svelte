@@ -1,43 +1,34 @@
 <script>
-  import { get } from 'svelte/store';
-  import { go, activeSession } from '../stores/ui.js';
-  import { profile } from '../stores/profile.js';
-  import { srs } from '../stores/srsStore.js';
+  // Lespad voor één track (pad of leercurve): modules op volgorde, met per module
+  // de lessen A·Kennis → B·Techniek → C·Eindbaas (de casus_bouw-boss als poort).
+  import { go, activeSession, pathTrack } from '../stores/ui.js';
   import { progress } from '../stores/progressStore.js';
-  import { settings } from '../stores/settings.js';
-  import { modules } from '../lib/content.js';
-  import { buildSession, buildLessonSession, buildBossSession, dueCount } from '../lib/session.js';
+  import { modulesForTrack } from '../lib/content.js';
+  import { buildLessonSession, buildBossSession } from '../lib/session.js';
   import { isLessonUnlocked, isModuleUnlocked, moduleProgress } from '../lib/progress.js';
-  import { predict } from '../lib/predict.js';
-  import { todayNumber } from '../lib/day.js';
-  import { motivationOfDay, randomFrom, motivation } from '../lib/humor.js';
   import LessonNode from '../components/LessonNode.svelte';
-  import Mascot from '../components/Mascot.svelte';
 
-  $: due = dueCount($srs);
-  $: pred = predict($srs);
-  $: goalPct = $profile.dailyGoalXp ? Math.min(1, ($profile.today.xp ?? 0) / $profile.dailyGoalXp) : 0;
+  $: mods = modulesForTrack($pathTrack);
+  $: trackTitle = $pathTrack === 'leercurve' ? 'Extra leercurve' : 'Het pad';
+  $: trackSub = $pathTrack === 'leercurve' ? 'Verdiepende trainingsmodules' : 'Kennis → Techniek → Eindbaas, op volgorde';
 
-  // Welke module is "actief" (eerste niet-voltooide ontgrendelde)? Die klappen we open.
+  // Open de eerste onvoltooide ontgrendelde module van deze track (her-init bij wissel).
   let expanded = {};
-  $: {
-    // init: open de eerste onvoltooide ontgrendelde module
-    if (Object.keys(expanded).length === 0) {
-      const active = modules.find(
-        (m) => isModuleUnlocked($progress, modules, m.id) && !moduleProgress($progress, m).completed
-      );
-      if (active) expanded = { [active.id]: true };
-    }
+  let lastTrack = null;
+  $: if ($pathTrack !== lastTrack) {
+    lastTrack = $pathTrack;
+    const active = mods.find((m) => isModuleUnlocked($progress, mods, m.id) && !moduleProgress($progress, m).completed);
+    expanded = active ? { [active.id]: true } : {};
   }
 
   function lessonState(m, l) {
     if (l.boss) {
       if ($progress.modules?.[m.id]?.bossPassed) return 'done';
-      return isLessonUnlocked($progress, modules, m.id, l.id) ? 'available' : 'locked';
+      return isLessonUnlocked($progress, mods, m.id, l.id) ? 'available' : 'locked';
     }
     const rec = $progress.lessons?.[l.id];
     if (rec?.completed) return 'done';
-    return isLessonUnlocked($progress, modules, m.id, l.id) ? 'available' : 'locked';
+    return isLessonUnlocked($progress, mods, m.id, l.id) ? 'available' : 'locked';
   }
 
   function openLesson(m, l) {
@@ -49,82 +40,19 @@
     }
     go('session');
   }
-
-  function review() {
-    const s = get(settings);
-    activeSession.set({ ids: buildSession(get(srs), { length: s.sessionLength, newCount: 0 }), mode: 'review' });
-    go('session');
-  }
-
-  function startBlitz() {
-    go('blitz');
-  }
-
-  const hour = new Date().getHours();
-  const greeting = hour < 6 ? 'Goedenacht' : hour < 12 ? 'Goedemorgen' : hour < 18 ? 'Goedemiddag' : 'Goedenavond';
-
-  let quote = motivationOfDay(todayNumber());
-  function newQuote() {
-    let next = quote;
-    while (motivation.length > 1 && next === quote) next = randomFrom(motivation);
-    quote = next;
-  }
 </script>
 
 <div class="space-y-4 px-4 pb-28 pt-2">
-  <div class="flex items-center justify-between">
+  <div class="flex items-center gap-3">
+    <button class="text-lg text-slate-400 hover:text-white" on:click={() => go('home')} aria-label="Terug naar modi">←</button>
     <div class="min-w-0">
-      <h1 class="truncate font-pixel text-sm uppercase neon-cyan">{greeting}</h1>
-      <p class="mt-1 text-xs text-slate-400">Jouw pad naar het FAU-tentamen 👾</p>
+      <h1 class="truncate font-pixel text-sm uppercase neon-cyan">{trackTitle}</h1>
+      <p class="mt-1 text-xs text-slate-400">{trackSub}</p>
     </div>
-    <button class="btn-arcade shrink-0 rounded-xl px-3 py-2 font-pixel text-[9px] uppercase" on:click={() => go('cheatsheet')}>📕 Spiek</button>
   </div>
 
-  <!-- Plus: motivatie van de dag (tik voor een nieuwe) -->
-  <button type="button" class="block w-full text-left" on:click={newQuote} aria-label="Nieuwe quote">
-    <Mascot mood="happy" hint="tik voor nieuwe motivatie 🔁">{quote}</Mascot>
-  </button>
-
-  <!-- Dagdoel + herhaling -->
-  <div class="arcade-panel flex items-center gap-3 rounded-2xl p-4">
-    <div class="flex-1">
-      <div class="mb-1 flex items-center justify-between font-pixel text-[8px] uppercase tracking-wide text-slate-400">
-        <span>Dagdoel</span><span class="text-cyan-300">{$profile.today.xp ?? 0}/{$profile.dailyGoalXp} XP</span>
-      </div>
-      <div class="h-2.5 overflow-hidden rounded-full border border-cyan-500/20 bg-slate-900">
-        <div class="h-full rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 transition-all" style="width:{Math.round(goalPct * 100)}%"></div>
-      </div>
-    </div>
-    <button
-      class="btn-arcade btn-arcade-magenta shrink-0 rounded-xl px-3 py-2 font-pixel text-[9px] uppercase disabled:opacity-40"
-      on:click={review}
-      disabled={due === 0}
-      title="Herhaal vragen die vandaag aan de beurt zijn"
-    >🔁 Herhaal{due > 0 ? ` (${due})` : ''}</button>
-  </div>
-
-  <!-- Kennis-Blitz: getimede arcade-modus -->
-  <button
-    type="button"
-    class="arcade-panel flex w-full items-center justify-between rounded-2xl p-4 text-left transition hover:border-cyan-400/50"
-    on:click={startBlitz}
-  >
-    <div class="flex items-center gap-3">
-      <span class="text-3xl">⚡</span>
-      <div>
-        <div class="font-pixel text-[10px] uppercase tracking-wide neon-cyan">Kennis-Blitz</div>
-        <div class="mt-1 text-xs text-slate-400">Zoveel mogelijk goed tegen de klok</div>
-      </div>
-    </div>
-    <div class="text-right">
-      <div class="font-pixel text-[7px] uppercase tracking-wide text-slate-500">Highscore</div>
-      <div class="font-pixel text-sm neon-magenta">{$profile.blitz?.best ?? 0}</div>
-    </div>
-  </button>
-
-  <!-- Modules -->
-  {#each modules as m (m.id)}
-    {@const unlocked = isModuleUnlocked($progress, modules, m.id)}
+  {#each mods as m (m.id)}
+    {@const unlocked = isModuleUnlocked($progress, mods, m.id)}
     {@const mp = moduleProgress($progress, m)}
     <div class="overflow-hidden rounded-2xl border {unlocked ? 'border-slate-800' : 'border-slate-800/60'} bg-slate-900/50">
       <button
@@ -165,14 +93,4 @@
       {/if}
     </div>
   {/each}
-
-  <!-- Slaagkans -->
-  <button class="arcade-panel flex w-full items-center justify-between rounded-2xl p-5 text-left transition hover:border-cyan-400/50" on:click={() => go('predict')}>
-    <div>
-      <div class="font-pixel text-[8px] uppercase tracking-wide text-slate-400">Geschatte slagingskans</div>
-      <div class="mt-1.5 font-pixel text-xl neon-magenta">{pred.enoughData ? `${Math.round(pred.pPass / 0.05) * 5}%` : '—'}</div>
-      <div class="mt-1 text-xs text-slate-500">{pred.enoughData ? 'schatting, geen garantie' : 'oefen meer voor een schatting'}</div>
-    </div>
-    <div class="text-3xl">🔮</div>
-  </button>
 </div>
