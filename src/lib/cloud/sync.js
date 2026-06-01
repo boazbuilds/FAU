@@ -32,6 +32,30 @@ export async function signOut() {
   if (c) await c.auth.signOut();
 }
 
+// Gast met een naam: een anonieme sessie (echte auth.users-rij) zodat de gast
+// meteen meedoet op de ranglijst. Vereist 'Anonymous sign-ins' aan in Supabase;
+// staat dat uit, dan gooit dit een fout en valt de UI terug op een lokale gast.
+export async function signInAnonymously(username) {
+  const c = await getClient();
+  if (!c) throw new Error('Online staat uit (geen Supabase-config).');
+  const { data, error } = await c.auth.signInAnonymously();
+  if (error) throw error;
+  // Meteen een spelersrij met de gekozen naam (zodat de gast op de ranglijst komt).
+  if (data?.session?.user) {
+    await upsertPlayer(data.session.user.id, readLocal(), username);
+  }
+  return data;
+}
+
+// Een gast (anonieme sessie) omzetten naar een vast account met e-mail/wachtwoord.
+// De gebruikers-id blijft gelijk, dus voortgang én ranglijstplek blijven behouden.
+export async function upgradeGuest(email, password) {
+  const c = await getClient();
+  if (!c) throw new Error('Online staat uit (geen Supabase-config).');
+  const { error } = await c.auth.updateUser({ email, password });
+  if (error) throw error;
+}
+
 export async function pullCloud(userId) {
   const c = await getClient();
   if (!c) return null;
