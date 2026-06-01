@@ -1,9 +1,13 @@
 // @vitest-environment jsdom
 import { describe, it, expect, beforeEach } from 'vitest';
+import { guest } from '../stores/auth.js';
 
 beforeEach(() => {
   localStorage.clear();
   if (!globalThis.crypto) globalThis.crypto = { randomUUID: () => 'test-uuid' };
+  // Online is in de testomgeving 'geconfigureerd', dus zou het inlogscherm vóór de
+  // app verschijnen. We testen de app zelf, dus gaan als gast verder (bypasst de gate).
+  guest.set(true);
 });
 
 describe('App mount (jsdom)', () => {

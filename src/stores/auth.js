@@ -1,9 +1,15 @@
 import { writable } from 'svelte/store';
+import { persistentStore } from './persistent.js';
 import { isConfigured, getClient } from '../lib/cloud/online.js';
 
 // Online-account-status. ready=true zodra we weten of er iemand is ingelogd.
 // Zonder online-config is er nooit een user en is alles meteen 'ready'.
 export const auth = writable({ ready: !isConfigured(), user: null });
+
+// Gast-modus: de app zonder account gebruiken. Voortgang blijft dan lokaal op dit
+// apparaat (wordt niet in de cloud bewaard). Persistent, zodat een gast na een
+// herlaad niet telkens opnieuw langs het inlogscherm hoeft.
+export const guest = persistentStore('guest', false);
 
 let started = false;
 export async function initAuth() {

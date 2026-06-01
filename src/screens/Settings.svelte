@@ -8,7 +8,7 @@
   import { trackList, nowPlaying } from '../lib/audio.js';
   import { ratings } from '../stores/ratings.js';
   import { isConfigured } from '../lib/cloud/online.js';
-  import { auth } from '../stores/auth.js';
+  import { auth, guest } from '../stores/auth.js';
   import { signIn, signUp, signOut } from '../lib/cloud/sync.js';
 
   let diag = ''; // geluidsdiagnose-uitvoer
@@ -33,6 +33,7 @@
   }
   async function doLogout() {
     await signOut();
+    guest.set(false); // terug naar het inlogscherm
   }
 
   $: ratingCount = Object.keys($ratings).length;
@@ -131,7 +132,7 @@
     <h2 class="font-pixel text-[10px] uppercase tracking-wide text-cyan-300/80">Account</h2>
     {#if !isConfigured()}
       <p class="text-xs leading-relaxed text-slate-400">
-        Online staat nog uit. Met een gratis account bewaar je je voortgang in de cloud (op al je apparaten) en kun je vrienden toevoegen (tab Vrienden). Aanzetten? Zie <span class="font-mono text-slate-300">docs/ONLINE-SETUP.md</span>.
+        Online staat nog uit. Met een gratis account bewaar je je voortgang in de cloud (op al je apparaten) en kom je op de wereldwijde ranglijst (tab Ranglijst). Aanzetten? Zie <span class="font-mono text-slate-300">docs/ONLINE-SETUP.md</span>.
       </p>
     {:else if $auth.user}
       <p class="text-sm text-slate-200">Ingelogd als <span class="font-semibold text-white">{$auth.user.email}</span> ✅</p>

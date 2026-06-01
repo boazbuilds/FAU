@@ -7,7 +7,7 @@
   import { progress } from './stores/progressStore.js';
   import { srs } from './stores/srsStore.js';
   import { ratings } from './stores/ratings.js';
-  import { auth, initAuth } from './stores/auth.js';
+  import { auth, guest, initAuth } from './stores/auth.js';
   import { loginSync, schedulePush } from './lib/cloud/sync.js';
   import { regenHearts, reconcileDay, migrateProfile } from './lib/gamify.js';
   import { ensureInit } from './lib/progress.js';
@@ -27,7 +27,8 @@
   import Settings from './screens/Settings.svelte';
   import Cheatsheet from './screens/Cheatsheet.svelte';
   import Mistakes from './screens/Mistakes.svelte';
-  import Account from './screens/Account.svelte';
+  import Leaderboard from './screens/Leaderboard.svelte';
+  import Login from './screens/Login.svelte';
 
   onMount(() => {
     profile.update((p) => {
@@ -77,15 +78,28 @@
 
   $: chromeless = $screen === 'session' || $screen === 'results' || $screen === 'blitz';
 
+  // Login-first: zodra online aanstaat en niemand is ingelogd, tonen we eerst het
+  // inlogscherm — tenzij je als gast verdergaat. Zonder online-config is auth meteen
+  // 'ready' (user=null) en val je direct in de gast-stroom.
+  $: gated = $auth.ready && !$auth.user && !$guest;
+
   const nav = [
     { id: 'home', label: 'Pad', icon: '🗺️' },
     { id: 'progress', label: 'Voortgang', icon: '📊' },
-    { id: 'account', label: 'Vrienden', icon: '👥' },
+    { id: 'leaderboard', label: 'Ranglijst', icon: '🏆' },
     { id: 'settings', label: 'Meer', icon: '⚙️' }
   ];
 </script>
 
 <div class="mx-auto min-h-[100dvh] w-full max-w-md">
+  {#if !$auth.ready && !$guest}
+    <!-- Even checken of er nog een sessie is, vóór we het inlogscherm tonen. -->
+    <div class="flex min-h-[100dvh] items-center justify-center">
+      <p class="font-pixel text-[10px] uppercase tracking-wide text-slate-500">Laden…</p>
+    </div>
+  {:else if gated}
+    <Login />
+  {:else}
   {#if $settings.music !== false && !$audioReady}
     <!-- iOS/mobiel: geluid kan pas na een echte tik. Directe click-handler = betrouwbaarst. -->
     <button
@@ -113,8 +127,8 @@
     <Predict />
   {:else if $screen === 'settings'}
     <Settings />
-  {:else if $screen === 'account'}
-    <Account />
+  {:else if $screen === 'leaderboard'}
+    <Leaderboard />
   {:else if $screen === 'cheatsheet'}
     <Cheatsheet />
   {:else if $screen === 'mistakes'}
@@ -135,5 +149,6 @@
         {/each}
       </div>
     </nav>
+  {/if}
   {/if}
 </div>

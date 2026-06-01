@@ -2,8 +2,8 @@
 
 De app werkt prima zonder dit — alles staat lokaal en gaat **niet** verloren bij
 updates. Wil je inloggen, je voortgang in de cloud bewaren (op al je apparaten)
-én vrienden + ranglijst? Koppel dan eenmalig een gratis **Supabase**-project.
-~10 minuten.
+én meedoen aan de wereldwijde ranglijst? Koppel dan eenmalig een gratis
+**Supabase**-project. ~10 minuten.
 
 ## Stap 1 — Project aanmaken
 1. Ga naar [supabase.com](https://supabase.com) → **Start your project** (gratis).
@@ -20,46 +20,40 @@ create table if not exists public.player_data (
   updated_at timestamptz not null default now()
 );
 
--- Publiek mini-profiel voor de ranglijst.
+-- Publiek mini-profiel voor de globale ranglijst (gebruikersnaam + totaal-XP).
 create table if not exists public.players (
   id uuid primary key references auth.users on delete cascade,
   username text not null default 'Speler',
-  week_xp int not null default 0,
-  week_key text,
+  total_xp int not null default 0,
   updated_at timestamptz not null default now()
-);
-
--- Vriendschappen: ik (user_id) volg friend_id.
-create table if not exists public.friendships (
-  user_id uuid not null references auth.users on delete cascade,
-  friend_id uuid not null references public.players(id) on delete cascade,
-  created_at timestamptz not null default now(),
-  primary key (user_id, friend_id)
 );
 
 alter table public.player_data enable row level security;
 alter table public.players    enable row level security;
-alter table public.friendships enable row level security;
 
 -- Privé voortgang: alleen van jezelf.
 create policy "eigen voortgang" on public.player_data
   for all using (auth.uid() = id) with check (auth.uid() = id);
 
--- Mini-profiel: iedereen die ingelogd is mag lezen (nodig voor 'vriend op code'
--- en de ranglijst); schrijven alleen je eigen rij.
+-- Mini-profiel: iedereen mag lezen (de ranglijst is openbaar, ook voor gasten);
+-- schrijven mag alleen je eigen rij.
 create policy "spelers lezen" on public.players
-  for select to authenticated using (true);
+  for select using (true);
 create policy "eigen speler schrijven" on public.players
   for all using (auth.uid() = id) with check (auth.uid() = id);
-
--- Je beheert je eigen vriendschappen.
-create policy "eigen vriendschappen" on public.friendships
-  for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
 ```
 
-> In `players` staat bewust niets gevoeligs (alleen gebruikersnaam + week-XP).
-> De vriendcode wordt in de app afgeleid uit je gebruikers-id, dus die hoeft niet
-> opgeslagen te worden.
+> In `players` staat bewust niets gevoeligs (alleen gebruikersnaam + totaal-XP).
+
+**Upgrade je vanaf een oudere opzet (met week-XP en vrienden)?** Draai dit eenmalig:
+
+```sql
+alter table public.players add column if not exists total_xp int not null default 0;
+drop policy if exists "spelers lezen" on public.players;
+create policy "spelers lezen" on public.players for select using (true);
+-- De vrienden-functie is vervallen; opruimen mag (optioneel):
+drop table if exists public.friendships;
+```
 
 ## Stap 3 — E-mail login aanzetten
 **Authentication → Providers → Email**: aan. Voor snel testen kun je
@@ -83,11 +77,12 @@ public key). Voor de live site (GitHub Pages) zet je ze als
 > hierboven, niet in de geheimhouding van de key.
 
 ## Stap 5 — Gebruiken
-- **Instellingen → Account**: maak een account / log in. Je voortgang
-  synchroniseert daarna automatisch (en wordt bij inloggen veilig samengevoegd
-  met wat al lokaal stond — je verliest dus nooit XP of streak).
-- **Vrienden** (onderbalk): deel je **vriendcode** (`FAU-XXXXX`), voeg vrienden
-  toe op hun code, en zie de **week-XP-ranglijst**.
+- De app opent met een **inlogscherm**: maak een account, log in, of ga **als
+  gast** verder (je voortgang blijft dan lokaal op dit apparaat).
+- Ingelogd synchroniseert je voortgang automatisch (en wordt bij de eerste login
+  veilig samengevoegd met wat al lokaal stond — je verliest dus nooit XP of streak).
+- **Ranglijst** (onderbalk): alle spelers gerangschikt op **totaal-XP (aller
+  tijden)**; je eigen rij is gemarkeerd.
 
 ## Veelgestelde vragen
 - **Verlies ik mijn huidige voortgang?** Nee. Bij de eerste login wordt lokaal +
