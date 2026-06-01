@@ -8,9 +8,9 @@ import { buildBossSession } from './session.js';
 import { defaultProgress, ensureInit, isLessonUnlocked, isModuleUnlocked, starsFor, completeLesson, recordBoss } from './progress.js';
 
 describe('content loader (merge + normalisatie)', () => {
-  it('merget alle losse vragenbestanden samen', () => {
-    expect(modules.length).toBe(14); // m0–m9 + instellingstoets-modules mi1–mi4
-    expect(allQuestions.length).toBeGreaterThanOrEqual(497); // groeit als er content bijkomt
+  it('laadt de modules en vragen uit het app-bestand', () => {
+    expect(modules.length).toBe(29); // m0–m9 (basis) + ins0–ins10 (pad) + ins12–ins18 (leercurve) + insmock
+    expect(allQuestions.length).toBeGreaterThanOrEqual(800);
     expect(tips.length).toBe(22);
   });
 
@@ -29,10 +29,10 @@ describe('content loader (merge + normalisatie)', () => {
     expect(q.pairs[0].id).toBe('p0');
   });
 
-  it('bevat geen invul-vragen meer (omgezet naar keuze/koppel)', () => {
-    expect(allQuestions.some((q) => q.type === 'short')).toBe(false);
-    // voorheen een fill_blank; nu meerkeuze
-    expect(questionById['m0l1q4'].type).toBe('mcq');
+  it('normaliseert fill_blank naar short met accept-lijst', () => {
+    const q = questionById['m0l1q4']; // bron: fill_blank "waardering"
+    expect(q.type).toBe('short');
+    expect(q.answer.accept).toContain('waardering');
   });
 
   it('normaliseert multi_select naar mcq multi', () => {
@@ -129,22 +129,22 @@ describe('grading', () => {
     expect(buildScore(q, {})).toBe(0);
   });
 
-  it('casus_bouw normaliseert naar type "build" met slots en blocks', () => {
-    const q = questionById['mi1ceb'];
+  it('casus_bouw normaliseert naar type "build" met slots en blocks (NL-veldnamen gemapt)', () => {
+    const q = questionById['ins0-c-q1'];
     expect(q).toBeTruthy();
     expect(q.type).toBe('build');
     expect(q.slots.length).toBeGreaterThanOrEqual(2);
-    expect(q.blocks.some((b) => b.role === 'kern')).toBe(true);
+    expect(q.blocks.some((b) => b.role === 'kern')).toBe(true); // 'rol' → 'role'
     expect(q.blocks.some((b) => b.role === 'instinker')).toBe(true);
-    expect(buildMaxPoints(q)).toBe(15);
+    expect(q.blocks[0].text).toBeTruthy(); // 'tekst' → 'text'
+    expect(buildMaxPoints(q)).toBe(8); // som kern-punten
   });
 
-  it('elke instellingstoets-module (mi1–mi4) heeft een casus_bouw-Eindbaas als boss', () => {
-    for (const n of [1, 2, 3, 4]) {
-      const ids = buildBossSession('mi' + n);
-      expect(ids).toEqual([`mi${n}ceb`]); // de casus_bouw, niet een willekeurige trekking
-      expect(questionById[`mi${n}ceb`].type).toBe('build');
-      expect(buildMaxPoints(questionById[`mi${n}ceb`])).toBeGreaterThan(0);
+  it('instellingstoets-modules (track pad) hebben een casus_bouw-Eindbaas als boss', () => {
+    for (const id of ['ins0', 'ins3', 'ins7']) {
+      const ids = buildBossSession(id);
+      expect(ids.length).toBeGreaterThan(0);
+      expect(ids.some((qid) => questionById[qid].type === 'build')).toBe(true);
     }
   });
 });

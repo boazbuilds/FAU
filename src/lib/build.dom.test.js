@@ -8,14 +8,16 @@ beforeEach(() => {
 });
 
 describe('Eindbaas casus_bouw (jsdom)', () => {
-  it('boss mi1 → intro → bouwstenen + slots renderen en Controleer werkt', async () => {
+  it('boss ins0 → intro → bouwstenen + slots renderen en Controleer werkt', async () => {
     const { activeSession } = await import('../stores/ui.js');
     const { buildBossSession } = await import('./session.js');
+    const { questionById } = await import('./content.js');
     const Session = (await import('../screens/Session.svelte')).default;
 
-    const ids = buildBossSession('mi1');
-    expect(ids).toEqual(['mi1ceb']);
-    activeSession.set({ ids, mode: 'boss', moduleId: 'mi1' });
+    const ids = buildBossSession('ins0');
+    const firstCasus = ids.find((id) => questionById[id].type === 'build');
+    expect(firstCasus).toBeTruthy();
+    activeSession.set({ ids: [firstCasus], mode: 'boss', moduleId: 'ins0' });
 
     const target = document.body.appendChild(document.createElement('div'));
     const app = new Session({ target });
@@ -30,14 +32,14 @@ describe('Eindbaas casus_bouw (jsdom)', () => {
 
     // De bouwsteen-UI rendert: pot-label + minstens één slot-label + de Controleer-knop.
     expect(target.textContent).toContain('Bouwstenen');
-    expect(target.textContent).toContain('Cliëntonderzoek'); // slot s1 label
+    expect(target.textContent).toContain('Casus-feit'); // slot s1 label van ins0-c-q1
     const checkBtn = [...target.querySelectorAll('button')].find((b) => /Controleer/i.test(b.textContent));
     expect(checkBtn).toBeTruthy();
 
     // Inzenden zonder iets te plaatsen → feedback met punten-score verschijnt (geen crash).
     checkBtn.click();
     await tick();
-    expect(target.textContent).toMatch(/van de 15 punten/);
+    expect(target.textContent).toMatch(/van de 8 punten/);
 
     app.$destroy();
   });
