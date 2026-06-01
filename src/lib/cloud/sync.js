@@ -7,7 +7,7 @@ import { mergeSnapshot } from './merge.js';
 import { readLocal, writeLocal } from './snapshot.js';
 
 // 'player_data' = privé voortgang (alleen jij). 'players' = publiek mini-profiel
-// (gebruikersnaam + week-XP) voor de latere vrienden-ranglijst.
+// (gebruikersnaam + totaal-XP) voor de globale aller-tijden-ranglijst.
 export async function signUp(email, password, username) {
   const c = await getClient();
   if (!c) throw new Error('Online staat uit (geen Supabase-config).');
@@ -47,11 +47,10 @@ async function upsertPlayer(userId, snapshot, username) {
   // 1) Privé voortgang.
   const r1 = await c.from('player_data').upsert({ id: userId, data: snapshot, updated_at: now });
   if (r1.error) throw r1.error;
-  // 2) Publiek mini-profiel voor de ranglijst.
+  // 2) Publiek mini-profiel voor de ranglijst: het totaal-XP aller tijden.
   const pub = {
     id: userId,
-    week_xp: snapshot?.profile?.week?.xp ?? 0,
-    week_key: snapshot?.profile?.week?.weekKey ?? null,
+    total_xp: snapshot?.profile?.xp ?? 0,
     updated_at: now
   };
   if (username) pub.username = username;
