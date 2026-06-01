@@ -116,3 +116,32 @@ export function predict(srs) {
     weakest: weakest.slice(0, 3)
   };
 }
+
+// Geschat instellingstoets-cijfer (1–10): gemiddelde beheersing van de ins-modules
+// (track pad/leercurve/examen) → 1 + 9·mastery, plus de eenmalige DEADLINE-bonus
+// (+1 punt), gemaximeerd op 10.
+export function estimateCijfer(srs, profile) {
+  const stats = topicStats(srs);
+  const ids = topics.filter((t) => ['pad', 'leercurve', 'examen'].includes(t.track)).map((t) => t.id);
+  let sum = 0;
+  let seen = 0;
+  let n = 0;
+  for (const id of ids) {
+    const s = stats[id];
+    if (!s) continue;
+    sum += s.mastery;
+    seen += s.seen ?? 0;
+    n++;
+  }
+  const mastery = n ? sum / n : 0;
+  const base = 1 + 9 * Math.max(0, Math.min(1, mastery));
+  const bonus = profile?.deadlineBonus ?? 0;
+  const cijfer = Math.max(1, Math.min(10, base + bonus));
+  return {
+    base: Math.round(base * 10) / 10,
+    bonus,
+    cijfer: Math.round(cijfer * 10) / 10,
+    voldoende: cijfer >= 5.5,
+    hasData: seen > 0
+  };
+}

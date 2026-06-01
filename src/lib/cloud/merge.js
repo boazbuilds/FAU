@@ -59,6 +59,7 @@ function mergeProfile(a = {}, b = {}, aNewer) {
       lastScore: (newer.blitz ?? older.blitz ?? {}).lastScore ?? 0,
       plays: maxNum(a.blitz?.plays, b.blitz?.plays)
     },
+    deadlineBonus: maxNum(a.deadlineBonus, b.deadlineBonus), // eenmaal verdiend = behouden
     achievements: { ...(a.achievements || {}), ...(b.achievements || {}) },
     unlockedAchievements: Array.from(
       new Set([...(a.unlockedAchievements ?? []), ...(b.unlockedAchievements ?? [])])

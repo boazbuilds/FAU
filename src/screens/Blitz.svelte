@@ -1,7 +1,7 @@
 <script>
   import { get } from 'svelte/store';
   import { onMount, onDestroy } from 'svelte';
-  import { go } from '../stores/ui.js';
+  import { go, examScope } from '../stores/ui.js';
   import { profile } from '../stores/profile.js';
   import { srs } from '../stores/srsStore.js';
   import { questionById, topicById } from '../lib/content.js';
@@ -44,7 +44,7 @@
   }
 
   function start() {
-    ids = buildBlitzSession(get(srs));
+    ids = buildBlitzSession(get(srs), B.poolSize, get(examScope));
     index = 0;
     timeLeft = B.seconds;
     score = 0;

@@ -1,9 +1,13 @@
 import { writable } from 'svelte/store';
+import { persistentStore } from './persistent.js';
 
-// home(modi-menu) | path | session | results | progress | predict | settings | cheatsheet | mistakes
+// home(modi-menu) | path | session | blitz | deadline | results | progress | predict | settings | cheatsheet | mistakes
 export const screen = writable('home');
 
-// Welke track toont het Pad-scherm: 'pad' (ins0–ins10) of 'leercurve' (ins12–ins18).
+// Gekozen tentamen: 'instelling' (ins-tracks) of 'landelijk' (basis m0–m9). Persistent.
+export const examScope = persistentStore('examScope', 'instelling');
+
+// Welke track toont het Pad-scherm: 'basis' (landelijk), 'pad' of 'leercurve'.
 export const pathTrack = writable('pad');
 
 // Tijdens een sessie: { ids:[], mode, lessonId?, moduleId? }. Na afloop: { summary:{...} }.

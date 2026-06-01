@@ -18,10 +18,12 @@ describe('App mount (jsdom)', () => {
     await new Promise((r) => setTimeout(r, 50));
     const html = target.innerHTML;
     expect(html.length).toBeGreaterThan(200);
-    // bewijs dat het modi-menu rendert
+    // bewijs dat het modi-menu rendert, incl. de tentamen-toggle en de instelling-modi
     expect(html).toContain('Dagdoel');
+    expect(html).toContain('Instellingstoets'); // tentamen-toggle
     expect(html).toContain('Snel oefenen'); // modus-knop
     expect(html).toContain('Het pad'); // modus-knop
+    expect(html).toContain('DEADLINE'); // instelling-modus
     // mascotte (humor-laag) is gewired en rendert
     expect(html).toContain('motivatie-maatje');
     app.$destroy();

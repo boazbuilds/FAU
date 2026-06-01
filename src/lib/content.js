@@ -171,6 +171,17 @@ export function modulesForTrack(track) {
   return [...(modulesByTrack[track] ?? [])].sort((a, b) => a.order - b.order);
 }
 
+// Tentamen-scope: landelijk = basis (m0–m9); instelling = pad + leercurve + examen (ins*).
+const SCOPE_TRACKS = { landelijk: ['basis'], instelling: ['pad', 'leercurve', 'examen'] };
+export function modulesForScope(scope) {
+  return (SCOPE_TRACKS[scope] ?? SCOPE_TRACKS.instelling)
+    .flatMap((t) => modulesForTrack(t))
+    .sort((a, b) => a.order - b.order);
+}
+export function questionsForScope(scope) {
+  return modulesForScope(scope).flatMap((m) => questionsForTopic(m.id));
+}
+
 // --- 4. Examengewichten afleiden (proportioneel aan vraagaantal; overrides uit config) ---
 function deriveWeights() {
   const overrides = CONFIG.content.moduleWeightOverrides ?? {};
