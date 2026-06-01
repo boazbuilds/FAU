@@ -60,6 +60,11 @@ drop table if exists public.friendships;
 **Confirm email** uitzetten (Authentication → Settings), dan kun je meteen na
 registreren inloggen.
 
+**Gast op de ranglijst (anonieme login):** zet ook **Authentication → Sign In /
+Providers → Anonymous sign-ins** aan. Dan kan een gast met alléén een naam meteen
+meedoen op de ranglijst (hij krijgt een anonieme sessie + een rij in `players`).
+Staat dit uit, dan valt 'als gast' netjes terug op lokaal-only (geen ranglijst).
+
 ## Stap 4 — Sleutels in de build zetten
 De app leest de Supabase-config uit **build-time env-variabelen** (Vite). Zet ze
 in een `.env`-bestand in de projectroot (niet committen):
@@ -78,7 +83,10 @@ public key). Voor de live site (GitHub Pages) zet je ze als
 
 ## Stap 5 — Gebruiken
 - De app opent met een **inlogscherm**: maak een account, log in, of ga **als
-  gast** verder (je voortgang blijft dan lokaal op dit apparaat).
+  gast** verder. Vul je als gast een **naam** in, dan kom je met die naam op de
+  ranglijst (anonieme sessie); je voortgang blijft lokaal op dit apparaat. Een
+  gast kan later via **Instellingen → Account vastzetten** een vast account maken
+  zonder zijn voortgang of ranglijstplek te verliezen.
 - Ingelogd synchroniseert je voortgang automatisch (en wordt bij de eerste login
   veilig samengevoegd met wat al lokaal stond — je verliest dus nooit XP of streak).
 - **Ranglijst** (onderbalk): alle spelers gerangschikt op **totaal-XP (aller

@@ -5,7 +5,7 @@
   // er zonder account in — voortgang blijft dan lokaal op dit apparaat.
   import { isConfigured } from '../lib/cloud/online.js';
   import { guest } from '../stores/auth.js';
-  import { signIn, signUp } from '../lib/cloud/sync.js';
+  import { signIn, signUp, signInAnonymously } from '../lib/cloud/sync.js';
 
   let email = '';
   let password = '';
@@ -36,7 +36,31 @@
     busy = false;
   }
 
-  function playAsGuest() {
+  let guestName = '';
+  let guestErr = '';
+  let guestBusy = false;
+
+  async function playAsGuest() {
+    guestErr = '';
+    guestBusy = true;
+    try {
+      if (isConfigured() && guestName.trim()) {
+        // Echte (anonieme) sessie → de gast krijgt een rij in 'players' en komt
+        // zo met zijn naam op de ranglijst.
+        await signInAnonymously(guestName.trim());
+      } else {
+        // Geen naam of online uit → lokaal-only gast (geen ranglijst).
+        guest.set(true);
+      }
+    } catch (e) {
+      guestErr =
+        'Kon de gast-ranglijst niet starten. Anonieme login staat mogelijk uit in Supabase — je kunt wél lokaal verder spelen.';
+    } finally {
+      guestBusy = false;
+    }
+  }
+
+  function playLocal() {
     guest.set(true);
   }
 </script>
@@ -86,11 +110,31 @@
     </section>
   {/if}
 
-  <button
-    class="mt-4 w-full rounded-xl border border-slate-700 py-2.5 text-sm font-medium text-slate-200 hover:bg-slate-800"
-    on:click={playAsGuest}
-  >Doorgaan als gast →</button>
-  <p class="mt-2 text-center text-[11px] leading-relaxed text-slate-500">
-    Als gast wordt je voortgang alleen op dit apparaat bewaard (niet in de cloud).
-  </p>
+  <section class="mt-4 arcade-panel space-y-3 rounded-2xl p-5">
+    <h2 class="font-pixel text-[10px] uppercase tracking-wide text-cyan-300/80">Als gast spelen</h2>
+    {#if isConfigured()}
+      <input
+        class="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white outline-none focus:border-cyan-400"
+        placeholder="je naam (voor de ranglijst)"
+        bind:value={guestName}
+        maxlength="20"
+        on:keydown={(e) => e.key === 'Enter' && !guestBusy && playAsGuest()}
+      />
+    {/if}
+    <button
+      class="btn-arcade w-full rounded-xl py-2.5 font-pixel text-[10px] uppercase disabled:opacity-50"
+      on:click={playAsGuest}
+      disabled={guestBusy}
+    >{guestBusy ? '…' : 'Doorgaan als gast →'}</button>
+    {#if guestErr}
+      <p class="text-xs text-rose-400">{guestErr}</p>
+      <button
+        class="w-full rounded-xl border border-slate-700 py-2.5 text-sm font-medium text-slate-200 hover:bg-slate-800"
+        on:click={playLocal}
+      >Lokaal verder spelen →</button>
+    {/if}
+    <p class="text-[11px] leading-relaxed text-slate-500">
+      {#if isConfigured()}Vul een naam in en je komt op de ranglijst. Je voortgang blijft als gast op dit apparaat (niet gegarandeerd bewaard). Laat de naam leeg om alleen lokaal te spelen.{:else}Je voortgang blijft op dit apparaat (niet in de cloud).{/if}
+    </p>
+  </section>
 </div>

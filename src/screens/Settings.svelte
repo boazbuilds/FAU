@@ -9,7 +9,7 @@
   import { ratings } from '../stores/ratings.js';
   import { isConfigured } from '../lib/cloud/online.js';
   import { auth, guest } from '../stores/auth.js';
-  import { signIn, signUp, signOut } from '../lib/cloud/sync.js';
+  import { signIn, signUp, signOut, upgradeGuest } from '../lib/cloud/sync.js';
 
   let diag = ''; // geluidsdiagnose-uitvoer
 
@@ -18,6 +18,7 @@
   let username = '';
   let authMode = 'login';
   let authErr = '';
+  let authMsg = '';
   let authBusy = false;
   async function doAuth() {
     authErr = '';
@@ -34,6 +35,18 @@
   async function doLogout() {
     await signOut();
     guest.set(false); // terug naar het inlogscherm
+  }
+  async function doUpgrade() {
+    authErr = authMsg = '';
+    authBusy = true;
+    try {
+      await upgradeGuest(email.trim(), password);
+      email = password = '';
+      authMsg = 'Gelukt! Bevestig eventueel je e-mail; je voortgang en ranglijstplek blijven behouden.';
+    } catch (e) {
+      authErr = e?.message || 'Er ging iets mis.';
+    }
+    authBusy = false;
   }
 
   $: ratingCount = Object.keys($ratings).length;
@@ -134,6 +147,15 @@
       <p class="text-xs leading-relaxed text-slate-400">
         Online staat nog uit. Met een gratis account bewaar je je voortgang in de cloud (op al je apparaten) en kom je op de wereldwijde ranglijst (tab Ranglijst). Aanzetten? Zie <span class="font-mono text-slate-300">docs/ONLINE-SETUP.md</span>.
       </p>
+    {:else if $auth.user && $auth.user.is_anonymous}
+      <p class="text-sm text-slate-200">Je speelt als gast — je staat op de ranglijst 🏆</p>
+      <p class="-mt-1 text-xs text-slate-500">Je voortgang staat alleen op dit apparaat. Maak een account om 'm vast te zetten (op al je apparaten); je ranglijstplek blijft behouden.</p>
+      <input class="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white outline-none focus:border-indigo-400" type="email" placeholder="e-mail" bind:value={email} autocomplete="email" />
+      <input class="w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-white outline-none focus:border-indigo-400" type="password" placeholder="wachtwoord" bind:value={password} autocomplete="new-password" />
+      {#if authErr}<p class="text-xs text-rose-400">{authErr}</p>{/if}
+      {#if authMsg}<p class="text-xs text-emerald-300">{authMsg}</p>{/if}
+      <button class="w-full rounded-xl bg-indigo-600 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-50" on:click={doUpgrade} disabled={authBusy || !email || !password}>{authBusy ? '…' : 'Account vastzetten'}</button>
+      <button class="w-full rounded-xl border border-slate-700 py-2.5 text-sm font-medium text-slate-200 hover:bg-slate-800" on:click={doLogout}>Uitloggen</button>
     {:else if $auth.user}
       <p class="text-sm text-slate-200">Ingelogd als <span class="font-semibold text-white">{$auth.user.email}</span> ✅</p>
       <p class="-mt-1 text-xs text-slate-500">Je voortgang synchroniseert automatisch.</p>
