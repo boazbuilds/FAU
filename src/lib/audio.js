@@ -173,7 +173,6 @@ function noise(t, dur, opts = {}) {
 
 // Heerlijk bevredigend "goed!" — stijgend arpeggio dat hoger wordt met je combo.
 export function correct(combo = 0) {
-  setCombo(combo); // muziek bouwt mee op met de combo
   if (!ensure() || !sfxOn) return;
   const t = ctx.currentTime;
   const step = Math.min(Math.max(combo - 1, 0), 14);
@@ -187,7 +186,6 @@ export function correct(combo = 0) {
 }
 
 export function wrong() {
-  resetCombo(); // muziek zakt terug na een fout
   if (!ensure() || !sfxOn) return;
   const t = ctx.currentTime;
   tone(F(52), t, 0.12, { type: 'sawtooth', gain: 0.22, sweepTo: F(49) });
@@ -241,7 +239,7 @@ export function tap() {
 function duck(t, depth = 0.55) {
   if (!musicBus) return;
   const g = musicBus.gain;
-  const base = musicOn ? musicBaseVol() : 0.0001;
+  const base = musicOn ? MUSIC_VOL : 0.0001;
   g.cancelScheduledValues(t);
   g.setValueAtTime(Math.max(0.0001, base * (1 - depth)), t);
   g.linearRampToValueAtTime(base, t + 0.18);
@@ -394,10 +392,7 @@ const MEL = {
   chiptune: [0, 4, 7, 12, 7, 4, null, 7, 9, null, 7, 4, 0, null, 2, null],
   synthwave: [7, null, null, 5, null, 4, null, null, 3, null, 5, null, 7, null, null, null],
   pursuit: [0, null, 3, null, 7, 6, 7, null, 10, null, 7, null, 3, null, 0, null],
-  menu: [null, null, 7, null, null, null, 5, null, null, null, 3, null, null, null, null, null],
-  chill: [0, null, null, 7, null, 5, null, null, 3, null, null, 7, null, null, 5, null],
-  country: [0, null, 4, null, 7, null, 9, null, 7, null, 4, null, 2, null, 0, null],
-  chopin: [0, null, 2, 3, null, 2, null, 7, null, 5, null, 3, 2, null, 0, null]
+  menu: [null, null, 7, null, null, null, 5, null, null, null, 3, null, null, null, null, null]
 };
 
 function pad(t, freqs, dur, gain = 0.05) {
@@ -424,68 +419,6 @@ const HAPPY = [
   { root: 41, chord: [0, 4, 7, 12] } // F
 ];
 
-// Chopin-achtige nocturne-progressie (A mineur), publiek domein-stijl.
-const NOCT = [
-  { root: 45, chord: [0, 3, 7] }, // Am
-  { root: 40, chord: [0, 4, 7, 10] }, // E7
-  { root: 45, chord: [0, 3, 7] }, // Am
-  { root: 50, chord: [0, 3, 7] } // Dm
-];
-
-// Warme elektrische piano (Rhodes/akoestisch gevoel) — kern van chill & Chopin.
-function epiano(t, freq, dur, gain = 0.12) {
-  if (!ctx) return;
-  const f = ctx.createBiquadFilter();
-  f.type = 'lowpass';
-  f.frequency.value = 2900;
-  const g = ctx.createGain();
-  env(g, t, dur, gain, 0.012, 0.4);
-  const o1 = ctx.createOscillator();
-  o1.type = 'sine';
-  o1.frequency.value = freq;
-  const o2 = ctx.createOscillator();
-  o2.type = 'triangle';
-  o2.frequency.value = freq;
-  o2.detune.value = 5;
-  const tine = ctx.createOscillator(); // korte "bel" bovenop (FM-achtig)
-  const tg = ctx.createGain();
-  tine.type = 'sine';
-  tine.frequency.value = freq * 2;
-  env(tg, t, Math.min(dur, 0.2), gain * 0.3, 0.004, 0.1);
-  o1.connect(f); o2.connect(f); tine.connect(tg); tg.connect(f);
-  f.connect(g);
-  g.connect(musicSum);
-  sendTo(g, reverbSend, gain * 0.3);
-  sendTo(g, delaySend, gain * 0.16);
-  o1.start(t); o1.stop(t + dur + 0.45);
-  o2.start(t); o2.stop(t + dur + 0.45);
-  tine.start(t); tine.stop(t + 0.3);
-}
-
-// Korte, twangy pluck — gitaar/banjo voor de country-track.
-function pluck(t, freq, dur, gain = 0.1) {
-  if (!ctx) return;
-  const f = ctx.createBiquadFilter();
-  f.type = 'lowpass';
-  f.frequency.value = 3200;
-  f.Q.value = 2;
-  const g = ctx.createGain();
-  env(g, t, dur, gain, 0.002, 0.05);
-  const o1 = ctx.createOscillator();
-  o1.type = 'triangle';
-  o1.frequency.value = freq;
-  const o2 = ctx.createOscillator();
-  o2.type = 'sawtooth';
-  o2.frequency.value = freq;
-  o2.detune.value = 8;
-  o1.connect(f); o2.connect(f);
-  f.connect(g);
-  g.connect(musicSum);
-  sendTo(g, delaySend, gain * 0.14);
-  o1.start(t); o1.stop(t + dur + 0.06);
-  o2.start(t); o2.stop(t + dur + 0.06);
-}
-
 const barAt = (prog, step) => prog[Math.floor(step / 16) % prog.length];
 
 // Elke track: naam, bpm, en een play(step, t) die de instrumenten aanstuurt.
@@ -502,70 +435,6 @@ const TRACKS = {
       if (s === 0) pad(t, b.chord.map((c) => F(b.root + 12 + c)), 1.7, 0.045);
       const m = MEL.menu[s];
       if (m != null) lead(t, F(b.root + 24 + m), 0.4, { gain: 0.07, lp: 2800, release: 0.3 });
-    }
-  },
-  chill: {
-    name: '🌙 Lo-Fi Chill',
-    bpm: 76,
-    play(step, t) {
-      const b = barAt(EUPH, step);
-      const s = step % 16;
-      if (s === 0 || s === 8) kick(t, 0.5);
-      if (s === 4 || s === 12) snare(t, 0.18);
-      if (s % 4 === 2) hat(t, false, 0.04);
-      if (s === 0) pad(t, b.chord.map((c) => F(b.root + 12 + c)), 1.9, 0.045);
-      if (s === 0 || s === 10) sawBass(t, F(b.root - 12), 0.5, 0.18, 700);
-      const m = MEL.chill[s];
-      if (m != null) epiano(t, F(b.root + 24 + m), 0.5, 0.13);
-    }
-  },
-  country: {
-    name: '🤠 Country Road',
-    bpm: 108,
-    play(step, t) {
-      const b = barAt(HAPPY, step);
-      const s = step % 16;
-      if (s % 4 === 0) kick(t, 0.55);
-      if (s === 4 || s === 12) snare(t, 0.22);
-      if (s % 2 === 1) hat(t, false, 0.05);
-      // walking bas (root → kwint → sext), train-feel
-      const walk = [0, 7, 0, 7, 5, 7, 9, 7];
-      if (s % 2 === 0) sawBass(t, F(b.root - 12 + walk[(s / 2) % walk.length]), 0.2, 0.22, 1000);
-      // banjo/gitaar pluck-arpeggio
-      const arp = [0, b.chord[1], b.chord[2], b.chord[1] + 12, b.chord[2], b.chord[1], b.chord[2], b.chord[1]];
-      pluck(t, F(b.root + 12 + arp[s % arp.length]), 0.13, 0.085);
-      const m = MEL.country[s];
-      if (m != null) lead(t, F(b.root + 24 + m), 0.16, { gain: 0.1, lp: 4200, type: 'triangle' });
-    }
-  },
-  chopin: {
-    name: '🎹 Chopin Nocturne',
-    bpm: 100,
-    play(step, t) {
-      const b = barAt(NOCT, step);
-      const s = step % 16;
-      // linkerhand: wijd gebroken akkoord (bas–kwint–octaaf–kwint), legato
-      const lh = [b.root - 12, b.root + 7, b.root + 12, b.root + 7];
-      if (s % 2 === 0) epiano(t, F(lh[(s / 2) % lh.length]), 0.55, 0.08);
-      // rechterhand: zingende melodie
-      const m = MEL.chopin[s];
-      if (m != null) epiano(t, F(b.root + 24 + m), 0.8, 0.13);
-    }
-  },
-  overdrive: {
-    name: '🔥 Overdrive',
-    bpm: 168,
-    play(step, t) {
-      const b = barAt(EUPH, step);
-      const s = step % 16;
-      if (s % 4 === 0) kick(t, 1.0);
-      if (s === 4 || s === 12) clap(t, 0.3);
-      if (s % 2 === 0) hat(t, false, 0.07);
-      if (s % 2 === 0) sawBass(t, F(b.root - 12), 0.11, 0.28, 1500);
-      // stabs spaarzaam (zwaar): alleen begin van de maathelften
-      if (s === 0 || s === 8) stab(t, b.chord.slice(0, 3).map((c) => F(b.root + 12 + c)), 0.3, 0.06);
-      const m = MEL.stadium[s];
-      if (m != null) lead(t, F(b.root + 24 + m), 0.13, { gain: 0.16, lp: 6500 });
     }
   },
   stadium: {
@@ -659,50 +528,15 @@ const TRACKS = {
 };
 
 const ALL_IDS = Object.keys(TRACKS);
-const SESSION_POOL = ['stadium', 'turbo', 'chiptune', 'synthwave']; // arcade = standaard tijdens sessies
+const SESSION_POOL = ['stadium', 'turbo', 'chiptune', 'synthwave'];
 
-// Kiesbare nummers in de UI (de speciale 'overdrive' verschijnt alleen vanzelf).
-const PICKABLE = ['stadium', 'turbo', 'chiptune', 'synthwave', 'chill', 'country', 'chopin', 'pursuit', 'menu'];
-export const trackList = PICKABLE.map((id) => ({ id, name: TRACKS[id].name }));
+export const trackList = ALL_IDS.map((id) => ({ id, name: TRACKS[id].name }));
 
 let musicTimer = null;
 let nextStepTime = 0;
 let stepCounter = 0;
 let currentTrack = 'menu';
 let energeticChoice = 'stadium';
-let userTrack = null; // door de speler gekozen genre (blijft 'plakken'); null = standaard arcade
-
-// --- Trackmania-stijl: de muziek bouwt op (luider) naarmate het goed gaat, en
-//     springt bij een hoge combo naar de speciale 'overdrive'-track. ---
-const IDLE_INT = 0.4;
-const HYPE_COMBO = 10;
-let intensity = IDLE_INT; // 0..1, soepel gevolgd in tick()
-let intensityTarget = IDLE_INT;
-let overdrive = false;
-function musicBaseVol() {
-  return MUSIC_VOL * (0.55 + 0.6 * Math.max(0, Math.min(1, intensity)));
-}
-function resolveSessionTrack() {
-  return userTrack || energeticChoice;
-}
-// Combo-feedback vanuit de sessie (aangeroepen door correct()/wrong()).
-export function setCombo(combo) {
-  intensityTarget = Math.max(0, Math.min(1, IDLE_INT + Math.max(0, combo - 1) * 0.08));
-  if (combo >= HYPE_COMBO && !overdrive && currentTrack !== 'menu') {
-    overdrive = true;
-    applyTrack('overdrive'); // het speciale nummer als het écht lekker gaat
-  } else if (combo < HYPE_COMBO && overdrive) {
-    overdrive = false;
-    applyTrack(resolveSessionTrack());
-  }
-}
-export function resetCombo() {
-  intensityTarget = 0.2; // even zachter na een fout; bouwt daarna weer op
-  if (overdrive) {
-    overdrive = false;
-    applyTrack(resolveSessionTrack());
-  }
-}
 
 const SWING = 0.18; // shuffle: oneven 16e-noten iets later = groove
 function tick() {
@@ -720,18 +554,11 @@ function tick() {
   }
   const track = TRACKS[currentTrack] ?? TRACKS.menu;
   const stepDur = 60 / track.bpm / 4; // zestiende noot
-  intensity += (intensityTarget - intensity) * 0.06; // soepel naar het doelniveau
-  // VEILIGHEIDSSLOT: plan nooit meer dan een handvol stappen per tick. Als een
-  // dichte track meer rekentijd kost dan een stap duurt, zou de lookahead anders
-  // nooit ingehaald worden en blijft deze lus draaien → de hele tab loopt vast.
-  // De cap geeft de browser altijd lucht (de loop her-ankert vanzelf in de tick).
-  let guard = 0;
-  while (nextStepTime < ctx.currentTime + 0.12 && guard < 24) {
+  while (nextStepTime < ctx.currentTime + 0.12) {
     const swing = stepCounter % 2 === 1 ? stepDur * SWING : 0;
     track.play(stepCounter, nextStepTime + swing);
     nextStepTime += stepDur;
     stepCounter++;
-    guard++;
   }
   musicTimer = setTimeout(tick, 25);
 }
@@ -742,7 +569,7 @@ function startLoop() {
   nextStepTime = ctx.currentTime + 0.08;
   stepCounter = 0;
   musicBus.gain.cancelScheduledValues(ctx.currentTime);
-  musicBus.gain.setValueAtTime(musicBaseVol(), ctx.currentTime);
+  musicBus.gain.setValueAtTime(MUSIC_VOL, ctx.currentTime);
   musicSum.gain.cancelScheduledValues(ctx.currentTime);
   musicSum.gain.setValueAtTime(Math.max(0.0001, musicSum.gain.value), ctx.currentTime);
   musicSum.gain.linearRampToValueAtTime(1, ctx.currentTime + 0.6);
@@ -779,49 +606,32 @@ export function stopMusic() {
   musicSum.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.3);
 }
 
-// Interne, naadloze trackwissel (zonder userTrack bij te werken).
-function applyTrack(trackId) {
+// Wissel van track zonder de loop te onderbreken (naadloos).
+export function setTrack(trackId) {
   if (!TRACKS[trackId] || currentTrack === trackId) return;
   currentTrack = trackId;
   nowPlaying.set(TRACKS[trackId].name);
 }
 
-// Door de speler gekozen nummer; blijft 'plakken', ook tijdens sessies.
-export function setTrack(trackId) {
-  if (!TRACKS[trackId]) return;
-  userTrack = trackId;
-  if (SESSION_POOL.includes(trackId)) energeticChoice = trackId;
-  applyTrack(trackId);
-}
-
-// Volgend nummer in de jukebox. Geeft de nieuwe naam terug.
+// Volgend nummer in de jukebox (werkt overal). Geeft de nieuwe naam terug.
 export function nextTrack() {
-  const cur = userTrack ?? currentTrack;
-  const i = PICKABLE.indexOf(cur);
-  const next = PICKABLE[(i + 1) % PICKABLE.length];
-  setTrack(next); // zet userTrack + speelt naadloos
+  const i = ALL_IDS.indexOf(currentTrack);
+  const next = ALL_IDS[(i + 1) % ALL_IDS.length];
+  if (SESSION_POOL.includes(next)) energeticChoice = next;
+  setTrack(next);
   return TRACKS[next].name;
 }
 
-// Kies het sessienummer: de keuze van de speler wint; anders (random) arcade,
-// boss krijgt het intense 'pursuit'. Reset de Trackmania-intensiteit.
+// Kies (random) het sessienummer; boss krijgt het intense 'pursuit'.
 export function pickSession(isBoss) {
-  if (!userTrack) energeticChoice = isBoss ? 'pursuit' : SESSION_POOL[Math.floor(Math.random() * SESSION_POOL.length)];
-  overdrive = false;
-  intensity = IDLE_INT;
-  intensityTarget = IDLE_INT;
-  applyTrack(resolveSessionTrack());
+  energeticChoice = isBoss ? 'pursuit' : SESSION_POOL[Math.floor(Math.random() * SESSION_POOL.length)];
+  setTrack(energeticChoice);
 }
 
 // Schakel de muziek mee met het actieve scherm.
 export function setContext(screen) {
-  if (screen === 'session' || screen === 'results') {
-    applyTrack(resolveSessionTrack());
-  } else {
-    overdrive = false;
-    intensityTarget = IDLE_INT;
-    applyTrack(userTrack || 'menu');
-  }
+  if (screen === 'session' || screen === 'results') setTrack(energeticChoice);
+  else setTrack('menu');
 }
 
 // =========================================================================
