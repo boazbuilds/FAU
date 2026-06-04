@@ -554,11 +554,17 @@ function tick() {
   }
   const track = TRACKS[currentTrack] ?? TRACKS.menu;
   const stepDur = 60 / track.bpm / 4; // zestiende noot
-  while (nextStepTime < ctx.currentTime + 0.12) {
+  // VEILIGHEIDSSLOT: nooit meer dan een handvol stappen per tick plannen. Als het
+  // plannen op een drukke/trage machine langer duurt dan een stap, zou de lookahead
+  // anders nooit ingehaald worden → deze lus blijft draaien en de hele tab loopt
+  // vast. De cap geeft de browser altijd lucht; de loop her-ankert vanzelf.
+  let guard = 0;
+  while (nextStepTime < ctx.currentTime + 0.12 && guard < 24) {
     const swing = stepCounter % 2 === 1 ? stepDur * SWING : 0;
     track.play(stepCounter, nextStepTime + swing);
     nextStepTime += stepDur;
     stepCounter++;
+    guard++;
   }
   musicTimer = setTimeout(tick, 25);
 }
