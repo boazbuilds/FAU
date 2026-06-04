@@ -1,9 +1,11 @@
 import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { VitePWA } from 'vite-plugin-pwa';
 
-// Belangrijk: GitHub Pages serveert onder /FAU/, dus `base` moet kloppen,
-// anders laden de assets niet. Lokaal (npm run dev) werkt dit ook prima.
+// GEEN PWA/service worker meer. De self-destruct-SW herlaadde de pagina
+// (client.navigate) en werd via registerSW.js bij elke load opnieuw geregistreerd
+// → een oneindige herlaad-lus die 100% CPU opslokt (lijkt op 'vastlopen'). De app
+// draait nu als gewone site die altijd vers van het netwerk laadt. Een eventueel
+// achtergebleven SW wordt in main.js opgeruimd (zonder herladen).
 export default defineConfig({
   base: '/FAU/',
   // Supabase in een eigen chunk; alleen lazy geladen als online aanstaat.
@@ -12,41 +14,5 @@ export default defineConfig({
       output: { manualChunks: { supabase: ['@supabase/supabase-js'] } }
     }
   },
-  plugins: [
-    svelte(),
-    VitePWA({
-      // Zet de PWA-cache UIT en ruim oude service workers + caches op. De offline-
-      // cache zorgde er steeds voor dat een kapotte versie bleef 'plakken' (vastloper,
-      // mislukte imports). Zo laadt de app voortaan altijd vers van het netwerk en
-      // worden vastzittende apparaten automatisch losgetrokken.
-      selfDestroying: true,
-      registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg'],
-      // Dev service worker uit laten staan voorkomt cache-verwarring tijdens ontwikkelen.
-      devOptions: { enabled: false },
-      manifest: {
-        name: 'FAU — Financial Auditing',
-        short_name: 'FAU',
-        description: 'Leer Financial Auditing met korte, verslavende dagelijkse vragen.',
-        lang: 'nl',
-        theme_color: '#4f46e5',
-        background_color: '#0f172a',
-        display: 'standalone',
-        orientation: 'portrait',
-        start_url: '/FAU/',
-        scope: '/FAU/',
-        icons: [
-          { src: 'favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any maskable' }
-        ]
-      },
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,json,woff2}'],
-        // Cache álle JS mee (óók de Supabase-chunk). Anders kan een bijgewerkte
-        // app-schil naar een oude, niet-gecachete chunk-hash verwijzen die na een
-        // redeploy verdwenen is → "Importing a module script failed" bij inloggen.
-        cleanupOutdatedCaches: true,
-        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024
-      }
-    })
-  ]
+  plugins: [svelte()]
 });
