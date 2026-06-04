@@ -15,6 +15,11 @@ export default defineConfig({
   plugins: [
     svelte(),
     VitePWA({
+      // Zet de PWA-cache UIT en ruim oude service workers + caches op. De offline-
+      // cache zorgde er steeds voor dat een kapotte versie bleef 'plakken' (vastloper,
+      // mislukte imports). Zo laadt de app voortaan altijd vers van het netwerk en
+      // worden vastzittende apparaten automatisch losgetrokken.
+      selfDestroying: true,
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       // Dev service worker uit laten staan voorkomt cache-verwarring tijdens ontwikkelen.
