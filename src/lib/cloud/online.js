@@ -14,12 +14,22 @@ export async function getClient() {
   if (!isConfigured()) return null;
   if (_client) return _client;
   if (!_loading) {
-    _loading = import('@supabase/supabase-js').then(({ createClient }) => {
-      _client = createClient(URL, KEY, {
-        auth: { persistSession: true, autoRefreshToken: true }
+    // Lazy import met time-out: als de (niet vooraf gecachte) Supabase-chunk niet
+    // binnenkomt, blijft de app anders eindeloos hangen op "...".
+    _loading = Promise.race([
+      import('@supabase/supabase-js'),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Verbinding maken duurde te lang.')), 12000))
+    ])
+      .then(({ createClient }) => {
+        _client = createClient(URL, KEY, {
+          auth: { persistSession: true, autoRefreshToken: true }
+        });
+        return _client;
+      })
+      .catch((e) => {
+        _loading = null; // reset, zodat een volgende poging opnieuw probeert
+        throw e;
       });
-      return _client;
-    });
   }
   return _loading;
 }
