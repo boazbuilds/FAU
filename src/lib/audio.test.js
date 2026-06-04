@@ -101,11 +101,13 @@ describe('audio-engine', () => {
     expect(oscCount).toBeGreaterThan(beforeSfx);
     expect(startCount).toBeGreaterThan(0);
 
+    // Achtergrondmuziek staat uit: setMusicEnabled start de sequencer NIET (geen extra osc).
     const beforeMusic = oscCount;
-    a.setMusicEnabled(true); // context bestaat → sequencer schedulet stappen
-    expect(oscCount).toBeGreaterThan(beforeMusic);
-    expect(get(a.nowPlaying)).toBeTruthy(); // UI weet welk nummer speelt
+    a.setMusicEnabled(true);
+    expect(oscCount).toBe(beforeMusic); // geen muziek-oscillators meer
 
+    // De trackkeuze/jukebox werkt qua UI-naam nog wel (ook met muziek uit).
+    a.setTrack('stadium');
     const before = get(a.nowPlaying);
     a.nextTrack(); // jukebox: volgend nummer
     expect(get(a.nowPlaying)).not.toBe(before);
