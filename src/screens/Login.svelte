@@ -114,6 +114,12 @@
     </section>
   {/if}
 
+  <button
+    type="button"
+    class="mt-3 w-full text-center text-xs text-slate-400 underline underline-offset-2 transition hover:text-cyan-300"
+    on:click={playLocal}
+  >Of sla over en speel nu meteen →</button>
+
   <section class="mt-4 arcade-panel space-y-3 rounded-2xl p-5">
     <h2 class="font-pixel text-[10px] uppercase tracking-wide text-cyan-300/80">Als gast spelen</h2>
     {#if isConfigured()}
