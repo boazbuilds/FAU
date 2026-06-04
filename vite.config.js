@@ -36,8 +36,10 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,json,woff2}'],
-        // De Supabase-chunk niet vooraf cachen: alleen ophalen als online aanstaat.
-        globIgnores: ['**/supabase-*.js'],
+        // Cache álle JS mee (óók de Supabase-chunk). Anders kan een bijgewerkte
+        // app-schil naar een oude, niet-gecachete chunk-hash verwijzen die na een
+        // redeploy verdwenen is → "Importing a module script failed" bij inloggen.
+        cleanupOutdatedCaches: true,
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024
       }
     })
