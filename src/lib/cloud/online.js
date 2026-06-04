@@ -22,7 +22,15 @@ export async function getClient() {
     ])
       .then(({ createClient }) => {
         _client = createClient(URL, KEY, {
-          auth: { persistSession: true, autoRefreshToken: true }
+          auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            // supabase-js v2 coördineert auth standaard via de Web Locks API. Die kan
+            // (na een vastgelopen of dubbel tabblad) blijven hangen → de login-aanroep
+            // lost nooit op en geeft een time-out, terwijl het verzoek de server wél
+            // bereikt. Een no-op lock voert de actie gewoon direct uit en omzeilt dat.
+            lock: (_name, _acquireTimeout, fn) => fn()
+          }
         });
         return _client;
       })
