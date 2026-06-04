@@ -56,8 +56,9 @@
         guest.set(true);
       }
     } catch (e) {
-      guestErr =
-        'Kon de gast-ranglijst niet starten. Anonieme login staat mogelijk uit in Supabase — je kunt wél lokaal verder spelen.';
+      // Lukt de online gast-sessie niet (anon-login uit, of netwerk/Supabase traag)?
+      // Laat de speler dan gewoon lokaal verder i.p.v. te blijven hangen.
+      guest.set(true);
     } finally {
       guestBusy = false;
     }

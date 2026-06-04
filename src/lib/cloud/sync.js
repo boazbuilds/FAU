@@ -6,12 +6,21 @@ import { auth } from '../../stores/auth.js';
 import { mergeSnapshot } from './merge.js';
 import { readLocal, writeLocal } from './snapshot.js';
 
+// Voorkomt dat de UI eindeloos op "..." blijft hangen als het netwerk of Supabase
+// niet reageert (bv. een slapend free-tier-project): faal na een tijdje netjes.
+function withTimeout(promise, ms = 12000, msg = 'De server reageert niet. Probeer het opnieuw of speel als gast.') {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error(msg)), ms))
+  ]);
+}
+
 // 'player_data' = privé voortgang (alleen jij). 'players' = publiek mini-profiel
 // (gebruikersnaam + totaal-XP) voor de globale aller-tijden-ranglijst.
 export async function signUp(email, password, username) {
   const c = await getClient();
   if (!c) throw new Error('Online staat uit (geen Supabase-config).');
-  const { data, error } = await c.auth.signUp({ email, password });
+  const { data, error } = await withTimeout(c.auth.signUp({ email, password }));
   if (error) throw error;
   // Direct ingelogd? Dan meteen een spelersrij met username aanmaken.
   if (data?.session?.user) {
@@ -23,7 +32,7 @@ export async function signUp(email, password, username) {
 export async function signIn(email, password) {
   const c = await getClient();
   if (!c) throw new Error('Online staat uit (geen Supabase-config).');
-  const { error } = await c.auth.signInWithPassword({ email, password });
+  const { error } = await withTimeout(c.auth.signInWithPassword({ email, password }));
   if (error) throw error;
 }
 
@@ -38,7 +47,7 @@ export async function signOut() {
 export async function signInAnonymously(username) {
   const c = await getClient();
   if (!c) throw new Error('Online staat uit (geen Supabase-config).');
-  const { data, error } = await c.auth.signInAnonymously();
+  const { data, error } = await withTimeout(c.auth.signInAnonymously());
   if (error) throw error;
   // Meteen een spelersrij met de gekozen naam (zodat de gast op de ranglijst komt).
   if (data?.session?.user) {
