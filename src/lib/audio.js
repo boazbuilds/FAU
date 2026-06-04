@@ -554,18 +554,18 @@ const TRACKS = {
   },
   overdrive: {
     name: '🔥 Overdrive',
-    bpm: 172,
+    bpm: 168,
     play(step, t) {
       const b = barAt(EUPH, step);
       const s = step % 16;
       if (s % 4 === 0) kick(t, 1.0);
-      if (s === 4 || s === 12) clap(t, 0.32);
-      hat(t, s % 4 === 2, s % 2 ? 0.1 : 0.06);
-      if (s % 2 === 0) sawBass(t, F(b.root - 12), 0.11, 0.3, 1500);
-      if (s % 2 === 0) stab(t, b.chord.slice(0, 3).map((c) => F(b.root + 12 + c)), 0.16, 0.06);
-      if (s === 0) supersaw(t, F(b.root + 12), 0.5, { gain: 0.08, voices: 7, detune: 22, lp: 5200, release: 0.2, reverb: 0.25, delay: 0.2 });
+      if (s === 4 || s === 12) clap(t, 0.3);
+      if (s % 2 === 0) hat(t, false, 0.07);
+      if (s % 2 === 0) sawBass(t, F(b.root - 12), 0.11, 0.28, 1500);
+      // stabs spaarzaam (zwaar): alleen begin van de maathelften
+      if (s === 0 || s === 8) stab(t, b.chord.slice(0, 3).map((c) => F(b.root + 12 + c)), 0.3, 0.06);
       const m = MEL.stadium[s];
-      if (m != null) lead(t, F(b.root + 36 + m), 0.12, { gain: 0.16, lp: 6500 });
+      if (m != null) lead(t, F(b.root + 24 + m), 0.13, { gain: 0.16, lp: 6500 });
     }
   },
   stadium: {
@@ -721,11 +721,17 @@ function tick() {
   const track = TRACKS[currentTrack] ?? TRACKS.menu;
   const stepDur = 60 / track.bpm / 4; // zestiende noot
   intensity += (intensityTarget - intensity) * 0.06; // soepel naar het doelniveau
-  while (nextStepTime < ctx.currentTime + 0.12) {
+  // VEILIGHEIDSSLOT: plan nooit meer dan een handvol stappen per tick. Als een
+  // dichte track meer rekentijd kost dan een stap duurt, zou de lookahead anders
+  // nooit ingehaald worden en blijft deze lus draaien → de hele tab loopt vast.
+  // De cap geeft de browser altijd lucht (de loop her-ankert vanzelf in de tick).
+  let guard = 0;
+  while (nextStepTime < ctx.currentTime + 0.12 && guard < 24) {
     const swing = stepCounter % 2 === 1 ? stepDur * SWING : 0;
     track.play(stepCounter, nextStepTime + swing);
     nextStepTime += stepDur;
     stepCounter++;
+    guard++;
   }
   musicTimer = setTimeout(tick, 25);
 }
