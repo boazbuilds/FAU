@@ -11,6 +11,7 @@
   import { applyResult } from '../lib/srs.js';
   import { xpForAnswer } from '../lib/gamify.js';
   import { estimateCijfer } from '../lib/predict.js';
+  import { deadlineState } from '../stores/deadline.js';
   import { onMount } from 'svelte';
   import * as audio from '../lib/audio.js';
   import Question from '../components/Question.svelte';
@@ -34,13 +35,23 @@
   $: total = ids.length;
   $: isLast = index + 1 >= total;
   $: pct = total ? Math.round(((index + (stage === 'feedback' ? 1 : 0)) / total) * 100) : 0;
+  // Opgeslagen tussenstand → hervatten waar je was.
+  $: hasResume = $deadlineState.pos > 0 && $deadlineState.pos < total;
 
-  function start() {
-    ids = buildDeadlineSession();
-    index = 0;
-    answered = 0;
-    correctCount = 0;
-    sessionXp = 0;
+  function start(resume) {
+    if (resume) {
+      const s = get(deadlineState);
+      index = Math.min(s.pos, total - 1);
+      answered = s.pos;
+      correctCount = s.correct;
+      sessionXp = s.xp;
+    } else {
+      index = 0;
+      answered = 0;
+      correctCount = 0;
+      sessionXp = 0;
+      deadlineState.set({ pos: 0, correct: 0, xp: 0 });
+    }
     stage = 'playing';
     audio.unlock();
   }
@@ -72,6 +83,7 @@
     if (lastResult === 'correct') audio.correct(1);
     else if (lastResult === 'partial') audio.partial();
     else audio.wrong();
+    deadlineState.set({ pos: answered, correct: correctCount, xp: sessionXp }); // tussenstand bewaren
     stage = 'feedback';
   }
 
@@ -92,6 +104,7 @@
       return p;
     });
     gradeAfter = estimateCijfer(get(srs), get(profile));
+    deadlineState.set({ pos: 0, correct: 0, xp: 0 }); // voltooid → volgende keer fris beginnen
     audio.fanfare();
     stage = 'done';
   }
@@ -100,7 +113,18 @@
     go('home');
   }
 
-  onMount(() => audio.pickSession(true));
+  onMount(() => {
+    ids = buildDeadlineSession();
+    const s = get(deadlineState);
+    // Alle 100 al beantwoord maar 'Afronden' overgeslagen? Rond meteen af (bonus + done).
+    if (ids.length > 0 && s.pos >= ids.length) {
+      answered = s.pos;
+      correctCount = s.correct;
+      sessionXp = s.xp;
+      finish();
+    }
+    audio.pickSession(true);
+  });
 </script>
 
 {#if stage === 'intro'}
@@ -109,11 +133,17 @@
     <div class="font-pixel text-[9px] uppercase tracking-wide neon-magenta glitch">DEADLINE</div>
     <h1 class="font-pixel text-lg leading-relaxed text-white">100 vragen</h1>
     <p class="mx-auto max-w-sm text-sm leading-relaxed text-slate-300">
-      Beantwoord <span class="text-fuchsia-300">alle 100</span> vragen van de leercurve achter
-      elkaar. Voltooi je de hele set, dan krijg je <span class="text-fuchsia-300">+1 punt</span>
-      op je geschatte instellingstoets-cijfer. Stoppen kan altijd, maar dan geen bonus.
+      Beantwoord <span class="text-fuchsia-300">alle 100</span> vragen van de leercurve. Je
+      voortgang wordt <span class="text-fuchsia-300">bewaard</span>, dus je kunt in stukjes
+      spelen (bijv. 10 per keer) en later verdergaan. Heb je alle 100 gedaan, dan krijg je
+      <span class="text-fuchsia-300">+1 punt</span> op je geschatte instellingstoets-cijfer.
     </p>
-    <button class="btn-arcade btn-arcade-magenta mt-2 w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={start}>Start ▶</button>
+    {#if hasResume}
+      <button class="btn-arcade btn-arcade-magenta mt-2 w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={() => start(true)}>Verder ▶ — vraag {$deadlineState.pos + 1}/{total}</button>
+      <button class="font-pixel text-[9px] uppercase text-slate-400 hover:text-white" on:click={() => start(false)}>Opnieuw vanaf 1</button>
+    {:else}
+      <button class="btn-arcade btn-arcade-magenta mt-2 w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={() => start(false)}>Start ▶</button>
+    {/if}
     <button class="font-pixel text-[9px] uppercase text-slate-500 hover:text-white" on:click={quit}>Terug</button>
   </div>
 {:else if stage === 'done'}
