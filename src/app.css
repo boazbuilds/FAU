@@ -118,6 +118,49 @@ button {
   box-shadow: 0 4px 0 rgba(162, 28, 175, 0.65), 0 0 14px rgba(255, 61, 240, 0.35);
 }
 
+/* HUD: streak-vlam gloeit zacht als het dagdoel vandaag binnen is. */
+.streak-live {
+  animation: streakpulse 2.2s ease-in-out infinite;
+}
+@keyframes streakpulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px rgba(251, 191, 36, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 9px rgba(251, 191, 36, 0.95));
+  }
+}
+
+/* HUD: glans die langzaam over de XP-balk loopt. */
+.xpbar {
+  position: relative;
+}
+.xpbar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: xpshine 2.6s linear infinite;
+}
+@keyframes xpshine {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Tik-feedback op kaarten/knoppen: licht indrukken. */
+.card-press {
+  transition: transform 0.08s ease;
+}
+.card-press:active {
+  transform: scale(0.98);
+}
+
 /* Respecteer de voorkeur voor minder beweging. */
 @media (prefers-reduced-motion: reduce) {
   * {

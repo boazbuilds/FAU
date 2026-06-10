@@ -20,6 +20,7 @@ describe('App mount (jsdom)', () => {
     expect(html.length).toBeGreaterThan(200);
     // bewijs dat het modi-menu rendert, incl. de tentamen-toggle en de instelling-modi
     expect(html).toContain('Dagdoel');
+    expect(html).toContain('Dagmissies'); // dagmissies-paneel
     expect(html).toContain('Instellingstoets'); // tentamen-toggle
     expect(html).toContain('Snel oefenen'); // modus-knop
     expect(html).toContain('Het pad'); // modus-knop

@@ -4,6 +4,7 @@
   import { activeSession, go } from '../stores/ui.js';
   import { srs } from '../stores/srsStore.js';
   import { settings } from '../stores/settings.js';
+  import { profile } from '../stores/profile.js';
   import { buildSession, buildLessonSession, buildBossSession } from '../lib/session.js';
   import { starsFor } from '../lib/progress.js';
   import { topicById } from '../lib/content.js';
@@ -71,6 +72,9 @@
     go('home');
   }
 
+  // De "nog één ronde"-haak: laat zien hoe dichtbij het dagdoel is.
+  $: goalLeft = Math.max(0, ($profile.dailyGoalXp ?? 0) - ($profile.today.xp ?? 0));
+
   onMount(() => {
     if (bossPassed || summary.perfect) audio.fanfare();
     else if (summary.outOfHearts) audio.wrong();
@@ -137,6 +141,16 @@
       <div class="flex flex-wrap justify-center gap-4">
         {#each summary.newBadges as b}<Badge achievement={b} size="lg" />{/each}
       </div>
+    </div>
+  {/if}
+
+  {#if goalLeft > 0}
+    <div class="w-full rounded-2xl border border-cyan-700/40 bg-cyan-950/30 p-3 text-sm text-cyan-200">
+      ⚡ Nog <span class="font-semibold">{goalLeft} XP</span> tot je dagdoel — één ronde is genoeg!
+    </div>
+  {:else}
+    <div class="w-full rounded-2xl border border-emerald-700/40 bg-emerald-950/25 p-3 text-sm text-emerald-300">
+      ✓ Dagdoel binnen — je streak van vandaag is veilig. 🔥
     </div>
   {/if}
 

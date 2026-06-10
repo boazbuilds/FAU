@@ -9,7 +9,7 @@
   import { ratings, rateQuestion } from '../stores/ratings.js';
   import { questionById, topicById, lessonById, modules, tipById, instinkerFor } from '../lib/content.js';
   import { applyResult } from '../lib/srs.js';
-  import { xpForAnswer, tallyAnswer, registerGoalProgress, evaluateAchievements } from '../lib/gamify.js';
+  import { xpForAnswer, tallyAnswer, registerGoalProgress, evaluateAchievements, levelFromXp } from '../lib/gamify.js';
   import { predict } from '../lib/predict.js';
   import { completeLesson, recordBoss } from '../lib/progress.js';
   import { CONFIG } from '../config.js';
@@ -42,6 +42,7 @@
   let maxCombo = 0;
   let comboMsg = null;
   let feedbackHead = '';
+  let leveledTo = null; // net een nieuw level bereikt → banner in de feedback
 
   // --- Tijd & Sjef-delegatie ---
   let qComp; // ref naar de Question (voor lock() bij time-out)
@@ -168,14 +169,21 @@
       return s;
     });
 
+    const lvlBefore = levelFromXp(get(profile).xp);
     profile.update((p) => {
       tallyAnswer(p, result, gained);
+      p.today.bestCombo = Math.max(p.today.bestCombo ?? 0, combo); // voedt de dagmissies
       if (heartsActive() && result === 'wrong') {
         p.hearts = Math.max(0, p.hearts - 1);
         if (p.hearts === 0) outOfHearts = true;
       }
       return p;
     });
+    const lvlAfter = levelFromXp(get(profile).xp);
+    if (lvlAfter > lvlBefore) {
+      leveledTo = lvlAfter;
+      setTimeout(() => audio.levelUp(), 450); // ná het goed-geluid
+    }
 
     phase = 'feedback';
   }
@@ -188,6 +196,7 @@
     index += 1;
     phase = 'question';
     lastResult = null;
+    leveledTo = null;
   }
 
   function finish() {
@@ -359,6 +368,9 @@
       on:next={next}
     >
       <svelte:fragment slot="head">
+        {#if leveledTo}
+          <div class="mb-2 animate-pop rounded-lg border border-cyan-400/60 bg-cyan-500/15 px-3 py-1.5 text-center font-pixel text-[10px] uppercase neon-cyan glitch">⬆️ Level {leveledTo}!</div>
+        {/if}
         {#if bonusXp > 0}
           <div class="mb-2 animate-burst font-pixel text-[10px] uppercase tracking-wide text-cyan-300">{isSjefQ ? '🦥 Sjef-bonus' : '⚡ Snel'} +{bonusXp} XP</div>
         {/if}
