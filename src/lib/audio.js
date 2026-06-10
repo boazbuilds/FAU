@@ -22,10 +22,10 @@ let noiseBuffer = null;
 let sfxOn = true;
 let musicOn = true;
 
-// Achtergrondmuziek staat tijdelijk UIT om vastlopers volledig uit te sluiten: de
-// muziek-sequencer was de enige plek die de hoofd-thread kon belasten. De korte SFX
-// (klik/goed/fout) blijven gewoon werken. Zet op true om de muziek te herstellen.
-const BG_MUSIC_ENABLED = false;
+// Achtergrondmuziek AAN. De vastloper kwam van de PWA-herlaadlus (verwijderd), niet
+// van de muziek; de sequencer heeft bovendien een harde stap-cap (zie tick()) die de
+// hoofd-thread niet meer kan belasten. Op false zetten schakelt de muziek volledig uit.
+const BG_MUSIC_ENABLED = true;
 
 const MUSIC_VOL = 0.26;
 const SFX_VOL = 0.85;

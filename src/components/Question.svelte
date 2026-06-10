@@ -93,6 +93,7 @@
           class="flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition {optionClass(opt.id)}"
           on:click={() => { if (!submitted) { isMulti ? toggleMulti(opt.id) : (selected = opt.id); } }}
           disabled={submitted}
+          aria-pressed={isMulti ? multiSelected.has(opt.id) : selected === opt.id}
         >
           <span class="grid h-6 w-6 shrink-0 place-items-center rounded-{isMulti ? 'md' : 'full'} border border-slate-500 text-xs font-bold uppercase">
             {isMulti ? (multiSelected.has(opt.id) ? '✓' : '') : opt.id}

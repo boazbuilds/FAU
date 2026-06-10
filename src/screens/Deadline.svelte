@@ -9,7 +9,7 @@
   import { questionById, topicById, tipById } from '../lib/content.js';
   import { buildDeadlineSession } from '../lib/session.js';
   import { applyResult } from '../lib/srs.js';
-  import { xpForAnswer } from '../lib/gamify.js';
+  import { xpForAnswer, tallyAnswer } from '../lib/gamify.js';
   import { estimateCijfer } from '../lib/predict.js';
   import { deadlineState } from '../stores/deadline.js';
   import { onMount } from 'svelte';
@@ -68,18 +68,7 @@
       if (q) s.items[q.id] = applyResult(s.items[q.id], lastResult);
       return s;
     });
-    profile.update((p) => {
-      p.xp += xp;
-      p.totals.answered = (p.totals.answered ?? 0) + 1;
-      p.today.answered = (p.today.answered ?? 0) + 1;
-      p.today.xp = (p.today.xp ?? 0) + xp;
-      if (p.week) p.week.xp = (p.week.xp ?? 0) + xp;
-      if (lastResult === 'correct') {
-        p.totals.correct = (p.totals.correct ?? 0) + 1;
-        p.today.correct = (p.today.correct ?? 0) + 1;
-      }
-      return p;
-    });
+    profile.update((p) => tallyAnswer(p, lastResult, xp));
     if (lastResult === 'correct') audio.correct(1);
     else if (lastResult === 'partial') audio.partial();
     else audio.wrong();

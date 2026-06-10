@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { applyResult, isDue } from './srs.js';
 import { gradeShort, gradeMcq, gradeTrueFalse, matchFraction, gradeMatchResult, gradeMatch, normalize, buildScore, buildMaxPoints, gradeBuildResult } from './grading.js';
 import { predict } from './predict.js';
-import { levelFromXp, xpForAnswer, defaultProfile, migrateProfile } from './gamify.js';
+import { levelFromXp, xpForAnswer, tallyAnswer, defaultProfile, migrateProfile } from './gamify.js';
 import { modules, allQuestions, questionById, questionsForLesson, tips, tipById, isObjective } from './content.js';
 import { buildBossSession } from './session.js';
 import { defaultProgress, ensureInit, isLessonUnlocked, isModuleUnlocked, starsFor, completeLesson, recordBoss } from './progress.js';
@@ -196,6 +196,19 @@ describe('progress (leerpad)', () => {
 });
 
 describe('gamify', () => {
+  it('tallyAnswer boekt XP + tellers; fout telt niet als correct', () => {
+    const p = { xp: 10, totals: { answered: 1, correct: 1 }, today: { xp: 5, answered: 1, correct: 1 }, week: { xp: 3 } };
+    tallyAnswer(p, 'correct', 7);
+    expect(p.xp).toBe(17);
+    expect(p.totals.answered).toBe(2);
+    expect(p.totals.correct).toBe(2);
+    expect(p.today.xp).toBe(12);
+    expect(p.week.xp).toBe(10);
+    tallyAnswer(p, 'wrong', 0);
+    expect(p.totals.answered).toBe(3);
+    expect(p.totals.correct).toBe(2); // fout verhoogt correct niet
+  });
+
   it('level stijgt met XP; XP-beloning schaalt met moeilijkheid', () => {
     expect(levelFromXp(1000)).toBeGreaterThan(levelFromXp(100));
     expect(xpForAnswer('correct', 3)).toBeGreaterThan(xpForAnswer('correct', 1));

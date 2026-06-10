@@ -1,24 +1,16 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { gradeBuildResult, buildScore, buildMaxPoints } from '../lib/grading.js';
+  import { shuffle } from '../lib/shuffle.js';
 
   export let question;
-  export let submitted = false;
+  let submitted = false; // interne staat; reset/set per vraag
 
   const dispatch = createEventDispatcher();
 
   // assignment = { [blockId]: slotId }. Niet-geplaatste blokken blijven in de pot.
   let assignment = {};
   let selectedBlock = null; // gekozen bouwsteen die je in een slot wilt zetten
-
-  function shuffle(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
 
   // Eén keer schudden per vraag.
   let shuffledFor = null;
