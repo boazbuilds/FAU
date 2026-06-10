@@ -7,7 +7,7 @@
   import { questionById, topicById } from '../lib/content.js';
   import { buildBlitzSession } from '../lib/session.js';
   import { applyResult } from '../lib/srs.js';
-  import { xpForAnswer } from '../lib/gamify.js';
+  import { xpForAnswer, tallyAnswer } from '../lib/gamify.js';
   import { CONFIG } from '../config.js';
   import * as audio from '../lib/audio.js';
   import Question from '../components/Question.svelte';
@@ -101,18 +101,7 @@
       if (q) s.items[q.id] = applyResult(s.items[q.id], result);
       return s;
     });
-    profile.update((p) => {
-      p.xp += xp;
-      p.totals.answered = (p.totals.answered ?? 0) + 1;
-      p.today.answered = (p.today.answered ?? 0) + 1;
-      p.today.xp = (p.today.xp ?? 0) + xp;
-      if (p.week) p.week.xp = (p.week.xp ?? 0) + xp;
-      if (result === 'correct') {
-        p.totals.correct = (p.totals.correct ?? 0) + 1;
-        p.today.correct = (p.today.correct ?? 0) + 1;
-      }
-      return p;
-    });
+    profile.update((p) => tallyAnswer(p, result, xp));
 
     stage = 'feedback';
   }

@@ -1,23 +1,15 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { gradeMatchResult } from '../lib/grading.js';
+  import { shuffle } from '../lib/shuffle.js';
 
   export let question;
-  export let submitted = false;
+  let submitted = false; // interne staat; res/set per vraag
 
   const dispatch = createEventDispatcher();
 
   let mapping = {}; // pairId (links) -> pairId (gekozen rechts)
   let selectedLeft = null;
-
-  function shuffle(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
 
   // Reactief afgeleid (rendert meteen). Eén keer schudden per vraag.
   $: lefts = question?.pairs ?? [];

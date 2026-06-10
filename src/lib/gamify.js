@@ -54,6 +54,22 @@ export function xpForAnswer(result, difficulty) {
   return 0;
 }
 
+// Boekt één antwoord in het profiel: XP + de tellers (totals/today/week). Muteert
+// p in-place en geeft p terug. Levens/combo/bonus blijven per scherm (verschillen).
+// Gedeeld door Session/Blitz/Deadline zodat de telling nooit uiteen kan lopen.
+export function tallyAnswer(p, result, xp) {
+  p.xp += xp;
+  p.totals.answered = (p.totals.answered ?? 0) + 1;
+  p.today.answered = (p.today.answered ?? 0) + 1;
+  p.today.xp = (p.today.xp ?? 0) + xp;
+  if (p.week) p.week.xp = (p.week.xp ?? 0) + xp;
+  if (result === 'correct') {
+    p.totals.correct = (p.totals.correct ?? 0) + 1;
+    p.today.correct = (p.today.correct ?? 0) + 1;
+  }
+  return p;
+}
+
 export function defaultProfile() {
   const today = todayNumber();
   return {

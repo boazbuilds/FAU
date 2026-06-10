@@ -9,7 +9,7 @@
   import { ratings, rateQuestion } from '../stores/ratings.js';
   import { questionById, topicById, lessonById, modules, tipById } from '../lib/content.js';
   import { applyResult } from '../lib/srs.js';
-  import { xpForAnswer, registerGoalProgress, evaluateAchievements } from '../lib/gamify.js';
+  import { xpForAnswer, tallyAnswer, registerGoalProgress, evaluateAchievements } from '../lib/gamify.js';
   import { predict } from '../lib/predict.js';
   import { completeLesson, recordBoss } from '../lib/progress.js';
   import { CONFIG } from '../config.js';
@@ -166,16 +166,8 @@
     });
 
     profile.update((p) => {
-      p.xp += gained;
-      p.totals.answered = (p.totals.answered ?? 0) + 1;
-      p.today.answered = (p.today.answered ?? 0) + 1;
-      p.today.xp = (p.today.xp ?? 0) + gained;
-      if (p.week) p.week.xp = (p.week.xp ?? 0) + gained;
-      if (result === 'correct') {
-        p.totals.correct = (p.totals.correct ?? 0) + 1;
-        p.today.correct = (p.today.correct ?? 0) + 1;
-      }
-      if (heartsActive() && q.type !== 'open' && result === 'wrong') {
+      tallyAnswer(p, result, gained);
+      if (heartsActive() && result === 'wrong') {
         p.hearts = Math.max(0, p.hearts - 1);
         if (p.hearts === 0) outOfHearts = true;
       }

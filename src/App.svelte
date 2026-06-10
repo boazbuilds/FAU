@@ -149,8 +149,10 @@
           <button
             class="flex flex-col items-center gap-1 py-2.5 {$screen === item.id ? 'neon-cyan' : 'text-slate-500'}"
             on:click={() => go(item.id)}
+            aria-label={item.label}
+            aria-current={$screen === item.id ? 'page' : undefined}
           >
-            <span class="text-lg">{item.icon}</span>
+            <span class="text-lg" aria-hidden="true">{item.icon}</span>
             <span class="font-pixel text-[7px] uppercase tracking-wide">{item.label}</span>
           </button>
         {/each}

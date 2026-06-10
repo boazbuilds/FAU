@@ -6,15 +6,7 @@ import { isDue } from './srs.js';
 import { todayNumber } from './day.js';
 import { topicMasteryMap } from './predict.js';
 import { ratings } from '../stores/ratings.js';
-
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
+import { shuffle } from './shuffle.js';
 
 // --- Eigen vraagbeoordelingen: 'down' komt veel minder vaak voorbij, 'up' iets vaker. ---
 export const RATING_WEIGHT = { down: 0.12, up: 1.6 };
