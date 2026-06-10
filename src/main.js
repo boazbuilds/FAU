@@ -1,4 +1,5 @@
-import '@fontsource/press-start-2p/latin-400.css'; // pixel-font (SIL OFL, vrij te gebruiken)
+import '@fontsource/press-start-2p/latin-400.css'; // pixel-font voor HUD-labels (SIL OFL)
+import '@fontsource-variable/space-grotesk'; // hoofdlettertype (SIL OFL) — karaktervol, sterke cijfers
 import './app.css';
 import App from './App.svelte';
 

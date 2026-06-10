@@ -33,7 +33,9 @@
 
 <div class="fixed inset-x-0 bottom-0 mx-auto w-full max-w-md animate-floatup border-t p-4 {panel}">
   <div class="mb-1.5 flex items-center justify-between gap-2">
-    <span class="min-w-0 font-pixel text-[11px] uppercase tracking-wide {headColor}">{headText}</span>
+    <!-- Korte standaard-uitslag (Goed!/Deels/Fout) als goedkeurings-stempel; eigen
+         koppen (Session-praise) zijn te lang voor een stempel en blijven gewoon. -->
+    <span class="min-w-0 font-pixel text-[11px] uppercase tracking-wide {headColor} {headline ? '' : 'stamp mt-1 animate-pop'}">{headText}</span>
     <slot name="headRight" />
   </div>
   <slot name="head" />

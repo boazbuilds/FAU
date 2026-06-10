@@ -4,11 +4,12 @@
 
 :root {
   color-scheme: dark;
-  /* Neon-palet (arcade) */
+  /* Palet: "het bureau van de auditor, 's nachts" — inkt-marine, messing/goud
+     (bureaulamp) en stempel-rood, met cyaan als beeldschermgloed. */
   --neon-cyan: #22d3ee;
-  --neon-magenta: #ff3df0;
+  --neon-magenta: #ff3d5e; /* stempel-rood (AFGEKEURD-energie voor boss/DEADLINE) */
   --neon-yellow: #fde047;
-  --grid: rgba(56, 132, 255, 0.18);
+  --brass: 212, 175, 55; /* messing, voor het grootboek-ruitjespapier */
 }
 
 html,
@@ -18,29 +19,38 @@ body {
 
 body {
   margin: 0;
-  background: #070b1a;
+  background: #0a1120;
   color: #e2e8f0;
+  font-family: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Arcade-achtergrond: diep blauw + neon-grid + gloed bovenin, net als de poster. */
+/* Achtergrond: het bureau van de auditor bij nacht. Een warme bureaulamp-gloed
+   (linksboven), een koele beeldschermgloed (rechtsonder), zwevende audit-symbolen
+   (✓ § € Σ % ¶) als watermerk, en grootboek-ruitjespapier in messing — fijne
+   lijntjes met elke vijfde lijn zwaarder, zoals echt kolommenpapier. */
 #app {
   position: relative;
   min-height: 100dvh;
-  background-color: #070b1a;
+  background-color: #0a1120;
   background-image:
-    radial-gradient(1100px 560px at 50% -8%, rgba(99, 102, 241, 0.28), transparent 60%),
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    radial-gradient(900px 480px at 16% -6%, rgba(245, 166, 35, 0.16), transparent 60%),
+    radial-gradient(820px 520px at 88% 110%, rgba(34, 211, 238, 0.1), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cg fill='%23d4af37' fill-opacity='0.05' font-family='monospace'%3E%3Ctext x='30' y='84' font-size='44' transform='rotate(-12 30 84)'%3E%E2%9C%93%3C/text%3E%3Ctext x='300' y='120' font-size='34' transform='rotate(8 300 120)'%3E%C2%A7%3C/text%3E%3Ctext x='150' y='244' font-size='38' transform='rotate(-6 150 244)'%3E%E2%82%AC%3C/text%3E%3Ctext x='336' y='330' font-size='40' transform='rotate(10 336 330)'%3E%CE%A3%3C/text%3E%3Ctext x='60' y='372' font-size='30' transform='rotate(6 60 372)'%3E%25%3C/text%3E%3Ctext x='224' y='44' font-size='28' transform='rotate(-8 224 44)'%3E%C2%B6%3C/text%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(rgba(var(--brass), 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--brass), 0.14) 1px, transparent 1px),
+    linear-gradient(rgba(var(--brass), 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--brass), 0.055) 1px, transparent 1px);
   background-size:
     100% 100%,
-    34px 34px,
-    34px 34px;
-  background-position:
-    center top,
-    center top,
-    center top;
+    100% 100%,
+    420px 420px,
+    160px 160px,
+    160px 160px,
+    32px 32px,
+    32px 32px;
+  background-position: center top;
 }
 
 /* Subtiele CRT-scanlines over de hele app (rustig, niet storend). */
@@ -78,8 +88,8 @@ button {
   text-shadow: 0 0 4px var(--neon-cyan), 0 0 12px rgba(34, 211, 238, 0.6);
 }
 .neon-magenta {
-  color: #ffe3fb;
-  text-shadow: 0 0 4px var(--neon-magenta), 0 0 12px rgba(255, 61, 240, 0.55);
+  color: #ffe3e8;
+  text-shadow: 0 0 4px var(--neon-magenta), 0 0 12px rgba(255, 61, 94, 0.55);
 }
 .neon-yellow {
   color: #fffbeb;
@@ -91,11 +101,25 @@ button {
   text-shadow: 2px 0 var(--neon-magenta), -2px 0 var(--neon-cyan);
 }
 
-/* Arcade-paneel: donkere kaart met neon-rand en lichte binnengloed. */
+/* Dossier-paneel: donkere kaart met neon-rand, lichte binnengloed en een warme
+   messing-glint langs de bovenrand (de bureaulamp schijnt erop). */
 .arcade-panel {
   background: rgba(10, 16, 38, 0.72);
   border: 1px solid rgba(56, 132, 255, 0.35);
-  box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.08), 0 0 18px rgba(34, 211, 238, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(212, 175, 55, 0.16),
+    inset 0 0 0 1px rgba(34, 211, 238, 0.07),
+    0 0 18px rgba(34, 211, 238, 0.08);
+}
+
+/* Goedkeurings-stempel (zoals op een verklaring): kader + lichte rotatie. */
+.stamp {
+  display: inline-block;
+  padding: 2px 9px;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  transform: rotate(-3deg);
+  letter-spacing: 0.08em;
 }
 
 /* Chunky arcade-knop met "indruk"-effect. */
