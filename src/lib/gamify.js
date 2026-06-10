@@ -103,13 +103,6 @@ export function regenHearts(profile, now = Date.now()) {
   return profile;
 }
 
-export function msUntilNextHeart(profile, now = Date.now()) {
-  if (profile.hearts >= CONFIG.maxHearts) return 0;
-  const ms = CONFIG.heartRegenHours * 3600 * 1000;
-  const elapsed = now - (profile.heartsUpdatedAt ?? now);
-  return Math.max(0, ms - (elapsed % ms));
-}
-
 // Nieuwe dag: reset 'today' en breek de streak bij een hele gemiste dag (met freeze-buffer).
 export function reconcileDay(profile, today = todayNumber(), thisWeek = weekNumber()) {
   if (profile.today?.day !== today) {

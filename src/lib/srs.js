@@ -18,11 +18,11 @@ export function applyResult(prev, result, today = todayNumber()) {
   if (result === 'correct') {
     item.box = isNew ? 2 : Math.min(item.box + 1, CONFIG.maxBox);
     item.history.push(1);
-    item.due = today + CONFIG.intervals[item.box];
+    item.due = today + (CONFIG.intervals[item.box] ?? 0);
   } else if (result === 'partial') {
     item.box = isNew ? 1 : item.box;
     item.history.push(0.5);
-    item.due = today + Math.max(1, Math.round(CONFIG.intervals[item.box] / 2));
+    item.due = today + Math.max(1, Math.round((CONFIG.intervals[item.box] ?? 0) / 2));
   } else {
     if (item.box >= 3) item.lapses = (item.lapses ?? 0) + 1;
     item.box = 1;

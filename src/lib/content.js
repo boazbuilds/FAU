@@ -129,7 +129,6 @@ export const modules = course.modules.map((m) => ({
 // engine-alias: een "topic" == een module
 export const topics = modules;
 export const topicById = Object.fromEntries(modules.map((m) => [m.id, m]));
-export const moduleById = topicById;
 
 export const questionById = {};
 export const questionsByTopic = {};
@@ -161,9 +160,8 @@ export function questionsForLesson(lessonId) {
   return questionsByLesson[lessonId] ?? [];
 }
 
-// --- 3. Tracks & modi (uit het app-bestand) ---
-// modes[] = de knoppen (snel/pad/leercurve/examen); elke module heeft een 'track'.
-export const modes = appData.modes ?? [];
+// --- 3. Tracks (uit het app-bestand) ---
+// Elke module heeft een 'track'; de modus-knoppen (snel/pad/leercurve/examen) zitten in Home.
 export const TRACKS = ['basis', 'pad', 'leercurve', 'examen'];
 export const modulesByTrack = {};
 for (const m of modules) (modulesByTrack[m.track] ??= []).push(m);
@@ -200,10 +198,9 @@ function deriveWeights() {
 }
 deriveWeights();
 
-// --- Examentips + instinkers (coaching) — ingesloten in het app-bestand ---
+// --- Examentips (coaching) — ingesloten in het app-bestand ---
 export const tips = appData.tips ?? [];
 export const tipById = Object.fromEntries(tips.map((t) => [t.id, t]));
-export const instinkers = appData.instinkers ?? [];
 
 // --- Achievements ---
 export const achievements = achievementsData.achievements ?? [];

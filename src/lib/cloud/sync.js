@@ -91,21 +91,30 @@ async function upsertPlayer(userId, snapshot, username) {
   if (r2.error) throw r2.error;
 }
 
+// Pas pushen NADAT de eerste cloud↔lokaal-merge klaar is. Anders schiet een vroege
+// push (de store-subscriptions vuren al bij mount) de nog-niet-gemergede lokale staat
+// naar de cloud en overschrijft die de cloud-voortgang.
+let synced = false;
+export function resetSync() {
+  synced = false;
+}
+
 // Bij inloggen: cloud ophalen, samenvoegen met lokaal, terugschrijven en pushen.
 export async function loginSync() {
   const u = get(auth).user;
   if (!u || !isConfigured()) return;
   const cloud = await pullCloud(u.id);
   const merged = mergeSnapshot(readLocal(), cloud);
-  writeLocal(merged);
+  writeLocal(merged); // triggert schedulePush, maar synced=false → nog geen push
   await upsertPlayer(u.id, merged);
+  synced = true; // vanaf nu mogen wijzigingen meegepusht worden
 }
 
-// Gedempte push bij wijzigingen (na inloggen geactiveerd).
+// Gedempte push bij wijzigingen (pas actief na de eerste merge).
 let timer = null;
 export function schedulePush() {
   const u = get(auth).user;
-  if (!u || !isConfigured()) return;
+  if (!u || !isConfigured() || !synced) return;
   clearTimeout(timer);
   timer = setTimeout(() => {
     upsertPlayer(u.id, readLocal()).catch(() => {});

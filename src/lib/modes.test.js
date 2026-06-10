@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { buildQuickSession, buildBlitzSession, buildDeadlineSession } from './session.js';
 import { estimateCijfer } from './predict.js';
-import { questionById } from './content.js';
+import { questionById, allQuestions } from './content.js';
 import { defaultProfile } from './gamify.js';
+import { applyResult } from './srs.js';
 
 const topicOf = (id) => questionById[id].topicId;
 const isIns = (t) => /^ins/.test(t); // ins0–ins18 + insmock
@@ -51,5 +52,23 @@ describe('estimateCijfer (instellingstoets)', () => {
     const withBonus = estimateCijfer({ items: {} }, { deadlineBonus: 1 });
     expect(withBonus.bonus).toBe(1);
     expect(withBonus.cijfer).toBeCloseTo(Math.min(10, base.cijfer + 1), 5);
+  });
+
+  it('stijgt met goede antwoorden (mastery-gedreven) en blijft ≤ 10', () => {
+    // Beheers de ins-modules door alles meermaals goed te beantwoorden.
+    const items = {};
+    let day = 0;
+    for (const q of allQuestions.filter((qq) => isIns(qq.topicId))) {
+      let it;
+      for (let i = 0; i < 4; i++) it = applyResult(it, 'correct', day++);
+      items[q.id] = it;
+    }
+    const empty = estimateCijfer({ items: {} }, { deadlineBonus: 0 });
+    const good = estimateCijfer({ items }, { deadlineBonus: 0 });
+    expect(good.hasData).toBe(true);
+    expect(good.cijfer).toBeGreaterThan(empty.cijfer); // beheersing → hoger cijfer
+    expect(good.cijfer).toBeLessThanOrEqual(10);
+    // +1 bonus mag het cijfer nooit boven 10 tillen
+    expect(estimateCijfer({ items }, { deadlineBonus: 1 }).cijfer).toBeLessThanOrEqual(10);
   });
 });

@@ -123,13 +123,3 @@ export function gradeBuildResult(question, assignment) {
   if (f >= 0.5) return 'partial';
   return 'wrong';
 }
-
-// 'correct' | 'wrong' voor objectieve types. Open vragen worden zelf beoordeeld.
-export function gradeObjective(question, answer) {
-  let ok = false;
-  if (question.type === 'mcq') ok = gradeMcq(question, answer);
-  else if (question.type === 'truefalse') ok = gradeTrueFalse(question, answer);
-  else if (question.type === 'short') ok = gradeShort(question, answer);
-  else if (question.type === 'match') ok = gradeMatch(question, answer);
-  return ok ? 'correct' : 'wrong';
-}

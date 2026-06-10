@@ -79,4 +79,19 @@ describe('mergeSnapshot — nooit voortgang verliezen', () => {
     expect(m.profile.blitz.best).toBe(200);
     expect(m.profile.blitz.plays).toBe(5);
   });
+
+  it('deadlineBonus blijft behouden (eenmaal verdiend = voor altijd)', () => {
+    const a = snap({ profile: { ...snap().profile, deadlineBonus: 1 } });
+    const b = snap({ profile: { ...snap().profile, deadlineBonus: 0 } });
+    expect(mergeSnapshot(a, b).profile.deadlineBonus).toBe(1);
+    expect(mergeSnapshot(b, a).profile.deadlineBonus).toBe(1); // ongeacht volgorde
+  });
+
+  it('streak.lastActiveDay: null blijft null (niet 0), anders de hoogste dag', () => {
+    // Beide leeg → null. (Een 0 zou reconcileDay de streak laten resetten.)
+    expect(mergeSnapshot(snap(), snap()).profile.streak.lastActiveDay).toBe(null);
+    const a = snap({ profile: { ...snap().profile, streak: { current: 1, longest: 1, lastActiveDay: 5 } } });
+    const b = snap({ profile: { ...snap().profile, streak: { current: 1, longest: 1, lastActiveDay: 9 } } });
+    expect(mergeSnapshot(a, b).profile.streak.lastActiveDay).toBe(9);
+  });
 });
