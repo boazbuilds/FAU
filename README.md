@@ -4,14 +4,14 @@ Een kleine, verslavende leer-app (Duolingo-stijl) om het vak **Financial Auditin
 te halen. Korte dagelijkse vragen, XP & streaks, spaced repetition, en een eerlijke
 **"ga ik slagen?"-schatting** op basis van je oefenresultaten.
 
-- 📱 Werkt op telefoon én laptop, **offline** (PWA, installeerbaar).
+- 📱 Werkt op telefoon én laptop; laadt altijd de nieuwste versie van het web.
 - 🗺️ **Leerpad** Module → Les → Boss met sterren en ontgrendeling (Duolingo-stijl).
 - 🧠 **Spaced repetition** (Leitner) zodat je de stof onthoudt.
 - 🎮 XP, niveaus, league, streaks, levens (mild) en badges.
 - ❓ Vraagtypen: meerkeuze, meerkeuze-meervoudig, **koppelen** en invul — met echte tentamencasussen.
 - 💡 **Examentips** als hint na je antwoord + 📕 **Spiekbriefje** ("Tab je HRA" + beslisbomen).
 - 🔮 Slagingskans + "oefen dit als eerste", gewogen naar examenbelang; 📕 foutenlogboek.
-- 🇳🇱 Nederlandse vragenbank: **8 modules, 103 vragen** (NBA-instellingstoets).
+- 🇳🇱 Nederlandse vragenbank: **29 modules, 826 vragen** over 4 tracks (basis/pad/leercurve/examen).
 - 🆓 Geen account, geen backend, geen kosten — alles lokaal in je browser.
 
 ## Lokaal draaien
@@ -37,17 +37,17 @@ npm run preview    # serveer de productie-build lokaal
 > De `base` staat op `/FAU/` in `vite.config.js`. Wijkt je repo-naam af, pas die dan aan.
 
 ## Vragen toevoegen
-De content staat los van de code in `content/` — zie [`content/SCHEMA.md`](content/SCHEMA.md).
-Voeg lessen/vragen toe in `content/course/*.json` (jouw vragenbank-formaat), draai
-`npm run validate`, klaar. Spiekbriefje uitbreiden? Pas `content/cheatsheet.json` aan.
+Alle content zit in één zelfstandig bestand: `content/app-instellingstoets.json`
+(modules → lessen → vragen, plus tips & instinkers; zie het `_howto`-veld erin).
+Pas dat bestand aan, draai `npm run validate`, klaar. Spiekbriefje uitbreiden? Pas
+`content/cheatsheet.json` aan.
 
 ## Structuur
 ```
-content/course/   vragenbank.json (+ casussen/techniek)  — de vragenbank
-content/          examtips.json, cheatsheet.json, achievements.json
-src/lib/          engine: content (merge+normaliseer), srs, grading, session,
-                  progress (leerpad), gamify, predict, storage, sync (online-naad)
+content/          app-instellingstoets.json (alle vragen/tips), cheatsheet.json, achievements.json
+src/lib/          engine: content (normaliseer), srs, grading, session,
+                  progress (leerpad), gamify, predict, storage; cloud/ (Supabase-sync)
 src/stores/       Svelte stores (gekoppeld aan localStorage)
-src/components/ + src/screens/   de UI (Path = home, Session, Results, Cheatsheet, …)
+src/components/ + src/screens/   de UI (Home = modi, Session, Results, Cheatsheet, …)
 src/config.js     alle afstembare knoppen op één plek
 ```

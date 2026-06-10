@@ -45,7 +45,12 @@ function mergeProfile(a = {}, b = {}, aNewer) {
     streak: {
       current: maxNum(a.streak?.current, b.streak?.current),
       longest: maxNum(a.streak?.longest, b.streak?.longest),
-      lastActiveDay: maxNum(a.streak?.lastActiveDay, b.streak?.lastActiveDay) || (newer.streak?.lastActiveDay ?? null)
+      // dag-index die null mag zijn → NIET via maxNum (die maakt van null een 0 en
+      // verpest de streak-berekening). Neem de hoogste niet-null dag, anders null.
+      lastActiveDay: (() => {
+        const days = [a.streak?.lastActiveDay, b.streak?.lastActiveDay].filter((v) => v != null);
+        return days.length ? Math.max(...days) : null;
+      })()
     },
     totals: {
       answered: maxNum(a.totals?.answered, b.totals?.answered),

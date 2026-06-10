@@ -95,6 +95,7 @@
   }
 
   function finish() {
+    if (stage === 'done') return; // idempotent: nooit dubbel tellen/bonus toekennen
     gradeBefore = estimateCijfer(get(srs), get(profile));
     profile.update((p) => {
       p.today.sessions = (p.today.sessions ?? 0) + 1;

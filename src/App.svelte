@@ -8,7 +8,7 @@
   import { srs } from './stores/srsStore.js';
   import { ratings } from './stores/ratings.js';
   import { auth, guest, initAuth } from './stores/auth.js';
-  import { loginSync, schedulePush } from './lib/cloud/sync.js';
+  import { loginSync, schedulePush, resetSync } from './lib/cloud/sync.js';
   import { regenHearts, reconcileDay, migrateProfile } from './lib/gamify.js';
   import { ensureInit } from './lib/progress.js';
   import { maybeRemind } from './lib/notify.js';
@@ -64,6 +64,7 @@
       loginSync();
     } else if (!u) {
       syncedFor = null;
+      resetSync();
     }
   }
   $: handleAuth($auth.user);

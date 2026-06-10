@@ -7,7 +7,7 @@ import { modules, allQuestions, questionById, questionsForLesson, tips, tipById,
 import { buildBossSession } from './session.js';
 import { defaultProgress, ensureInit, isLessonUnlocked, isModuleUnlocked, starsFor, completeLesson, recordBoss } from './progress.js';
 
-describe('content loader (merge + normalisatie)', () => {
+describe('content loader (normalisatie)', () => {
   it('laadt de modules en vragen uit het app-bestand', () => {
     expect(modules.length).toBe(29); // m0–m9 (basis) + ins0–ins10 (pad) + ins12–ins18 (leercurve) + insmock
     expect(allQuestions.length).toBeGreaterThanOrEqual(800);
