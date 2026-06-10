@@ -17,6 +17,7 @@
   import * as audio from '../lib/audio.js';
   import Question from '../components/Question.svelte';
   import MusicControl from '../components/MusicControl.svelte';
+  import FeedbackBar from '../components/FeedbackBar.svelte';
 
   const sess = get(activeSession) ?? { ids: [], mode: 'normal' };
   const ids = sess.ids ?? [];
@@ -346,53 +347,42 @@
   </main>
 
   {#if phase === 'feedback' && q}
-    <div
-      class="fixed inset-x-0 bottom-0 mx-auto w-full max-w-md animate-floatup border-t p-4
-      {lastResult === 'correct'
-        ? 'border-emerald-700 bg-emerald-950/95'
-        : lastResult === 'partial'
-          ? 'border-amber-700 bg-amber-950/95'
-          : 'border-rose-800 bg-rose-950/95'}"
+    <FeedbackBar
+      result={lastResult}
+      headline={feedbackHead}
+      explanation={q.explanation}
+      {tip}
+      nextLabel={outOfHearts || isLast ? 'Afronden ■' : 'Volgende ▶'}
+      on:next={next}
     >
-      <div
-        class="mb-1.5 font-pixel text-[11px] uppercase tracking-wide
-        {lastResult === 'correct' ? 'text-emerald-300' : lastResult === 'partial' ? 'text-amber-300' : 'text-rose-300 animate-shake'}"
-      >
-        {feedbackHead}
-      </div>
-      {#if bonusXp > 0}
-        <div class="mb-2 animate-burst font-pixel text-[10px] uppercase tracking-wide text-cyan-300">{isSjefQ ? '🦥 Sjef-bonus' : '⚡ Snel'} +{bonusXp} XP</div>
-      {/if}
-      {#if comboMsg}
-        <div class="mb-2 animate-burst rounded-lg bg-amber-500/15 px-3 py-1.5 text-sm font-bold text-amber-300">🔥 {comboMsg}</div>
-      {/if}
-      {#if q.type === 'short'}
-        <div class="mb-1 text-sm text-slate-200">Geaccepteerd antwoord: <span class="font-semibold">{q.answer.accept[0]}</span></div>
-      {/if}
-      <p class="text-sm leading-relaxed text-slate-200">{q.explanation}</p>
-      {#if tip}
-        <p class="mt-2 rounded-lg bg-slate-900/60 p-2 text-xs leading-relaxed text-indigo-200"><span class="font-semibold">💡 Tip — {tip.title}:</span> {tip.body}</p>
-      {/if}
-
-      <!-- Beoordeel de vraag: 👎 = minder vaak tonen -->
-      <div class="mt-3 flex items-center justify-center gap-2 text-xs">
-        <span class="text-slate-500">Vraag:</span>
-        <button
-          class="rounded-lg border px-2.5 py-1 transition {rating === 'up' ? 'border-emerald-500 bg-emerald-500/15 text-emerald-300' : 'border-slate-700 text-slate-400 hover:border-slate-500'}"
-          on:click={() => rate('up')}
-          aria-label="Goede vraag"
-        >👍</button>
-        <button
-          class="rounded-lg border px-2.5 py-1 transition {rating === 'down' ? 'border-rose-500 bg-rose-500/15 text-rose-300' : 'border-slate-700 text-slate-400 hover:border-slate-500'}"
-          on:click={() => rate('down')}
-          aria-label="Deze vraag minder vaak tonen"
-        >👎 {rating === 'down' ? 'minder getoond' : 'minder tonen'}</button>
-      </div>
-
-      <button class="btn-arcade mt-3 w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={next}>
-        {outOfHearts || isLast ? 'Afronden ■' : 'Volgende ▶'}
-      </button>
-    </div>
+      <svelte:fragment slot="head">
+        {#if bonusXp > 0}
+          <div class="mb-2 animate-burst font-pixel text-[10px] uppercase tracking-wide text-cyan-300">{isSjefQ ? '🦥 Sjef-bonus' : '⚡ Snel'} +{bonusXp} XP</div>
+        {/if}
+        {#if comboMsg}
+          <div class="mb-2 animate-burst rounded-lg bg-amber-500/15 px-3 py-1.5 text-sm font-bold text-amber-300">🔥 {comboMsg}</div>
+        {/if}
+        {#if q.type === 'short'}
+          <div class="mb-1 text-sm text-slate-200">Geaccepteerd antwoord: <span class="font-semibold">{q.answer.accept[0]}</span></div>
+        {/if}
+      </svelte:fragment>
+      <svelte:fragment slot="actions">
+        <!-- Beoordeel de vraag: 👎 = minder vaak tonen -->
+        <div class="mt-3 flex items-center justify-center gap-2 text-xs">
+          <span class="text-slate-500">Vraag:</span>
+          <button
+            class="rounded-lg border px-2.5 py-1 transition {rating === 'up' ? 'border-emerald-500 bg-emerald-500/15 text-emerald-300' : 'border-slate-700 text-slate-400 hover:border-slate-500'}"
+            on:click={() => rate('up')}
+            aria-label="Goede vraag"
+          >👍</button>
+          <button
+            class="rounded-lg border px-2.5 py-1 transition {rating === 'down' ? 'border-rose-500 bg-rose-500/15 text-rose-300' : 'border-slate-700 text-slate-400 hover:border-slate-500'}"
+            on:click={() => rate('down')}
+            aria-label="Deze vraag minder vaak tonen"
+          >👎 {rating === 'down' ? 'minder getoond' : 'minder tonen'}</button>
+        </div>
+      </svelte:fragment>
+    </FeedbackBar>
   {/if}
 </div>
 {/if}

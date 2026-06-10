@@ -12,6 +12,7 @@
   import * as audio from '../lib/audio.js';
   import Question from '../components/Question.svelte';
   import MusicControl from '../components/MusicControl.svelte';
+  import FeedbackBar from '../components/FeedbackBar.svelte';
 
   const B = CONFIG.blitz;
 
@@ -220,22 +221,11 @@
     </main>
 
     {#if stage === 'feedback' && q}
-      <div
-        class="fixed inset-x-0 bottom-0 mx-auto w-full max-w-md animate-floatup border-t p-4
-        {lastResult === 'correct' ? 'border-emerald-700 bg-emerald-950/95' : lastResult === 'partial' ? 'border-amber-700 bg-amber-950/95' : 'border-rose-800 bg-rose-950/95'}"
-      >
-        <div class="mb-1.5 flex items-center justify-between">
-          <span class="font-pixel text-[11px] uppercase tracking-wide {lastResult === 'correct' ? 'text-emerald-300' : lastResult === 'partial' ? 'text-amber-300' : 'text-rose-300'}">
-            {lastResult === 'correct' ? 'Goed!' : lastResult === 'partial' ? 'Deels' : 'Fout'}
-          </span>
+      <FeedbackBar result={lastResult} explanation={q.explanation} {refLabel} on:next={nextQuestion}>
+        <svelte:fragment slot="headRight">
           {#if lastGain > 0}<span class="font-pixel text-[10px] text-cyan-300">+{lastGain} pt</span>{/if}
-        </div>
-        {#if refLabel}
-          <p class="mb-1 font-pixel text-[10px] uppercase tracking-wide neon-cyan">📖 {refLabel}</p>
-        {/if}
-        <p class="text-sm leading-relaxed text-slate-200">{q.explanation}</p>
-        <button class="btn-arcade mt-3 w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={nextQuestion}>Volgende ▶</button>
-      </div>
+        </svelte:fragment>
+      </FeedbackBar>
     {/if}
   </div>
 {/if}

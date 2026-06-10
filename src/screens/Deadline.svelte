@@ -16,6 +16,7 @@
   import * as audio from '../lib/audio.js';
   import Question from '../components/Question.svelte';
   import MusicControl from '../components/MusicControl.svelte';
+  import FeedbackBar from '../components/FeedbackBar.svelte';
 
   let stage = 'intro'; // 'intro' | 'playing' | 'feedback' | 'done'
   let ids = [];
@@ -182,22 +183,14 @@
     </main>
 
     {#if stage === 'feedback' && q}
-      <div
-        class="fixed inset-x-0 bottom-0 mx-auto w-full max-w-md animate-floatup border-t p-4
-        {lastResult === 'correct' ? 'border-emerald-700 bg-emerald-950/95' : lastResult === 'partial' ? 'border-amber-700 bg-amber-950/95' : 'border-rose-800 bg-rose-950/95'}"
-      >
-        <div class="mb-1.5 font-pixel text-[11px] uppercase tracking-wide {lastResult === 'correct' ? 'text-emerald-300' : lastResult === 'partial' ? 'text-amber-300' : 'text-rose-300'}">
-          {lastResult === 'correct' ? 'Goed!' : lastResult === 'partial' ? 'Deels' : 'Fout'}
-        </div>
-        {#if q.ref}<p class="mb-1 font-pixel text-[10px] uppercase tracking-wide neon-cyan">📖 {q.ref}</p>{/if}
-        <p class="text-sm leading-relaxed text-slate-200">{q.explanation}</p>
-        {#if tip}
-          <p class="mt-2 rounded-lg bg-slate-900/60 p-2 text-xs leading-relaxed text-indigo-200"><span class="font-semibold">💡 {tip.title}:</span> {tip.body}</p>
-        {/if}
-        <button class="btn-arcade mt-3 w-full rounded-xl py-3 font-pixel text-xs uppercase" on:click={next}>
-          {isLast ? 'Afronden ■' : 'Volgende ▶'}
-        </button>
-      </div>
+      <FeedbackBar
+        result={lastResult}
+        explanation={q.explanation}
+        {tip}
+        refLabel={q.ref}
+        nextLabel={isLast ? 'Afronden ■' : 'Volgende ▶'}
+        on:next={next}
+      />
     {/if}
   </div>
 {/if}
