@@ -6,7 +6,7 @@
   import { go } from '../stores/ui.js';
   import { profile } from '../stores/profile.js';
   import { srs } from '../stores/srsStore.js';
-  import { questionById, topicById, tipById } from '../lib/content.js';
+  import { questionById, topicById, tipById, instinkerFor } from '../lib/content.js';
   import { buildDeadlineSession } from '../lib/session.js';
   import { applyResult } from '../lib/srs.js';
   import { xpForAnswer, tallyAnswer } from '../lib/gamify.js';
@@ -33,6 +33,7 @@
   $: q = questionById[ids[index]];
   $: topic = q ? topicById[q.topicId] : null;
   $: tip = q?.tipRef ? tipById[q.tipRef] : null;
+  $: valkuil = stage === 'feedback' && lastResult === 'wrong' && q ? instinkerFor(q) : null;
   $: total = ids.length;
   $: isLast = index + 1 >= total;
   $: pct = total ? Math.round(((index + (stage === 'feedback' ? 1 : 0)) / total) * 100) : 0;
@@ -187,6 +188,7 @@
         result={lastResult}
         explanation={q.explanation}
         {tip}
+        {valkuil}
         refLabel={q.ref}
         nextLabel={isLast ? 'Afronden ■' : 'Volgende ▶'}
         on:next={next}

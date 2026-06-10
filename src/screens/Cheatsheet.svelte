@@ -1,9 +1,9 @@
 <script>
   import { go } from '../stores/ui.js';
-  import { tips } from '../lib/content.js';
+  import { tips, instinkers } from '../lib/content.js';
   import cheatsheet from '../../content/cheatsheet.json';
 
-  let tab = 'hra'; // 'hra' | 'trees' | 'tips'
+  let tab = 'hra'; // 'hra' | 'trees' | 'valkuilen' | 'tips'
   let query = '';
   let tipFilter = 'alle'; // 'alle' | 'techniek' | 'inhoud'
 
@@ -28,9 +28,10 @@
     <h1 class="text-2xl font-bold text-white">Spiekbriefje 📕</h1>
   </div>
 
-  <div class="grid grid-cols-3 gap-1 rounded-xl bg-slate-900/60 p-1 text-sm">
-    <button class="rounded-lg py-2 font-medium {tab === 'hra' ? 'bg-indigo-600 text-white' : 'text-slate-300'}" on:click={() => (tab = 'hra')}>Tab je HRA</button>
-    <button class="rounded-lg py-2 font-medium {tab === 'trees' ? 'bg-indigo-600 text-white' : 'text-slate-300'}" on:click={() => (tab = 'trees')}>Beslisbomen</button>
+  <div class="grid grid-cols-4 gap-1 rounded-xl bg-slate-900/60 p-1 text-xs">
+    <button class="rounded-lg py-2 font-medium {tab === 'hra' ? 'bg-indigo-600 text-white' : 'text-slate-300'}" on:click={() => (tab = 'hra')}>HRA</button>
+    <button class="rounded-lg py-2 font-medium {tab === 'trees' ? 'bg-indigo-600 text-white' : 'text-slate-300'}" on:click={() => (tab = 'trees')}>Bomen</button>
+    <button class="rounded-lg py-2 font-medium {tab === 'valkuilen' ? 'bg-rose-600 text-white' : 'text-slate-300'}" on:click={() => (tab = 'valkuilen')}>⚠️ Valkuilen</button>
     <button class="rounded-lg py-2 font-medium {tab === 'tips' ? 'bg-indigo-600 text-white' : 'text-slate-300'}" on:click={() => (tab = 'tips')}>Tips</button>
   </div>
 
@@ -67,6 +68,19 @@
             <li class="flex gap-2"><span class="font-semibold text-indigo-400">{i + 1}.</span><span>{step}</span></li>
           {/each}
         </ol>
+      </div>
+    {/each}
+
+  {:else if tab === 'valkuilen'}
+    <p class="text-xs text-slate-400">De {instinkers.length} klassieke instinkers waar CA's punten op verliezen. Lees ze vlak voor de toets nog één keer door.</p>
+    {#each instinkers as v (v.id)}
+      <div class="rounded-xl border border-rose-900/60 bg-slate-900/60 p-3">
+        <div class="flex items-baseline gap-2">
+          <span class="shrink-0 text-xs font-semibold text-rose-400">#{v.nr}</span>
+          <span class="font-medium text-white">{v.title}</span>
+        </div>
+        <p class="mt-1 text-xs leading-relaxed text-rose-200/90"><span class="font-semibold">⚠️ Valkuil:</span> {v.valkuil}</p>
+        <p class="mt-1 text-xs leading-relaxed text-emerald-200/90"><span class="font-semibold">✓ Zo wel:</span> {v.goed}</p>
       </div>
     {/each}
 

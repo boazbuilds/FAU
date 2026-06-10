@@ -3,7 +3,7 @@ import { applyResult, isDue } from './srs.js';
 import { gradeShort, gradeMcq, gradeTrueFalse, matchFraction, gradeMatchResult, gradeMatch, normalize, buildScore, buildMaxPoints, gradeBuildResult } from './grading.js';
 import { predict } from './predict.js';
 import { levelFromXp, xpForAnswer, tallyAnswer, defaultProfile, migrateProfile } from './gamify.js';
-import { modules, allQuestions, questionById, questionsForLesson, tips, tipById, isObjective } from './content.js';
+import { modules, allQuestions, questionById, questionsForLesson, tips, tipById, isObjective, instinkers, instinkerFor } from './content.js';
 import { buildBossSession } from './session.js';
 import { defaultProgress, ensureInit, isLessonUnlocked, isModuleUnlocked, starsFor, completeLesson, recordBoss } from './progress.js';
 
@@ -46,6 +46,21 @@ describe('content loader (normalisatie)', () => {
     for (const q of allQuestions) {
       if (q.tipRef) expect(tipById[q.tipRef]).toBeTruthy();
     }
+  });
+
+  it('instinkers (valkuilen) geladen; instinkerFor matcht op tag-overlap', () => {
+    expect(instinkers.length).toBe(16);
+    expect(instinkers[0].nr).toBe(1); // gesorteerd op nr
+    // ViO-tag → een valkuil met die tag (val01: ViO bij non-assurance)
+    const hit = instinkerFor({ tags: ['ViO'] });
+    expect(hit).toBeTruthy();
+    expect(hit.tags).toContain('ViO');
+    // meer overlap wint van minder
+    const best = instinkerFor({ tags: hit.tags });
+    expect(best.id).toBe(hit.id);
+    // geen overlap → null (geen ruis in de feedback)
+    expect(instinkerFor({ tags: ['bestaat-niet-xyz'] })).toBe(null);
+    expect(instinkerFor({ tags: [] })).toBe(null);
   });
 
   it('elke module heeft een boss-examen', () => {
