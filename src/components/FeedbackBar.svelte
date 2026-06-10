@@ -9,6 +9,7 @@
   export let headline = null; // override; anders afgeleid van de uitslag
   export let explanation = '';
   export let tip = null; // { title, body } | null
+  export let valkuil = null; // instinker { title, valkuil, goed } | null — bij een fout
   export let refLabel = null; // bv. "Standaard 240.31"
   export let nextLabel = 'Volgende ▶';
 
@@ -40,6 +41,12 @@
     <p class="mb-1 font-pixel text-[10px] uppercase tracking-wide neon-cyan">📖 {refLabel}</p>
   {/if}
   <p class="text-sm leading-relaxed text-slate-200">{explanation}</p>
+  {#if valkuil}
+    <div class="mt-2 rounded-lg border border-rose-700/50 bg-rose-950/60 p-2 text-xs leading-relaxed">
+      <p class="text-rose-200"><span class="font-semibold">⚠️ Bekende valkuil — {valkuil.title}:</span> {valkuil.valkuil}</p>
+      <p class="mt-1 text-emerald-200"><span class="font-semibold">✓ Zo wel:</span> {valkuil.goed}</p>
+    </div>
+  {/if}
   {#if tip}
     <p class="mt-2 rounded-lg bg-slate-900/60 p-2 text-xs leading-relaxed text-indigo-200">
       <span class="font-semibold">💡 {tip.title}:</span> {tip.body}

@@ -198,9 +198,28 @@ function deriveWeights() {
 }
 deriveWeights();
 
-// --- Examentips (coaching) — ingesloten in het app-bestand ---
+// --- Examentips + valkuilen (coaching) — ingesloten in het app-bestand ---
 export const tips = appData.tips ?? [];
 export const tipById = Object.fromEntries(tips.map((t) => [t.id, t]));
+
+// Instinkers = de 16 bekende valkuilen (val01–16: title/valkuil/goed/tags).
+// Getoond als naslagkaarten én als coaching: bij een fout antwoord zoeken we de
+// valkuil met de meeste overlappende tags, zodat de app de val bij naam noemt.
+export const instinkers = [...(appData.instinkers ?? [])].sort((a, b) => (a.nr ?? 0) - (b.nr ?? 0));
+export function instinkerFor(question) {
+  const tags = question?.tags ?? [];
+  if (!tags.length) return null;
+  let best = null;
+  let bestOverlap = 0;
+  for (const ins of instinkers) {
+    const overlap = (ins.tags ?? []).filter((t) => tags.includes(t)).length;
+    if (overlap > bestOverlap) {
+      best = ins;
+      bestOverlap = overlap;
+    }
+  }
+  return best;
+}
 
 // --- Achievements ---
 export const achievements = achievementsData.achievements ?? [];

@@ -7,7 +7,7 @@
   import { progress } from '../stores/progressStore.js';
   import { settings } from '../stores/settings.js';
   import { ratings, rateQuestion } from '../stores/ratings.js';
-  import { questionById, topicById, lessonById, modules, tipById } from '../lib/content.js';
+  import { questionById, topicById, lessonById, modules, tipById, instinkerFor } from '../lib/content.js';
   import { applyResult } from '../lib/srs.js';
   import { xpForAnswer, tallyAnswer, registerGoalProgress, evaluateAchievements } from '../lib/gamify.js';
   import { predict } from '../lib/predict.js';
@@ -100,6 +100,8 @@
   $: q = questionById[ids[index]];
   $: topic = q ? topicById[q.topicId] : null;
   $: tip = q?.tipRef ? tipById[q.tipRef] : null;
+  // Bij een fout: noem de bekende valkuil (instinker) die bij deze vraag-tags hoort.
+  $: valkuil = phase === 'feedback' && lastResult === 'wrong' && q ? instinkerFor(q) : null;
   $: progressPct = ids.length ? (index + (phase === 'feedback' ? 1 : 0)) / ids.length : 0;
   $: isLast = index + 1 >= ids.length;
 
@@ -352,6 +354,7 @@
       headline={feedbackHead}
       explanation={q.explanation}
       {tip}
+      {valkuil}
       nextLabel={outOfHearts || isLast ? 'Afronden ■' : 'Volgende ▶'}
       on:next={next}
     >

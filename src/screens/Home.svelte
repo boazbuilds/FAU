@@ -7,7 +7,8 @@
   import { profile } from '../stores/profile.js';
   import { srs } from '../stores/srsStore.js';
   import { settings } from '../stores/settings.js';
-  import { buildQuickSession, buildSession, buildBossSession, dueCount } from '../lib/session.js';
+  import { buildQuickSession, buildSession, buildBossSession, buildDeadlineSession, dueCount } from '../lib/session.js';
+  import { deadlineState } from '../stores/deadline.js';
   import { predict, estimateCijfer } from '../lib/predict.js';
   import { todayNumber } from '../lib/day.js';
   import { motivationOfDay, randomFrom, motivation } from '../lib/humor.js';
@@ -61,10 +62,16 @@
     { icon: '🛤️', title: 'Het pad', desc: 'Op volgorde: Kennis → Techniek → Eindbaas', ring: 'bg-indigo-500/15', border: 'hover:border-indigo-400/60', fn: openPad },
     { icon: '⏱️', title: 'Blitzkrieg', desc: 'Zoveel mogelijk goed tegen de klok', ring: 'bg-rose-500/15', border: 'hover:border-rose-400/60', fn: blitz }
   ];
-  const instellingOnly = [
+  // DEADLINE-kaart toont je tussenstand, zodat je ziet dat je kunt hervatten.
+  const deadlineTotal = buildDeadlineSession().length;
+  $: deadlineDesc =
+    $deadlineState.pos > 0 && $deadlineState.pos < deadlineTotal
+      ? `▶ Verder bij vraag ${$deadlineState.pos + 1}/${deadlineTotal} → +1 punt`
+      : `${deadlineTotal} vragen achter elkaar → +1 punt op je cijfer`;
+  $: instellingOnly = [
     { icon: '📈', title: 'Extra leercurve', desc: 'Verdiepende trainingsmodules', ring: 'bg-violet-500/15', border: 'hover:border-violet-400/60', fn: leercurve },
     { icon: '🏁', title: 'Mock-examen', desc: 'Eén doorlopende casus — 100 punten', ring: 'bg-amber-500/15', border: 'hover:border-amber-400/60', fn: mock },
-    { icon: '🎯', title: 'DEADLINE', desc: '100 vragen achter elkaar → +1 punt op je cijfer', ring: 'bg-fuchsia-500/15', border: 'hover:border-fuchsia-400/60', fn: deadline }
+    { icon: '🎯', title: 'DEADLINE', desc: deadlineDesc, ring: 'bg-fuchsia-500/15', border: 'hover:border-fuchsia-400/60', fn: deadline }
   ];
   $: cards = $examScope === 'landelijk' ? universal : [...universal.slice(0, 2), ...instellingOnly, universal[2]];
 </script>
