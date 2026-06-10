@@ -35,14 +35,16 @@ body {
   min-height: 100dvh;
   background-color: #0a1120;
   background-image:
-    radial-gradient(900px 480px at 16% -6%, rgba(245, 166, 35, 0.16), transparent 60%),
-    radial-gradient(820px 520px at 88% 110%, rgba(34, 211, 238, 0.1), transparent 60%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cg fill='%23d4af37' fill-opacity='0.05' font-family='monospace'%3E%3Ctext x='30' y='84' font-size='44' transform='rotate(-12 30 84)'%3E%E2%9C%93%3C/text%3E%3Ctext x='300' y='120' font-size='34' transform='rotate(8 300 120)'%3E%C2%A7%3C/text%3E%3Ctext x='150' y='244' font-size='38' transform='rotate(-6 150 244)'%3E%E2%82%AC%3C/text%3E%3Ctext x='336' y='330' font-size='40' transform='rotate(10 336 330)'%3E%CE%A3%3C/text%3E%3Ctext x='60' y='372' font-size='30' transform='rotate(6 60 372)'%3E%25%3C/text%3E%3Ctext x='224' y='44' font-size='28' transform='rotate(-8 224 44)'%3E%C2%B6%3C/text%3E%3C/g%3E%3C/svg%3E"),
-    linear-gradient(rgba(var(--brass), 0.14) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--brass), 0.14) 1px, transparent 1px),
-    linear-gradient(rgba(var(--brass), 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--brass), 0.055) 1px, transparent 1px);
+    radial-gradient(1250px 680px at 8% -12%, rgba(247, 184, 78, 0.42), transparent 62%),
+    radial-gradient(620px 380px at 8% -6%, rgba(255, 224, 150, 0.34), transparent 60%),
+    radial-gradient(900px 560px at 92% 114%, rgba(34, 211, 238, 0.16), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cg fill='%23d4af37' fill-opacity='0.11' font-family='monospace'%3E%3Ctext x='30' y='84' font-size='44' transform='rotate(-12 30 84)'%3E%E2%9C%93%3C/text%3E%3Ctext x='300' y='120' font-size='34' transform='rotate(8 300 120)'%3E%C2%A7%3C/text%3E%3Ctext x='150' y='244' font-size='38' transform='rotate(-6 150 244)'%3E%E2%82%AC%3C/text%3E%3Ctext x='336' y='330' font-size='40' transform='rotate(10 336 330)'%3E%CE%A3%3C/text%3E%3Ctext x='60' y='372' font-size='30' transform='rotate(6 60 372)'%3E%25%3C/text%3E%3Ctext x='224' y='44' font-size='28' transform='rotate(-8 224 44)'%3E%C2%B6%3C/text%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(rgba(var(--brass), 0.30) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--brass), 0.30) 1px, transparent 1px),
+    linear-gradient(rgba(var(--brass), 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--brass), 0.12) 1px, transparent 1px);
   background-size:
+    100% 100%,
     100% 100%,
     100% 100%,
     420px 420px,
@@ -68,7 +70,7 @@ body {
     rgba(0, 0, 0, 0) 4px
   );
   mix-blend-mode: multiply;
-  opacity: 0.5;
+  opacity: 0.22;
 }
 
 button {
