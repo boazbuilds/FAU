@@ -1,9 +1,9 @@
 // Nerdy Big Four-accountantshumor + Duolingo-achtige feedback.
 // Alles is puur en deterministisch te seeden, zodat het testbaar blijft.
 
-export const MASCOT = { emoji: '🧮', name: 'Plus', role: 'je motivatie-maatje' };
+export const MASCOT = { emoji: '🧮', name: 'Muddie', role: 'je motivatie-maatje' };
 
-// --- Motivatie van Plus: overwegend positief, soms cynisch, af en toe een grap.
+// --- Motivatie van Muddie: overwegend positief, soms cynisch, af en toe een grap.
 //     De echte citaten zijn geverifieerd en eerlijk toegeschreven (incl. de
 //     bekende valkuilen: de "Aristoteles"-quote is van Will Durant, en de
 //     Prediker-regel is bewust gemarkeerd als bewerking). ---
