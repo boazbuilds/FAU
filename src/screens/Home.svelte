@@ -59,6 +59,10 @@
     pathTrack.set('drill');
     go('path');
   }
+  function ops() {
+    pathTrack.set('ops');
+    go('path');
+  }
   function blitz() {
     go('blitz');
   }
@@ -98,6 +102,7 @@
       : `${deadlineTotal} vragen achter elkaar → +1 punt op je cijfer`;
   $: instellingOnly = [
     { icon: '🛠️', title: 'Drill 250', desc: '10 drill-modules op je leercurve (dr1–dr10)', ring: 'bg-emerald-500/15', border: 'hover:border-emerald-400/60', fn: drill },
+    { icon: '📂', title: 'Opdracht-dossiers', desc: '6 opdrachtsoorten: vaste casusstructuur + Eindbaas', ring: 'bg-teal-500/15', border: 'hover:border-teal-400/60', fn: ops },
     { icon: '📈', title: 'Extra leercurve', desc: 'Verdiepende trainingsmodules', ring: 'bg-violet-500/15', border: 'hover:border-violet-400/60', fn: leercurve },
     { icon: '🏁', title: 'Mock-examen', desc: 'Eén doorlopende casus — 100 punten', ring: 'bg-amber-500/15', border: 'hover:border-amber-400/60', fn: mock },
     { icon: '🎯', title: 'DEADLINE', desc: deadlineDesc, ring: 'bg-fuchsia-500/15', border: 'hover:border-fuchsia-400/60', fn: deadline }

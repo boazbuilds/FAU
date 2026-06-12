@@ -7,7 +7,7 @@ import { applyResult } from './srs.js';
 
 const topicOf = (id) => questionById[id].topicId;
 const isIns = (t) => /^ins/.test(t); // ins0–ins18 + insmock (telt mee voor het cijfer)
-const isInstelling = (t) => /^ins/.test(t) || /^dr\d+$/.test(t); // instelling-scope = ins* + drill dr1–dr10
+const isInstelling = (t) => /^ins/.test(t) || /^dr\d+$/.test(t) || /^ops\d+$/.test(t); // instelling-scope = ins* + drill dr1–dr10 + ops1–ops6
 const isBasis = (t) => /^m\d+$/.test(t); // m0–m9
 
 describe('tentamen-scope (modi)', () => {
