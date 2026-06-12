@@ -162,7 +162,7 @@ export function questionsForLesson(lessonId) {
 
 // --- 3. Tracks (uit het app-bestand) ---
 // Elke module heeft een 'track'; de modus-knoppen (snel/pad/leercurve/examen) zitten in Home.
-export const TRACKS = ['basis', 'pad', 'leercurve', 'examen', 'drill'];
+export const TRACKS = ['basis', 'pad', 'leercurve', 'examen', 'drill', 'ops'];
 export const modulesByTrack = {};
 for (const m of modules) (modulesByTrack[m.track] ??= []).push(m);
 export function modulesForTrack(track) {
@@ -170,7 +170,7 @@ export function modulesForTrack(track) {
 }
 
 // Tentamen-scope: landelijk = basis (m0–m9); instelling = pad + leercurve + examen (ins*).
-const SCOPE_TRACKS = { landelijk: ['basis'], instelling: ['pad', 'leercurve', 'examen', 'drill'] };
+const SCOPE_TRACKS = { landelijk: ['basis'], instelling: ['pad', 'leercurve', 'examen', 'drill', 'ops'] };
 export function modulesForScope(scope) {
   return (SCOPE_TRACKS[scope] ?? SCOPE_TRACKS.instelling)
     .flatMap((t) => modulesForTrack(t))
