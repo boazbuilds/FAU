@@ -9,8 +9,13 @@
   import LessonNode from '../components/LessonNode.svelte';
 
   $: mods = modulesForTrack($pathTrack);
-  $: trackTitle = $pathTrack === 'leercurve' ? 'Extra leercurve' : 'Het pad';
-  $: trackSub = $pathTrack === 'leercurve' ? 'Verdiepende trainingsmodules' : 'Kennis → Techniek → Eindbaas, op volgorde';
+  $: trackTitle = $pathTrack === 'leercurve' ? 'Extra leercurve' : $pathTrack === 'drill' ? 'Drill 250' : 'Het pad';
+  $: trackSub =
+    $pathTrack === 'leercurve'
+      ? 'Verdiepende trainingsmodules'
+      : $pathTrack === 'drill'
+        ? '10 drill-modules (dr1–dr10) op je leercurve — met Eindbazen'
+        : 'Kennis → Techniek → Eindbaas, op volgorde';
 
   // Open de eerste onvoltooide ontgrendelde module van deze track (her-init bij wissel).
   let expanded = {};

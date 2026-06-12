@@ -6,7 +6,8 @@ import { defaultProfile } from './gamify.js';
 import { applyResult } from './srs.js';
 
 const topicOf = (id) => questionById[id].topicId;
-const isIns = (t) => /^ins/.test(t); // ins0–ins18 + insmock
+const isIns = (t) => /^ins/.test(t); // ins0–ins18 + insmock (telt mee voor het cijfer)
+const isInstelling = (t) => /^ins/.test(t) || /^dr\d+$/.test(t); // instelling-scope = ins* + drill dr1–dr10
 const isBasis = (t) => /^m\d+$/.test(t); // m0–m9
 
 describe('tentamen-scope (modi)', () => {
@@ -22,12 +23,12 @@ describe('tentamen-scope (modi)', () => {
   it('buildQuickSession instelling → alleen ins-tracks', () => {
     const ids = buildQuickSession({ items: {} }, 10, 'instelling');
     expect(ids.length).toBeGreaterThan(0);
-    for (const id of ids) expect(isIns(topicOf(id))).toBe(true);
+    for (const id of ids) expect(isInstelling(topicOf(id))).toBe(true);
   });
 
   it('buildBlitzSession respecteert de scope', () => {
     for (const id of buildBlitzSession({ items: {} }, 20, 'landelijk')) expect(isBasis(topicOf(id))).toBe(true);
-    for (const id of buildBlitzSession({ items: {} }, 20, 'instelling')) expect(isIns(topicOf(id))).toBe(true);
+    for (const id of buildBlitzSession({ items: {} }, 20, 'instelling')) expect(isInstelling(topicOf(id))).toBe(true);
   });
 
   it('buildDeadlineSession = de leercurve-set (ins12–ins18, 100 vragen)', () => {
