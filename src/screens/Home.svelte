@@ -55,6 +55,10 @@
     pathTrack.set('leercurve');
     go('path');
   }
+  function drill() {
+    pathTrack.set('drill');
+    go('path');
+  }
   function blitz() {
     go('blitz');
   }
@@ -93,6 +97,7 @@
       ? `▶ Verder bij vraag ${$deadlineState.pos + 1}/${deadlineTotal} → +1 punt`
       : `${deadlineTotal} vragen achter elkaar → +1 punt op je cijfer`;
   $: instellingOnly = [
+    { icon: '🛠️', title: 'Drill 250', desc: '10 drill-modules op je leercurve (dr1–dr10)', ring: 'bg-emerald-500/15', border: 'hover:border-emerald-400/60', fn: drill },
     { icon: '📈', title: 'Extra leercurve', desc: 'Verdiepende trainingsmodules', ring: 'bg-violet-500/15', border: 'hover:border-violet-400/60', fn: leercurve },
     { icon: '🏁', title: 'Mock-examen', desc: 'Eén doorlopende casus — 100 punten', ring: 'bg-amber-500/15', border: 'hover:border-amber-400/60', fn: mock },
     { icon: '🎯', title: 'DEADLINE', desc: deadlineDesc, ring: 'bg-fuchsia-500/15', border: 'hover:border-fuchsia-400/60', fn: deadline }
