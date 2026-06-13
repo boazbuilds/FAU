@@ -21,11 +21,19 @@ export async function initAuth() {
   }
   try {
     const c = await getClient();
-    const { data } = await c.auth.getSession();
-    auth.set({ ready: true, user: data?.session?.user ?? null });
+    // Reageer op elke sessie-wijziging; dit vuurt in supabase-js v2 ook meteen de
+    // INITIAL_SESSION, dus de gate gaat open zodra de sessie bekend is.
     c.auth.onAuthStateChange((_event, session) => {
       auth.set({ ready: true, user: session?.user ?? null });
     });
+    // Backstop met time-out: nooit eindeloos op "Laden…" blijven hangen als
+    // getSession niet terugkomt (bv. een token-refresh op een trage verbinding).
+    // Lost het op als "geen sessie"; een echte sessie corrigeert via de listener.
+    const { data } = await Promise.race([
+      c.auth.getSession(),
+      new Promise((resolve) => setTimeout(() => resolve({ data: { session: null } }), 12000))
+    ]);
+    auth.set({ ready: true, user: data?.session?.user ?? null });
   } catch (e) {
     auth.set({ ready: true, user: null });
   }
