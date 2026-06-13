@@ -65,13 +65,15 @@ describe('Kennis-Blitz pool', () => {
     expect(isKnowledge({ phase: 'toepassing' })).toBe(false);
   });
 
-  it('buildBlitzSession levert objectieve kennisvragen, begrensd en variërend', () => {
+  it('buildBlitzSession levert enkelvoudige mcq-kennisvragen (1 klik), begrensd en variërend', () => {
     const a = buildBlitzSession({ items: {} });
     expect(a.length).toBeGreaterThan(0);
     expect(a.length).toBeLessThanOrEqual(CONFIG.blitz.poolSize);
-    // alleen objectieve kennisvragen
+    // alleen enkelvoudige multiple-choice (één-klik): geen multi-select/matching/typen
     for (const id of a) {
       const q = questionById[id];
+      expect(q.type).toBe('mcq');
+      expect(q.multi).toBe(false);
       expect(isObjective(q)).toBe(true);
       expect(isKnowledge(q)).toBe(true);
     }

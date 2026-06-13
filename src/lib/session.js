@@ -127,13 +127,14 @@ export function buildBossSession(moduleId, length = CONFIG.path.bossLength) {
   return weightedSample(pool, length ?? pool.length).map((q) => q.id);
 }
 
-// Kennis-Blitz: ruime, rating-gewogen pool objectieve kennisvragen. Prioriteert
-// SRS-due en zwakke topics, maar blijft gevarieerd. Lijst is lang genoeg dat de
-// klok eerder op is dan de vragen.
+// Kennis-Blitz: ruime, rating-gewogen pool met alléén enkelvoudige multiple-choice
+// (één-klik-antwoord) — geen multi-select, matching of typen, zodat de ronde snel
+// blijft. Prioriteert SRS-due en zwakke topics, maar blijft gevarieerd. Lijst is
+// lang genoeg dat de klok eerder op is dan de vragen.
 export function buildBlitzSession(srs, length = CONFIG.blitz.poolSize, scope = 'instelling') {
   const items = srs?.items ?? {};
   const today = todayNumber();
-  const pool = questionsForScope(scope).filter((q) => isObjective(q) && isKnowledge(q));
+  const pool = questionsForScope(scope).filter((q) => q.type === 'mcq' && !q.multi && isKnowledge(q));
   const mastery = topicMasteryMap(srs);
   // Trek gewogen (down-rated zakt weg), en sorteer dan zwakke topics + due eerst.
   const sample = weightedSample(pool, Math.min(length, pool.length));

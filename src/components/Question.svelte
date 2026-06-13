@@ -5,6 +5,9 @@
   import BuildQuestion from './BuildQuestion.svelte';
 
   export let question;
+  // Eén-klik-modus (Blitz): bij enkelvoudige mcq is de klik op een optie meteen
+  // het antwoord — geen losse "Controleer"-stap. Geldt niet voor multi-select.
+  export let instantMcq = false;
 
   const dispatch = createEventDispatcher();
 
@@ -43,6 +46,12 @@
     if (answer.length === 0) return;
     submitted = true;
     dispatch('answer', { result: gradeMcq(question, answer) ? 'correct' : 'wrong', answer });
+  }
+  function pickMcq(id) {
+    if (submitted) return;
+    if (isMulti) { toggleMulti(id); return; }
+    selected = id;
+    if (instantMcq) submitMcq(); // één klik = antwoord (Blitz)
   }
   function toggleMulti(id) {
     if (submitted) return;
@@ -91,7 +100,7 @@
         <button
           type="button"
           class="flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition {optionClass(opt.id)}"
-          on:click={() => { if (!submitted) { isMulti ? toggleMulti(opt.id) : (selected = opt.id); } }}
+          on:click={() => pickMcq(opt.id)}
           disabled={submitted}
           aria-pressed={isMulti ? multiSelected.has(opt.id) : selected === opt.id}
         >
@@ -102,7 +111,7 @@
         </button>
       {/each}
     </div>
-    {#if !submitted}
+    {#if !submitted && !(instantMcq && !isMulti)}
       <button
         type="button"
         class="w-full rounded-xl bg-indigo-600 py-3 font-semibold text-white enabled:hover:bg-indigo-500 disabled:opacity-40"
