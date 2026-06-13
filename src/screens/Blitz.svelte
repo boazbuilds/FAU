@@ -152,9 +152,9 @@
     <div class="font-pixel text-[9px] uppercase tracking-wide neon-cyan glitch">Kennis-Blitz</div>
     <h1 class="font-pixel text-lg leading-relaxed text-white">{B.seconds} seconden</h1>
     <p class="mx-auto max-w-sm text-sm leading-relaxed text-slate-300">
-      Beantwoord zoveel mogelijk kennisvragen goed tegen de klok. Elk goed antwoord geeft punten
-      én <span class="text-cyan-300">+{B.timeBonusSec}s</span>. Combo's geven bonuspunten. Na elk
-      antwoord zie je de wet/Standaard-verwijzing.
+      Zoveel mogelijk meerkeuzevragen goed tegen de klok — <span class="text-cyan-300">één tik = antwoord</span>.
+      Elk goed antwoord geeft punten én <span class="text-cyan-300">+{B.timeBonusSec}s</span>. Combo's geven
+      bonuspunten. Na elk antwoord zie je de wet/Standaard-verwijzing.
     </p>
     <div class="arcade-panel rounded-2xl p-4">
       <div class="font-pixel text-[8px] uppercase tracking-wide text-slate-400">Highscore</div>
@@ -215,7 +215,7 @@
           <div class="mb-3 text-xs font-semibold uppercase tracking-wide text-slate-400">{topic.icon} {topic.title}</div>
         {/if}
         {#key q.id}
-          <Question bind:this={qComp} question={q} on:answer={onAnswer} />
+          <Question bind:this={qComp} question={q} instantMcq on:answer={onAnswer} />
         {/key}
       {/if}
     </main>
