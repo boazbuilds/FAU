@@ -61,7 +61,7 @@
   function handleAuth(u) {
     if (u && u.id !== syncedFor) {
       syncedFor = u.id;
-      loginSync();
+      loginSync().catch(() => {}); // sync is achtergrondwerk; nooit de app laten breken
     } else if (!u) {
       syncedFor = null;
       resetSync();
