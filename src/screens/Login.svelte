@@ -33,8 +33,9 @@
       email = password = username = '';
     } catch (e) {
       err = e?.message || 'Er ging iets mis.';
+    } finally {
+      busy = false; // de knop komt ALTIJD weer vrij, ook bij een time-out/fout
     }
-    busy = false;
   }
 
   let guestName = '';
