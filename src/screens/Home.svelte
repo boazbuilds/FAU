@@ -1,13 +1,13 @@
 <script>
   // Startscherm. Bovenaan kies je het tentamen (Instellingstoets / Landelijk); de
-  // modi en het cijfer passen zich daarop aan. Modi: Snel / Het pad / Blitzkrieg
+  // modi en het cijfer passen zich daarop aan. Kernmodi: Blitzkrieg / Expeditie
   // (beide tentamens) + Extra leercurve / Mock / DEADLINE (alleen instellingstoets).
   import { get } from 'svelte/store';
   import { go, activeSession, pathTrack, examScope } from '../stores/ui.js';
   import { profile } from '../stores/profile.js';
   import { srs } from '../stores/srsStore.js';
   import { settings } from '../stores/settings.js';
-  import { buildQuickSession, buildSession, buildBossSession, buildDeadlineSession, dueCount } from '../lib/session.js';
+  import { buildSession, buildBossSession, buildDeadlineSession, dueCount } from '../lib/session.js';
   import { deadlineState } from '../stores/deadline.js';
   import { predict, estimateCijfer } from '../lib/predict.js';
   import { dailyQuests, questProgress, rollChest } from '../lib/quests.js';
@@ -43,10 +43,6 @@
     audio.fanfare();
   }
 
-  function snel() {
-    activeSession.set({ ids: buildQuickSession(get(srs), 10, get(examScope)), mode: 'quick' });
-    go('session');
-  }
   function openPad() {
     pathTrack.set(get(examScope) === 'landelijk' ? 'basis' : 'pad');
     go('path');
@@ -88,11 +84,10 @@
     quote = n;
   }
 
-  // Universele modi + (alleen instellingstoets) leercurve/mock/deadline.
+  // Twee kernmodi (beide tentamens): Blitzkrieg eerst, dan de Expeditie.
   const universal = [
-    { icon: '⚡', title: 'Snel oefenen', desc: 'Random mix — losse vragen tegen jezelf', ring: 'bg-cyan-500/15', border: 'hover:border-cyan-400/60', fn: snel },
-    { icon: '🛤️', title: 'Het pad', desc: 'Op volgorde: Kennis → Techniek → Eindbaas', ring: 'bg-indigo-500/15', border: 'hover:border-indigo-400/60', fn: openPad },
-    { icon: '⏱️', title: 'Blitzkrieg', desc: 'Zoveel mogelijk goed tegen de klok', ring: 'bg-rose-500/15', border: 'hover:border-rose-400/60', fn: blitz }
+    { icon: '⏱️', title: 'Blitzkrieg', desc: 'Zoveel mogelijk goed tegen de klok', ring: 'bg-rose-500/15', border: 'hover:border-rose-400/60', fn: blitz },
+    { icon: '🧭', title: 'Expeditie', desc: 'Reis door de modules — Kennis → Techniek → Eindbaas', ring: 'bg-indigo-500/15', border: 'hover:border-indigo-400/60', fn: openPad }
   ];
   // DEADLINE-kaart toont je tussenstand, zodat je ziet dat je kunt hervatten.
   const deadlineTotal = buildDeadlineSession().length;
@@ -107,7 +102,7 @@
     { icon: '🏁', title: 'Mock-examen', desc: 'Eén doorlopende casus — 100 punten', ring: 'bg-amber-500/15', border: 'hover:border-amber-400/60', fn: mock },
     { icon: '🎯', title: 'DEADLINE', desc: deadlineDesc, ring: 'bg-fuchsia-500/15', border: 'hover:border-fuchsia-400/60', fn: deadline }
   ];
-  $: cards = $examScope === 'landelijk' ? universal : [...universal.slice(0, 2), ...instellingOnly, universal[2]];
+  $: cards = $examScope === 'landelijk' ? universal : [...universal, ...instellingOnly];
 </script>
 
 <div class="space-y-4 px-4 pb-28 pt-2">
