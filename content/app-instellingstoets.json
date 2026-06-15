@@ -10,8 +10,8 @@
       "heartsPerLesson": 5
     },
     "counts": {
-      "modules": 45,
-      "questions": 1157,
+      "modules": 46,
+      "questions": 1173,
       "instinkers": 16,
       "tips": 22,
       "perTrack": {
@@ -12117,6 +12117,336 @@
         }
       ],
       "track": "pad"
+    },
+    {
+      "id": "m10",
+      "order": 10,
+      "icon": "🧭",
+      "title": "Opdracht & oordeel — snelronde",
+      "description": "Opdrachtsoorten, mate van zekerheid en het juiste oordeel — in snelle, ondubbelzinnige vragen.",
+      "lessons": [
+        {
+          "id": "m10-a",
+          "title": "A · Kennis: opdrachten & zekerheid",
+          "questions": [
+            {
+              "id": "m10-a-q1",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Welke opdracht geeft de hóógste mate van zekerheid?",
+              "options": [
+                "Samenstellingsopdracht (Standaard 4410)",
+                "Beoordelingsopdracht (Standaard 2400)",
+                "Controleopdracht (Standaard 700-serie)",
+                "Opdracht tot overeengekomen specifieke werkzaamheden (4400N)"
+              ],
+              "correct": 2,
+              "explanation": "Een controle geeft een redelijke (hoog, niet absoluut) mate van zekerheid en mondt uit in een OORDEEL. Beoordeling = beperkte zekerheid (conclusie); samenstelling en 4400N geven geen zekerheid.",
+              "ref": "Standaard 200",
+              "tags": [
+                "zekerheid",
+                "opdrachtsoorten"
+              ]
+            },
+            {
+              "id": "m10-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Juist of onjuist? Bij een beoordelingsopdracht geeft de accountant een OORDEEL met een redelijke mate van zekerheid.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 1,
+              "explanation": "Onjuist. Een beoordeling geeft BEPERKTE zekerheid en eindigt met een CONCLUSIE — geen oordeel. Een oordeel met redelijke zekerheid hoort bij een controle.",
+              "ref": "Standaard 2400",
+              "tags": [
+                "zekerheid"
+              ]
+            },
+            {
+              "id": "m10-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Wat is de uitkomst van een samenstellingsopdracht (Standaard 4410)?",
+              "options": [
+                "Een oordeel met redelijke zekerheid",
+                "Een conclusie met beperkte zekerheid",
+                "Een samenstellingsverklaring zonder zekerheid",
+                "Een rapport van feitelijke bevindingen"
+              ],
+              "correct": 2,
+              "explanation": "Bij samenstellen verleent de accountant GEEN zekerheid; hij geeft een samenstellingsverklaring. Een rapport van feitelijke bevindingen hoort juist bij 4400N.",
+              "ref": "Standaard 4410",
+              "tags": [
+                "opdrachtsoorten"
+              ]
+            },
+            {
+              "id": "m10-a-q4",
+              "type": "fill_blank",
+              "difficulty": 2,
+              "prompt": "Welke Standaard gaat over het bepalen van de materialiteit bij een controle? Standaard ___",
+              "answer": "320",
+              "accept": [
+                "Standaard 320",
+                "320"
+              ],
+              "explanation": "Standaard 320 behandelt materialiteit bij het plannen en uitvoeren van de controle.",
+              "ref": "Standaard 320",
+              "tags": [
+                "materialiteit"
+              ]
+            },
+            {
+              "id": "m10-a-q5",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? Bij een opdracht tot het verrichten van overeengekomen specifieke werkzaamheden (4400N) verstrekt de accountant géén zekerheid.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. 4400N leidt tot een rapport van feitelijke bevindingen; de gebruiker trekt zelf conclusies. De accountant geeft geen oordeel of conclusie.",
+              "ref": "Standaard 4400N",
+              "tags": [
+                "opdrachtsoorten",
+                "zekerheid"
+              ]
+            },
+            {
+              "id": "m10-a-q6",
+              "type": "multi_select",
+              "difficulty": 2,
+              "prompt": "Welke van deze opdrachten geven GÉÉN mate van zekerheid? (meerdere antwoorden mogelijk)",
+              "options": [
+                "Controleopdracht (700)",
+                "Beoordelingsopdracht (2400)",
+                "Samenstellingsopdracht (4410)",
+                "Overeengekomen specifieke werkzaamheden (4400N)"
+              ],
+              "correct": [
+                2,
+                3
+              ],
+              "explanation": "Samenstellen (4410) en 4400N geven geen zekerheid. Controle = redelijke zekerheid, beoordeling = beperkte zekerheid.",
+              "ref": "Standaard 200",
+              "tags": [
+                "zekerheid",
+                "opdrachtsoorten"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m10-b",
+          "title": "B · Toepassen: welke opdracht & welk oordeel",
+          "questions": [
+            {
+              "id": "m10-b-q1",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Een ondernemer wil 'zoveel mogelijk zekerheid' bij zijn jaarrekening, omdat de bank erom vraagt. Welke opdracht past daar het best bij?",
+              "options": [
+                "Samenstellingsopdracht (4410)",
+                "Beoordelingsopdracht (2400)",
+                "Controleopdracht (700-serie)",
+                "Opdracht tot specifieke werkzaamheden (4400N)"
+              ],
+              "correct": 2,
+              "explanation": "De hoogste zekerheid komt van een controle (redelijke mate van zekerheid → oordeel). De andere opties geven minder of geen zekerheid.",
+              "ref": "Standaard 200",
+              "tags": [
+                "opdrachtsoorten",
+                "zekerheid"
+              ]
+            },
+            {
+              "id": "m10-b-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "De jaarrekening bevat een afwijking die van materieel belang is, maar NIET van diepgaande invloed (niet 'pervasive'). Welk oordeel hoort hierbij?",
+              "options": [
+                "Goedkeurend oordeel",
+                "Oordeel met beperking",
+                "Afkeurend oordeel",
+                "Oordeelonthouding"
+              ],
+              "correct": 1,
+              "explanation": "Materieel maar niet diepgaand → oordeel met beperking. Pas als de afwijking van diepgaande (pervasive) invloed is, wordt het afkeurend.",
+              "ref": "Standaard 705",
+              "tags": [
+                "oordeel",
+                "verklaring"
+              ]
+            },
+            {
+              "id": "m10-b-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Een afwijking is zowel van materieel belang ALS van diepgaande invloed op de jaarrekening. Welk oordeel?",
+              "options": [
+                "Goedkeurend oordeel",
+                "Oordeel met beperking",
+                "Afkeurend oordeel",
+                "Oordeelonthouding"
+              ],
+              "correct": 2,
+              "explanation": "Materieel én diepgaand (pervasive) → afkeurend oordeel: de jaarrekening als geheel is niet getrouw.",
+              "ref": "Standaard 705",
+              "tags": [
+                "oordeel",
+                "verklaring"
+              ]
+            },
+            {
+              "id": "m10-b-q4",
+              "type": "multiple_choice",
+              "difficulty": 3,
+              "prompt": "De accountant kan onvoldoende controle-informatie verkrijgen en het mógelijke effect daarvan is van diepgaande invloed. Welk oordeel?",
+              "options": [
+                "Goedkeurend oordeel",
+                "Oordeel met beperking",
+                "Afkeurend oordeel",
+                "Oordeelonthouding"
+              ],
+              "correct": 3,
+              "explanation": "Een beperking in de controle (te weinig informatie) met mogelijk diepgaand effect → oordeelonthouding. Let op: een geconstateerde AFWIJKING met diepgaand effect leidt juist tot een afkeurend oordeel.",
+              "ref": "Standaard 705",
+              "tags": [
+                "oordeel",
+                "verklaring",
+                "instinker"
+              ]
+            },
+            {
+              "id": "m10-b-q5",
+              "type": "matching",
+              "difficulty": 2,
+              "prompt": "Koppel elke opdracht aan de bijbehorende uitkomst. (elk heeft precies één juiste match)",
+              "pairs": [
+                {
+                  "left": "Controle (700)",
+                  "right": "Oordeel — redelijke zekerheid"
+                },
+                {
+                  "left": "Beoordeling (2400)",
+                  "right": "Conclusie — beperkte zekerheid"
+                },
+                {
+                  "left": "Samenstelling (4410)",
+                  "right": "Samenstellingsverklaring — geen zekerheid"
+                },
+                {
+                  "left": "Specifieke werkzaamheden (4400N)",
+                  "right": "Rapport van feitelijke bevindingen"
+                }
+              ],
+              "explanation": "Elke opdrachtsoort kent precies één uitkomst en niveau van zekerheid — een ondubbelzinnige 1-op-1 koppeling.",
+              "ref": "Standaard 200",
+              "tags": [
+                "opdrachtsoorten",
+                "zekerheid"
+              ]
+            },
+            {
+              "id": "m10-b-q6",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Zet de opdrachten op volgorde van géén → beperkte → redelijke mate van zekerheid.",
+              "options": [
+                "Samenstelling → Beoordeling → Controle",
+                "Beoordeling → Samenstelling → Controle",
+                "Controle → Beoordeling → Samenstelling",
+                "Samenstelling → Controle → Beoordeling"
+              ],
+              "correct": 0,
+              "explanation": "Samenstelling = geen zekerheid, beoordeling = beperkt, controle = redelijk. (Bewust als meerkeuze i.p.v. slepen: één juist antwoord, geen discussie.)",
+              "ref": "Standaard 200",
+              "tags": [
+                "zekerheid"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "m10-c",
+          "title": "C · Valkuilen: snelvuur juist/onjuist",
+          "questions": [
+            {
+              "id": "m10-c-q1",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Juist of onjuist? Een goedkeurende controleverklaring betekent dat de jaarrekening gegarandeerd 100% foutloos is.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 1,
+              "explanation": "Onjuist. Een controle geeft REDELIJKE — geen absolute — zekerheid. Door materialiteit, steekproeven en schattingen blijft er een restrisico.",
+              "ref": "Standaard 200",
+              "tags": [
+                "zekerheid",
+                "instinker"
+              ]
+            },
+            {
+              "id": "m10-c-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? De materialiteit wordt pas aan het einde van de controle bepaald.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 1,
+              "explanation": "Onjuist. Materialiteit bepaal je bij de PLANNING (Standaard 320) en herzie je zo nodig tijdens de controle.",
+              "ref": "Standaard 320",
+              "tags": [
+                "materialiteit",
+                "instinker"
+              ]
+            },
+            {
+              "id": "m10-c-q3",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Wat betekent 'een redelijke mate van zekerheid' bij een controle?",
+              "options": [
+                "Absolute zekerheid dat de jaarrekening geen enkele fout bevat",
+                "Een hoge, maar niet absolute mate van zekerheid",
+                "Een beperkte mate van zekerheid",
+                "Helemaal geen zekerheid"
+              ],
+              "correct": 1,
+              "explanation": "Redelijke zekerheid = hoog maar niet absoluut. Absolute zekerheid is onhaalbaar door o.a. steekproeven, schattingen en materialiteit.",
+              "ref": "Standaard 200",
+              "tags": [
+                "zekerheid"
+              ]
+            },
+            {
+              "id": "m10-c-q4",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? Een 'oordeel met beperking' is hetzelfde als een afkeurend oordeel.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 1,
+              "explanation": "Onjuist. Een oordeel met beperking betekent: op één afgebakend onderdeel na is de jaarrekening getrouw. Een afkeurend oordeel betekent dat de jaarrekening als geheel niet getrouw is (diepgaande invloed).",
+              "ref": "Standaard 705",
+              "tags": [
+                "oordeel",
+                "instinker"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
     },
     {
       "id": "ins1",
