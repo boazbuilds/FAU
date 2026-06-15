@@ -16,7 +16,7 @@
         ? 'Drill 250'
         : $pathTrack === 'ops'
           ? 'Opdracht-dossiers'
-          : 'Het pad';
+          : 'Expeditie';
   $: trackSub =
     $pathTrack === 'leercurve'
       ? 'Verdiepende trainingsmodules'

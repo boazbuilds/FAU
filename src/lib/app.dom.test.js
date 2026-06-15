@@ -22,8 +22,8 @@ describe('App mount (jsdom)', () => {
     expect(html).toContain('Dagdoel');
     expect(html).toContain('Dagmissies'); // dagmissies-paneel
     expect(html).toContain('Instellingstoets'); // tentamen-toggle
-    expect(html).toContain('Snel oefenen'); // modus-knop
-    expect(html).toContain('Het pad'); // modus-knop
+    expect(html).toContain('Blitzkrieg'); // kernmodus
+    expect(html).toContain('Expeditie'); // kernmodus (voorheen "Het pad")
     expect(html).toContain('DEADLINE'); // instelling-modus
     // mascotte (humor-laag) is gewired en rendert
     expect(html).toContain('motivatie-maatje');
