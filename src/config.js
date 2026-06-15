@@ -58,7 +58,7 @@ export const CONFIG = {
 
   // --- Content ---
   content: {
-    earlyUnlockModules: ['m0', 'm7'], // techniek + fundamenten meteen open
+    earlyUnlockModules: ['m0', 'm7', 'm10'], // techniek + fundamenten + nieuwe-stijl-pilot meteen open
     moduleWeightOverrides: { m7: 0 } // techniek telt niet mee in slaagkans
   },
 
