@@ -8,10 +8,10 @@ import { applyResult } from './srs.js';
 const topicOf = (id) => questionById[id].topicId;
 const isIns = (t) => /^ins/.test(t); // ins0–ins18 + insmock (telt mee voor het cijfer)
 const isInstelling = (t) => /^ins/.test(t) || /^dr\d+$/.test(t) || /^ops\d+$/.test(t); // instelling-scope = ins* + drill dr1–dr10 + ops1–ops6
-const isBasis = (t) => /^m\d+$/.test(t); // m0–m9
+const isBasis = (t) => /^lt\d+$/.test(t); // landelijk = lt1–lt12 (12 examenvraagtype-werelden)
 
 describe('tentamen-scope (modi)', () => {
-  it('buildQuickSession landelijk → alleen basis (m0–m9), geen casus/typen', () => {
+  it('buildQuickSession landelijk → alleen landelijk (lt1–lt12), geen casus/typen', () => {
     const ids = buildQuickSession({ items: {} }, 10, 'landelijk');
     expect(ids.length).toBeGreaterThan(0);
     for (const id of ids) {
