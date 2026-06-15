@@ -9,7 +9,7 @@ import { defaultProgress, ensureInit, isLessonUnlocked, isModuleUnlocked, starsF
 
 describe('content loader (normalisatie)', () => {
   it('laadt de modules en vragen uit het app-bestand', () => {
-    expect(modules.length).toBe(45); // basis(10) + pad(11) + leercurve(7) + examen(1) + drill(10) + ops(6)
+    expect(modules.length).toBe(46); // basis(11) + pad(11) + leercurve(7) + examen(1) + drill(10) + ops(6)
     expect(allQuestions.length).toBeGreaterThanOrEqual(800);
     expect(tips.length).toBe(22);
   });
