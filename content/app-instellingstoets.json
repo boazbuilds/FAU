@@ -10,8 +10,8 @@
       "heartsPerLesson": 5
     },
     "counts": {
-      "modules": 46,
-      "questions": 1173,
+      "modules": 58,
+      "questions": 1231,
       "instinkers": 16,
       "tips": 22,
       "perTrack": {
@@ -865,7 +865,7 @@
           ]
         }
       ],
-      "track": "basis"
+      "track": "archief"
     },
     {
       "id": "m1",
@@ -2345,7 +2345,7 @@
           ]
         }
       ],
-      "track": "basis"
+      "track": "archief"
     },
     {
       "id": "m2",
@@ -3750,7 +3750,7 @@
           ]
         }
       ],
-      "track": "basis"
+      "track": "archief"
     },
     {
       "id": "m3",
@@ -5324,7 +5324,7 @@
           ]
         }
       ],
-      "track": "basis"
+      "track": "archief"
     },
     {
       "id": "m4",
@@ -6645,7 +6645,7 @@
           ]
         }
       ],
-      "track": "basis"
+      "track": "archief"
     },
     {
       "id": "m5",
@@ -7848,7 +7848,7 @@
           ]
         }
       ],
-      "track": "basis"
+      "track": "archief"
     },
     {
       "id": "m6",
@@ -8764,7 +8764,7 @@
           ]
         }
       ],
-      "track": "basis"
+      "track": "archief"
     },
     {
       "id": "m7",
@@ -9758,7 +9758,7 @@
           ]
         }
       ],
-      "track": "basis"
+      "track": "archief"
     },
     {
       "id": "m8",
@@ -10607,7 +10607,7 @@
           ]
         }
       ],
-      "track": "basis"
+      "track": "archief"
     },
     {
       "id": "m9",
@@ -11623,7 +11623,7 @@
           ]
         }
       ],
-      "track": "basis"
+      "track": "archief"
     },
     {
       "id": "ins0",
@@ -12446,7 +12446,7 @@
           ]
         }
       ],
-      "track": "basis"
+      "track": "archief"
     },
     {
       "id": "ins1",
@@ -38508,6 +38508,1268 @@
         }
       ],
       "track": "ops"
+    },
+    {
+      "id": "lt1",
+      "order": 50,
+      "icon": "🤝",
+      "title": "1 · Aanvaarding & onafhankelijkheid",
+      "description": "Mag/wil je de opdracht (continueren)? Bedreigingen, waarborgen, VGBA & ViO.",
+      "lessons": [
+        {
+          "id": "lt1-a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "lt1-a-q1",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Welke regeling gaat specifiek over de onafhankelijkheid van de accountant bij assurance-opdrachten?",
+              "options": [
+                "VGBA",
+                "ViO",
+                "Standaard 500",
+                "Wta"
+              ],
+              "correct": 1,
+              "explanation": "De ViO (Verordening inzake de onafhankelijkheid) regelt onafhankelijkheid. De VGBA bevat de bredere fundamentele beginselen.",
+              "ref": "ViO",
+              "tags": [
+                "onafhankelijkheid"
+              ]
+            },
+            {
+              "id": "lt1-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? Eigenbelang, zelftoetsing, belangenbehartiging, vertrouwdheid en intimidatie zijn de vijf soorten bedreigingen voor de fundamentele beginselen.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. Dit zijn de vijf bedreigingscategorieën uit het conceptueel raamwerk; je zoekt er passende waarborgen bij.",
+              "ref": "VGBA / ViO",
+              "tags": [
+                "onafhankelijkheid"
+              ]
+            },
+            {
+              "id": "lt1-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Welke Standaard gaat over het overeenkomen van de opdrachtvoorwaarden (opdrachtbevestiging)?",
+              "options": [
+                "Standaard 210",
+                "Standaard 220",
+                "Standaard 300",
+                "Standaard 500"
+              ],
+              "correct": 0,
+              "explanation": "Standaard 210 behandelt het overeenkomen van de voorwaarden van controleopdrachten.",
+              "ref": "Standaard 210",
+              "tags": [
+                "aanvaarding"
+              ]
+            },
+            {
+              "id": "lt1-a-q4",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? Als een bedreiging niet met waarborgen tot een aanvaardbaar niveau kan worden teruggebracht, neemt of continueert de accountant de opdracht niet.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. Lukt het niet de bedreiging weg te nemen of af te schermen, dan moet je de opdracht weigeren of teruggeven.",
+              "ref": "ViO / VGBA",
+              "tags": [
+                "onafhankelijkheid"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
+    },
+    {
+      "id": "lt2",
+      "order": 51,
+      "icon": "📏",
+      "title": "2 · Materialiteit",
+      "description": "Benchmark, bedrag, uitvoeringsmaterialiteit.",
+      "lessons": [
+        {
+          "id": "lt2-a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "lt2-a-q1",
+              "type": "fill_blank",
+              "difficulty": 1,
+              "prompt": "Welke Standaard behandelt de materialiteit bij de controle? Standaard ___",
+              "answer": "320",
+              "accept": [
+                "Standaard 320",
+                "320"
+              ],
+              "explanation": "Standaard 320 gaat over materialiteit en uitvoeringsmaterialiteit.",
+              "ref": "Standaard 320",
+              "tags": [
+                "materialiteit"
+              ]
+            },
+            {
+              "id": "lt2-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? De uitvoeringsmaterialiteit is lager dan de materialiteit voor de jaarrekening als geheel.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. De uitvoeringsmaterialiteit ligt lager, om op te vangen dat niet-gecorrigeerde én niet-gedetecteerde afwijkingen samen toch de materialiteit overschrijden (aggregatierisico).",
+              "ref": "Standaard 320",
+              "tags": [
+                "materialiteit"
+              ]
+            },
+            {
+              "id": "lt2-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Waarom stelt de accountant een (lagere) uitvoeringsmaterialiteit vast?",
+              "options": [
+                "Om sneller te kunnen werken",
+                "Om het risico te beperken dat het totaal aan afwijkingen ongemerkt de materialiteit overschrijdt",
+                "Omdat de wet een vast bedrag voorschrijft",
+                "Om de controle goedkoper te maken"
+              ],
+              "correct": 1,
+              "explanation": "De uitvoeringsmaterialiteit vangt het aggregatierisico op.",
+              "ref": "Standaard 320",
+              "tags": [
+                "materialiteit"
+              ]
+            },
+            {
+              "id": "lt2-a-q4",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Een veelgebruikte benchmark voor de materialiteit bij een winstgevende commerciële onderneming is:",
+              "options": [
+                "Het aantal werknemers",
+                "Het resultaat vóór belasting",
+                "Het aandelenkapitaal",
+                "De kasstroom uit financieringsactiviteiten"
+              ],
+              "correct": 1,
+              "explanation": "Resultaat vóór belasting is een gangbare benchmark; afhankelijk van de entiteit kan ook omzet of balanstotaal passend zijn.",
+              "ref": "Standaard 320",
+              "tags": [
+                "materialiteit"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
+    },
+    {
+      "id": "lt3",
+      "order": 52,
+      "icon": "🎯",
+      "title": "3 · Risicoanalyse ⭐",
+      "description": "Risico → post → bewering → significant? (Standaard 315/240)",
+      "lessons": [
+        {
+          "id": "lt3-a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "lt3-a-q1",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Welke Standaard gaat over het identificeren en inschatten van de risico’s op een afwijking van materieel belang?",
+              "options": [
+                "Standaard 315",
+                "Standaard 500",
+                "Standaard 700",
+                "Standaard 540"
+              ],
+              "correct": 0,
+              "explanation": "Standaard 315: inzicht in de entiteit en haar omgeving → risico-inschatting.",
+              "ref": "Standaard 315",
+              "tags": [
+                "risico"
+              ]
+            },
+            {
+              "id": "lt3-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Hoe luidt het controlerisicomodel?",
+              "options": [
+                "Inherent risico × interne-beheersingsrisico × ontdekkingsrisico",
+                "Inherent risico + interne-beheersingsrisico + ontdekkingsrisico",
+                "Materialiteit × ontdekkingsrisico",
+                "Inherent risico × materialiteit"
+              ],
+              "correct": 0,
+              "explanation": "Controlerisico = IR × IB-risico × ontdekkingsrisico. De accountant stuurt het ontdekkingsrisico via de aard, timing en omvang van de werkzaamheden.",
+              "ref": "Standaard 200 / 315",
+              "tags": [
+                "risico"
+              ]
+            },
+            {
+              "id": "lt3-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Op welk(e) niveau(s) schat de accountant de risico’s in?",
+              "options": [
+                "Alleen op jaarrekeningniveau",
+                "Alleen op het niveau van de post",
+                "Op jaarrekeningniveau én op beweringenniveau",
+                "Alleen op het niveau van de bewering"
+              ],
+              "correct": 2,
+              "explanation": "Risico’s worden ingeschat op jaarrekeningniveau én op beweringenniveau (per post/transactiestroom).",
+              "ref": "Standaard 315",
+              "tags": [
+                "risico"
+              ]
+            },
+            {
+              "id": "lt3-a-q4",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? Een significant risico vraagt om specifieke aandacht en kan niet worden afgedekt met uitsluitend cijferanalyses.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. Bij een significant risico zijn gegevensgerichte werkzaamheden vereist die specifiek op dat risico zijn gericht; alleen globale cijferanalyse volstaat niet.",
+              "ref": "Standaard 315 / 330",
+              "tags": [
+                "risico"
+              ]
+            },
+            {
+              "id": "lt3-a-q5",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? De accountant mag bij de risico-inschatting uitgaan van de goede werking van interne beheersingsmaatregelen zónder die te toetsen.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 1,
+              "explanation": "Onjuist. Wil je steunen op interne beheersing, dan moet je de werking ervan toetsen (test of controls).",
+              "ref": "Standaard 330",
+              "tags": [
+                "risico",
+                "interne beheersing"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lt3-b",
+          "title": "B · Toepassen",
+          "questions": [
+            {
+              "id": "lt3-b-q1",
+              "type": "matching",
+              "difficulty": 2,
+              "prompt": "Koppel elke post aan de bewering die er doorgaans het meeste risico loopt.",
+              "pairs": [
+                {
+                  "left": "Voorraad",
+                  "right": "Waardering"
+                },
+                {
+                  "left": "Crediteuren",
+                  "right": "Volledigheid"
+                },
+                {
+                  "left": "Omzet rond jaareinde",
+                  "right": "Afgrenzing (cut-off)"
+                },
+                {
+                  "left": "Liquide middelen",
+                  "right": "Bestaan"
+                }
+              ],
+              "explanation": "Elke post kent een typische risicobewering: voorraad→waardering, crediteuren→volledigheid, omzet rond jaareinde→afgrenzing, liquide middelen→bestaan.",
+              "ref": "Standaard 315",
+              "tags": [
+                "risico",
+                "bewering"
+              ]
+            },
+            {
+              "id": "lt3-b-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Een groothandel heeft veel incourante (oude) voorraad. Welke bewering loopt het meeste risico?",
+              "options": [
+                "Bestaan",
+                "Waardering",
+                "Volledigheid",
+                "Presentatie"
+              ],
+              "correct": 1,
+              "explanation": "Incourante voorraad raakt vooral de waardering (afwaarderen naar lagere opbrengstwaarde).",
+              "ref": "Standaard 315",
+              "tags": [
+                "risico",
+                "bewering"
+              ]
+            },
+            {
+              "id": "lt3-b-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Omzet wordt vlak vóór jaareinde geboekt, maar de goederen gaan pas in januari de deur uit. Welke bewering is in het geding?",
+              "options": [
+                "Afgrenzing (cut-off)",
+                "Volledigheid van crediteuren",
+                "Bestaan van liquide middelen",
+                "Waardering van de voorraad"
+              ],
+              "correct": 0,
+              "explanation": "Dit is een afgrenzingsvraagstuk (cut-off): is de omzet in de juiste periode verantwoord?",
+              "ref": "Standaard 315",
+              "tags": [
+                "risico",
+                "bewering"
+              ]
+            },
+            {
+              "id": "lt3-b-q4",
+              "type": "multi_select",
+              "difficulty": 3,
+              "prompt": "Welke factoren verhógen doorgaans het inherente risico? (meerdere mogelijk)",
+              "options": [
+                "Complexe schattingen",
+                "Veel subjectiviteit/oordeelsvorming",
+                "Routinematige, eenvoudige transacties met goede interne beheersing",
+                "Ongebruikelijke transacties aan het einde van het jaar"
+              ],
+              "correct": [
+                0,
+                1,
+                3
+              ],
+              "explanation": "Complexiteit, subjectiviteit en ongebruikelijke transacties verhogen het inherente risico; routinematige, goed beheerste transacties juist niet.",
+              "ref": "Standaard 315",
+              "tags": [
+                "risico"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "lt3-c",
+          "title": "C · Eindbaas: de casus",
+          "boss": true,
+          "casusIntro": "Casus — Bouwbedrijf Veld BV: omzet uit langlopende projecten (onderhanden werk), forse voorraad bouwmaterialen, en een banklening met convenanten. Jij plant de jaarrekeningcontrole.",
+          "questions": [
+            {
+              "id": "lt3-c-q1",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "context": "Casus — Bouwbedrijf Veld BV: omzet uit langlopende projecten (onderhanden werk), forse voorraad bouwmaterialen, en een banklening met convenanten. Jij plant de jaarrekeningcontrole.",
+              "prompt": "Waarmee begin je de risico-inschatting bij Veld BV?",
+              "options": [
+                "Het controle-oordeel formuleren",
+                "Inzicht verkrijgen in de entiteit, haar omgeving en de interne beheersing",
+                "De controleverklaring opstellen",
+                "De materialiteit pas achteraf bepalen"
+              ],
+              "correct": 1,
+              "explanation": "Eerst inzicht in de entiteit en haar omgeving + interne beheersing (Standaard 315); daarop bouw je de risico-inschatting.",
+              "ref": "Standaard 315",
+              "tags": [
+                "risico"
+              ]
+            },
+            {
+              "id": "lt3-c-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "context": "Casus — Bouwbedrijf Veld BV: omzet uit langlopende projecten (onderhanden werk), forse voorraad bouwmaterialen, en een banklening met convenanten. Jij plant de jaarrekeningcontrole.",
+              "prompt": "Bij de post \"onderhanden projecten\" — welke bewering springt qua risico het meest in het oog?",
+              "options": [
+                "Bestaan",
+                "Waardering",
+                "Presentatie",
+                "Volledigheid van het eigen vermogen"
+              ],
+              "correct": 1,
+              "explanation": "Onderhanden werk wordt via een schatting (percentage of completion) gewaardeerd → waardering is het kernrisico.",
+              "ref": "Standaard 315 / RJ 221",
+              "tags": [
+                "risico",
+                "schatting"
+              ]
+            },
+            {
+              "id": "lt3-c-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "context": "Casus — Bouwbedrijf Veld BV: omzet uit langlopende projecten (onderhanden werk), forse voorraad bouwmaterialen, en een banklening met convenanten. Jij plant de jaarrekeningcontrole.",
+              "prompt": "Is de waardering van het onderhanden werk hier een significant risico?",
+              "options": [
+                "Nee, het is routinematig",
+                "Ja, het betreft een schatting met veel oordeelsvorming",
+                "Nee, schattingen zijn nooit significant",
+                "Alleen als de accountant dat prettig vindt"
+              ],
+              "correct": 1,
+              "explanation": "Schattingen met hoge oordeelsvorming/onzekerheid zijn typisch een significant risico.",
+              "ref": "Standaard 315 / 540",
+              "tags": [
+                "risico",
+                "schatting"
+              ]
+            },
+            {
+              "id": "lt3-c-q4",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "context": "Casus — Bouwbedrijf Veld BV: omzet uit langlopende projecten (onderhanden werk), forse voorraad bouwmaterialen, en een banklening met convenanten. Jij plant de jaarrekeningcontrole.",
+              "prompt": "Welke werkzaamheid past het best bij dit schattingsrisico?",
+              "options": [
+                "Alleen een globale cijferanalyse op de omzet",
+                "De schattingsmethode en de onderbouwing (aannames, data) evalueren en toetsen",
+                "Vertrouwen op de mededeling van de directie",
+                "De voorraad tellen"
+              ],
+              "correct": 1,
+              "explanation": "Bij een schattingsrisico evalueer/toets je de methode, aannames en data (Standaard 540) — niet enkel cijferanalyse of een mededeling.",
+              "ref": "Standaard 540",
+              "tags": [
+                "schatting",
+                "werkzaamheden"
+              ]
+            },
+            {
+              "id": "lt3-c-q5",
+              "type": "multiple_choice",
+              "difficulty": 3,
+              "context": "Casus — Bouwbedrijf Veld BV: omzet uit langlopende projecten (onderhanden werk), forse voorraad bouwmaterialen, en een banklening met convenanten. Jij plant de jaarrekeningcontrole.",
+              "prompt": "De convenanten op de banklening staan onder druk. Welk bréder risico signaleer je?",
+              "options": [
+                "Geen enkel risico",
+                "Een prikkel voor de directie om het resultaat te flatteren (management bias) en mogelijk continuïteitsrisico",
+                "Alleen een presentatiekwestie",
+                "Een risico voor de volledigheid van de liquide middelen"
+              ],
+              "correct": 1,
+              "explanation": "Convenanten onder druk geven een prikkel tot winststuring (management override/bias) en raken de continuïteit (Standaard 570).",
+              "ref": "Standaard 240 / 570",
+              "tags": [
+                "risico",
+                "fraude",
+                "continuïteit"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
+    },
+    {
+      "id": "lt4",
+      "order": 53,
+      "icon": "💶",
+      "title": "4 · Werkzaamheden omzet ⭐",
+      "description": "Systeem- + gegevensgericht; opbrengstverantwoording.",
+      "lessons": [
+        {
+          "id": "lt4-a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "lt4-a-q1",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Welke Standaard gaat over het verkrijgen van voldoende en geschikte controle-informatie?",
+              "options": [
+                "Standaard 500",
+                "Standaard 320",
+                "Standaard 700",
+                "Standaard 210"
+              ],
+              "correct": 0,
+              "explanation": "Standaard 500 gaat over controle-informatie; Standaard 330 over de inspelende werkzaamheden.",
+              "ref": "Standaard 500",
+              "tags": [
+                "werkzaamheden"
+              ]
+            },
+            {
+              "id": "lt4-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? Een systeemgerichte controle steunt op de werking van interne beheersingsmaatregelen en vereist dat je die maatregelen toetst.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. Steunen op interne beheersing kan alleen na het toetsen van de werking ervan (test of controls).",
+              "ref": "Standaard 330",
+              "tags": [
+                "werkzaamheden"
+              ]
+            },
+            {
+              "id": "lt4-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Wanneer mag omzet uit de verkoop van goederen doorgaans worden verantwoord?",
+              "options": [
+                "Bij het versturen van de offerte",
+                "Bij de overgang van de belangrijkste risico’s en voordelen (levering)",
+                "Pas bij ontvangst van de betaling",
+                "Altijd op de balansdatum"
+              ],
+              "correct": 1,
+              "explanation": "Opbrengstverantwoording bij overgang van risico’s en voordelen / de prestatie (RJ 270).",
+              "ref": "RJ 270",
+              "tags": [
+                "omzet"
+              ]
+            },
+            {
+              "id": "lt4-a-q4",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Wat is een gegevensgerichte werkzaamheid bij omzet?",
+              "options": [
+                "Het wachtwoordbeleid testen",
+                "Functiescheiding evalueren",
+                "Facturen aansluiten op vrachtbrieven en het grootboek",
+                "De opzet van het IT-systeem beoordelen"
+              ],
+              "correct": 2,
+              "explanation": "Aansluiten van facturen ↔ vrachtbrieven ↔ grootboek is een gegevensgerichte detailcontrole.",
+              "ref": "Standaard 330 / 500",
+              "tags": [
+                "omzet",
+                "werkzaamheden"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
+    },
+    {
+      "id": "lt5",
+      "order": 54,
+      "icon": "📦",
+      "title": "5 · Voorraad & onderhanden werk",
+      "description": "Bestaan + waardering; POC bij projecten.",
+      "lessons": [
+        {
+          "id": "lt5-a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "lt5-a-q1",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Welke Standaard gaat specifiek over het bijwonen van de voorraadopname?",
+              "options": [
+                "Standaard 501",
+                "Standaard 700",
+                "Standaard 320",
+                "Standaard 240"
+              ],
+              "correct": 0,
+              "explanation": "Standaard 501 behandelt o.a. het bijwonen van de voorraadopname (bestaan en staat van de voorraad).",
+              "ref": "Standaard 501",
+              "tags": [
+                "voorraad"
+              ]
+            },
+            {
+              "id": "lt5-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? Bij het bijwonen van de voorraadopname richt de accountant zich vooral op het bestaan en de staat (waardering) van de voorraad.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. De voorraadopname levert vooral controle-informatie over bestaan en de fysieke staat (relevant voor de waardering).",
+              "ref": "Standaard 501",
+              "tags": [
+                "voorraad"
+              ]
+            },
+            {
+              "id": "lt5-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Onderhanden projecten worden volgens RJ 221 doorgaans gewaardeerd via:",
+              "options": [
+                "Altijd de kostprijs",
+                "De methode naar rato van de verrichte prestatie (percentage of completion)",
+                "De nominale waarde",
+                "De verkoopwaarde minus marge"
+              ],
+              "correct": 1,
+              "explanation": "Onderhanden projecten: opbrengstverantwoording naar rato van de voortgang (PoC).",
+              "ref": "RJ 221",
+              "tags": [
+                "voorraad",
+                "schatting"
+              ]
+            },
+            {
+              "id": "lt5-a-q4",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Bij incourante voorraad is vooral welke bewering in het geding?",
+              "options": [
+                "Bestaan",
+                "Volledigheid",
+                "Waardering",
+                "Presentatie"
+              ],
+              "correct": 2,
+              "explanation": "Incourante voorraad raakt de waardering (afwaarderen naar lagere opbrengstwaarde).",
+              "ref": "Standaard 315",
+              "tags": [
+                "voorraad",
+                "bewering"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
+    },
+    {
+      "id": "lt6",
+      "order": 55,
+      "icon": "📐",
+      "title": "6 · Schattingen",
+      "description": "Methode, aannames, backtesting (Standaard 540).",
+      "lessons": [
+        {
+          "id": "lt6-a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "lt6-a-q1",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Welke Standaard gaat over de controle van schattingen?",
+              "options": [
+                "Standaard 540",
+                "Standaard 501",
+                "Standaard 700",
+                "Standaard 210"
+              ],
+              "correct": 0,
+              "explanation": "Standaard 540 behandelt schattingen en de bijbehorende onzekerheid.",
+              "ref": "Standaard 540",
+              "tags": [
+                "schatting"
+              ]
+            },
+            {
+              "id": "lt6-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? Backtesting — terugkijken hoe eerdere schattingen achteraf uitpakten — helpt om de betrouwbaarheid van het schattingsproces te beoordelen.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. Een terugblik op eerdere schattingen geeft inzicht in de kwaliteit van het schattingsproces en mogelijke management bias.",
+              "ref": "Standaard 540",
+              "tags": [
+                "schatting"
+              ]
+            },
+            {
+              "id": "lt6-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Wat beoordeelt de accountant bij een schatting onder meer?",
+              "options": [
+                "Alleen de uitkomst",
+                "De gehanteerde methode, de aannames en de gebruikte data",
+                "Alleen óf er een schatting is gemaakt",
+                "Uitsluitend de mededeling van de directie"
+              ],
+              "correct": 1,
+              "explanation": "De accountant beoordeelt methode, aannames en data — niet alleen de uitkomst.",
+              "ref": "Standaard 540",
+              "tags": [
+                "schatting"
+              ]
+            },
+            {
+              "id": "lt6-a-q4",
+              "type": "multiple_choice",
+              "difficulty": 3,
+              "prompt": "Een hogere schattingsonzekerheid betekent voor de controle:",
+              "options": [
+                "Minder werkzaamheden",
+                "Geen gevolgen",
+                "Meer en specifiekere werkzaamheden, mogelijk een significant risico",
+                "Alleen een opmerking in de verklaring"
+              ],
+              "correct": 2,
+              "explanation": "Hoe groter de schattingsonzekerheid, hoe meer/specifieker de werkzaamheden; vaak een significant risico.",
+              "ref": "Standaard 540",
+              "tags": [
+                "schatting",
+                "risico"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
+    },
+    {
+      "id": "lt7",
+      "order": 56,
+      "icon": "💻",
+      "title": "7 · IT: GITC & ISAE 3402 ⭐",
+      "description": "General IT controls, applicatiecontroles, serviceorganisaties.",
+      "lessons": [
+        {
+          "id": "lt7-a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "lt7-a-q1",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Wat zijn general IT controls (GITC’s)?",
+              "options": [
+                "Specifieke controles binnen één transactie",
+                "Algemene IT-beheersmaatregelen (toegang, wijzigingenbeheer, IT-operations) die de werking van applicatiecontroles ondersteunen",
+                "Cijferanalyses op de omzet",
+                "De fysieke voorraadopname"
+              ],
+              "correct": 1,
+              "explanation": "GITC’s zijn algemene IT-beheersmaatregelen; ze vormen de basis waarop applicatiecontroles betrouwbaar functioneren.",
+              "ref": "Standaard 315",
+              "tags": [
+                "IT"
+              ]
+            },
+            {
+              "id": "lt7-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? Als de general IT controls niet effectief zijn, kun je niet zonder meer steunen op de geautomatiseerde applicatiecontroles.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. Zwakke GITC’s ondermijnen het vertrouwen in de geautomatiseerde controles; je moet dan aanvullend werk doen.",
+              "ref": "Standaard 315 / 330",
+              "tags": [
+                "IT"
+              ]
+            },
+            {
+              "id": "lt7-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Waarover gaat een ISAE 3402-rapport?",
+              "options": [
+                "De jaarrekening van de accountant zelf",
+                "De beheersingsmaatregelen bij een serviceorganisatie (uitbestede processen)",
+                "De fiscale aangifte",
+                "De notulen van de RvC"
+              ],
+              "correct": 1,
+              "explanation": "ISAE 3402 (Standaard 402) gaat over de interne beheersing bij een serviceorganisatie waaraan processen zijn uitbesteed.",
+              "ref": "Standaard 402 / ISAE 3402",
+              "tags": [
+                "IT"
+              ]
+            },
+            {
+              "id": "lt7-a-q4",
+              "type": "multiple_choice",
+              "difficulty": 3,
+              "prompt": "Een type II ISAE 3402-rapport geeft, anders dan type I, óók zekerheid over:",
+              "options": [
+                "Alleen de opzet op één moment",
+                "De werking van de beheersingsmaatregelen over een periode",
+                "De jaarrekening als geheel",
+                "De fiscale positie"
+              ],
+              "correct": 1,
+              "explanation": "Type II geeft zekerheid over de werking over een periode; type I alleen over opzet/bestaan op een moment.",
+              "ref": "ISAE 3402",
+              "tags": [
+                "IT"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
+    },
+    {
+      "id": "lt8",
+      "order": 57,
+      "icon": "📅",
+      "title": "8 · Gebeurtenissen na balansdatum",
+      "description": "Blijkend (verwerken) vs. niet-blijkend (toelichten).",
+      "lessons": [
+        {
+          "id": "lt8-a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "lt8-a-q1",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Welke Standaard gaat over gebeurtenissen na de einddatum van de verslagperiode?",
+              "options": [
+                "Standaard 560",
+                "Standaard 570",
+                "Standaard 320",
+                "Standaard 240"
+              ],
+              "correct": 0,
+              "explanation": "Standaard 560 behandelt gebeurtenissen na balansdatum.",
+              "ref": "Standaard 560",
+              "tags": [
+                "na balansdatum"
+              ]
+            },
+            {
+              "id": "lt8-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? Een blijkende gebeurtenis (de omstandigheid bestond al op balansdatum) leidt tot aanpassing van de jaarrekening.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. Blijkende (aanpassende) gebeurtenissen verwerk je in de cijfers.",
+              "ref": "Standaard 560",
+              "tags": [
+                "na balansdatum"
+              ]
+            },
+            {
+              "id": "lt8-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Een grote brand ná balansdatum (de oorzaak ontstond ná balansdatum) leidt tot:",
+              "options": [
+                "Aanpassing van de cijfers",
+                "Toelichting indien materieel (niet-blijkende gebeurtenis)",
+                "Niets",
+                "Het altijd heropenen van de controle"
+              ],
+              "correct": 1,
+              "explanation": "Niet-blijkend (de omstandigheid ontstond ná balansdatum) → toelichten als het materieel is, niet aanpassen.",
+              "ref": "Standaard 560",
+              "tags": [
+                "na balansdatum"
+              ]
+            },
+            {
+              "id": "lt8-a-q4",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Het faillissement van een debiteur kort ná balansdatum, terwijl de oorzaak al vóór balansdatum bestond, is:",
+              "options": [
+                "Een blijkende (aanpassende) gebeurtenis",
+                "Een niet-blijkende gebeurtenis",
+                "Niet relevant",
+                "Altijd reden voor een afkeurend oordeel"
+              ],
+              "correct": 0,
+              "explanation": "De oorzaak bestond al op balansdatum → blijkend → de waardering van de debiteur aanpassen.",
+              "ref": "Standaard 560",
+              "tags": [
+                "na balansdatum"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
+    },
+    {
+      "id": "lt9",
+      "order": 58,
+      "icon": "♻️",
+      "title": "9 · Continuïteit",
+      "description": "Wel/geen materiële onzekerheid; gevolg voor de verklaring.",
+      "lessons": [
+        {
+          "id": "lt9-a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "lt9-a-q1",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Welke Standaard gaat over continuïteit?",
+              "options": [
+                "Standaard 570",
+                "Standaard 560",
+                "Standaard 500",
+                "Standaard 210"
+              ],
+              "correct": 0,
+              "explanation": "Standaard 570 behandelt de continuïteitsveronderstelling.",
+              "ref": "Standaard 570",
+              "tags": [
+                "continuïteit"
+              ]
+            },
+            {
+              "id": "lt9-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? Bij een materiële onzekerheid over de continuïteit die adequaat is toegelicht, geeft de accountant een goedkeurend oordeel mét een aparte sectie over die onzekerheid.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. Adequaat toegelicht → goedkeurend oordeel + sectie \"Materiële onzekerheid omtrent de continuïteit\" (geen oordeelaanpassing).",
+              "ref": "Standaard 570 / 706",
+              "tags": [
+                "continuïteit",
+                "verklaring"
+              ]
+            },
+            {
+              "id": "lt9-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 3,
+              "prompt": "De continuïteitsveronderstelling is ten onrechte gehanteerd (de onderneming gaat zeker stoppen). Welk oordeel?",
+              "options": [
+                "Goedkeurend",
+                "Oordeel met beperking",
+                "Afkeurend",
+                "Oordeelonthouding"
+              ],
+              "correct": 2,
+              "explanation": "Onterechte continuïteitsveronderstelling → de jaarrekening is als geheel misleidend → afkeurend oordeel.",
+              "ref": "Standaard 570 / 705",
+              "tags": [
+                "continuïteit",
+                "verklaring"
+              ]
+            },
+            {
+              "id": "lt9-a-q4",
+              "type": "multiple_choice",
+              "difficulty": 3,
+              "prompt": "Een materiële onzekerheid over de continuïteit die NIET adequaat is toegelicht, leidt tot:",
+              "options": [
+                "Een goedkeurend oordeel met paragraaf",
+                "Een oordeel met beperking of een afkeurend oordeel",
+                "Altijd een oordeelonthouding",
+                "Geen gevolg"
+              ],
+              "correct": 1,
+              "explanation": "Ontbrekende/onvoldoende toelichting is een afwijking → oordeel met beperking of afkeurend, afhankelijk van de diepgang.",
+              "ref": "Standaard 570 / 705",
+              "tags": [
+                "continuïteit",
+                "verklaring"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
+    },
+    {
+      "id": "lt10",
+      "order": 59,
+      "icon": "🚨",
+      "title": "10 · Fraude & NOCLAR",
+      "description": "Professioneel-kritische instelling, escalatie, melding.",
+      "lessons": [
+        {
+          "id": "lt10-a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "lt10-a-q1",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Welke Standaard gaat specifiek over fraude in het kader van de jaarrekeningcontrole?",
+              "options": [
+                "Standaard 240",
+                "Standaard 700",
+                "Standaard 500",
+                "Standaard 320"
+              ],
+              "correct": 0,
+              "explanation": "Standaard 240 behandelt de verantwoordelijkheid van de accountant met betrekking tot fraude.",
+              "ref": "Standaard 240",
+              "tags": [
+                "fraude"
+              ]
+            },
+            {
+              "id": "lt10-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? De accountant hanteert een professioneel-kritische instelling en onderkent het risico dat het management interne beheersing doorbreekt (management override).",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. Management override of controls is altijd een significant frauderisico.",
+              "ref": "Standaard 240",
+              "tags": [
+                "fraude"
+              ]
+            },
+            {
+              "id": "lt10-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Waar staat NOCLAR voor?",
+              "options": [
+                "Een type controleverklaring",
+                "Non-Compliance with Laws and Regulations (niet-naleving van wet- en regelgeving)",
+                "Een IT-beheersmaatregel",
+                "Een waarderingsmethode"
+              ],
+              "correct": 1,
+              "explanation": "NOCLAR = (vermoedens van) niet-naleving van wet- en regelgeving; de VGBA/Standaard 250 geven het stappenplan.",
+              "ref": "VGBA / Standaard 250",
+              "tags": [
+                "fraude",
+                "NOCLAR"
+              ]
+            },
+            {
+              "id": "lt10-a-q4",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Bij een vermoeden van fraude door het management is een passende eerste stap:",
+              "options": [
+                "Direct de controleverklaring afgeven",
+                "Het op een gepast (hoger) niveau in de organisatie communiceren en de aard en omvang nader onderzoeken",
+                "Het negeren als het bedrag klein lijkt",
+                "Meteen de pers inlichten"
+              ],
+              "correct": 1,
+              "explanation": "Eerst escaleren naar een passend (hoger) niveau en de aard/omvang onderzoeken; nooit zomaar afgeven of negeren.",
+              "ref": "Standaard 240 / 260",
+              "tags": [
+                "fraude"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
+    },
+    {
+      "id": "lt11",
+      "order": 60,
+      "icon": "📋",
+      "title": "11 · Controleverklaring ⭐",
+      "description": "Soort verklaring uit aard × omvang van de bevinding.",
+      "lessons": [
+        {
+          "id": "lt11-a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "lt11-a-q1",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Een afwijking is van materieel belang, maar NIET van diepgaande invloed (niet pervasive). Welk oordeel?",
+              "options": [
+                "Goedkeurend oordeel",
+                "Oordeel met beperking",
+                "Afkeurend oordeel",
+                "Oordeelonthouding"
+              ],
+              "correct": 1,
+              "explanation": "Materieel maar niet diepgaand → oordeel met beperking.",
+              "ref": "Standaard 705",
+              "tags": [
+                "verklaring",
+                "oordeel"
+              ]
+            },
+            {
+              "id": "lt11-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Een afwijking is zowel materieel áls van diepgaande invloed. Welk oordeel?",
+              "options": [
+                "Goedkeurend oordeel",
+                "Oordeel met beperking",
+                "Afkeurend oordeel",
+                "Oordeelonthouding"
+              ],
+              "correct": 2,
+              "explanation": "Materieel én diepgaand → afkeurend oordeel.",
+              "ref": "Standaard 705",
+              "tags": [
+                "verklaring",
+                "oordeel"
+              ]
+            },
+            {
+              "id": "lt11-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 3,
+              "prompt": "De accountant kan onvoldoende controle-informatie verkrijgen en het mógelijke effect is diepgaand. Welk oordeel?",
+              "options": [
+                "Goedkeurend oordeel",
+                "Oordeel met beperking",
+                "Afkeurend oordeel",
+                "Oordeelonthouding"
+              ],
+              "correct": 3,
+              "explanation": "Beperking in de controle met mogelijk diepgaand effect → oordeelonthouding. (Een geconstateerde afwijking met diepgaand effect → afkeurend.)",
+              "ref": "Standaard 705",
+              "tags": [
+                "verklaring",
+                "oordeel",
+                "instinker"
+              ]
+            },
+            {
+              "id": "lt11-a-q4",
+              "type": "multiple_choice",
+              "difficulty": 1,
+              "prompt": "Juist of onjuist? Een goedkeurende controleverklaring betekent dat de jaarrekening gegarandeerd 100% foutloos is.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 1,
+              "explanation": "Onjuist. Een controle geeft redelijke — geen absolute — zekerheid; door materialiteit en steekproeven blijft een restrisico.",
+              "ref": "Standaard 200",
+              "tags": [
+                "verklaring",
+                "instinker"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
+    },
+    {
+      "id": "lt12",
+      "order": 61,
+      "icon": "📝",
+      "title": "12 · Rapportage & communicatie",
+      "description": "Managementletter, accountantsverslag, communicatie met governance.",
+      "lessons": [
+        {
+          "id": "lt12-a",
+          "title": "A · Kennis",
+          "questions": [
+            {
+              "id": "lt12-a-q1",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Welke Standaard gaat over de communicatie met de met governance belaste personen (bv. de RvC)?",
+              "options": [
+                "Standaard 260",
+                "Standaard 265",
+                "Standaard 700",
+                "Standaard 500"
+              ],
+              "correct": 0,
+              "explanation": "Standaard 260: communicatie met de met governance belaste personen.",
+              "ref": "Standaard 260",
+              "tags": [
+                "rapportage"
+              ]
+            },
+            {
+              "id": "lt12-a-q2",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Welke Standaard gaat over het communiceren van tekortkomingen in de interne beheersing?",
+              "options": [
+                "Standaard 260",
+                "Standaard 265",
+                "Standaard 240",
+                "Standaard 320"
+              ],
+              "correct": 1,
+              "explanation": "Standaard 265: tekortkomingen in de interne beheersing communiceren.",
+              "ref": "Standaard 265",
+              "tags": [
+                "rapportage"
+              ]
+            },
+            {
+              "id": "lt12-a-q3",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Juist of onjuist? Een tekortkoming in de interne beheersing van voldoende belang communiceert de accountant schriftelijk aan de met governance belaste personen.",
+              "options": [
+                "Juist",
+                "Onjuist"
+              ],
+              "correct": 0,
+              "explanation": "Juist. Significante tekortkomingen worden tijdig en schriftelijk gecommuniceerd.",
+              "ref": "Standaard 265",
+              "tags": [
+                "rapportage"
+              ]
+            },
+            {
+              "id": "lt12-a-q4",
+              "type": "multiple_choice",
+              "difficulty": 2,
+              "prompt": "Wat bevat een managementletter doorgaans?",
+              "options": [
+                "Het controle-oordeel",
+                "Bevindingen en aanbevelingen over de interne beheersing en de processen",
+                "De fiscale aangifte",
+                "De notulen van de aandeelhoudersvergadering"
+              ],
+              "correct": 1,
+              "explanation": "De managementletter bevat bevindingen en aanbevelingen (vaak over interne beheersing) — niet het oordeel zelf.",
+              "ref": "Standaard 260 / 265",
+              "tags": [
+                "rapportage"
+              ]
+            }
+          ]
+        }
+      ],
+      "track": "basis"
     }
   ],
   "instinkers": [
