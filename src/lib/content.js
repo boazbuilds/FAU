@@ -153,6 +153,11 @@ for (const m of course.modules) {
 
 export const allQuestions = Object.values(questionById);
 
+// Vragen uit actieve (niet-gearchiveerde) modules. Gearchiveerde content blijft wel
+// geladen (id's resolven voor oude SRS-records), maar hoort niet meer in de
+// gameplay-pools (Snel/Herhaal/sessies) op te duiken.
+export const activeQuestions = allQuestions.filter((q) => topicById[q.topicId]?.track !== 'archief');
+
 export function questionsForTopic(topicId) {
   return questionsByTopic[topicId] ?? [];
 }
@@ -183,17 +188,20 @@ export function questionsForScope(scope) {
 // --- 4. Examengewichten afleiden (proportioneel aan vraagaantal; overrides uit config) ---
 function deriveWeights() {
   const overrides = CONFIG.content.moduleWeightOverrides ?? {};
+  // Gearchiveerde modules (track 'archief') tellen niet mee in de examenweging — net
+  // als een 0-override. De overige modules herverdelen zo tot een som van 1.
+  const forced = (m) => (m.track === 'archief' ? 0 : overrides[m.id]);
   const counts = {};
   let total = 0;
   for (const m of modules) {
-    const override = overrides[m.id];
-    const n = override !== undefined ? 0 : questionsForTopic(m.id).length;
+    const f = forced(m);
+    const n = f !== undefined ? 0 : questionsForTopic(m.id).length;
     counts[m.id] = n;
     total += n;
   }
   for (const m of modules) {
-    const override = overrides[m.id];
-    m.examWeight = override !== undefined ? override : total > 0 ? counts[m.id] / total : 0;
+    const f = forced(m);
+    m.examWeight = f !== undefined ? f : total > 0 ? counts[m.id] / total : 0;
   }
 }
 deriveWeights();
