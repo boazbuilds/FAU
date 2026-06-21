@@ -1,7 +1,7 @@
 // Stelt een dagsessie samen: due reviews + nieuwe items, door elkaar gehusseld.
 import { get } from 'svelte/store';
 import { CONFIG } from '../config.js';
-import { allQuestions, questionsForTopic, questionsForLesson, isObjective, modules, questionsForScope, modulesForTrack } from './content.js';
+import { activeQuestions, questionsForTopic, questionsForLesson, isObjective, modules, questionsForScope, modulesForTrack } from './content.js';
 import { isDue } from './srs.js';
 import { todayNumber } from './day.js';
 import { topicMasteryMap } from './predict.js';
@@ -50,7 +50,7 @@ function interleave(items) {
 
 export function dueCount(srs, today = todayNumber()) {
   const items = srs?.items ?? {};
-  return allQuestions.filter((q) => isDue(items[q.id], today)).length;
+  return activeQuestions.filter((q) => isDue(items[q.id], today)).length;
 }
 
 export function buildSession(srs, opts = {}) {
@@ -62,7 +62,7 @@ export function buildSession(srs, opts = {}) {
 
   const r = get(ratings);
   const downRank = (id) => (r[id] === 'down' ? 1 : 0); // 'minder tonen' zakt naar onderen
-  const due = allQuestions.filter((q) => isDue(items[q.id], today));
+  const due = activeQuestions.filter((q) => isDue(items[q.id], today));
   due.sort(
     (a, b) =>
       downRank(a.id) - downRank(b.id) ||
@@ -71,7 +71,7 @@ export function buildSession(srs, opts = {}) {
   );
 
   const mastery = topicMasteryMap(srs);
-  const fresh = allQuestions.filter((q) => !items[q.id]);
+  const fresh = activeQuestions.filter((q) => !items[q.id]);
   fresh.sort(
     (a, b) => (mastery[a.topicId] ?? 1) - (mastery[b.topicId] ?? 1) || a.difficulty - b.difficulty
   );
@@ -87,7 +87,7 @@ export function buildSession(srs, opts = {}) {
   }
   if (picked.length < length) {
     const chosen = new Set(picked.map((q) => q.id));
-    const future = allQuestions
+    const future = activeQuestions
       .filter((q) => seen(q.id) && !chosen.has(q.id))
       .sort((a, b) => items[a.id].due - items[b.id].due);
     picked.push(...future.slice(0, length - picked.length));
@@ -99,7 +99,7 @@ export function buildSession(srs, opts = {}) {
 // Oefensessie (herstel): bij voorkeur reeds geziene items; kost geen levens.
 export function buildPracticeSession(srs, topicId = null, length = CONFIG.sessionLength) {
   const items = srs?.items ?? {};
-  const base = topicId ? questionsForTopic(topicId) : allQuestions;
+  const base = topicId ? questionsForTopic(topicId) : activeQuestions;
   let pool = base.filter((q) => items[q.id]);
   if (pool.length === 0) pool = base; // nog niets gezien: pak nieuwe
   return interleave(weightedSample(pool, length)).map((q) => q.id);
@@ -162,6 +162,6 @@ export function buildDeadlineSession() {
 
 // Oefenen op een tag (bv. "St.520" of "typologie"); voor drills.
 export function buildTagSession(tag, length = CONFIG.sessionLength) {
-  const pool = allQuestions.filter((q) => (q.tags ?? []).includes(tag));
+  const pool = activeQuestions.filter((q) => (q.tags ?? []).includes(tag));
   return interleave(weightedSample(pool, length)).map((q) => q.id);
 }

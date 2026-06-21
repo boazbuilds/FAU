@@ -71,12 +71,15 @@ export function topicMasteryMap(srs) {
 export function predict(srs) {
   const P = CONFIG.predict;
   const stats = topicStats(srs);
+  // Gearchiveerde modules tellen niet mee: hun gewicht is 0 en ze zijn niet te
+  // oefenen, dus ze horen niet in de slaagkans of de 'oefen-dit'-aanbevelingen.
+  const active = topics.filter((t) => t.track !== 'archief');
 
   let S = 0;
   let coverageSum = 0;
   let attempts = 0;
   let n = 0;
-  for (const t of topics) {
+  for (const t of active) {
     const s = stats[t.id];
     S += s.weight * s.mastery;
     coverageSum += s.coverage;
@@ -90,7 +93,7 @@ export function predict(srs) {
   const half = P.bandMax * (1 - confidence);
   const band = [clamp01(pPass - half), clamp01(pPass + half)];
 
-  const weakest = topics
+  const weakest = active
     .map((t) => {
       const s = stats[t.id];
       return {
